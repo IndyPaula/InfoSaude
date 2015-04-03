@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template/template_vacinador.xhtml">
+
+            <ui:define name="centro">
+
+                <h:form id="cadastrarFornecedor">
+                    <p:dialog widgetVar="cadastrarFornecedor" width="1000px" height="310px" style="background: #EBF5FF" resizable="false">
+                        <p:panel header="Cadastrar Fornecedor" style="background: transparent; border: 0; ">
+                            <h:panelGrid columns="2" style="position: absolute" >
+
+                                <h:outputText value="Fornecedor: "/>
+                                <p:inputText value="" size="100"
+                                             />
+                                <h:outputText value="CNPJ: "/>
+                                <p:inputText value="" size="20" required="true"/>
+                                <h:outputText value="Endereço: "/>
+                                <p:inputText value="" 
+                                             size="70" />
+                                <h:outputText value="Bairro: "/>
+                                <p:inputText value=""
+                                             size="60" />
+                                <h:outputText value="Cidade: " />
+                                <p:row>
+                                    <p:column colspan="2" style="position: absolute">
+                                        <h:panelGrid columns="6" >
+                                            <p:inputText value=""
+                                                         size="50" style="margin-right: 45px"/>
+                                            <h:outputText value="UF: "/>
+                                            <p:selectOneMenu id="ufEndereco" value="">
+                                                <f:selectItem itemLabel="Selecione"/>
+                                                <f:selectItems var="uf" value="" 
+                                                               itemLabel="#{uf}" itemValue="#{uf}"
+                                                               />
+                                            </p:selectOneMenu>
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row> 
+                                <h:outputText value="Telefone 1: "/>
+                                <p:row>
+                                    <p:column colspan="2" style="position: absolute">
+                                        <h:panelGrid columns="6" >
+                                            <p:inputText value=""
+                                                         size="20" style="margin-right: 50px"/>
+
+                                            <h:outputText value="Telefone 2: "/>
+                                            <p:inputText value=""
+                                                         size="20" />
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row> 
+                                <h:outputText value="Email 1: "/>
+                                <p:inputText value="" size="50" />
+                                <h:outputText value="Email 2: "/>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:inputText value="" size="50" />
+                                        <p:commandButton value="Salvar" style="position: absolute;
+                                                         margin-left: 15%"
+                                                         onclick="PF('cadastrarFornecedor').hide();"                                                        />
+                                    </p:column>
+                                </p:row>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dialog>
+                </h:form>
+
+
+                <h:form id="cadastrarVacina" >
+
+                    <p:panel header="Cadastrar Vacina" style="background: transparent; border: 0; width: 1100px">
+                        <h:panelGrid columns="2">
+
+
+                            <h:outputText value="Lote: " style="text-align: center"/>
+
+                            <p:row>
+                                <p:column colspan="2" style="position: absolute">
+                                    <h:panelGrid columns="6" >
+                                        <p:inputText value="" 
+                                                     style="margin-right: 40px; margin-left: -3px"   />
+                                        <h:outputText value="Data de Fab.: "/>
+                                        <p:calendar locale="pt_BR" navigator="true" 
+                                                    pattern="dd/mm/yyyy" mask="true"
+                                                    style="margin-right: 50px;"/>
+                                        <h:outputText value="Data de Venc.: " />
+                                        <p:calendar locale="pt_BR" navigator="true" 
+                                                    pattern="dd/mm/yyyy" mask="true"
+                                                    />
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
+
+                            <h:outputText value="Fornecedor: "/>
+                            <p:row>
+                                <p:column colspan="2" style="position: absolute">
+                                    <h:panelGrid columns="6" >
+                                        <p:selectOneMenu editable="true" value="" style="width: 450px">
+                                            <f:selectItem itemLabel="Fornecedor 1"/>
+                                            <f:selectItem itemLabel="Fornecedor 2"/>
+                                            <f:selectItem itemLabel="Fornecedor 3"/>
+                                            <f:selectItem itemLabel="Fornecedor 4"/>
+                                            <f:selectItem itemLabel="Fornecedor 5"/>
+                                        </p:selectOneMenu>
+                                        <p:commandLink onclick="PF('cadastrarFornecedor').show();">
+                                            <p:graphicImage value="/resources/imagens/icon/mais.png"
+                                                            style="height: 30px; margin-left: 15px"/> 
+
+                                        </p:commandLink>
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
+
+                            <h:outputText value="Nome da Vacina: "/>
+                            <p:inputText value="" size="60" />
+
+
+                            <h:outputText value="Tipo de Administração:"/>
+                            <p:selectOneMenu editable="true" value="">
+                                <f:selectItem itemLabel="Intra-Muscular"/>
+                                <f:selectItem itemLabel="Oral"/>
+                                <f:selectItem itemLabel="Sub-Cultanea"/>
+                                <f:selectItem itemLabel="Intra-Dermica"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Volume: "/>
+                            <p:spinner />
+
+                            <h:outputText value="Instruções de Administração: "/>
+                            <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                             value=""
+                                             rows="3" autoResize="false"
+                                             />
+
+                            <h:outputText value="Instruções de Armazenamento: "/>
+                            <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                             value=""
+                                             rows="3" autoResize="false"
+                                             />
+
+                            <h:outputText value="Contra Indicações: "/>
+                            <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                             value=""
+                                             rows="3" autoResize="false"
+                                             />
+
+                            <h:outputText value="Reações Adversas: "/>
+
+                            <p:row>
+                                <p:column colspan="2" style="position: absolute">
+                                    <h:panelGrid columns="2" >
+
+                                        <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                                         value=""
+                                                         rows="3" autoResize="false"
+                                                         />
+
+
+                                        <p:commandLink>
+                                            <p:graphicImage value="/resources/imagens/icon/salvar2.png" 
+                                                            style="margin-top: 29%; margin-left: 50%; height: 60px" />
+                                        </p:commandLink>
+
+
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
+
+
+
+                        </h:panelGrid>
+
+                    </p:panel> 
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

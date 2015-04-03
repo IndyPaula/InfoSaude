@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template/template_vacinador.xhtml">
+
+            <ui:define name="centro">
+
+                <h:form id="vacinador">
+                    <p:dataTable id="tableVacinador" var="vacinador" value="#{p}" selectionMode="single"
+                                 selection="#{p}" rowKey="#{p}"
+                                 rows="10" paginator="true" style="border: 0; width: 80%">
+                        <f:facet name="header">
+                            Lista de Vacinadores 
+                        </f:facet>
+                        <p:column headerText="Registro Coren"  width="150" filterBy="#{p}" >
+                            <h:outputText value="#{p}"/>
+                        </p:column>
+                        <p:column   headerText="Nome" filterBy="#{p}" >
+                            <h:outputText value="#{p}"/>
+                        </p:column>
+                        <p:column headerText="Matrícula"  width="200" 
+                                  style="text-align: center" filterBy="#{p}">
+                            <h:outputText value="#{p}" />
+                        </p:column>
+                        <p:column headerText="Opções" width="130">
+                            <p:button value="imprimir Ficha" icon="ui-icon-print" outcome="p" target="_new">
+                                <f:param value="#{p}" name="vacinador"/> 
+                            </p:button>
+
+                            <p:button value="Atualizar Ficha" icon="ui-icon-refresh" 
+                                      outcome="p" target="_new">
+                                <f:param value="#{p}" name="p"/> 
+                            </p:button>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,43 @@
+/* 
+    Created on : 07/03/2015, 03:24:18
+    Author     : Jefferson Emanuel C. da Silva <jefferson.ecs@gmail.com>
+*/
+
+
+
+.imagem_logo .ui-layout-unit-content {
+    background: white;
+    border: 0;
+}
+
+
+.ui-ribbon {
+    background: white;
+    border:  0px;
+    
+}
+
+
+.imagem_icon {
+
+    height: 70px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+    font-size: 9px;
+    
+}
+
+
+.centro_atividades .ui-layout-unit-content {
+    /*background: #D6F5FF;*/
+    border: 0;
+    background-size: 100%;
+
+}
+
+.ui-icon { 
+    width: 16px; 
+    height: 16px; 
+    background-image: url(#{resource['/resources/imagens/icon/conf.png']}); 
+}
