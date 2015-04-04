@@ -65,19 +65,19 @@
         </dependency>
         
 <!--Jersey dependecy for Restful Web Services-->
-         <dependency>
+        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-servlet</artifactId>
             <version>1.19</version>
             <type>jar</type>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-     
+           <dependency>
+               <groupId>com.google.code.gson</groupId>
+               <artifactId>gson</artifactId>
+               <version>2.3.1</version>
+           </dependency>
+        
     </dependencies>
 
     <repositories>
@@ -87,7 +87,7 @@
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
-          <repository>
+        <repository>
             <id>snapshot-repository.java.net</id>
             <name>Java.net Snapshot Repository for Maven</name>
             <url>https://maven.java.net/content/repositories/snapshots/</url>
