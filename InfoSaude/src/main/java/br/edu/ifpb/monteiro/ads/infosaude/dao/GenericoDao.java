@@ -14,7 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
  * @param <IdentificadorGenerico>
  * @date 04/04/2015
  */
-public abstract class DaoGenerico<IdentificadorGenerico extends EntidadeBase> {
+public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
 
     public EntityManager getEM() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("InfoSaudePU");

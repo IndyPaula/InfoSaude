@@ -10,6 +10,6 @@ import javax.persistence.Persistence;
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 03/04/2015
  */
-public class PessoaDao extends DaoGenerico<Pessoa> {
+public class PessoaDao extends GenericoDao<Pessoa> {
 
 }

@@ -1,5 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -22,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity(name = "pessoa")
-public class Pessoa implements Serializable, EntidadeBase{
+public class Pessoa implements Serializable, EntidadeBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +38,9 @@ public class Pessoa implements Serializable, EntidadeBase{
     @Column(name = "pessoa_data_nascimento", nullable = false)
     private Date dataNascimento;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "pessoa_sexo", nullable = true, length = 9)
-    private String sexo;
+    private EnumGeneros sexo;
 
     @Column(name = "pessoa_nome_mae", nullable = true, length = 80)
     private String nomeMae;
@@ -45,9 +48,9 @@ public class Pessoa implements Serializable, EntidadeBase{
     @Column(name = "pessoa_nome_pai", nullable = true, length = 80)
     private String nomePai;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "pessoa_etnia", nullable = true, length = 20)
-    private String etnia;
+    private EnumEtnias etnia;
 
     @Column(name = "pessoa_altura", nullable = true, precision = 2)
     private double altura;
@@ -76,9 +79,9 @@ public class Pessoa implements Serializable, EntidadeBase{
     @Column(name = "pessoa_endereco_bairro", nullable = true, length = 80)
     private String bairro;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "pessoa_endereco_estado", nullable = true, length = 30)
-    private String estado;
+    private EnumEstados estado;
 
     @Override
     public Long getId() {
@@ -105,11 +108,11 @@ public class Pessoa implements Serializable, EntidadeBase{
         this.dataNascimento = dataNascimento;
     }
 
-    public String getSexo() {
+    public EnumGeneros getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(EnumGeneros sexo) {
         this.sexo = sexo;
     }
 
@@ -129,11 +132,11 @@ public class Pessoa implements Serializable, EntidadeBase{
         this.nomePai = nomePai;
     }
 
-    public String getEtnia() {
+    public EnumEtnias getEtnia() {
         return etnia;
     }
 
-    public void setEtnia(String etnia) {
+    public void setEtnia(EnumEtnias etnia) {
         this.etnia = etnia;
     }
 
@@ -209,11 +212,11 @@ public class Pessoa implements Serializable, EntidadeBase{
         this.bairro = bairro;
     }
 
-    public String getEstado() {
+    public EnumEstados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EnumEstados estado) {
         this.estado = estado;
     }
 

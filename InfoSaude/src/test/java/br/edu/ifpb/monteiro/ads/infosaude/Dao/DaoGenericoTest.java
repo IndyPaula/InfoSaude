@@ -5,7 +5,7 @@
  */
 package br.edu.ifpb.monteiro.ads.infosaude.Dao;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.DaoGenerico;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.GenericoDao;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -40,12 +40,12 @@ public class DaoGenericoTest {
     }
 
     /**
-     * Test of getEM method, of class DaoGenerico.
+     * Test of getEM method, of class GenericoDao.
      */
     @org.junit.Test
     public void testGetEM() {
         System.out.println("getEM");
-        DaoGenerico instance = new DaoGenericoImpl();
+        GenericoDao instance = new DaoGenericoImpl();
         EntityManager expResult = null;
         EntityManager result = instance.getEM();
         assertEquals(expResult, result);
@@ -53,13 +53,13 @@ public class DaoGenericoTest {
     }
 
     /**
-     * Test of salvar method, of class DaoGenerico.
+     * Test of salvar method, of class GenericoDao.
      */
     @org.junit.Test
     public void testSalvar() throws Exception {
         System.out.println("salvar");
         Object identificadorGenerico = null;
-        DaoGenerico instance = new DaoGenericoImpl();
+        GenericoDao instance = new DaoGenericoImpl();
         Boolean expResult = null;
         Boolean result = instance.salvar(identificadorGenerico);
         assertEquals(expResult, result);
@@ -67,13 +67,13 @@ public class DaoGenericoTest {
     }
 
     /**
-     * Test of atualizar method, of class DaoGenerico.
+     * Test of atualizar method, of class GenericoDao.
      */
     @org.junit.Test
     public void testAtualizar() throws Exception {
         System.out.println("atualizar");
         Object identificadorGenerico = null;
-        DaoGenerico instance = new DaoGenericoImpl();
+        GenericoDao instance = new DaoGenericoImpl();
         Boolean expResult = null;
         Boolean result = instance.atualizar(identificadorGenerico);
         assertEquals(expResult, result);
@@ -81,12 +81,12 @@ public class DaoGenericoTest {
     }
 
     /**
-     * Test of remover method, of class DaoGenerico.
+     * Test of remover method, of class GenericoDao.
      */
     @org.junit.Test
     public void testRemover() {
         System.out.println("remover");
-        DaoGenerico instance = new DaoGenericoImpl();
+        GenericoDao instance = new DaoGenericoImpl();
         Boolean expResult = null;
         Boolean result = instance.remover(null);
         assertEquals(expResult, result);
@@ -94,19 +94,19 @@ public class DaoGenericoTest {
     }
 
     /**
-     * Test of consultarPorId method, of class DaoGenerico.
+     * Test of consultarPorId method, of class GenericoDao.
      */
     @org.junit.Test
     public void testConsultarPorId() {
         System.out.println("consultarPorId");
-        DaoGenerico instance = new DaoGenericoImpl();
+        GenericoDao instance = new DaoGenericoImpl();
         Object expResult = null;
         Object result = instance.consultarPorId(null);
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
 
-    public class DaoGenericoImpl extends DaoGenerico {
+    public class DaoGenericoImpl extends GenericoDao {
     }
     
 }
