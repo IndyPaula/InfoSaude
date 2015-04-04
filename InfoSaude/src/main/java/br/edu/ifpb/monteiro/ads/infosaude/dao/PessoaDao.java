@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.infosaude.Dao;
+package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Pessoa;
 import javax.persistence.EntityManager;

@@ -1,6 +1,5 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.Dao.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;

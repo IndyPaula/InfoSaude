@@ -1,5 +1,6 @@
-package br.edu.ifpb.monteiro.ads.infosaude.Dao;
+package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.EntidadeBase;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,7 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
  * @param <IdentificadorGenerico>
  * @date 04/04/2015
  */
-public abstract class DaoGenerico<IdentificadorGenerico extends EntidadeBase> implements Serializable{
+public abstract class DaoGenerico<IdentificadorGenerico extends EntidadeBase> {
 
     public EntityManager getEM() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("InfoSaudePU");

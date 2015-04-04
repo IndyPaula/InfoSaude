@@ -5,6 +5,7 @@
  */
 package br.edu.ifpb.monteiro.ads.infosaude.Dao;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.DaoGenerico;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
