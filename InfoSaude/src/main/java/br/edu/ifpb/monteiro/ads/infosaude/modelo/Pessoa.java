@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.Dao.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -22,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity(name = "pessoa")
-public class Pessoa implements Serializable {
+public class Pessoa implements Serializable, EntidadeBase{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +36,7 @@ public class Pessoa implements Serializable {
     @Column(name = "pessoa_data_nascimento", nullable = false)
     private Date dataNascimento;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "pessoa_sexo", nullable = true, length = 9)
     private String sexo;
 
@@ -45,7 +46,7 @@ public class Pessoa implements Serializable {
     @Column(name = "pessoa_nome_pai", nullable = true, length = 80)
     private String nomePai;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "pessoa_etnia", nullable = true, length = 20)
     private String etnia;
 
@@ -76,15 +77,16 @@ public class Pessoa implements Serializable {
     @Column(name = "pessoa_endereco_bairro", nullable = true, length = 80)
     private String bairro;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "pessoa_endereco_estado", nullable = true, length = 30)
     private String estado;
 
-    public Long getIdPessoa() {
+    @Override
+    public Long getId() {
         return idPessoa;
     }
 
-    public void setIdPessoa(Long idPessoa) {
+    public void setId(Long idPessoa) {
         this.idPessoa = idPessoa;
     }
 

@@ -10,16 +10,6 @@ import javax.persistence.Persistence;
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 03/04/2015
  */
-public class PessoaDao {
+public class PessoaDao extends DaoGenerico<Pessoa> {
 
-    public EntityManager getEM () {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("InfoSaudePU");
-        return emf.createEntityManager();
-    }
-    
-    public void salvar (Pessoa pessoa) {
-        EntityManager em = getEM();
-        em.persist(pessoa);
-    }
-    
 }
