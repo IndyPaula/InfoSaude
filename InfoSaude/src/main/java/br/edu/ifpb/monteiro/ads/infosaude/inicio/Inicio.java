@@ -16,15 +16,16 @@ public class Inicio {
         Pessoa pessoa = new Pessoa();
         pessoa.setNome("Jefferson");
         pessoa.setDataNascimento(Date.from(Instant.EPOCH));
-        pessoa.setCpf("12345674910");
+        pessoa.setCpf("12345321910");
 
         Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("123123456389456");
+        paciente.setCartaoSUS("123123982567453");
         paciente.setPacienteDataCadastro(Date.from(Instant.EPOCH));
-        paciente.setPacienteNumeroProntuario(32);
+        paciente.setPacienteNumeroProntuario(10);
         paciente.setPessoa(pessoa);
 
-        PacienteDao pacienteDao = new PacienteDao();
-        pacienteDao.salvar(paciente);
+        PacienteDao pacienteDao = new  PacienteDao();
+        System.out.println(pacienteDao.consultarPorId(1L).getPessoa().getNome());
+//        pacienteDao.salvar(paciente);
     }
 }

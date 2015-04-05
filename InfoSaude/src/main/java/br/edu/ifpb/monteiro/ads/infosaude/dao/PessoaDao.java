@@ -12,4 +12,9 @@ import javax.persistence.Persistence;
  */
 public class PessoaDao extends GenericoDao<Pessoa> {
 
+    public PessoaDao() {
+        super(Pessoa.class);
+    }
+
+
 }

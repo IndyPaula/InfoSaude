@@ -9,4 +9,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
  */
 public class PacienteDao extends GenericoDao<Paciente>{
 
+    public PacienteDao() {
+        super(Paciente.class);
+    }
+
 }

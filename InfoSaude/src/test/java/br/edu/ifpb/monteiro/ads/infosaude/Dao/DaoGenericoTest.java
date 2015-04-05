@@ -6,6 +6,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.Dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.GenericoDao;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.EntidadeBase;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -61,7 +62,7 @@ public class DaoGenericoTest {
         Object identificadorGenerico = null;
         GenericoDao instance = new DaoGenericoImpl();
         Boolean expResult = null;
-        Boolean result = instance.salvar(identificadorGenerico);
+        Boolean result = instance.salvar((EntidadeBase) identificadorGenerico);
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
@@ -75,7 +76,7 @@ public class DaoGenericoTest {
         Object identificadorGenerico = null;
         GenericoDao instance = new DaoGenericoImpl();
         Boolean expResult = null;
-        Boolean result = instance.atualizar(identificadorGenerico);
+        Boolean result = instance.atualizar((EntidadeBase) identificadorGenerico);
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
@@ -107,6 +108,10 @@ public class DaoGenericoTest {
     }
 
     public class DaoGenericoImpl extends GenericoDao {
+
+        public DaoGenericoImpl() {
+            super(Class.class);
+        }
     }
     
 }

@@ -20,6 +20,22 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("InfoSaudePU");
         return emf.createEntityManager();
     }
+    
+    
+
+    private Class<IdentificadorGenerico> clazz;
+    
+    public GenericoDao(Class<IdentificadorGenerico> clazz) {
+        this.clazz =  clazz;
+    }
+    
+    public EntityManager em() {
+        return getEM();
+    }
+    
+    
+    
+    
 
     public Boolean salvar(IdentificadorGenerico identificadorGenerico) throws Exception {
         EntityManager em = getEM();
@@ -63,7 +79,7 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
         return result;
     }
 
-    public Boolean remover(Class<IdentificadorGenerico> clazz, Long id) {
+    public Boolean remover(Long id) {
         EntityManager em = getEM();
         IdentificadorGenerico identificadorGenerico = em.find(clazz, id);
         Boolean result = false;
@@ -81,7 +97,7 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
 
     }
 
-    public IdentificadorGenerico consultarPorId(Class<IdentificadorGenerico> clazz, Long id) {
+    public IdentificadorGenerico consultarPorId(Long id) {
         EntityManager em = getEM();
         IdentificadorGenerico idetificadorGenerico = null;
         try {
@@ -94,7 +110,7 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
         return idetificadorGenerico;
     }
     
-     public List<IdentificadorGenerico> buscarTudo(Class<IdentificadorGenerico> clazz) {
+     public List<IdentificadorGenerico> buscarTudo() {
         CriteriaQuery cq = getEM().getCriteriaBuilder().createQuery();
         cq.select(cq.from(clazz));
         return getEM().createQuery(cq).getResultList();
