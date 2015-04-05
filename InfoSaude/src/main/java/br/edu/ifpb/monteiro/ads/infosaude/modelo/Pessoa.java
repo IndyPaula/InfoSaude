@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,13 +24,13 @@ import javax.persistence.TemporalType;
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 31/03/2015
  */
-@Inheritance(strategy = InheritanceType.JOINED)
 @Entity(name = "pessoa")
+@SequenceGenerator(name = "pessoa_seq", sequenceName = "pessoa_seq", initialValue = 1, allocationSize = 1)
 public class Pessoa implements Serializable, EntidadeBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPessoa;
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "pessoa_seq")
+    private Long id;
 
     @Column(name = "pessoa_nome", nullable = false, length = 80)
     private String nome;
@@ -52,19 +53,16 @@ public class Pessoa implements Serializable, EntidadeBase {
     @Column(name = "pessoa_etnia", nullable = true, length = 20)
     private EnumEtnias etnia;
 
-    @Column(name = "pessoa_altura", nullable = true, precision = 2)
+    @Column(name = "pessoa_altura", nullable = true, scale = 2)
     private double altura;
 
-    @Column(name = "pessoa_peso", nullable = true, precision = 2)
+    @Column(name = "pessoa_peso", nullable = true, scale = 2)
     private double peso;
 
-    @Column(name = "pessoa_cartao_sus", nullable = false, length = 15)
-    private String cartaoSUS;
-
-    @Column(name = "pessoa_cpf", nullable = false, length = 11)
+    @Column(name = "pessoa_cpf", nullable = false, length = 11, unique = true, precision = 11)
     private String cpf;
 
-    @Column(name = "pessoa_peso_nascer", nullable = true, precision = 2)
+    @Column(name = "pessoa_peso_nascer", nullable = true, scale = 2)
     private double pesoNascer;
 
     @Column(name = "pessoa_endereco_rua", nullable = true, length = 80)
@@ -85,11 +83,7 @@ public class Pessoa implements Serializable, EntidadeBase {
 
     @Override
     public Long getId() {
-        return idPessoa;
-    }
-
-    public void setId(Long idPessoa) {
-        this.idPessoa = idPessoa;
+        return id;
     }
 
     public String getNome() {
@@ -156,14 +150,6 @@ public class Pessoa implements Serializable, EntidadeBase {
         this.peso = peso;
     }
 
-    public String getCartaoSUS() {
-        return cartaoSUS;
-    }
-
-    public void setCartaoSUS(String cartaoSUS) {
-        this.cartaoSUS = cartaoSUS;
-    }
-
     public String getCpf() {
         return cpf;
     }
@@ -223,7 +209,7 @@ public class Pessoa implements Serializable, EntidadeBase {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.idPessoa);
+        hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -236,7 +222,7 @@ public class Pessoa implements Serializable, EntidadeBase {
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        if (!Objects.equals(this.idPessoa, other.idPessoa)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
