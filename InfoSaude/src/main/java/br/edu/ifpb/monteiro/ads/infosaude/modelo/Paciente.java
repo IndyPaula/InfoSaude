@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "paciente")
 @SequenceGenerator(name = "paciente_seq", sequenceName = "paciente_seq", initialValue = 1, allocationSize = 1)
-public class Paciente implements Serializable, EntidadeBase {
+public class Paciente implements EntidadeBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "paciente_seq")

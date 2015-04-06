@@ -35,7 +35,7 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
         try {
             em.getTransaction().begin();
             if (identificadorGenerico.getId() == null) {
-                em.persist(identificadorGenerico); // Persiste a entidade
+                em.persist(identificadorGenerico); 
                 em.getTransaction().commit();
                 result = true;
             }

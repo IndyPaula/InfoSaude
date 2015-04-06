@@ -1,9 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
-import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,47 +15,31 @@ import javax.persistence.SequenceGenerator;
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 06/04/2015
  */
-@Entity(name = "login_admin")
-@SequenceGenerator(name = "login_admin_seq", sequenceName = "login_admin_seq", initialValue = 1, allocationSize = 1)
-public class LoginAdmin implements EntidadeBase {
-
+@Entity(name = "acs")
+@SequenceGenerator(name = "acs_seq", sequenceName = "acs_seq", initialValue = 1, allocationSize = 1)
+public class ACS implements EntidadeBase {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "login_admin_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "acs_seq")
     private Long id;
     
-    @Column(name = "login_admin_name", nullable = false, length = 45, unique = true)
-    private String nome;
+    @Column(name = "acs_cbo", length = 15, nullable = false, unique = true)
+    private String cbo;
     
-    @Column(name = "login_admin_senha", nullable = false, length = 45, unique = false)
-    private String senha;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Funcionario funcionario;
-    
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Long getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getCbo() {
+        return cbo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setCbo(String cbo) {
+        this.cbo = cbo;
     }
 
     public Funcionario getFuncionario() {
@@ -70,8 +52,8 @@ public class LoginAdmin implements EntidadeBase {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -83,13 +65,13 @@ public class LoginAdmin implements EntidadeBase {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final LoginAdmin other = (LoginAdmin) obj;
+        final ACS other = (ACS) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-    
+
     
     
 }
