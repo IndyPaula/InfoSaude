@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.infosaude.modelo;
+package br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces;
 
 /**
  *

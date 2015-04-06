@@ -14,18 +14,18 @@ public class Inicio {
         PessoaDao pessosDao = new PessoaDao();
         // nome, datanascimento, cpf
         Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Jefferson");
+        pessoa.setNome("Jordielson");
         pessoa.setDataNascimento(Date.from(Instant.EPOCH));
-        pessoa.setCpf("12345321910");
+        pessoa.setCpf("12342340690");
 
         Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("123123982567453");
-        paciente.setPacienteDataCadastro(Date.from(Instant.EPOCH));
-        paciente.setPacienteNumeroProntuario(10);
+        paciente.setCartaoSUS("123453049567453");
+        paciente.setDataCadastro(Date.from(Instant.EPOCH));
+        paciente.setNumeroProntuario(1);
         paciente.setPessoa(pessoa);
 
         PacienteDao pacienteDao = new  PacienteDao();
-        System.out.println(pacienteDao.consultarPorId(1L).getPessoa().getNome());
-//        pacienteDao.salvar(paciente);
+//        System.out.println(pacienteDao.consultarPorId(26L).getPessoa().getNome());
+        pacienteDao.salvar(paciente);
     }
 }

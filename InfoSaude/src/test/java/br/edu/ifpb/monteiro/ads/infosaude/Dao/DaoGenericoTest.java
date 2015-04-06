@@ -6,7 +6,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.Dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.GenericoDao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;

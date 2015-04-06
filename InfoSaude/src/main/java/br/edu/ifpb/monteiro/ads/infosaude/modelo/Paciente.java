@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -28,11 +29,11 @@ public class Paciente implements Serializable, EntidadeBase {
     private Long id;
 
     @Column(name = "paciente_numero_prontuario", nullable = false, unique = true)
-    private int pacienteNumeroProntuario;
+    private int numeroProntuario;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "paciente_data_cadastro", nullable = false)
-    private Date pacienteDataCadastro;
+    private Date dataCadastro;
 
     @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
@@ -45,20 +46,20 @@ public class Paciente implements Serializable, EntidadeBase {
         return id;
     }
 
-    public int getPacienteNumeroProntuario() {
-        return pacienteNumeroProntuario;
+    public int getNumeroProntuario() {
+        return numeroProntuario;
     }
 
-    public void setPacienteNumeroProntuario(int pacienteNumeroProntuario) {
-        this.pacienteNumeroProntuario = pacienteNumeroProntuario;
+    public void setNumeroProntuario(int numeroProntuario) {
+        this.numeroProntuario = numeroProntuario;
     }
 
-    public Date getPacienteDataCadastro() {
-        return pacienteDataCadastro;
+    public Date getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setPacienteDataCadastro(Date pacienteDataCadastro) {
-        this.pacienteDataCadastro = pacienteDataCadastro;
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public String getCartaoSUS() {

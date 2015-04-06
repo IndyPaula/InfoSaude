@@ -1,6 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,25 +20,17 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("InfoSaudePU");
         return emf.createEntityManager();
     }
-    
-    
+
+    private EntityManager em;
 
     private Class<IdentificadorGenerico> clazz;
-    
+
     public GenericoDao(Class<IdentificadorGenerico> clazz) {
-        this.clazz =  clazz;
+        this.clazz = clazz;
+        em = getEM();
     }
-    
-    public EntityManager em() {
-        return getEM();
-    }
-    
-    
-    
-    
 
     public Boolean salvar(IdentificadorGenerico identificadorGenerico) throws Exception {
-        EntityManager em = getEM();
         Boolean result = false;
         try {
             em.getTransaction().begin();
@@ -57,7 +49,6 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
     }
 
     public Boolean atualizar(IdentificadorGenerico identificadorGenerico) throws Exception {
-        EntityManager em = getEM();
         Boolean result = false;
         try {
             em.getTransaction().begin();
@@ -80,7 +71,6 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
     }
 
     public Boolean remover(Long id) {
-        EntityManager em = getEM();
         IdentificadorGenerico identificadorGenerico = em.find(clazz, id);
         Boolean result = false;
         try {
@@ -98,23 +88,21 @@ public abstract class GenericoDao<IdentificadorGenerico extends EntidadeBase> {
     }
 
     public IdentificadorGenerico consultarPorId(Long id) {
-        EntityManager em = getEM();
         IdentificadorGenerico idetificadorGenerico = null;
         try {
             idetificadorGenerico = em.find(clazz, id);
         } catch (Exception e) {
-            
+
         } finally {
             em.close();
         }
         return idetificadorGenerico;
     }
-    
-     public List<IdentificadorGenerico> buscarTudo() {
+
+    public List<IdentificadorGenerico> buscarTudo() {
         CriteriaQuery cq = getEM().getCriteriaBuilder().createQuery();
         cq.select(cq.from(clazz));
         return getEM().createQuery(cq).getResultList();
     }
-    
 
 }
