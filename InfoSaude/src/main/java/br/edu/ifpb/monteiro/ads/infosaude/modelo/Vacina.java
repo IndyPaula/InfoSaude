@@ -1,7 +1,9 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,50 +34,53 @@ public class Vacina implements EntidadeBase {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "vacina_via_administracao", nullable = false, length = 25)
-    private String viaAdministracao;
+    private EnumViaAdministracao viaAdministracao;
 
     @Column(name = "vacina_nome", nullable = false, length = 45)
     private String nome;
 
     @Column(name = "vacina_instrucao_administracao", length = 255)
     private String instrucaoAdministracao;
-    
+
     @Column(name = "vacina_instrucao_armazenamento", length = 255)
     private String instrucaoArmazenamento;
-    
+
     @Column(name = "vacina_contra_indicacoes", length = 255)
     private String contraIndicacoes;
-    
+
     @Column(name = "vacina_reacoes_adversas", length = 255)
     private String reacoesAdversas;
-    
+
     @Column(name = "vacina_volume", scale = 2)
     private double volume;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "vacina_data_fabricacao", nullable = false)
     private Date dataFabricacao;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "vacina_data_validade", nullable = false)
     private Date dataValidade;
-    
-    @Column(name = "vacina_numero_lote", nullable = false, length = 20)
+
+    @Column(name = "vacina_numero_lote", nullable = false, length = 20, unique = true)
     private String numeroLote;
-    
-    // muitos para muitos
-    private Fornecedor fornecedor;
+
+    @ManyToMany
+    @JoinTable(name = "vacina_fornecedor", joinColumns
+            = @JoinColumn(name = "vacina_id"),
+            inverseJoinColumns = @JoinColumn(name = "fornecedor_id"))
+    private List<Fornecedor> fornecedores;
 
     @Override
     public Long getId() {
         return id;
     }
 
-    public String getViaAdministracao() {
+    public EnumViaAdministracao getViaAdministracao() {
         return viaAdministracao;
     }
 
-    public void setViaAdministracao(String viaAdministracao) {
+    public void setViaAdministracao(EnumViaAdministracao viaAdministracao) {
         this.viaAdministracao = viaAdministracao;
     }
 
@@ -148,12 +156,12 @@ public class Vacina implements EntidadeBase {
         this.numeroLote = numeroLote;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
+    public List<Fornecedor> getFornecedores() {
+        return fornecedores;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setFornecedores(List<Fornecedor> fornecedores) {
+        this.fornecedores = fornecedores;
     }
 
     @Override
@@ -177,7 +185,5 @@ public class Vacina implements EntidadeBase {
         }
         return true;
     }
-    
-    
-    
+
 }

@@ -1,5 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import java.util.Date;
 import java.util.Objects;
@@ -41,14 +43,14 @@ public class AtendimentoImunizacao implements EntidadeBase {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "atendimento_imunizacao_dose", nullable = false, length = 20)
-    private String dose;
+    private EnumDoseVacina dose;
 
     @OneToOne
     private Vacina vacina;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "atendimento_imunizacao_estrategia_imunizacao", length = 25, nullable = false)
-    private String estrategiaImunizacao;
+    private EnumEstrategiaImunizacao estrategiaImunizacao;
     
     @OneToOne
     private Paciente paciente;
@@ -82,11 +84,11 @@ public class AtendimentoImunizacao implements EntidadeBase {
         this.dataAgendamento = dataAgendamento;
     }
 
-    public String getDose() {
+    public EnumDoseVacina getDose() {
         return dose;
     }
 
-    public void setDose(String dose) {
+    public void setDose(EnumDoseVacina dose) {
         this.dose = dose;
     }
 
@@ -98,11 +100,11 @@ public class AtendimentoImunizacao implements EntidadeBase {
         this.vacina = vacina;
     }
 
-    public String getEstrategiaImunizacao() {
+    public EnumEstrategiaImunizacao getEstrategiaImunizacao() {
         return estrategiaImunizacao;
     }
 
-    public void setEstrategiaImunizacao(String estrategiaImunizacao) {
+    public void setEstrategiaImunizacao(EnumEstrategiaImunizacao estrategiaImunizacao) {
         this.estrategiaImunizacao = estrategiaImunizacao;
     }
 

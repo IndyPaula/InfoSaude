@@ -9,7 +9,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.enumerations;
  *
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  */
-public enum EnumVacina {
+public enum EnumViaAdministracao {
     
     INTRAMUSCULAR("Intramuscular"),
     ORAL("Oral"),
@@ -19,7 +19,7 @@ public enum EnumVacina {
 
     private String descricao;
 
-    private EnumVacina(String descricao) {
+    private EnumViaAdministracao(String descricao) {
         this.descricao = descricao;
     }
 
