@@ -1,0 +1,25 @@
+- Adequar os papeis do projeto de acordo com o IMPROS -> FEITO
+
+- Refazer a estimativa das atividades -> VANDERLAN
+
+- Item de backlog é funcionalidade (o que vai ser entregue) -> FEITO
+
+- Planejamento das sprints -> VANDERLAN TÁ FAZENDO
+
+- Definir data para entrega da infraestrutura por parte do "cliente" -> VER NA REUNIÃO 
+
+- PLANILHA RISCOS:
+
+	- Desistência- solução : renegociar escopo ou renegociar o tempo -> FEITO
+
+	- No começo da interação, escolher um componente para se inteirar de uma tecnologia não dominada. -> FEITO
+
+	- Em caso de perda de prazo, entrar em contato com cliente para avisar e negociar nova dead line,
+	e avaliar os motivos que causaram a perda de tempo -> FEITO
+
+	- Acordar anteriormente o SO que será utilizado. -> FEITO
+
+GERÊNCIA DE CONFIGURAÇÃO:
+
+	- Mudar a estrutura de branch, adotar a integração dinâmica (diária) para identificar erros com
+	mais agilidade.
