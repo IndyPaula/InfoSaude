@@ -39,5 +39,5 @@
 .ui-icon { 
     width: 16px; 
     height: 16px; 
-    background-image: url(#{resource['/resources/imagens/icon/conf.png']}); 
+    /*background-image: url(#{resource['/resources/imagens/icon/conf.png']});*/ 
 }
