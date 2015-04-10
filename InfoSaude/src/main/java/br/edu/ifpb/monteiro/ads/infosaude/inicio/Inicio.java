@@ -16,6 +16,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.time.Instant;
 import java.util.Date;
 
+
 public class Inicio {
 
     public static void main(String[] args) throws Exception {
@@ -37,7 +38,7 @@ public class Inicio {
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNome("Teste");
         fornecedor.setCnpj("123456789098765");
-        
+
         // viaAdministracao, nome, dataFabricacao, dataValidade, fornecedor
         Vacina vacina = new Vacina();
         vacina.setViaAdministracao(EnumViaAdministracao.ORAL);
@@ -45,13 +46,13 @@ public class Inicio {
         vacina.setDataFabricacao(Date.from(Instant.EPOCH));
         vacina.setDataValidade(Date.from(Instant.EPOCH));
         vacina.setFornecedor(fornecedor);
-        
+
         // cnes, nome, numero
         UnidadeSaude unidadeSaude = new UnidadeSaude();
         unidadeSaude.setCnes(3211);
         unidadeSaude.setNome("Teste");
         unidadeSaude.setNumero(1);
-        
+
         // matricula, codigoEquipeINE, pessoa, unidadeSaude, nomeUsuario, senha
         Funcionario funcionario = new Funcionario();
         funcionario.setMatricula(12);
@@ -60,12 +61,12 @@ public class Inicio {
         funcionario.setUnidadeSaude(unidadeSaude);
         funcionario.setNomeUsuario("Teste");
         funcionario.setSenha("teste");
-        
+
         // registroCoren, funcionario
         Vacinador vacinador = new Vacinador();
         vacinador.setRegistroCoren(23131);
         vacinador.setFuncionario(funcionario);
-        
+
         // vacinador, dataAtendimento, dose, vacina, estrategiaImunizacao, paciente
         AtendimentoImunizacao atendimentoImunizacao = new AtendimentoImunizacao();
         atendimentoImunizacao.setVacinador(vacinador);
@@ -75,9 +76,8 @@ public class Inicio {
         atendimentoImunizacao.setEstrategiaImunizacao(EnumEstrategiaImunizacao.ROTINA);
         atendimentoImunizacao.setPaciente(paciente);
 
-        
         AtendimentoImunizacaoDao atendimentoImunizacaoDao = new AtendimentoImunizacaoDao();
         atendimentoImunizacaoDao.salvar(atendimentoImunizacao);
-        
+
     }
 }
