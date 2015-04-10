@@ -26,7 +26,7 @@ public class LoginAdmin implements EntidadeBase {
     private Long id;
     
     @Column(name = "login_admin_name", nullable = false, length = 45, unique = true)
-    private String nome;
+    private String login;
     
     @Column(name = "login_admin_senha", nullable = false, length = 45, unique = false)
     private String senha;
@@ -45,11 +45,11 @@ public class LoginAdmin implements EntidadeBase {
     }
 
     public String getNome() {
-        return nome;
+        return login;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
