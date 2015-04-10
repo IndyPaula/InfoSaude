@@ -13,6 +13,7 @@ public enum EnumEstrategiaImunizacao {
     INTENSIFICACAO("Intensificação"), 
     CAMPANHA_INDISCRIMINADA("Campanha Indiscriminada"),
     CAMPANHA_SELETIVA("Campanha Seletiva"),
+    CAMPANHA_SEGUIMENTO("Campanha de Saguimento"),
     SOROTERAPIA("Soroterapia");
     
     private String descricao;

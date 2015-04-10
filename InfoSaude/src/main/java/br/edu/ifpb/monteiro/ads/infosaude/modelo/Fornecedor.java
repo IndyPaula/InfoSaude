@@ -3,12 +3,15 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -39,8 +42,10 @@ public class Fornecedor implements EntidadeBase {
     @Column(name = "fornecedor_email", nullable = true, length = 45)
     private String email;
     
-    @ManyToMany(mappedBy = "fornecedores")
+    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private List<Vacina> vacinas;
+    
 
     @Override
     public Long getId() {

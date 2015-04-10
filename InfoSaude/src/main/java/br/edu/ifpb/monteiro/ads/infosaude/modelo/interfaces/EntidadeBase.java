@@ -9,10 +9,9 @@ import java.io.Serializable;
  */
 public interface EntidadeBase extends Serializable {
 
-   public Long getId();
+    static final long serialVersionUID = 1L;
 
-//    @Override
-//    public String toString();
+    public Long getId();
 
     @Override
     public boolean equals(Object obj);
@@ -20,7 +19,4 @@ public interface EntidadeBase extends Serializable {
     @Override
     public int hashCode();
 
-   
-   
-   
 }

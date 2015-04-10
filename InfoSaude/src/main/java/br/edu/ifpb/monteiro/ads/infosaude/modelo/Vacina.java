@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -65,12 +66,9 @@ public class Vacina implements EntidadeBase {
     @Column(name = "vacina_numero_lote", nullable = false, length = 20, unique = true)
     private String numeroLote;
 
-    @ManyToMany
-    @JoinTable(name = "vacina_fornecedor", joinColumns
-            = @JoinColumn(name = "vacina_id"),
-            inverseJoinColumns = @JoinColumn(name = "fornecedor_id"))
-    private List<Fornecedor> fornecedores;
-
+    @ManyToOne
+    private Fornecedor fornecedor;
+    
     @Override
     public Long getId() {
         return id;
@@ -156,14 +154,14 @@ public class Vacina implements EntidadeBase {
         this.numeroLote = numeroLote;
     }
 
-    public List<Fornecedor> getFornecedores() {
-        return fornecedores;
+    public Fornecedor getFornecedor() {
+        return fornecedor;
     }
 
-    public void setFornecedores(List<Fornecedor> fornecedores) {
-        this.fornecedores = fornecedores;
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

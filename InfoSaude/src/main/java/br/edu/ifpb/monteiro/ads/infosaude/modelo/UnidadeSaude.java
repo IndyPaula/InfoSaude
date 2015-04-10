@@ -27,7 +27,7 @@ public class UnidadeSaude implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "unidade_saude_seq")
     private Long id;
 
-    @Column(name = "unidade_saude_cnes", unique = true)
+    @Column(name = "unidade_saude_cnes", unique = true, nullable = false)
     private int cnes;
 
     @Column(name = "unidade_saude_nome", nullable = false, length = 80)
