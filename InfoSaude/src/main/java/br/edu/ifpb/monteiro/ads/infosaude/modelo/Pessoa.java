@@ -33,53 +33,53 @@ public class Pessoa implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "pessoa_seq")
     private Long id;
 
-    @Column(name = "pessoa_nome", nullable = false, length = 80)
+    @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "pessoa_data_nascimento", nullable = false)
+    @Column(name = "data_nascimento", nullable = false)
     private Date dataNascimento;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "pessoa_sexo", nullable = true, length = 9)
+    @Column(name = "sexo", nullable = true, length = 9)
     private EnumGeneros sexo;
 
-    @Column(name = "pessoa_nome_mae", nullable = true, length = 80)
+    @Column(name = "nome_mae", nullable = true, length = 80)
     private String nomeMae;
 
-    @Column(name = "pessoa_nome_pai", nullable = true, length = 80)
+    @Column(name = "nome_pai", nullable = true, length = 80)
     private String nomePai;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "pessoa_etnia", nullable = true, length = 20)
+    @Column(name = "etnia", nullable = true, length = 20)
     private EnumEtnias etnia;
 
-    @Column(name = "pessoa_altura", nullable = true, scale = 2)
+    @Column(name = "altura", nullable = true, scale = 2)
     private double altura;
 
-    @Column(name = "pessoa_peso", nullable = true, scale = 2)
+    @Column(name = "peso", nullable = true, scale = 2)
     private double peso;
 
-    @Column(name = "pessoa_cpf", nullable = false, length = 11, unique = true, precision = 11)
+    @Column(name = "cpf", nullable = false, length = 11, unique = true, precision = 11)
     private String cpf;
 
-    @Column(name = "pessoa_peso_nascer", nullable = true, scale = 2)
+    @Column(name = "peso_nascer", nullable = true, scale = 2)
     private double pesoNascer;
 
-    @Column(name = "pessoa_endereco_rua", nullable = true, length = 80)
+    @Column(name = "endereco_rua", nullable = true, length = 80)
     private String rua;
 
-    @Column(name = "pessoa_endereco_numero", nullable = true)
+    @Column(name = "endereco_numero", nullable = true)
     private int numero;
 
-    @Column(name = "pessoa_endereco_cep", nullable = true, length = 8)
+    @Column(name = "endereco_cep", nullable = true, length = 8)
     private String cep;
 
-    @Column(name = "pessoa_endereco_bairro", nullable = true, length = 80)
+    @Column(name = "endereco_bairro", nullable = true, length = 80)
     private String bairro;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "pessoa_endereco_estado", nullable = true, length = 30)
+    @Column(name = "endereco_estado", nullable = true, length = 30)
     private EnumEstados estado;
 
     @Override

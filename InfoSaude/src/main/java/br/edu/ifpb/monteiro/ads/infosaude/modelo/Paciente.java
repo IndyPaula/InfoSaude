@@ -28,11 +28,11 @@ public class Paciente implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "paciente_seq")
     private Long id;
 
-    @Column(name = "paciente_numero_prontuario", nullable = false, unique = true)
+    @Column(name = "numero_prontuario", nullable = false, unique = true)
     private int numeroProntuario;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "paciente_data_cadastro", nullable = false)
+    @Column(name = "data_cadastro", nullable = false)
     private Date dataCadastro;
 
     @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)

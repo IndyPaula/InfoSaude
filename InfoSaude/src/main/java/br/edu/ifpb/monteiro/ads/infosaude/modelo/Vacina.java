@@ -34,36 +34,36 @@ public class Vacina implements EntidadeBase {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "vacina_via_administracao", nullable = false, length = 25)
+    @Column(name = "via_administracao", nullable = false, length = 25)
     private EnumViaAdministracao viaAdministracao;
 
-    @Column(name = "vacina_nome", nullable = false, length = 45)
+    @Column(name = "nome", nullable = false, length = 45)
     private String nome;
 
-    @Column(name = "vacina_instrucao_administracao", length = 255)
+    @Column(name = "instrucao_administracao", length = 255)
     private String instrucaoAdministracao;
 
-    @Column(name = "vacina_instrucao_armazenamento", length = 255)
+    @Column(name = "instrucao_armazenamento", length = 255)
     private String instrucaoArmazenamento;
 
-    @Column(name = "vacina_contra_indicacoes", length = 255)
+    @Column(name = "contra_indicacoes", length = 255)
     private String contraIndicacoes;
 
-    @Column(name = "vacina_reacoes_adversas", length = 255)
+    @Column(name = "reacoes_adversas", length = 255)
     private String reacoesAdversas;
 
-    @Column(name = "vacina_volume", scale = 2)
+    @Column(name = "volume", scale = 2)
     private double volume;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "vacina_data_fabricacao", nullable = false)
+    @Column(name = "data_fabricacao", nullable = false)
     private Date dataFabricacao;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "vacina_data_validade", nullable = false)
+    @Column(name = "data_validade", nullable = false)
     private Date dataValidade;
 
-    @Column(name = "vacina_numero_lote", nullable = false, length = 20, unique = true)
+    @Column(name = "numero_lote", nullable = false, length = 20, unique = true)
     private String numeroLote;
 
     @ManyToOne

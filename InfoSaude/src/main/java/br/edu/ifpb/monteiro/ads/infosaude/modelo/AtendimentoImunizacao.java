@@ -34,22 +34,22 @@ public class AtendimentoImunizacao implements EntidadeBase {
     private Vacinador vacinador;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "atendimento_imunizacao_data_atendimento", nullable = false)
+    @Column(name = "data_atendimento", nullable = false)
     private Date dataAtendimento;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "atendimento_imunizacao_data_agendamento", nullable = true)
+    @Column(name = "data_agendamento", nullable = true)
     private Date dataAgendamento;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "atendimento_imunizacao_dose", nullable = false, length = 20)
+    @Column(name = "dose", nullable = false, length = 20)
     private EnumDoseVacina dose;
 
     @OneToOne
     private Vacina vacina;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "atendimento_imunizacao_estrategia_imunizacao", length = 25, nullable = false)
+    @Column(name = "estrategia_imunizacao", length = 25, nullable = false)
     private EnumEstrategiaImunizacao estrategiaImunizacao;
     
     @OneToOne

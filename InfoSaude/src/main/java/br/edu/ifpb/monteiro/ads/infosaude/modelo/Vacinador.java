@@ -24,7 +24,7 @@ public class Vacinador implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vacinador_seq")
     private Long id;
     
-    @Column(name = "vacinador_registro_coren", nullable = false, unique = true)
+    @Column(name = "registro_coren", nullable = false, unique = true)
     private int registroCoren;
     
     @OneToOne(cascade = CascadeType.ALL)

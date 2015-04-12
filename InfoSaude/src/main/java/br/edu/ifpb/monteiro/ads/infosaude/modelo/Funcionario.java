@@ -26,13 +26,13 @@ public class Funcionario implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "funcionario_seq")
     private Long id;
 
-    @Column(name = "funcionario_matricula", unique = true, nullable = false)
+    @Column(name = "matricula", unique = true, nullable = false)
     private int matricula;
 
-    @Column(name = "funcionario_turno", length = 20, nullable = true)
+    @Column(name = "turno", length = 20, nullable = true)
     private String turno;
     
-    @Column(name = "funcionario_codigo_euipe_ine", length = 15, nullable = false)
+    @Column(name = "codigo_euipe_ine", length = 15, nullable = false)
     private String codigoEquipeINE;
     
     @OneToOne(cascade = CascadeType.ALL)
@@ -41,10 +41,10 @@ public class Funcionario implements EntidadeBase {
     @ManyToOne
     private UnidadeSaude unidadeSaude;
     
-    @Column(name = "funcionario_nome_usuario", length = 45, unique = true, nullable = false)
+    @Column(name = "nome_usuario", length = 45, unique = true, nullable = false)
     private String nomeUsuario;
     
-    @Column(name = "funcionario_senha", length = 45, unique = false, nullable = false)
+    @Column(name = "senha", length = 45, unique = false, nullable = false)
     private String senha;
 
     @Override

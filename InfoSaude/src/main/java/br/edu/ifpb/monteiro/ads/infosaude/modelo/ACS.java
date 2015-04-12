@@ -23,7 +23,7 @@ public class ACS implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "acs_seq")
     private Long id;
     
-    @Column(name = "acs_cbo", length = 15, nullable = false, unique = true)
+    @Column(name = "cbo", length = 15, nullable = false, unique = true)
     private String cbo;
     
     @OneToOne

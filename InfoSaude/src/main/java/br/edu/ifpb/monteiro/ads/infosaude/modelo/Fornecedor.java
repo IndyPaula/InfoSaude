@@ -27,19 +27,19 @@ public class Fornecedor implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "fornecedor_seq")
     private Long id;
 
-    @Column(name = "fornecedor_nome", nullable = false, length = 80)
+    @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @Column(name = "fornecedor_cnpj", nullable = false, length = 15)
+    @Column(name = "cnpj", nullable = false, length = 15)
     private String cnpj;
 
-    @Column(name = "fornecedor_endereco", nullable = true, length = 80)
+    @Column(name = "endereco", nullable = true, length = 80)
     private String endereco;
 
-    @Column(name = "fornecedor_telefone", nullable = true, length = 12)
+    @Column(name = "telefone", nullable = true, length = 12)
     private String telefone;
 
-    @Column(name = "fornecedor_email", nullable = true, length = 45)
+    @Column(name = "email", nullable = true, length = 45)
     private String email;
     
     @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)

@@ -27,16 +27,16 @@ public class UnidadeSaude implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "unidade_saude_seq")
     private Long id;
 
-    @Column(name = "unidade_saude_cnes", unique = true, nullable = false)
+    @Column(name = "cnes", unique = true, nullable = false)
     private int cnes;
 
-    @Column(name = "unidade_saude_nome", nullable = false, length = 80)
+    @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @Column(name = "unidade_saude_endereco", nullable = true, length = 80)
+    @Column(name = "endereco", nullable = true, length = 80)
     private String endereco;
 
-    @Column(name = "unidade_saude_numero", nullable = false, unique = true)
+    @Column(name = "numero", nullable = false, unique = true)
     private int numero;
 
     @OneToMany(mappedBy = "unidadeSaude", cascade = CascadeType.ALL)

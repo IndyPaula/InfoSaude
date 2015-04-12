@@ -25,10 +25,10 @@ public class LoginAdmin implements EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "login_admin_seq")
     private Long id;
     
-    @Column(name = "login_admin_name", nullable = false, length = 45, unique = true)
+    @Column(name = "login", nullable = false, length = 45, unique = true)
     private String login;
     
-    @Column(name = "login_admin_senha", nullable = false, length = 45, unique = false)
+    @Column(name = "senha", nullable = false, length = 45, unique = false)
     private String senha;
     
     @OneToOne(cascade = CascadeType.ALL)
