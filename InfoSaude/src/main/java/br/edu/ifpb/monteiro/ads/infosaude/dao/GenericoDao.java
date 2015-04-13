@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
 import java.io.Serializable;
@@ -19,7 +20,7 @@ import javax.persistence.criteria.Root;
  * @param <T>
  * @date 04/04/2015
  */
-public class GenericoDao<T extends EntidadeBase> implements Serializable {
+public class GenericoDao<T extends EntidadeBase> implements Serializable, DaoIF<T> {
 
     @PersistenceContext(unitName = "InfoSaudePU")
     private EntityManager em;
@@ -39,6 +40,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return classePersistente;
     }
 
+    @Override
     public boolean salvar(T identificadorGenerico) throws DaoExcecoes {
         Boolean result = false;
         try {
@@ -57,6 +59,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return true;
     }
 
+    @Override
     public boolean atualizar(T identificadorGenerico) throws DaoExcecoes {
         Boolean result = false;
         try {
@@ -79,6 +82,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return result;
     }
 
+    @Override
     public boolean remover(Long id) throws DaoExcecoes {
         T identificadorGenerico = em.find(classePersistente, id);
         Boolean result = false;
@@ -95,6 +99,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return result;
     }
 
+    @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
         T identificadorGenerico = null;
         try {
@@ -107,6 +112,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return identificadorGenerico;
     }
 
+    @Override
     public T buscarPorCampo(String campo, Object valor) throws DaoExcecoes {
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -131,6 +137,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         }
     }
 
+    @Override
     public List<T> buscarTodosPorCampo(String campo, Object valor) throws DaoExcecoes {
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -153,7 +160,8 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         }
     }
 
-    public List<T> buscarTudo() {
+    @Override
+    public List<T> buscarTudo() throws DaoExcecoes {
         CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(classePersistente));
         return getEntityManager().createQuery(cq).getResultList();

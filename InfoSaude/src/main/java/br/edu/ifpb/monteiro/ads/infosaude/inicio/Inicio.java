@@ -15,7 +15,7 @@ public class Inicio {
         pessoa.setDataNascimento(Date.from(Instant.EPOCH));
         pessoa.setCpf("12342341690");
         PessoaDao pd = new PessoaDao();
-        pd.buscarTudo();
+        pd.buscarPorCampo("cpf", "12342341690");
         
         
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa
