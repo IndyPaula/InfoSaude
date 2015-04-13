@@ -66,7 +66,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
             em.getTransaction().rollback();
             if (!em.contains(identificadorGenerico)) {
                 if (em.find(identificadorGenerico.getClass(), identificadorGenerico.getId()) == null) {
-                    throw new DaoExcecoes(e.getMessage(), e);
+                    throw new DaoExcecoes("Erro ao persistir " + identificadorGenerico, e);
                 }
             }
         } finally {
@@ -84,7 +84,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
             em.getTransaction().commit();
             result = true;
         } catch (Exception e) {
-            throw new DaoExcecoes(e.getMessage(), e);
+            throw new DaoExcecoes("Erro ao remover " + identificadorGenerico, e);
         } finally {
             em.close();
         }
@@ -93,15 +93,15 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
     }
 
     public T consultarPorId(Long id) throws DaoExcecoes {
-        T idetificadorGenerico = null;
+        T identificadorGenerico = null;
         try {
-            idetificadorGenerico = em.find(classePersistente, id);
+            identificadorGenerico = em.find(classePersistente, id);
         } catch (Exception e) {
-            throw new DaoExcecoes(e.getMessage(), e);
+            throw new DaoExcecoes("Erro ao buscar por " + identificadorGenerico, e);
         } finally {
             em.close();
         }
-        return idetificadorGenerico;
+        return identificadorGenerico;
     }
 
     public List<T> buscarTudo() {

@@ -1,6 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.inicio;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.AtendimentoImunizacaoDao;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.FuncionarioDao;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.PacienteDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
@@ -29,14 +31,16 @@ public class Inicio {
         pessoa.setCpf("12342341690");
         PessoaDao dao = new PessoaDao();
 //        dao.salvar(pessoa);
-        dao.remover(198L);
+//        dao.remover(198L);
 
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa
-//        Paciente paciente = new Paciente();
-//        paciente.setCartaoSUS("123453049567451");
-//        paciente.setDataCadastro(Date.from(Instant.EPOCH));
-//        paciente.setNumeroProntuario(21);
-//        paciente.setPessoa(pessoa);
+        Paciente paciente = new Paciente();
+        paciente.setCartaoSUS("123453049567451");
+        paciente.setDataCadastro(Date.from(Instant.EPOCH));
+        paciente.setNumeroProntuario(21);
+        paciente.setPessoa(pessoa);
+        PacienteDao pacienteDao = new PacienteDao();
+        pacienteDao.salvar(paciente);
 //
 //        // nome, cnpj
 //        Fornecedor fornecedor = new Fornecedor();
@@ -68,9 +72,12 @@ public class Inicio {
 //        funcionario.setMatricula(12);
 //        funcionario.setCodigoEquipeINE("23ef");
 //        funcionario.setPessoa(pessoa);
-//        funcionario.setUnidadeSaude(unidadeSaude);
+////        funcionario.setUnidadeSaude(unidadeSaude);
 //        funcionario.setNomeUsuario("Teste");
 //        funcionario.setSenha("teste");
+//        
+//        FuncionarioDao funcionarioDao = new FuncionarioDao();
+//        funcionarioDao.remover(161L);
 //
 //        // registroCoren, funcionario
 //        Vacinador vacinador = new Vacinador();
