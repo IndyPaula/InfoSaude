@@ -1,24 +1,9 @@
 package br.edu.ifpb.monteiro.ads.infosaude.inicio;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.AtendimentoImunizacaoDao;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.FuncionarioDao;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.PacienteDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoImunizacao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Fornecedor;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Pessoa;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Inicio {
 
@@ -31,16 +16,16 @@ public class Inicio {
         pessoa.setCpf("12342341690");
         PessoaDao dao = new PessoaDao();
 //        dao.salvar(pessoa);
-//        dao.remover(198L);
+        dao.buscarPorCampo("cpf", "12342341690");
 
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa
-        Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("123453049567451");
-        paciente.setDataCadastro(Date.from(Instant.EPOCH));
-        paciente.setNumeroProntuario(21);
-        paciente.setPessoa(pessoa);
-        PacienteDao pacienteDao = new PacienteDao();
-        pacienteDao.salvar(paciente);
+//        Paciente paciente = new Paciente();;
+//        paciente.setCartaoSUS("123453049567451");
+//        paciente.setDataCadastro(Date.from(Instant.EPOCH));
+//        paciente.setNumeroProntuario(21);
+//        paciente.setPessoa(pessoa);
+//        PacienteDao pacienteDao = new PacienteDao();
+//        pacienteDao.salvar(paciente);
 //
 //        // nome, cnpj
 //        Fornecedor fornecedor = new Fornecedor();
