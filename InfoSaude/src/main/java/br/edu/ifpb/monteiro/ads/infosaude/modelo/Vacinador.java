@@ -18,7 +18,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "vacinador")
 @SequenceGenerator(name = "vacinador_seq", sequenceName = "vacinador_seq", initialValue = 1, allocationSize = 1)
-public class Vacinador implements EntidadeBase {
+public class Vacinador implements EntidadeBase<Vacinador> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vacinador_seq")

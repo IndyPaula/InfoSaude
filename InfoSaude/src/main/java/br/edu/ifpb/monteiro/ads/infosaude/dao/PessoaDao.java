@@ -16,5 +16,4 @@ public class PessoaDao extends GenericoDao<Pessoa> {
         super(Pessoa.class);
     }
 
-
 }

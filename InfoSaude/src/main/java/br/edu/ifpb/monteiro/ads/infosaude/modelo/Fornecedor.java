@@ -21,7 +21,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "fornecedor")
 @SequenceGenerator(name = "fornecedor_seq", sequenceName = "fornecedor_seq", initialValue = 1, allocationSize = 1)
-public class Fornecedor implements EntidadeBase {
+public class Fornecedor implements EntidadeBase<Fornecedor> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "fornecedor_seq")

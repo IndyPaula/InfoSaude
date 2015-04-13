@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,22 +18,17 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "acs")
 @SequenceGenerator(name = "acs_seq", sequenceName = "acs_seq", initialValue = 1, allocationSize = 1)
-public class ACS implements EntidadeBase {
-    
+public class ACS implements EntidadeBase<ACS> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "acs_seq")
     private Long id;
-    
+
     @Column(name = "cbo", length = 15, nullable = false, unique = true)
     private String cbo;
-    
+
     @OneToOne
     private Funcionario funcionario;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
 
     public String getCbo() {
         return cbo;
@@ -51,27 +47,8 @@ public class ACS implements EntidadeBase {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        return hash;
+    public Long getId() {
+       return id;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ACS other = (ACS) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-
-    
-    
 }

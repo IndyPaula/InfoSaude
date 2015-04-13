@@ -21,7 +21,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "unidade_saude")
 @SequenceGenerator(name = "unidade_saude_seq", sequenceName = "unidade_saude_seq", initialValue = 1, allocationSize = 1)
-public class UnidadeSaude implements EntidadeBase {
+public class UnidadeSaude implements EntidadeBase<UnidadeSaude> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "unidade_saude_seq")

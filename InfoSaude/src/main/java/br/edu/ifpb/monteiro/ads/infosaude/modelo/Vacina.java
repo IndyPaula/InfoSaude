@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "vacina")
 @SequenceGenerator(name = "vacina_seq", sequenceName = "vacina_seq", initialValue = 1, allocationSize = 1)
-public class Vacina implements EntidadeBase {
+public class Vacina implements EntidadeBase<Vacina> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vacina_seq")

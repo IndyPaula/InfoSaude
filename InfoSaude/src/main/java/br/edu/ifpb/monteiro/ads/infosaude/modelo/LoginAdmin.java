@@ -19,7 +19,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "login_admin")
 @SequenceGenerator(name = "login_admin_seq", sequenceName = "login_admin_seq", initialValue = 1, allocationSize = 1)
-public class LoginAdmin implements EntidadeBase {
+public class LoginAdmin implements EntidadeBase<LoginAdmin> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "login_admin_seq")

@@ -20,7 +20,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "funcionario")
 @SequenceGenerator(name = "funcionario_seq", sequenceName = "funcionario_seq", initialValue = 1, allocationSize = 1)
-public class Funcionario implements EntidadeBase {
+public class Funcionario implements EntidadeBase<Funcionario> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "funcionario_seq")

@@ -28,7 +28,8 @@ public class Inicio {
         pessoa.setDataNascimento(Date.from(Instant.EPOCH));
         pessoa.setCpf("12342341690");
         PessoaDao dao = new PessoaDao();
-        dao.remover(185L);
+//        dao.salvar(pessoa);
+        dao.remover(198L);
 
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa
 //        Paciente paciente = new Paciente();
