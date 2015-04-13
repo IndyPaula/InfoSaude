@@ -14,10 +14,10 @@ public class Inicio {
         pessoa.setNome("Jefferson");
         pessoa.setDataNascimento(Date.from(Instant.EPOCH));
         pessoa.setCpf("12342341690");
-        PessoaDao dao = new PessoaDao();
-//        dao.salvar(pessoa);
-        dao.buscarPorCampo("cpf", "12342341690");
-
+        PessoaDao pd = new PessoaDao();
+        pd.buscarTudo();
+        
+        
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa
 //        Paciente paciente = new Paciente();;
 //        paciente.setCartaoSUS("123453049567451");

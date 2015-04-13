@@ -57,7 +57,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return true;
     }
 
-    public Boolean atualizar(T identificadorGenerico) throws DaoExcecoes {
+    public boolean atualizar(T identificadorGenerico) throws DaoExcecoes {
         Boolean result = false;
         try {
             em.getTransaction().begin();
@@ -79,7 +79,7 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         return result;
     }
 
-    public Boolean remover(Long id) throws DaoExcecoes {
+    public boolean remover(Long id) throws DaoExcecoes {
         T identificadorGenerico = em.find(classePersistente, id);
         Boolean result = false;
         try {
@@ -106,55 +106,52 @@ public class GenericoDao<T extends EntidadeBase> implements Serializable {
         }
         return identificadorGenerico;
     }
-    
-    
-     public T buscarPorCampo(String campo, Object valor) throws DaoExcecoes {
+
+    public T buscarPorCampo(String campo, Object valor) throws DaoExcecoes {
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            
+
             CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(classePersistente);
-            
+
             Root<T> root = createQuery.from(classePersistente);
-            
+
             Predicate predicate = criteriaBuilder.conjunction();
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.<T>get(campo), valor));
-            
+
             createQuery.where(predicate);
-            
+
             T resultado = em.createQuery(createQuery).getSingleResult();
-            
+
             return resultado;
-            
+
         } catch (NoResultException e) {
             return null;
         } catch (Exception e) {
             throw new DaoExcecoes("Informação não encontrada", e);
         }
     }
-    
+
     public List<T> buscarTodosPorCampo(String campo, Object valor) throws DaoExcecoes {
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            
+
             CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(classePersistente);
-            
+
             Root<T> root = createQuery.from(classePersistente);
-            
+
             Predicate predicate = criteriaBuilder.conjunction();
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.<T>get(campo), valor));
-            
+
             createQuery.where(predicate);
-            
+
             List<T> resultado = em.createQuery(createQuery).getResultList();
-            
+
             return resultado;
-            
+
         } catch (Exception e) {
             throw new DaoExcecoes("Informação não encontrada", e);
         }
     }
-    
-    
 
     public List<T> buscarTudo() {
         CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
