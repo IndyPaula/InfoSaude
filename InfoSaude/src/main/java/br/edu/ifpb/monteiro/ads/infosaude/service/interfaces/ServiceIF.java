@@ -24,6 +24,6 @@ public interface ServiceIF<T> {
        
        List<T> buscarTodosPorCampo(String campo, Object valor) throws ServiceExcecoes;
        
-       List<T> buscarTudo();
+       List<T> buscarTudo() throws ServiceExcecoes;
        
 }
