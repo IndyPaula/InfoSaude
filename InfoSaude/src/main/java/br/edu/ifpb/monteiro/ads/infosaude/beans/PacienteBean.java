@@ -36,5 +36,4 @@ public class PacienteBean {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-
 }
