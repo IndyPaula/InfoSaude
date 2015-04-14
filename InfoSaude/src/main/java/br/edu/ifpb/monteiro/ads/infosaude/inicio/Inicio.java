@@ -19,7 +19,7 @@ public class Inicio {
 //        PessoaDao pd = new PessoaDao();
 //        pd.buscarPorCampo("cpf", "12342341690");
         PessoaService pessoaService = new PessoaService();
-        pessoaService.buscarPorCampo("cpf", "12342341690");
+        pessoaService.salvar(pessoa);
         
         
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa

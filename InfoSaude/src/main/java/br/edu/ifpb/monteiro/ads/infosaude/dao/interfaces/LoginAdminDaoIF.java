@@ -8,5 +8,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
  * @date 13/04/2015
  */
 public interface LoginAdminDaoIF extends DaoIF<LoginAdmin> {
+
+    public LoginAdmin efetuarLogin(String login, String senha);
     
 }

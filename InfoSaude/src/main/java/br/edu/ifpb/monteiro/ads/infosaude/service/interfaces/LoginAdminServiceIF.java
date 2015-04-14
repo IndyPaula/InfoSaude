@@ -8,5 +8,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
  * @date 14/04/2015
  */
 public interface LoginAdminServiceIF extends ServiceIF<LoginAdmin> {
-    
+
+    public LoginAdmin efetuarLogin(String login, String senha);
 }

@@ -1,5 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
+import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -14,11 +16,18 @@ import org.primefaces.context.RequestContext;
 
 @ManagedBean
 public class UserLoginBean {
-
-    private String login;
     
+    private LoginAdminService service;
+    private String login;
     private String senha;
+    private LoginAdmin adm;
 
+    public UserLoginBean() {
+    
+        service = new LoginAdminService();
+    }
+
+    
     public String getLogin() {
         return login;
     }
@@ -43,6 +52,8 @@ public class UserLoginBean {
         FacesMessage message = null;
         boolean loggedIn = false;
          
+        adm = service.efetuarLogin(login, senha);
+        
         if(login != null && login.equals("admin") && senha != null && senha.equals("admin")) {
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", login);
