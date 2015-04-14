@@ -2,7 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "atendimento_imunizacao")
 @SequenceGenerator(name = "atendimento_imunizacao_seq", sequenceName = "atendimento_imunizacao_seq", initialValue = 1, allocationSize = 1)
-public class AtendimentoImunizacao implements EntidadeBase<AtendimentoImunizacao> {
+public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizacao> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "atendimento_imunizacao_seq")
@@ -33,11 +33,11 @@ public class AtendimentoImunizacao implements EntidadeBase<AtendimentoImunizacao
     @OneToOne
     private Vacinador vacinador;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_atendimento", nullable = false)
     private Date dataAtendimento;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_agendamento", nullable = true)
     private Date dataAgendamento;
 

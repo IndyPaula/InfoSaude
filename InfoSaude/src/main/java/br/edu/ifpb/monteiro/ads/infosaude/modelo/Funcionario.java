@@ -1,7 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
-import java.io.Serializable;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +19,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "funcionario")
 @SequenceGenerator(name = "funcionario_seq", sequenceName = "funcionario_seq", initialValue = 1, allocationSize = 1)
-public class Funcionario implements EntidadeBase<Funcionario> {
+public class Funcionario implements Identificavel<Funcionario> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "funcionario_seq")

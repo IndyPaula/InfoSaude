@@ -1,9 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -27,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "vacina")
 @SequenceGenerator(name = "vacina_seq", sequenceName = "vacina_seq", initialValue = 1, allocationSize = 1)
-public class Vacina implements EntidadeBase<Vacina> {
+public class Vacina implements Identificavel<Vacina> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vacina_seq")

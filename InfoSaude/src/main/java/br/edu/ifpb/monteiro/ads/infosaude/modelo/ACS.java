@@ -1,8 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
-import java.io.Serializable;
-import java.util.Objects;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "acs")
 @SequenceGenerator(name = "acs_seq", sequenceName = "acs_seq", initialValue = 1, allocationSize = 1)
-public class ACS implements EntidadeBase<ACS> {
+public class ACS implements Identificavel<ACS> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "acs_seq")

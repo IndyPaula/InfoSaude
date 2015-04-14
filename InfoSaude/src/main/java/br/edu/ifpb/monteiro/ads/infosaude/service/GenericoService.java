@@ -2,7 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.service;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @param <T>
  * @date 13/04/2015
  */
-public abstract class GenericoService<T extends EntidadeBase> implements ServiceIF<T> {
+public abstract class GenericoService<T extends Identificavel> implements ServiceIF<T> {
     
     public abstract DaoIF getDao();
 

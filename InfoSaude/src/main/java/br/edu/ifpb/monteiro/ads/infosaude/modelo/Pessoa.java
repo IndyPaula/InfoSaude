@@ -1,6 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "pessoa")
 @SequenceGenerator(name = "pessoa_seq", sequenceName = "pessoa_seq", initialValue = 1, allocationSize = 1)
-public class Pessoa implements EntidadeBase<Pessoa> {
+public class Pessoa implements Identificavel<Pessoa> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "pessoa_seq")
@@ -36,7 +36,7 @@ public class Pessoa implements EntidadeBase<Pessoa> {
     @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_nascimento", nullable = false)
     private Date dataNascimento;
 

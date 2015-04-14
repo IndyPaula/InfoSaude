@@ -6,6 +6,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.PessoaService;
 import java.time.Instant;
 import java.util.Date;
 
+
 public class Inicio {
 
     public static void main(String[] args) throws Exception {

@@ -1,6 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service.interfaces;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import java.util.List;
 

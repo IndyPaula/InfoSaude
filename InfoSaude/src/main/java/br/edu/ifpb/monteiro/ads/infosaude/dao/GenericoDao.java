@@ -3,7 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,7 +20,7 @@ import javax.persistence.criteria.Root;
  * @param <T>
  * @date 04/04/2015
  */
-public class GenericoDao<T extends EntidadeBase> implements Serializable, DaoIF<T> {
+public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
 
     @PersistenceContext(unitName = "InfoSaudePU")
     private EntityManager em;

@@ -1,6 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.EntidadeBase;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -21,7 +20,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "fornecedor")
 @SequenceGenerator(name = "fornecedor_seq", sequenceName = "fornecedor_seq", initialValue = 1, allocationSize = 1)
-public class Fornecedor implements EntidadeBase<Fornecedor> {
+public class Fornecedor implements Identificavel<Fornecedor> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "fornecedor_seq")
