@@ -18,12 +18,13 @@
                         <h:panelGrid columns="2"  >
 
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="" size="60"
+                            <p:inputText value="#{pacienteBean.paciente.pessoa.nome}" size="60"
                                          />
 
                             <h:outputText value="CPF: "/>
-                            <p:inputMask value="" 
+                            <p:inputMask value="#{pacienteBean.paciente.pessoa.cpf}" 
                                          mask="999.999.999-99" required="true"/>
+                            
                             <h:outputText value="RG: " style="text-align: center"/>
 
                             <p:row>
@@ -47,15 +48,15 @@
                             <h:outputText value="Data de nascimento: "/>
                             <p:calendar locale="pt_BR" navigator="true" 
                                         pattern="dd/mm/yyyy" mask="true"
-                                        />
+                                        value="#{pacienteBean.paciente.pessoa.dataNascimento}"/>
 
 
                             <h:outputText value="Nome da mãe: "/>
-                            <p:inputText value=""
+                            <p:inputText value="#{pacienteBean.paciente.pessoa.nomeMae}"
                                          size="60" />
 
                             <h:outputText value="Nome do pai: "/>
-                            <p:inputText value=""
+                            <p:inputText value="#{pacienteBean.paciente.pessoa.nomePai}"
                                          size="60" />
 
                             <h:outputText value="Estado Cívil: "/>
