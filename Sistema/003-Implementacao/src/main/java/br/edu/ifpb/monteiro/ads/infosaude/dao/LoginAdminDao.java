@@ -23,13 +23,13 @@ public class LoginAdminDao extends GenericoDao<LoginAdmin> implements LoginAdmin
     @Override
     public LoginAdmin efetuarLogin(String login, String senha) {
 
-        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-
-        CriteriaQuery<LoginAdmin> criteriaQuery = criteriaBuilder.createQuery(LoginAdmin.class);
-        Root<LoginAdmin> usu = criteriaQuery.from(LoginAdmin.class);
-
-        criteriaQuery.where(criteriaBuilder.equal(usu.get("login"), login));
-        criteriaQuery.where(criteriaBuilder.equal(usu.get("senha"), senha));
+//        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+//
+//        CriteriaQuery<LoginAdmin> criteriaQuery = criteriaBuilder.createQuery(LoginAdmin.class);
+//        Root<LoginAdmin> usu = criteriaQuery.from(LoginAdmin.class);
+//
+//        criteriaQuery.where(criteriaBuilder.equal(usu.get("login"), login));
+//        criteriaQuery.where(criteriaBuilder.equal(usu.get("senha"), senha));
 
         Query typedQuery = getEntityManager().createNativeQuery(
                 
