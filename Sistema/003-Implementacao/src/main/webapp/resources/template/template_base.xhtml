@@ -47,7 +47,7 @@
                 <h:form>
                     <p:menu style="width: 90%; ">
                         <p:submenu label="Cadastros">
-                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" />
+                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" action="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
                             <p:menuitem value="Vacinadores" icon="ui-icon-person" />         
                             <p:menuitem value="Agentes comunitários de Saúde" icon="ui-icon-person" />   
                             <p:menuitem value="Administradores" icon="ui-icon-person" />   
@@ -72,18 +72,23 @@
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center" >
+            <p:layoutUnit position="center" style="height: 50%;" >
 
-                <div align="center" style="width: 100%;height: 100%;">
+                <div align="center" style="width: 100%;">
 
-                    <h:form id="cadastrarAdministrador" >
+                    <!--                    <h:form id="cadastrarAdministrador" >
+                    
+                                            <img src="../imagens/info_saude_web.png" alt="InfoSaúde" height="100"/>
+                                        </h:form>-->
 
-                        <img src="../imagens/info_saude_web.png" alt="InfoSaúde" height="100"/>
-                    </h:form>
+                    <p:spacer height="2%"/>
+                    <ui:insert name="centro">
 
+                    </ui:insert>
                 </div>
 
             </p:layoutUnit>
+
 
         </p:layout>
     </h:body>
