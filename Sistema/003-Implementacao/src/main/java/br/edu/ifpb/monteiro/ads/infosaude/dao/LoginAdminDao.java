@@ -35,7 +35,7 @@ public class LoginAdminDao extends GenericoDao<LoginAdmin> implements LoginAdmin
 
         }else{
 
-            return null;
+            return new LoginAdmin();
         }
       
     }
