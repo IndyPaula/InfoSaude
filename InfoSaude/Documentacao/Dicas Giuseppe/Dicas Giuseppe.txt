@@ -1,5 +1,0 @@
-- como pode ocorrer o planejamento de vacinas considerando o intervalo de datas para evitar desperdício?
-
-- como o sistema permitirá que os atendimentos domiciliares serão planejados, e automaticamente remarcados, garantindo o maior índice de cobertura possível, também garantindo uma naior taxa de cobertura para os casos mais problemáticos?
-
-- criação de grupos de risco, para garantir a atendimento às pessoas mais necessitadas.
