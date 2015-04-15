@@ -4,6 +4,10 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.LoginAdminDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import java.security.MessageDigest;
 import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -16,29 +20,48 @@ public class LoginAdminDao extends GenericoDao<LoginAdmin> implements LoginAdmin
         super(LoginAdmin.class);
     }
 
-    
     @Override
     public LoginAdmin efetuarLogin(String login, String senha) {
-        try {
-            login = login.toLowerCase().trim();
-            System.out.println("Verificando login do usuário " + login);
 
-            List retorno = getEntityManager().createQuery(
-                    "SELECT c FROM LoginAdmin  WHERE c.login = :login AND c.senha = :senha")
-                    .setParameter("login", login)
-                    .setParameter("senha", senha)
-                    .getResultList();
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
 
-            if (retorno.size() == 1) {
-                LoginAdmin userFound = (LoginAdmin) retorno.get(0);
-                return userFound;
+        CriteriaQuery<LoginAdmin> criteriaQuery = criteriaBuilder.createQuery(LoginAdmin.class);
+        Root<LoginAdmin> usu = criteriaQuery.from(LoginAdmin.class);
 
-            }
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
+        criteriaQuery.where(criteriaBuilder.equal(usu.get("login"), login));
+        criteriaQuery.where(criteriaBuilder.equal(usu.get("senha"), senha));
+
+        Query typedQuery = getEntityManager().createNativeQuery(
+                
+                "SELECT * FROM login_admin  WHERE login =  '"+login+"' AND senha = '"+senha+"'" , LoginAdmin.class);
+
+        List users = typedQuery.getResultList();
+
+        if (users.size() == 1) {
+
+            LoginAdmin userFound = (LoginAdmin) users.get(0);
+            System.err.println("--- ENCONTRADO");
+
+            return userFound;
+
+        }else{
+            System.err.println("-- NADA ");
+
             return null;
         }
+
+//        try {
+//            senha = senha.toLowerCase().trim();
+//
+//            System.out.println("Verificando login do usuário " + login);
+//
+//            List retorno = getEntityManager().createQuery("FROM LoginAdmin'").getResultList();
+//
+//            System.err.println(retorno.get(0));
+//            return null;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+      
     }
 
     private String convertStringToMd5(String valor) {

@@ -41,7 +41,17 @@
     </servlet-mapping>
     
     <!-- -->
-        
+    <!-- login filter --> 
+    <filter> 
+        <filter-name>LoginFilter</filter-name> 
+        <filter-class>br.edu.ifpb.monteiro.ads.infosaude.filter.LoginFilter</filter-class> 
+    </filter> 
+    <filter-mapping> 
+        <filter-name>LoginFilter</filter-name> 
+        <url-pattern>/resources/*</url-pattern> 
+    </filter-mapping>
+     <!-- login filter --> 
+   
     
     <session-config>
         <session-timeout>

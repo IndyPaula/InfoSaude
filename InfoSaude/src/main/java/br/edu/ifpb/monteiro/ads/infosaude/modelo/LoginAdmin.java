@@ -8,11 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Transient;
 
 /**
  *
@@ -21,15 +18,8 @@ import javax.persistence.Transient;
  */
 @Entity(name = "login_admin")
 @SequenceGenerator(name = "login_admin_seq", sequenceName = "login_admin_seq", initialValue = 1, allocationSize = 1)
-
-@NamedQueries(value = { @NamedQuery(name = "Usuario.findByLoginSenha", 
-        query = "SELECT lg FROM LoginAdmin lg  WHERE lg.login = :login AND lg.senha = :senha")})
-
 public class LoginAdmin implements Identificavel<LoginAdmin> {
     
-    @Transient
-    public static final String FIND_BY_EMAIL_SENHA = "Usuario.findByLoginSenha"; 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "login_admin_seq")
     private Long id;

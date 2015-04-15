@@ -24,13 +24,13 @@
 
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="usuario" value="Usuário:" />
-                        <p:inputText id="usuario" value="#{userLoginBean.login}" required="true" label="usuario" />
+                        <p:inputText id="usuario" value="#{usuarioBean.login}" required="true" label="usuario" />
 
                         <h:outputLabel for="senha" value="Senha:" />
-                        <p:password id="senha" value="#{userLoginBean.senha}" required="true" label="senha" />
+                        <p:password id="senha" value="#{usuarioBean.senha}" required="true" label="senha" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Login" update="growl" actionListener="#{userLoginBean.getLoginAction}"
+                            <p:commandButton value="Login" update="growl" action="#{usuarioBean.doLogin}"
                                              oncomplete="handleLoginRequest(xhr, status, args)" style="left: 75%" />
                         </f:facet>  
                     </h:panelGrid>
