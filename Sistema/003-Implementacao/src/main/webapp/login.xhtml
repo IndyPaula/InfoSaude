@@ -8,21 +8,36 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>InfoSaúde</title>
-        <link href="${facesContext.externalContext.requestContextPath}/resources/paginas/css/infoSaudeEstilo.css" rel="stylesheet" type="text/css" />  
+        
+        <link rel="icon" type="image/png" href="res/imagens/favicon.png"/>
+        
+        <title>InfoSaúde WEB - Login</title>
+        <style>
+
+            .ui-widget,.ui-widget .ui-widget {
+                font-size: 12px !important;
+                margin: 0px ;
+
+            }
+
+        </style>
+
     </h:head>
 
-    <h:body >
-        <div align="center" style="border: 0">
+    <h:body style="border: 0; margin: 0px;padding: 0px;">
 
+        <div align="center" >
 
-
+            <div style="height: 50px;background-color: skyblue;width: 100%;" align="left">
+                <img src="res/imagens/info_saude_web.png"
+                     alt="InfoSaúde WEB" height="45"/>
+            </div>
             <h:form>
-                <p:growl id="growl" sticky="true" showDetail="true" life="3000"  />
+                <p:growl id="growl"  showDetail="true" life="3000"  />
 
-                <p:dialog header="Login" widgetVar="dlg" resizable="false" visible="true" modal="true">
+                <p:fieldset legend="Login" style="width: 20%;margin-top:10%; ">
 
-                    <h:panelGrid columns="2" cellpadding="5">
+                    <h:panelGrid columns="2" cellpadding="5" style="margin-top: 10%;">
                         <h:outputLabel for="usuario" value="Usuário:" />
                         <p:inputText id="usuario" value="#{usuarioBean.login}" required="true" label="usuario" />
 
@@ -30,44 +45,14 @@
                         <p:password id="senha" value="#{usuarioBean.senha}" required="true" label="senha" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Login" update="growl" action="#{usuarioBean.doLogin}"
-                                             oncomplete="handleLoginRequest(xhr, status, args)" style="left: 75%" />
+                            <p:commandButton value="Entrar" update="growl" action="#{usuarioBean.doLogin}"
+                                             style="left: 70%" />
                         </f:facet>  
                     </h:panelGrid>
-                </p:dialog>
+
+                </p:fieldset>
+
             </h:form>
-
-            <script type="text/javascript">
-                function handleLoginRequest(xhr, status, args) {
-                    if (args.validationFailed || !args.loggedIn) {
-                        PF('dlg').jq.effect("elastic", {times: 50}, 100);
-                    }
-                    else {
-                        PF('dlg').hide();
-                        $('#loginLink').fadeOut();
-
-                    }
-                }
-            </script>
-
-
-            <p:layout fullPage="true">  
-
-                <p:layoutUnit position="center" styleClass="centro_atividades" >  
-
-                    <h:form>
-
-                        <!--<hr style="color: #3ac4e7; background-color: #3ac4e7; height: 90px; margin-top: 0">-->
-                    </h:form>
-                    <p:spacer height="250px"/>
-
-                    <ui:insert name="centro">
-
-
-                    </ui:insert>
-                </p:layoutUnit>
-
-            </p:layout>  
         </div>
     </h:body>
 

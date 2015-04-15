@@ -48,16 +48,12 @@ public class UserLoginBean implements Serializable {
     public String doLogin() {
         LoginAdmin usuarioFound = (LoginAdmin) service.efetuarLogin(login, senha);
 
-        System.err.println("EFETUANDO LOGIN");
-
         if (usuarioFound == null) {
             JsfUtil.addErrorMessage("Usuário e senha inválidos");
             
             FacesContext.getCurrentInstance().validationFailed();
 
-            JsfUtil.addErrorMessage("Usuário e senha inválidos");
-
-            return "/login.xhtml?faces-redirect=true";
+            return null;
         } else {
             loggedIn = true;
             admLogado = usuarioFound;
