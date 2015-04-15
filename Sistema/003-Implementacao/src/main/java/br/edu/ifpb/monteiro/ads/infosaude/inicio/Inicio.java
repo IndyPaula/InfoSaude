@@ -1,25 +1,19 @@
 package br.edu.ifpb.monteiro.ads.infosaude.inicio;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Pessoa;
-import br.edu.ifpb.monteiro.ads.infosaude.service.PessoaService;
-import java.time.Instant;
-import java.util.Date;
-
 
 public class Inicio {
 
     public static void main(String[] args) throws Exception {
 
-//        // nome, datanascimento, cpf
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Jefferson");
-        pessoa.setDataNascimento(Date.from(Instant.EPOCH));
-        pessoa.setCpf("12342341690");
-//        PessoaDao pd = new PessoaDao();
-//        pd.buscarPorCampo("cpf", "12342341690");
-        PessoaService pessoaService = new PessoaService();
-        pessoaService.salvar(pessoa);
+////        // nome, datanascimento, cpf
+//        Pessoa pessoa = new Pessoa();
+//        pessoa.setNome("Jefferson");
+//        pessoa.setDataNascimento(Date.from(Instant.EPOCH));
+//        pessoa.setCpf("12342341690");
+////        PessoaDao pd = new PessoaDao();
+////        pd.buscarPorCampo("cpf", "12342341690");
+//        PessoaService pessoaService = new PessoaService();
+//        pessoaService.salvar(pessoa);
         
         
 //        // numeroProntuario, dataCadastro, cartaoSUS, pessoa
