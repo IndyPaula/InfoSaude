@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -56,7 +57,7 @@ public class LoginAdmin implements Identificavel<LoginAdmin> {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha = CriptografiaUtil.convertStringToMd5(senha);
     }
 
     public Funcionario getFuncionario() {
