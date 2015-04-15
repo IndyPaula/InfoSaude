@@ -50,7 +50,7 @@
         <filter-name>LoginFilter</filter-name> 
         <url-pattern>/resources/*</url-pattern> 
     </filter-mapping>
-     <!-- login filter --> 
+    <!-- login filter --> 
    
     
     <session-config>
