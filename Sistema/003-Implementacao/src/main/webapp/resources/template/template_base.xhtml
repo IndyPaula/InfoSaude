@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>InfoSaúde</title>
+        <link href="${facesContext.externalContext.requestContextPath}/resources/css/styleTemplate.css" rel="stylesheet" type="text/css" />  
+
+        <!--imagem como plano de fundo-->
+        <style type="text/css">
+
+        </style>
+    </h:head>
+
+    <h:body >
+
+        <div style="height: 50px;background-color: skyblue;width: 100%; " >
+            <div > 
+                <img src="${facesContext.externalContext.requestContextPath}/res/imagens/info_saude_web.png"
+                     alt="InfoSaúde WEB" height="45"/>
+            </div>
+        </div>
+
+        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px;" >
+            <p:layoutUnit position="west"  size="250" minSize="250" >
+
+                <h:form>
+                    <p:tieredMenu style="width:200px; margin-top: 29%; float: left">
+                        <p:submenu label="Usuários da UBS" icon="ui-icon-person"/>
+                        <p:submenu label="Acompanhamentos" icon="ui-icon-pencil"/>
+                        <p:menuitem value="Vacinas"  icon="ui-icon-disk"/>
+                        <p:menuitem value="Visita médica"  icon="ui-icon-arrowrefresh-1-w"/>
+
+                        <p:submenu label="Agentes de Saúde" icon="ui-icon-person"/>
+                        <p:submenu label="Vacinadores" icon="ui-icon-person"/>
+                        <p:submenu label="Relatórios" icon="ui-icon-print"/>
+                    </p:tieredMenu>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" >
+                Center
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+
+</html>
