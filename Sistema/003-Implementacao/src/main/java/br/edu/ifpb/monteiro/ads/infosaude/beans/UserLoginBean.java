@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
+import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,7 +18,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class UserLoginBean implements Serializable {
 
-    private LoginAdminService service;
+    private LoginAdminServiceIF service;
     private String login;
     private String senha;
     private LoginAdmin admLogado;
