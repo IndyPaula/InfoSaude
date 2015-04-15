@@ -18,15 +18,30 @@
 
     <h:body >
 
-        <div style="height: 70px;background-color: skyblue;width: 100%; " >
-            <div > 
-                <img src="${facesContext.externalContext.requestContextPath}/res/imagens/info_saude_web.png"
-                     alt="InfoSaúde WEB" height="65"/>
+        <div style="height: 45px;background-color: skyblue;width: 100%; " >
+            <div style="display: table; width: 100%;">
+                <div style="width: 50%;  float: left;margin-left: 5%;"> 
+
+                    <img src="${facesContext.externalContext.requestContextPath}/res/imagens/info_saude_web.png"
+                         alt="InfoSaúde WEB" height="40" align="middle"/>
+
+                </div>
+                <div style="width: 35%; float: right;padding-top: 10px;" align="right"> 
+                    <h:form>
+                        <p:commandLink   value="Visitas domiciliares  "  style="color: #403c3c"/>
+
+                        <p:commandLink value="|  Relatórios " 
+                                       style="color: #403c3c"/>
+                        <p:commandLink  value="| Sair" 
+                                        style="margin-right: 70px;color: #403c3c"/>
+
+                    </h:form>
+                </div>
             </div>
         </div>
 
         <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px;" >
-            <p:layoutUnit position="west"  size="250" minSize="250" >
+            <p:layoutUnit position="west"  size="280" minSize="280" >
                 <span style="font-size: 23px; ">
                     <img src="../../res/imagens/notificacao.png" height="30"/> 2 Notificações</span>
                 <h:form>
@@ -42,12 +57,12 @@
                             <p:menuitem value="Acompanhamento nutricional" icon="ui-icon-copy" /> 
                             <p:menuitem value="Acompanhamento de gestantes" icon="ui-icon-copy" />     
                         </p:submenu>
-                        
+
                         <p:submenu label="Agendamentos">
                             <p:menuitem value="Vacinas" icon="ui-icon-print" />         
                             <p:menuitem value="Visita médica" icon="ui-icon-copy" /> 
                         </p:submenu>
-                        
+
                         <p:submenu label="Sistema">
                             <p:menuitem value="Verificar visitas de ACS" icon="ui-icon-check" />    
                             <p:menuitem value="Configurações" icon="ui-icon-gear" />         
@@ -60,28 +75,10 @@
             <p:layoutUnit position="center" >
 
                 <div align="center" style="width: 100%;height: 100%;">
-                    
+
                     <h:form id="cadastrarAdministrador" >
-                        <p:panel header="Usuário Administrador" style=" width: 350px" >
-                            <h:panelGrid columns="2"  >
 
-                                <h:outputText value="Matrícula: "/>
-                                <p:inputText value="" size="15"/>
-
-                                <h:outputText value="Nome de Usuário: "/>
-                                <p:inputText value="" size="15"/>
-
-
-                                <h:outputText value="Senha: "/>
-                                <p:password value="" size="15"/>
-
-
-                                <h:outputText value=" Confirmar Senha: "/>
-                                <p:password value="" size="15"/>
-                                <p:commandButton value="Cadastrar" style="left: 75%;"/>
-                            </h:panelGrid>
-
-                        </p:panel> 
+                        <img src="../imagens/info_saude_web.png" alt="InfoSaúde" height="100"/>
                     </h:form>
 
                 </div>

@@ -2,11 +2,15 @@
 
 body{
 
-    border: 0; margin: 0px;padding: 0px;
+    border: 0; margin: 0px;padding: 0px;background-color: #f1f1f1;
 }
+a:visited
+{text-decoration:none;color: #463e3e;}
+a:link
+{text-decoration:none;color: black;}
 
 .ui-widget,.ui-widget .ui-widget {
-    font-size: 12px !important;
+    font-size: 13px !important;
     margin: 0px ;
 
 }

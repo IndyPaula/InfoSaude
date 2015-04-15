@@ -60,7 +60,7 @@ public class UserLoginBean implements Serializable {
 
             JsfUtil.addSuccessMessage("Bem vindo");
 
-            return "/resources/index.xhtml?faces-redirect=true";
+            return "/resources/template/template_base.xhtml?faces-redirect=true";
         }
     }
     //Realiza o logout do usuário logado

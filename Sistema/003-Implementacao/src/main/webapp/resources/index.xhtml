@@ -20,42 +20,6 @@
     <h:body >
         <div align="center" style="border: 0">
 
-
-
-            <h:form>
-                <p:growl id="growl" sticky="true" showDetail="true" life="3000"  />
-
-                <p:dialog header="Login" widgetVar="dlg" resizable="false" visible="true" modal="true">
-
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputLabel for="usuario" value="Usuário:" />
-                        <p:inputText id="usuario" value="#{userLoginBean.login}" required="true" label="usuario" />
-
-                        <h:outputLabel for="senha" value="Senha:" />
-                        <p:password id="senha" value="#{userLoginBean.senha}" required="true" label="senha" />
-
-                        <f:facet name="footer">
-                            <p:commandButton value="Login" update="growl" actionListener="#{userLoginBean.getLoginAction}"
-                                             oncomplete="handleLoginRequest(xhr, status, args)" style="left: 75%" />
-                        </f:facet>  
-                    </h:panelGrid>
-                </p:dialog>
-            </h:form>
-
-            <script type="text/javascript">
-                function handleLoginRequest(xhr, status, args) {
-                    if (args.validationFailed || !args.loggedIn) {
-                        PF('dlg').jq.effect("shake", {times: 5}, 100);
-                    }
-                    else {
-                        PF('dlg').hide();
-                        $('#loginLink').fadeOut();
-
-                    }
-                }
-            </script>
-
-
             <p:layout fullPage="true">  
 
                 <p:layoutUnit position="center" styleClass="centro_atividades" >  
