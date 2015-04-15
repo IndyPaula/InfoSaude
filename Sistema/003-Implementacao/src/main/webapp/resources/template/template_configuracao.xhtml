@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>InfoSaúde</title>
+        <link href="${facesContext.externalContext.requestContextPath}/resources/paginas/css/infoSaudeEstilo.css" rel="stylesheet" type="text/css" />  
+
+        <!--imagem como plano de fundo-->
+        <style type="text/css">
+            .ui-layout-unit-content{background-image:url('#{request.contextPath}/resources/imagens/wallpaper.jpg');}
+        </style>
+    </h:head>
+
+    <h:body >
+        <div align="center" style="border: 0">
+            <p:layout fullPage="true">  
+
+                <p:layoutUnit position="center" styleClass="centro_atividades" >  
+                    <h:form>
+
+                        <!--<hr style="color: #3ac4e7; background-color: #3ac4e7; height: 90px; margin-top: 0">-->
+
+                        <p:graphicImage value="/resources/imagens/info_saude_web.png" style="height: 120px; 
+                                        margin-top: 40px; position: fixed; left: 50%"/>
+
+                        <h:panelGrid columns="1" style="position: fixed; left: 30px; margin-top: 200px">
+
+                            <h:commandLink action="/resources/template/template_usuario.xhtml" styleClass="imagem_icon" >  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/usuario.png" styleClass="imagem_icon" style="margin-right: 20px"/>
+                            </h:commandLink>
+
+                            <h:commandLink action="/resources/template/template_vacinador.xhtml" styleClass="imagem_icon" >  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/vacinador.png" styleClass="imagem_icon" style="margin-right: 20px"/>
+                            </h:commandLink>
+
+                            <h:commandLink action="/resources/template/template_acs.xhtml" styleClass="imagem_icon" >  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/acs.png" styleClass="imagem_icon" style="margin-right: 10px"/>
+                            </h:commandLink>
+                            
+                            <h:commandLink action="/resources/paginas/relatorios/relatorio.xhtml" styleClass="imagem_icon" >  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/relatorio.png" styleClass="imagem_icon" style="margin-right: 10px"/>
+                            </h:commandLink> 
+
+                            <h:commandLink action="/resources/template/template_configuracao.xhtml" styleClass="imagem_icon" >  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/ajustes.png" styleClass="imagem_icon" style="margin-right: 10px"/>
+                            </h:commandLink> 
+
+                        </h:panelGrid>
+                        <!--</hr>-->
+
+                        
+                        <!--Falta fazer e substituir todos os icones-->
+                        <h:panelGrid columns="4" style="position: fixed; left: 50%; margin-top: 200px">
+
+                            
+                            <h:commandLink action="/resources/paginas/ubs/ubs.xhtml" styleClass="imagem_icon" >  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/ubs.png" styleClass="imagem_icon" style="margin-right: 30px"/>
+                            </h:commandLink>
+
+                            <h:commandLink action="/resources/paginas/ubs/adicionar_admin.xhtml" styleClass="imagem_icon">  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/add_admin.png" styleClass="imagem_icon" style="margin-right: 30px"/>
+                            </h:commandLink> 
+
+                            <h:commandLink action="/resources/paginas/ubs/buscar_admin.xhtml" styleClass="imagem_icon">  
+                                <p:graphicImage value="/resources/imagens/icon/new_icon/buscar_admin.png" styleClass="imagem_icon" style="margin-right: 30px"/>
+                            </h:commandLink> 
+
+                        </h:panelGrid>
+
+
+                    </h:form>
+                    <p:spacer height="300px"/>
+
+                    <ui:insert name="centro">
+
+
+                    </ui:insert>
+                </p:layoutUnit>
+
+            </p:layout>  
+        </div>
+    </h:body>
+
+</html>
