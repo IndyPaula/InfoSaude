@@ -8,10 +8,9 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>InfoSaúde</title>
+        <title>InfoSaúde WEB</title>
         <link href="${facesContext.externalContext.requestContextPath}/resources/css/styleTemplate.css" rel="stylesheet" type="text/css" />  
-
-        <!--imagem como plano de fundo-->
+        <link rel="icon" type="image/png" href="${facesContext.externalContext.requestContextPath}/res/imagens/favicon.png"/>
         <style type="text/css">
 
         </style>
@@ -19,32 +18,74 @@
 
     <h:body >
 
-        <div style="height: 50px;background-color: skyblue;width: 100%; " >
+        <div style="height: 70px;background-color: skyblue;width: 100%; " >
             <div > 
                 <img src="${facesContext.externalContext.requestContextPath}/res/imagens/info_saude_web.png"
-                     alt="InfoSaúde WEB" height="45"/>
+                     alt="InfoSaúde WEB" height="65"/>
             </div>
         </div>
 
         <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px;" >
             <p:layoutUnit position="west"  size="250" minSize="250" >
-
+                <span style="font-size: 23px; ">
+                    <img src="../../res/imagens/notificacao.png" height="30"/> 2 Notificações</span>
                 <h:form>
-                    <p:tieredMenu style="width:200px; margin-top: 29%; float: left">
-                        <p:submenu label="Usuários da UBS" icon="ui-icon-person"/>
-                        <p:submenu label="Acompanhamentos" icon="ui-icon-pencil"/>
-                        <p:menuitem value="Vacinas"  icon="ui-icon-disk"/>
-                        <p:menuitem value="Visita médica"  icon="ui-icon-arrowrefresh-1-w"/>
-
-                        <p:submenu label="Agentes de Saúde" icon="ui-icon-person"/>
-                        <p:submenu label="Vacinadores" icon="ui-icon-person"/>
-                        <p:submenu label="Relatórios" icon="ui-icon-print"/>
-                    </p:tieredMenu>
+                    <p:menu style="width: 90%; ">
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" />
+                            <p:menuitem value="Vacinadores" icon="ui-icon-person" />         
+                            <p:menuitem value="Agentes comunitários de Saúde" icon="ui-icon-person" />   
+                            <p:menuitem value="Administradores" icon="ui-icon-person" />   
+                        </p:submenu>
+                        <p:submenu label="Relatórios">
+                            <p:menuitem value="Cobertura de vacina" icon="ui-icon-print" />         
+                            <p:menuitem value="Acompanhamento nutricional" icon="ui-icon-copy" /> 
+                            <p:menuitem value="Acompanhamento de gestantes" icon="ui-icon-copy" />     
+                        </p:submenu>
+                        
+                        <p:submenu label="Agendamentos">
+                            <p:menuitem value="Vacinas" icon="ui-icon-print" />         
+                            <p:menuitem value="Visita médica" icon="ui-icon-copy" /> 
+                        </p:submenu>
+                        
+                        <p:submenu label="Sistema">
+                            <p:menuitem value="Verificar visitas de ACS" icon="ui-icon-check" />    
+                            <p:menuitem value="Configurações" icon="ui-icon-gear" />         
+                            <p:menuitem value="Sair" icon="ui-icon-close" />         
+                        </p:submenu>
+                    </p:menu>
                 </h:form>
             </p:layoutUnit>
 
             <p:layoutUnit position="center" >
-                Center
+
+                <div align="center" style="width: 100%;height: 100%;">
+                    
+                    <h:form id="cadastrarAdministrador" >
+                        <p:panel header="Usuário Administrador" style=" width: 350px" >
+                            <h:panelGrid columns="2"  >
+
+                                <h:outputText value="Matrícula: "/>
+                                <p:inputText value="" size="15"/>
+
+                                <h:outputText value="Nome de Usuário: "/>
+                                <p:inputText value="" size="15"/>
+
+
+                                <h:outputText value="Senha: "/>
+                                <p:password value="" size="15"/>
+
+
+                                <h:outputText value=" Confirmar Senha: "/>
+                                <p:password value="" size="15"/>
+                                <p:commandButton value="Cadastrar" style="left: 75%;"/>
+                            </h:panelGrid>
+
+                        </p:panel> 
+                    </h:form>
+
+                </div>
+
             </p:layoutUnit>
 
         </p:layout>
