@@ -1,10 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.inicio;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.AtendimentoImunizacaoDao;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.PacienteDao;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoImunizacao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Fornecedor;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
