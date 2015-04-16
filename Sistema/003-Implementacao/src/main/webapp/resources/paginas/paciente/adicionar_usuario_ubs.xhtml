@@ -14,17 +14,17 @@
                 <h:form id="cadastrarPaciente" >
 
 
-                    <p:panel header="Cadastrar Usuário" style="background: transparent; border: 0; width: 1000px" >
+                    <p:panel header="Cadastrar Usuário" style="background: transparent; border: 0; width: 80%" >
                         <h:panelGrid columns="2"  >
 
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{pacienteBean.paciente.pessoa.nome}" size="60"
+                            <p:inputText value="#{pacienteBean.paciente.pessoa.nome}" size="40"
                                          />
 
                             <h:outputText value="CPF: "/>
                             <p:inputMask value="#{pacienteBean.paciente.pessoa.cpf}" 
                                          mask="999.999.999-99" required="true"/>
-                            
+
                             <h:outputText value="RG: " style="text-align: center"/>
 
                             <p:row>
@@ -53,11 +53,11 @@
 
                             <h:outputText value="Nome da mãe: "/>
                             <p:inputText value="#{pacienteBean.paciente.pessoa.nomeMae}"
-                                         size="60" />
+                                         size="40" />
 
                             <h:outputText value="Nome do pai: "/>
                             <p:inputText value="#{pacienteBean.paciente.pessoa.nomePai}"
-                                         size="60" />
+                                         size="40" />
 
                             <h:outputText value="Estado Cívil: "/>
                             <p:selectOneMenu editable="true" value="">
@@ -67,7 +67,7 @@
                             </p:selectOneMenu>
 
                             <h:outputText value="Nome do cônjugue: "/>
-                            <p:inputText value="" size="60" />
+                            <p:inputText value="" size="40" />
 
                             <h:outputText value="Naturalidade: "/>
 
@@ -75,7 +75,7 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
                                         <p:inputText value=""
-                                                     size="60" style="margin-right: 110px; margin-left: -3px"/>
+                                                     size="40" style="margin-right: 65px; "/>
 
                                         <h:outputText  value="UF: "/>
                                         <p:selectOneMenu id="uf" value="">
@@ -88,17 +88,15 @@
                                 </p:column>
                             </p:row> 
 
-
-
                             <h:outputText value="Endereço: "/>
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
+                                    <h:panelGrid columns="3" >
 
                                         <p:inputText value="" 
-                                                     size="70" style="margin-right: 25px"/>
-                                        <h:outputText value="Nº.: "/>
+                                                     size="45" style="margin-right: 25px"/>
+                                        <h:outputText value="Nº: "/>
                                         <p:inputText value="" 
                                                      size="6" />
 
@@ -110,10 +108,10 @@
                             <h:outputText value="Bairro: "/>
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
+                                    <h:panelGrid columns="3" >
 
                                         <p:inputText value="" 
-                                                     size="70" style="margin-right: 25px"/>
+                                                     size="45" style="margin-right: 25px"/>
                                         <h:outputText value="CEP: "/>
                                         <p:inputMask mask="99.999-999" value="" 
                                                      size="8" />
@@ -125,9 +123,9 @@
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
+                                    <h:panelGrid columns="3" >
                                         <p:inputText value=""
-                                                     size="40" style="margin-right: 40px"/>
+                                                     size="45" style="margin-right: 25px"/>
                                         <h:outputText value="UF: "/>
                                         <p:selectOneMenu id="ufEndereco" value="">
                                             <f:selectItem itemLabel="Selecione"/>
@@ -144,17 +142,12 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                        <p:inputTextarea maxlength="200"  style="width: 400px;" 
                                                          value=""
                                                          rows="3" autoResize="false"
                                                          />
-
-                                        <p:commandLink >
-                                            <p:graphicImage value="/resources/imagens/icon/salvar2.png" 
-                                                            style="margin-top: 30%; margin-left: 38%; height: 60px" />
-                                        </p:commandLink>
-
                                     </h:panelGrid>
+                                    <p:commandButton value="Cadastrar" style="top: 20px;"/>
                                 </p:column>
                             </p:row> 
 
