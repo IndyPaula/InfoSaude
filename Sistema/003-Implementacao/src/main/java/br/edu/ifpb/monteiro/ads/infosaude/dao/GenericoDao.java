@@ -7,7 +7,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -184,5 +183,4 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
         cq.select(cq.from(classePersistente));
         return getEntityManager().createQuery(cq).getResultList();
     }
-
 }

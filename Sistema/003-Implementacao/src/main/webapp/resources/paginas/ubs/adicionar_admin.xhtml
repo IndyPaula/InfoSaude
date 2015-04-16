@@ -24,8 +24,9 @@
                             <p:selectOneMenu>
                                 <f:selectItem itemLabel="Matrícula" itemValue=""/>
                                 <f:selectItems value="#{administrador.matriculas()}"
-                                               var="matricula" itemLabel="#{matricula}"
-                                               itemValue="#{matricula}"/>
+                                               var="matricula" 
+                                               itemLabel="#{matricula.matricula}"
+                                               itemValue="#{matricula.matricula}"/>
                             </p:selectOneMenu>
 
                             <h:outputText value="Nome de Usuário*: "/>

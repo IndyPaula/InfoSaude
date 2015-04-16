@@ -5,6 +5,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.FuncionarioService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
+import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,18 +28,15 @@ public class Administrador {
     private LoginAdmin admin;
     
     
-    public Administrador() {
+    public Administrador() throws ServiceExcecoes {
 
         service = new LoginAdminService();
+        matriculas();
     }
     
-    public List<Integer> matriculas() throws ServiceExcecoes{
-        List<Integer> matriculas = null;
-             List<Funcionario> f = new FuncionarioService().buscarTudo();
-             for (Funcionario f1 : f) {
-                 matriculas.add(f1.getMatricula());
-             }
-         return matriculas;
+    public List<Funcionario> matriculas() throws ServiceExcecoes{
+        FuncionarioServiceIF f = new FuncionarioService();
+        return f.buscarTudo();
     }
     
     
