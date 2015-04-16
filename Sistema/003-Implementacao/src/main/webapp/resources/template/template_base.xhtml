@@ -32,7 +32,7 @@
 
                         <p:commandLink value="|  Relatórios " 
                                        style="color: #403c3c"/>
-                        <p:commandLink  value="| Sair" 
+                        <p:commandLink  value="| Sair" action="${usuarioBean.doLogout()}" timeout="2000"
                                         style="margin-right: 70px;color: #403c3c"/>
 
                     </h:form>
@@ -40,12 +40,53 @@
             </div>
         </div>
 
-        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px;" >
-            <p:layoutUnit position="west"  size="280" minSize="280" >
-                <span style="font-size: 23px; ">
-                    <img src="../../res/imagens/notificacao.png" height="30"/> 2 Notificações</span>
+        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px; padding: 0px;height: 620px !important;"  >
+            
+            <p:layoutUnit position="west"  size="260"  >
+                <span style="font-size: 23px ">
+                    <img src="${facesContext.externalContext.requestContextPath}/res/imagens/notificacao.png" height="30"/> 2 Notificações</span>
                 <h:form>
-                    <p:menu style="width: 90%; ">
+                    <p:menu style="width: 90%;  margin-top: 0%; margin-bottom: 0px;">
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" outcome="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
+                            <p:menuitem value="Vacinadores" icon="ui-icon-person" />         
+                            <p:menuitem value="Agentes comunitários de Saúde" icon="ui-icon-person" />   
+                            <p:menuitem value="Administradores" icon="ui-icon-person" />   
+                        </p:submenu>
+                        <p:submenu label="Relatórios">
+                            <p:menuitem value="Cobertura de vacina" icon="ui-icon-print" />         
+                            <p:menuitem value="Acompanhamento nutricional" icon="ui-icon-copy" /> 
+                            <p:menuitem value="Acompanhamento de gestantes" icon="ui-icon-copy" />     
+                        </p:submenu>
+
+                        <p:submenu label="Agendamentos">
+                            <p:menuitem value="Vacinas" icon="ui-icon-print" />         
+                            <p:menuitem value="Visita médica" icon="ui-icon-copy" /> 
+                        </p:submenu>
+
+                        <p:submenu label="Sistema">
+                            <p:menuitem value="Verificar visitas de ACS" icon="ui-icon-check" />    
+                            <p:menuitem value="Configurações" icon="ui-icon-gear" />         
+                            <p:menuitem value="Sair" icon="ui-icon-close" action="${usuarioBean.doLogout()}"/>         
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" style="height: 90% !important">
+
+                    <ui:insert name="centro">
+
+                    </ui:insert>
+
+                </p:layoutUnit>
+         
+        </p:layout>
+    </h:body>
+
+</html>
+
+<!--                <p:menu style="width: 90%; margin: 0px; height: auto;">
                         <p:submenu label="Cadastros">
                             <p:menuitem value="Usuários da UBS" icon="ui-icon-person" action="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
                             <p:menuitem value="Vacinadores" icon="ui-icon-person" />         
@@ -68,29 +109,4 @@
                             <p:menuitem value="Configurações" icon="ui-icon-gear" />         
                             <p:menuitem value="Sair" icon="ui-icon-close" />         
                         </p:submenu>
-                    </p:menu>
-                </h:form>
-            </p:layoutUnit>
-
-            <p:layoutUnit position="center" style="height: 50%;" >
-
-                <div align="center" style="width: 100%;">
-
-                    <!--                    <h:form id="cadastrarAdministrador" >
-                    
-                                            <img src="../imagens/info_saude_web.png" alt="InfoSaúde" height="100"/>
-                                        </h:form>-->
-
-                    <p:spacer height="2%"/>
-                    <ui:insert name="centro">
-
-                    </ui:insert>
-                </div>
-
-            </p:layoutUnit>
-
-
-        </p:layout>
-    </h:body>
-
-</html>
+                    </p:menu>-->
