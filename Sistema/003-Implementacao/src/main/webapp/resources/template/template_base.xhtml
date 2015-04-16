@@ -40,14 +40,14 @@
             </div>
         </div>
 
-        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px;" >
+        <p:layout style="width: 90%;margin-left: 5%; " >
             <p:layoutUnit position="west"  size="280" minSize="280" >
                 <span style="font-size: 23px; ">
                     <img src="../../res/imagens/notificacao.png" height="30"/> 2 Notificações</span>
                 <h:form>
                     <p:menu style="width: 90%; ">
                         <p:submenu label="Cadastros">
-                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" action="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
+                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" outcome="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
                             <p:menuitem value="Vacinadores" icon="ui-icon-person" />         
                             <p:menuitem value="Agentes comunitários de Saúde" icon="ui-icon-person" />   
                             <p:menuitem value="Administradores" icon="ui-icon-person" />   
@@ -72,9 +72,9 @@
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center" style="height: 50%;" >
+            <p:layoutUnit position="center" >
 
-                <div align="center" style="width: 100%;">
+                <div align="center" style="width: 100%; ">
 
                     <!--                    <h:form id="cadastrarAdministrador" >
                     
