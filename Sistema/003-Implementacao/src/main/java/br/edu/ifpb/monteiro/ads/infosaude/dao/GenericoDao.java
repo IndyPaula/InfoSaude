@@ -7,6 +7,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,7 +30,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     public GenericoDao(Class<T> clazz) {
         this.classePersistente = clazz;
-        
+        this.em = EntityManagerUtil.getInstance();
     }
 
     public EntityManager getEntityManager() {
@@ -42,9 +43,12 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public boolean salvar(T identificadorGenerico) throws DaoExcecoes {
-        this.em = EntityManagerUtil.getInstance();
         Boolean result = false;
         try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerUtil.getInstance();
+            }
             em.getTransaction().begin();
             if (identificadorGenerico.getId() == null) {
                 em.persist(identificadorGenerico);
@@ -55,16 +59,19 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
             em.getTransaction().rollback();
             throw new DaoExcecoes(e.getMessage(), e);
         } finally {
-//            em.close();
+            em.close();
         }
         return true;
     }
 
     @Override
     public boolean atualizar(T identificadorGenerico) throws DaoExcecoes {
-        this.em = EntityManagerUtil.getInstance();
         Boolean result = false;
         try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerUtil.getInstance();
+            }
             em.getTransaction().begin();
             if (identificadorGenerico.getId() != null) {
                 em.merge(identificadorGenerico);
@@ -86,11 +93,14 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public boolean remover(Long id) throws DaoExcecoes {
-        this.em = EntityManagerUtil.getInstance();
         T identificadorGenerico = em.find(classePersistente, id);
         Boolean result = false;
         try {
-            em.getTransaction().begin();;
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerUtil.getInstance();
+            }
+            em.getTransaction().begin();
             em.remove(identificadorGenerico);
             em.getTransaction().commit();
             result = true;
@@ -104,21 +114,24 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        this.em = EntityManagerUtil.getInstance();
         T identificadorGenerico = null;
         try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerUtil.getInstance();
+            }
             identificadorGenerico = em.find(classePersistente, id);
         } catch (Exception e) {
             throw new DaoExcecoes("Erro ao buscar por " + identificadorGenerico, e);
         } finally {
-            em.close();
+//            em.close();
         }
         return identificadorGenerico;
     }
 
     @Override
     public T buscarPorCampo(String campo, Object valor) throws DaoExcecoes {
-        
+
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
