@@ -107,6 +107,46 @@
                         <p:submenu label="Sistema">
                             <p:menuitem value="Verificar visitas de ACS" icon="ui-icon-check" />    
                             <p:menuitem value="Configurações" icon="ui-icon-gear" />         
+                            <p:menuitem value="Sair" icon="ui-icon-close" action="${usuarioBean.doLogout()}"/>         
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" style="height: 90% !important">
+
+                    <ui:insert name="centro">
+
+                    </ui:insert>
+
+                </p:layoutUnit>
+         
+        </p:layout>
+    </h:body>
+
+</html>
+
+<!--                <p:menu style="width: 90%; margin: 0px; height: auto;">
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" outcome="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
+                            <p:menuitem value="Vacinadores" icon="ui-icon-person" />         
+                            <p:menuitem value="Agentes comunitários de Saúde" icon="ui-icon-person" />   
+                            <p:menuitem value="Administradores" icon="ui-icon-person" />   
+                        </p:submenu>
+                        <p:submenu label="Relatórios">
+                            <p:menuitem value="Cobertura de vacina" icon="ui-icon-print" />         
+                            <p:menuitem value="Acompanhamento nutricional" icon="ui-icon-copy" /> 
+                            <p:menuitem value="Acompanhamento de gestantes" icon="ui-icon-copy" />     
+                        </p:submenu>
+
+                        <p:submenu label="Agendamentos">
+                            <p:menuitem value="Vacinas" icon="ui-icon-print" />         
+                            <p:menuitem value="Visita médica" icon="ui-icon-copy" /> 
+                        </p:submenu>
+
+                        <p:submenu label="Sistema">
+                            <p:menuitem value="Verificar visitas de ACS" icon="ui-icon-check" />    
+                            <p:menuitem value="Configurações" icon="ui-icon-gear" />         
                             <p:menuitem value="Sair" icon="ui-icon-close" />         
                         </p:submenu>
                     </p:menu>-->
