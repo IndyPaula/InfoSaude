@@ -4,6 +4,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -62,7 +64,7 @@ public class Vacina implements Identificavel<Vacina> {
     @Column(name = "numero_lote", nullable = false, length = 20, unique = true)
     private String numeroLote;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Fornecedor fornecedor;
     
     @Override

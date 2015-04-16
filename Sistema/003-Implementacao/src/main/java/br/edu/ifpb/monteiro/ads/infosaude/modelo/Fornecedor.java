@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -41,11 +42,6 @@ public class Fornecedor implements Identificavel<Fornecedor> {
     @Column(name = "email", nullable = true, length = 45)
     private String email;
     
-    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private List<Vacina> vacinas;
-    
-
     @Override
     public Long getId() {
         return id;
@@ -89,14 +85,6 @@ public class Fornecedor implements Identificavel<Fornecedor> {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Vacina> getVacinas() {
-        return vacinas;
-    }
-
-    public void setVacinas(List<Vacina> vacinas) {
-        this.vacinas = vacinas;
     }
 
     @Override

@@ -37,7 +37,7 @@ public class Funcionario implements Identificavel<Funcionario> {
     @OneToOne(cascade = CascadeType.ALL)
     private Pessoa pessoa;
     
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private UnidadeSaude unidadeSaude;
     
     @Column(name = "nome_usuario", length = 45, unique = true, nullable = false)

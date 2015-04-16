@@ -5,6 +5,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,7 +31,7 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "atendimento_imunizacao_seq")
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Vacinador vacinador;
 
     @Temporal(TemporalType.DATE)
@@ -45,14 +46,14 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
     @Column(name = "dose", nullable = false, length = 20)
     private EnumDoseVacina dose;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Vacina vacina;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estrategia_imunizacao", length = 25, nullable = false)
     private EnumEstrategiaImunizacao estrategiaImunizacao;
-    
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Paciente paciente;
 
     @Override

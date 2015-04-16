@@ -38,9 +38,6 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude> {
     @Column(name = "numero", nullable = false, unique = true)
     private int numero;
 
-    @OneToMany(mappedBy = "unidadeSaude", cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private List<Funcionario> funcionarios;
 
     @Override
     public Long getId() {
@@ -77,14 +74,6 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude> {
 
     public void setNumero(int numero) {
         this.numero = numero;
-    }
-
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
-    }
-
-    public void setFuncionarios(List<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
     }
 
     @Override

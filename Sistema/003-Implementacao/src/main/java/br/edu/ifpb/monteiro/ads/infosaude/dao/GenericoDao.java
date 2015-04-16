@@ -29,7 +29,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     public GenericoDao(Class<T> clazz) {
         this.classePersistente = clazz;
-        this.em = EntityManagerUtil.getInstance();
+        
     }
 
     public EntityManager getEntityManager() {
@@ -42,6 +42,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public boolean salvar(T identificadorGenerico) throws DaoExcecoes {
+        this.em = EntityManagerUtil.getInstance();
         Boolean result = false;
         try {
             em.getTransaction().begin();
@@ -54,13 +55,14 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
             em.getTransaction().rollback();
             throw new DaoExcecoes(e.getMessage(), e);
         } finally {
-            em.close();
+//            em.close();
         }
         return true;
     }
 
     @Override
     public boolean atualizar(T identificadorGenerico) throws DaoExcecoes {
+        this.em = EntityManagerUtil.getInstance();
         Boolean result = false;
         try {
             em.getTransaction().begin();
@@ -84,6 +86,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public boolean remover(Long id) throws DaoExcecoes {
+        this.em = EntityManagerUtil.getInstance();
         T identificadorGenerico = em.find(classePersistente, id);
         Boolean result = false;
         try {
@@ -101,6 +104,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
+        this.em = EntityManagerUtil.getInstance();
         T identificadorGenerico = null;
         try {
             identificadorGenerico = em.find(classePersistente, id);
@@ -114,6 +118,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public T buscarPorCampo(String campo, Object valor) throws DaoExcecoes {
+        
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 

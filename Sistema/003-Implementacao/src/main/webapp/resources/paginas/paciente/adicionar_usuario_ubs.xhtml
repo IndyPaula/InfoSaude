@@ -14,8 +14,8 @@
                 <h:form id="cadastrarPaciente" >
 
 
-                    <p:panel header="Cadastrar Usuário" style="background: transparent; border: 0; width: 80%" >
-                        <h:panelGrid columns="2"  >
+                    <p:panel header="Cadastrar Usuário" style="background: transparent; border: 0; width: 99,99%; text-align: center" >
+                        <h:panelGrid columns="2"  style="text-align: left">
 
                             <h:outputText value="Nome: "/>
                             <p:inputText value="#{pacienteBean.paciente.pessoa.nome}" size="40"
@@ -147,7 +147,7 @@
                                                          rows="3" autoResize="false"
                                                          />
                                     </h:panelGrid>
-                                    <p:commandButton value="Cadastrar" style="top: 20px;"/>
+                                    <p:commandButton value="Cadastrar" style="top: 20px; margin-left: 50%;"/>
                                 </p:column>
                             </p:row> 
 
