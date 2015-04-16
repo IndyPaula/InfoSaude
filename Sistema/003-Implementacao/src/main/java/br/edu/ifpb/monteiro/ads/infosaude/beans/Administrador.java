@@ -30,7 +30,6 @@ public class Administrador {
     private Integer matFuncionario;
 
     public Administrador() throws ServiceExcecoes {
-
         service = new LoginAdminService();
         admin = new LoginAdmin();
         matriculas();
