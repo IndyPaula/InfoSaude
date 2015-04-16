@@ -20,24 +20,23 @@ public class LoginAdminDao extends GenericoDao<LoginAdmin> implements LoginAdmin
     @Override
     public LoginAdmin efetuarLogin(String login, String senha) {
 
-        Query typedQuery = getEntityManager().createNativeQuery(
-                
-                "SELECT * FROM login_admin  WHERE login =  '"
-                        +login+"' AND senha = '"+CriptografiaUtil.convertStringToMd5(senha)+"'" , LoginAdmin.class);
+        if (login != null && senha != null) {
 
-        List users = typedQuery.getResultList();
+            Query typedQuery = getEntityManager().createNativeQuery(
+                    "SELECT * FROM login_admin  WHERE login =  '"
+                    + login + "' AND senha = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", LoginAdmin.class);
 
-        if (users.size() == 1) {
+            List users = typedQuery.getResultList();
 
-            LoginAdmin userFound = (LoginAdmin) users.get(0);
+            if (users.size() == 1) {
 
-            return userFound;
+                LoginAdmin userFound = (LoginAdmin) users.get(0);
 
-        }else{
+                return userFound;
 
-            return new LoginAdmin();
+            }
+            return null;
         }
-      
+        return null;
     }
-
 }
