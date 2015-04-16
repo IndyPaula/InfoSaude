@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.inicio;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.AtendimentoImunizacaoDao;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.FuncionarioDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoImunizacao;
@@ -12,11 +13,13 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.FornecedorService;
+import br.edu.ifpb.monteiro.ads.infosaude.service.FuncionarioService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.PacienteService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.PessoaService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.VacinaServie;
 import br.edu.ifpb.monteiro.ads.infosaude.service.VacinadorService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FornecedorServiceIF;
+import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;
@@ -114,5 +117,14 @@ public class Inicio {
         AtendimentoImunizacaoDao atendimentoImunizacaoDao = new AtendimentoImunizacaoDao();
         atendimentoImunizacaoDao.salvar(atendimentoImunizacao);
 
+        
+        
+          FuncionarioServiceIF daoIF = new FuncionarioService();
+          System.out.println(daoIF.consultarPorId(18L).getMatricula());
+        
     }
+    
+    
+  
+    
 }

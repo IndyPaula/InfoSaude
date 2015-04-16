@@ -7,6 +7,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,25 +23,43 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class Administrador {
 
-     private LoginAdminServiceIF service;
-     
+    private LoginAdminServiceIF service;
+
     private String confirmarSenha;
     private LoginAdmin admin;
-    
-    
+    private Integer matFuncionario;
+
     public Administrador() throws ServiceExcecoes {
 
         service = new LoginAdminService();
+        admin = new LoginAdmin();
         matriculas();
     }
-    
-    public List<Funcionario> matriculas() throws ServiceExcecoes{
+
+    public List<Integer> matriculas() throws ServiceExcecoes {
         FuncionarioServiceIF f = new FuncionarioService();
-        return f.buscarTudo();
+        List<Funcionario> f1 = f.buscarTudo();
+        List<Integer> lista = new ArrayList<>();
+        for (Funcionario f11 : f1) {
+            lista.add(f11.getMatricula());
+        }
+        return lista;
     }
-    
-    
-    
+
+    public String salvar() {
+        try {
+            FuncionarioServiceIF f = new FuncionarioService();
+            Funcionario f1 = new Funcionario();
+            f1 = f.buscarPorCampo("matricula", matFuncionario);
+            admin.setFuncionario(f1);
+            System.out.println(matFuncionario);
+            service.salvar(admin);
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public LoginAdmin getAdmin() {
         return admin;
     }
@@ -48,7 +67,7 @@ public class Administrador {
     public void setAdmin(LoginAdmin admin) {
         this.admin = admin;
     }
-    
+
     public String getConfirmarSenha() {
         return confirmarSenha;
     }
@@ -64,6 +83,13 @@ public class Administrador {
     public void setService(LoginAdminServiceIF service) {
         this.service = service;
     }
-    
-    
+
+    public Integer getMatFuncionario() {
+        return matFuncionario;
+    }
+
+    public void setMatFuncionario(Integer matFuncionario) {
+        this.matFuncionario = matFuncionario;
+    }
+
 }
