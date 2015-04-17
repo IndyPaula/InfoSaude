@@ -7,12 +7,17 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -20,19 +25,21 @@ import javax.faces.bean.SessionScoped;
  * @date 16/04/2015
  */
 @ManagedBean(name = "administrador")
-@SessionScoped
-public class Administrador {
+@RequestScoped
+public class Administrador implements Serializable {
 
     private LoginAdminServiceIF service;
 
     private String confirmarSenha;
     private LoginAdmin admin;
     private Integer matFuncionario;
+    private List<LoginAdmin> administradores;
 
     public Administrador() throws ServiceExcecoes {
         service = new LoginAdminService();
         admin = new LoginAdmin();
         matriculas();
+        administradores = service.buscarTudo();
     }
 
     public List<Integer> matriculas() throws ServiceExcecoes {
@@ -57,6 +64,24 @@ public class Administrador {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public String atualizar() {
+        try {
+            service.atualizar(admin);
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    public void buscarPorId() {
+        try {
+            admin = service.buscarPorCampo("login", admin.getNome());
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public LoginAdmin getAdmin() {
@@ -89,6 +114,14 @@ public class Administrador {
 
     public void setMatFuncionario(Integer matFuncionario) {
         this.matFuncionario = matFuncionario;
+    }
+
+    public List<LoginAdmin> getAdministradores() {
+        return administradores;
+    }
+
+    public void setAdministradores(List<LoginAdmin> administradores) {
+        this.administradores = administradores;
     }
 
 }

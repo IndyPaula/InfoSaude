@@ -58,7 +58,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
             em.getTransaction().rollback();
             throw new DaoExcecoes(e.getMessage(), e);
         } finally {
-            em.close();
+//            em.close();
         }
         return true;
     }
@@ -85,7 +85,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
                 }
             }
         } finally {
-            em.close();
+//            em.close();
         }
         return result;
     }
@@ -106,7 +106,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
         } catch (Exception e) {
             throw new DaoExcecoes("Erro ao remover " + identificadorGenerico, e);
         } finally {
-            em.close();
+//            em.close();
         }
         return result;
     }

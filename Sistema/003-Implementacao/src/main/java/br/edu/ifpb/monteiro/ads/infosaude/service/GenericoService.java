@@ -63,7 +63,9 @@ public abstract class GenericoService<T extends Identificavel> implements Servic
         try {
             return (T) getDao().buscarPorCampo(campo, valor);
         } catch (DaoExcecoes ex) {
+            
             throw new ServiceExcecoes("Erro no Service ao Buscar por Campo", ex);
+                        
         }
     }
 
