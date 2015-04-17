@@ -25,7 +25,7 @@ import org.primefaces.event.RowEditEvent;
  * @date 16/04/2015
  */
 @ManagedBean(name = "administrador")
-@RequestScoped
+@SessionScoped
 public class Administrador implements Serializable {
 
     private LoginAdminServiceIF service;
@@ -34,10 +34,12 @@ public class Administrador implements Serializable {
     private LoginAdmin admin;
     private Integer matFuncionario;
     private List<LoginAdmin> administradores;
+    private LoginAdmin adminTemp;
 
     public Administrador() throws ServiceExcecoes {
         service = new LoginAdminService();
         admin = new LoginAdmin();
+        adminTemp = new LoginAdmin();
         matriculas();
         administradores = service.buscarTudo();
     }
@@ -66,9 +68,12 @@ public class Administrador implements Serializable {
         return null;
     }
 
-    public String atualizar() {
+    public String atualizar() throws ServiceExcecoes {
+        adminTemp.setNome(admin.getNome());
+        adminTemp.setSenha(admin.getSenha());
+        System.out.println(adminTemp.getId());
         try {
-            service.atualizar(admin);
+            service.atualizar(adminTemp);
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,9 +81,11 @@ public class Administrador implements Serializable {
         return null;
     }
 
-    public void buscarPorId() {
+    public void buscarPorNome() {
         try {
             admin = service.buscarPorCampo("login", admin.getNome());
+             adminTemp = admin;
+            System.out.println(admin.getId());
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -15,7 +15,7 @@
                 
                 <f:metadata>
                     <f:viewParam name="admin" value="#{administrador.admin.nome}" />
-                    <f:viewAction action="#{administrador.buscarPorId()}"  />
+                    <f:viewAction action="#{administrador.buscarPorNome()}"  />
 
             </f:metadata>
 
@@ -26,25 +26,25 @@
                     <p:panel header="Usuário Administrador" style="background: transparent; border: 0; width: 99,99%; text-align: center" >
                         <h:panelGrid columns="2"  style="text-align: left; ">
 
-
                             <h:outputText value="Nome de Usuário*: "/>
                             <p:inputText value="#{administrador.admin.nome}" size="15" required="true" requiredMessage="Nome de Usuário necessário" />
 
 
                             <h:outputText value="Senha*: "/>
-                            <p:password value="#{administrador.admin.senha}" size="15" required="true" requiredMessage="Senha de Usuário é necessária" feedback="true" 
+                            <p:password value="#{administrador.admin.senha}" size="15" requiredMessage="Senha de Usuário é necessária" feedback="true" 
                                         promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"   
                                         goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
                                         match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Senha" />
 
 
                             <h:outputText  value=" Confirmar Senha*: "/>
-                            <p:password value="#{administrador.confirmarSenha}" size="15" required="true" requiredMessage="É necessário confirmar senha" 
+                            <p:password value="#{administrador.confirmarSenha}" size="15" requiredMessage="É necessário confirmar senha" 
                                         id="confirmarSenha" label="Confirmar Senha"
                                       />
 
                             <p:commandButton value="Atualizar" style="top: 8px; margin-left: 150%;" update="growl"
-                                             action="#{administrador.atualizar()}"/>
+                                             action="#{administrador.atualizar()}" onclick="window.opener.location.href='buscar_admin.xhtml'; 
+                                                                                            window.close()"/>
                         </h:panelGrid>
 
                     </p:panel> 
