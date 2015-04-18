@@ -28,10 +28,10 @@
                 </div>
                 <div style="width: 35%; float: right;padding-top: 10px;" align="right"> 
                     <h:form>
-                        <p:commandLink   value="Visitas domiciliares  "  style="color: #403c3c"/>
+                        <p:outputLabel   value="#{usuarioBean.login} "  style="color: #403c3c" />
 
-                        <p:commandLink value="|  Relatórios " 
-                                       style="color: #403c3c"/>
+<!--                        <p:commandLink value="|  Relatórios " 
+                                       style="color: #403c3c"/>-->
                         <p:commandLink  value="| Sair" action="${usuarioBean.doLogout()}" timeout="2000"
                                         style="margin-right: 70px;color: #403c3c"/>
 
