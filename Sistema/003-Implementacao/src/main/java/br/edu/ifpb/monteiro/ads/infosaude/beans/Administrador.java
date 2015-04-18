@@ -67,7 +67,7 @@ public class Administrador implements Serializable {
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return "/resources/paginas/ubs/buscar_admin.xhtml";
     }
 
     public String atualizar() throws ServiceExcecoes {
