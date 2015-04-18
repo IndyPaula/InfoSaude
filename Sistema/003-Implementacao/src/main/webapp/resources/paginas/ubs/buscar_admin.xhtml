@@ -30,11 +30,17 @@
                         <p:column   headerText="Nome do Usuário" style="text-align: center" >
                             <h:outputText value="#{admin.nome}" style="text-align: center" />
                         </p:column>
+                        
+                        
+                        
+                        
                         <p:column headerText="Opções" width="130" style="text-align: center" >
                             <p:button value="Atualizar" icon="ui-icon-refresh" 
                                       outcome="/resources/paginas/ubs/atualizar_admin.xhtml" target="_new">
                                 <f:param value="#{admin.nome}" name="admin"/> 
                             </p:button>
+                            
+                            <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover()}" onclick="window.updateCommands()"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

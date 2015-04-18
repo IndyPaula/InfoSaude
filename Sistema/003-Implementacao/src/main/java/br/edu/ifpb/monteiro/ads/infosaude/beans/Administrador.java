@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -80,7 +81,23 @@ public class Administrador implements Serializable {
 
         return null;
     }
+    
+    
+    
+    public String remover() {
+        try {
+//            adminTemp = service.buscarPorCampo("login", admin.getNome());
+            service.remover(admin.getId());
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
+    
+    
+    
+    
     public void buscarPorNome() {
         try {
             admin = service.buscarPorCampo("login", admin.getNome());
