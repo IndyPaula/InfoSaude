@@ -63,6 +63,7 @@ public class Administrador implements Serializable {
             admin.setFuncionario(f1);
             System.out.println(matFuncionario);
             service.salvar(admin);
+            administradores = service.buscarTudo();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,22 +83,16 @@ public class Administrador implements Serializable {
         return null;
     }
     
-    
-    
-    public String remover() {
+    public String remover(LoginAdmin ad) {
         try {
-//            adminTemp = service.buscarPorCampo("login", admin.getNome());
-            service.remover(admin.getId());
+            service.remover(ad.getId());
+            administradores = service.buscarTudo();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    
-    
-    
-    
     public void buscarPorNome() {
         try {
             admin = service.buscarPorCampo("login", admin.getNome());

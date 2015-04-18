@@ -40,8 +40,9 @@
                                 <f:param value="#{admin.nome}" name="admin"/> 
                             </p:button>
                             
-                            <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover()}" onclick="window.updateCommands()"/>
-                        </p:column>
+                            <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover(admin)}" 
+                                             oncomplete="#{administrador.administradores}"/>
+                    </p:column>
                     </p:dataTable>
                 </h:form>
 

@@ -31,7 +31,7 @@ public class LoginAdmin implements Identificavel<LoginAdmin> {
     @Column(name = "senha", nullable = false, length = 45, unique = false)
     private String senha;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Funcionario funcionario;
     
 
