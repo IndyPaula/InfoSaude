@@ -29,8 +29,6 @@ public class LoginFilter implements Filter {
 
         if (usuarioMB == null || !usuarioMB.isLoggedIn()) {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-
-            System.err.println("-------------INVÁLIDO ----------------");
             
             ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
         } else {

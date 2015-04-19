@@ -14,3 +14,9 @@ a:link
     margin: 0px ;
 
 }
+#titulo_pagina{
+
+    font-size: 25px;
+    color: #5a999d;
+    text-shadow: skyblue 1px 1px 1px;
+}

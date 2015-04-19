@@ -28,7 +28,7 @@
                 </div>
                 <div style="width: 35%; float: right;padding-top: 10px;" align="right"> 
                     <h:form>
-                        <p:outputLabel   value="#{usuarioBean.login} "  style="color: #403c3c" />
+                        <p:outputLabel   value="Bem vindo, #{usuarioBean.login} "  style="color: #403c3c" />
 
 <!--                        <p:commandLink value="|  Relatórios " 
                                        style="color: #403c3c"/>-->
@@ -80,11 +80,11 @@
             </p:layoutUnit>
 
             <p:layoutUnit position="center" style="height: 90% !important">
-
+                <div align="center" style="width: 100%; margin-top: 40px;">
                     <ui:insert name="centro">
 
                     </ui:insert>
-
+                   </div>
                 </p:layoutUnit>
          
         </p:layout>
