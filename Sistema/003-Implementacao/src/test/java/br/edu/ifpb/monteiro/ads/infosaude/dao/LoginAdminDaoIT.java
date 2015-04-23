@@ -43,7 +43,7 @@ public class LoginAdminDaoIT {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
-        LoginAdmin result = instance.efetuarLogin("Vanderlan", null);
+        LoginAdmin result = instance.efetuarLogin("admin", null);
 
         assertEquals(expResult, result);
     }
@@ -54,7 +54,7 @@ public class LoginAdminDaoIT {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
-        LoginAdmin result = instance.efetuarLogin("Vanderlan", "irh328rhf8hh");
+        LoginAdmin result = instance.efetuarLogin("admin", "irh328rhf8hh");
 
         assertEquals(expResult, result);
     }
@@ -65,7 +65,7 @@ public class LoginAdminDaoIT {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
-        LoginAdmin result = instance.efetuarLogin("UT76rg32rghu", "dwqf");
+        LoginAdmin result = instance.efetuarLogin("UT76rg32rghu", "admin");
 
         assertEquals(expResult, result);
     }
@@ -76,9 +76,9 @@ public class LoginAdminDaoIT {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = new LoginAdmin();
-        expResult.setNome("Vanderlan");
+        expResult.setNome("Jefferson");
 
-        LoginAdmin result = instance.efetuarLogin("Vanderlan", "123");
+        LoginAdmin result = instance.efetuarLogin("Jefferson", "123");
 
         assertEquals(expResult.getNome(), result.getNome());
     }
