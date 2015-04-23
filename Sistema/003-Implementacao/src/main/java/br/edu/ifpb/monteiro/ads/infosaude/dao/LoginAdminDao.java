@@ -35,8 +35,8 @@ public class LoginAdminDao extends GenericoDao<LoginAdmin> implements LoginAdmin
                 return userFound;
 
             }
-            return new LoginAdmin();
+            return null;
         }
-        return new LoginAdmin();
+        return null;
     }
 }
