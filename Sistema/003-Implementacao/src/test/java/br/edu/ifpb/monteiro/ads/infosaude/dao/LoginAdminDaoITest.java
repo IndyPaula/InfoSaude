@@ -1,12 +1,13 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
-import org.junit.After;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -16,30 +17,41 @@ import static org.junit.Assert.*;
 public class LoginAdminDaoITest {
 
     public LoginAdminDaoITest() {
+
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void inserirDados(){
+        
+        LoginAdminDao instance = new LoginAdminDao();
+        LoginAdmin adm = new LoginAdmin();
+        
+        adm.setNome("JUNIT-TEST-USER-TO-LOGIN");
+        adm.setSenha("202cb962ac59075b964b07152d234b70");
+        
+        try {
+            instance.salvar(adm);
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
     @AfterClass
-    public static void tearDownClass() {
+    public static void removerDados(){
+        
+        LoginAdminDao instance = new LoginAdminDao();
+        LoginAdmin adm;
+        
+        try {
+            adm = instance.buscarPorCampo("login", "JUNIT-TEST-USER-TO-LOGIN");
+            instance.remover(adm.getId());
+            
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of efetuarLogin method, of class LoginAdminDao.
-     */
     @Test
     public void senhaNull() {
-        System.out.println("Teste de Senha Null");
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
@@ -50,18 +62,16 @@ public class LoginAdminDaoITest {
 
     @Test
     public void senhaIncorreta() {
-        System.out.println("Teste de Senha incorreta");
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
-        LoginAdmin result = instance.efetuarLogin("admin", "irh328rhf8hh");
+        LoginAdmin result = instance.efetuarLogin("JUNIT-TEST-USER-TO-LOGIN", "irh328rhf8hh");
 
         assertEquals(expResult, result);
     }
 
     @Test
     public void usuarioInexistente() {
-        System.out.println("Teste de usuários inexistente");
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
@@ -72,13 +82,12 @@ public class LoginAdminDaoITest {
 
     @Test
     public void usuarioValido() {
-        System.out.println("Teste de usuário válido");
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = new LoginAdmin();
-        expResult.setNome("Jefferson");
+        expResult.setNome("JUNIT-TEST-USER-TO-LOGIN");
 
-        LoginAdmin result = instance.efetuarLogin("Jefferson", "123");
+        LoginAdmin result = instance.efetuarLogin("JUNIT-TEST-USER-TO-LOGIN", "202cb962ac59075b964b07152d234b70");
 
         assertEquals(expResult.getNome(), result.getNome());
     }

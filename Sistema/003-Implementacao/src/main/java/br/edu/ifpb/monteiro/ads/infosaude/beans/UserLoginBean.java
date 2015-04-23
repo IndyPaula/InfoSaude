@@ -46,8 +46,17 @@ public class UserLoginBean implements Serializable {
         this.senha = senha;
     }
 
+    public LoginAdmin getAdmLogado() {
+        return admLogado;
+    }
+
+    public void setAdmLogado(LoginAdmin admLogado) {
+        this.admLogado = admLogado;
+    }
+    
+
     public String doLogin() {
-        LoginAdmin usuarioFound = (LoginAdmin) service.efetuarLogin(login, senha);
+        LoginAdmin usuarioFound = service.efetuarLogin(login, senha);
 
         if (usuarioFound == null) {
             JsfUtil.addErrorMessage("Usuário e senha inválidos");
@@ -57,7 +66,7 @@ public class UserLoginBean implements Serializable {
             return null;
         } else {
             loggedIn = true;
-            admLogado = usuarioFound;
+            setAdmLogado(usuarioFound);
 
             JsfUtil.addSuccessMessage("Bem vindo");
 

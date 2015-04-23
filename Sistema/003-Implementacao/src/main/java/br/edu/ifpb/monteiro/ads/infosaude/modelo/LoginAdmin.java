@@ -3,7 +3,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
