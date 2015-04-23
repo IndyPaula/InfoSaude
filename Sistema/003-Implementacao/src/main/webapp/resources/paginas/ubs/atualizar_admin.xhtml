@@ -12,18 +12,19 @@
 
             <ui:define name="centro">
 
-                
+
                 <f:metadata>
                     <f:viewParam name="admin" value="#{administrador.admin.nome}" />
                     <f:viewAction action="#{administrador.buscarPorNome()}"  />
 
-            </f:metadata>
+                </f:metadata>
 
-
+                <span id="titulo_pagina">Atualizar informações de administradres</span>
                 <h:form id="cadastrarAdministrador" >
                     <p:growl id="growl"  showDetail="false" life="3000"  />
 
-                    <p:panel header="Usuário Administrador" style="background: transparent; border: 0; width: 99,99%; text-align: center" >
+                    <p:fieldset legend="Usuário Administrador" 
+                                style="background: transparent; width: 40%; text-align: center; margin-top: 80px;" >
                         <h:panelGrid columns="2"  style="text-align: left; ">
 
                             <h:outputText value="Nome de Usuário*: "/>
@@ -40,20 +41,15 @@
                             <h:outputText  value=" Confirmar Senha*: "/>
                             <p:password value="#{administrador.confirmarSenha}" size="15" requiredMessage="É necessário confirmar senha" 
                                         id="confirmarSenha" label="Confirmar Senha"
-                                      />
+                                        />
 
                             <p:commandButton value="Atualizar" style="top: 8px; margin-left: 150%;" update="growl"
-                                             action="#{administrador.atualizar()}" onclick="window.opener.location.href='buscar_admin.xhtml'; 
-                                                                                            window.close()"/>
+                                             action="#{administrador.atualizar()}" onclick="window.opener.location.href = 'buscar_admin.xhtml';
+                                                     window.close()"/>
                         </h:panelGrid>
 
-                    </p:panel> 
+                    </p:fieldset>
                 </h:form>
-
-
-
-
-
 
             </ui:define>
 

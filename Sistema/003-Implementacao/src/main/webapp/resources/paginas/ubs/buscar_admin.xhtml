@@ -14,39 +14,41 @@
 
                 <h:form id="administrador">
                     <p:growl id="mensagem" showDetail="false"/>
+                       <span id="titulo_pagina">Lista de administradres</span>
+                    <p:fieldset legend="Usuário Administrador" 
+                                style="background: transparent; width: 90%; text-align: center; margin-top: 80px;" >
+                        <p:dataTable id="tableAdministrador" var="admin" value="#{administrador.administradores}" editable="true"
+                                     style="border: 0; width: 100%; margin-top: 3%; ">
+                            <f:facet name="header">
+                                Lista de Administradores
+                            </f:facet>
+
+                            <p:column headerText="Matrícula"  width="150"  style="text-align: center" >
+                                <h:outputText value="#{admin.funcionario.matricula}" style="text-align: center" />
+                            </p:column>
 
 
-                    <p:dataTable id="tableAdministrador" var="admin" value="#{administrador.administradores}" editable="true"
-                                 style="border: 0; width: 60%;margin-left: 20%; margin-top: 3%; ">
-                        <f:facet name="header">
-                            Lista de Administradores
-                        </f:facet>
-
-                        <p:column headerText="Matrícula"  width="150"  style="text-align: center" >
-                            <h:outputText value="#{admin.funcionario.matricula}" style="text-align: center" />
-                        </p:column>
+                            <p:column   headerText="Nome do Usuário" style="text-align: center" >
+                                <h:outputText value="#{admin.nome}" style="text-align: center" />
+                            </p:column>
 
 
-                        <p:column   headerText="Nome do Usuário" style="text-align: center" >
-                            <h:outputText value="#{admin.nome}" style="text-align: center" />
-                        </p:column>
-                        
-                        
-                        
-                        
-                        <p:column headerText="Opções" width="220" style="text-align: center" >
-                            <p:panelGrid style="border: 0;">
-                            <p:button value="Atualizar" icon="ui-icon-refresh" 
-                                      outcome="/resources/paginas/ubs/atualizar_admin.xhtml" target="_new" style="margin-right: 6px">
-                                <f:param value="#{admin.nome}" name="admin"/> 
-                            </p:button>
-                            
-                            <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover(admin)}" 
-                                             oncomplete="#{administrador.administradores}"/>
-                            </p:panelGrid>
-                    </p:column>
-                        
-                    </p:dataTable>
+
+
+                            <p:column headerText="Opções" width="220" style="text-align: center" >
+                                <p:panelGrid style="border: 0;">
+                                    <p:button value="Atualizar" icon="ui-icon-refresh" 
+                                              outcome="/resources/paginas/ubs/atualizar_admin.xhtml" target="_new" style="margin-right: 6px">
+                                        <f:param value="#{admin.nome}" name="admin"/> 
+                                    </p:button>
+
+                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover(admin)}" 
+                                                     oncomplete="#{administrador.administradores}"/>
+                                </p:panelGrid>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:fieldset>
                 </h:form>
 
 
