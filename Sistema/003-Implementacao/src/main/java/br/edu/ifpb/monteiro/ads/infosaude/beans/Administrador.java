@@ -12,13 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
-import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -30,7 +26,7 @@ import org.primefaces.event.RowEditEvent;
 public class Administrador implements Serializable {
 
     private LoginAdminServiceIF service;
-
+    private FacesContext contexto;
     private String confirmarSenha;
     private LoginAdmin admin;
     private Integer matFuncionario;
@@ -38,6 +34,7 @@ public class Administrador implements Serializable {
     private LoginAdmin adminTemp;
 
     public Administrador() throws ServiceExcecoes {
+        this.contexto = FacesContext.getCurrentInstance();
         service = new LoginAdminService();
         admin = new LoginAdmin();
         adminTemp = new LoginAdmin();
@@ -64,6 +61,7 @@ public class Administrador implements Serializable {
             System.out.println(matFuncionario);
             service.salvar(admin);
             administradores = service.buscarTudo();
+            admin = new LoginAdmin();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,6 +72,7 @@ public class Administrador implements Serializable {
         adminTemp.setNome(admin.getNome());
         adminTemp.setSenha(admin.getSenha());
         System.out.println(adminTemp.getId());
+        admin = new LoginAdmin();
         try {
             service.atualizar(adminTemp);
         } catch (ServiceExcecoes ex) {
@@ -82,7 +81,7 @@ public class Administrador implements Serializable {
 
         return null;
     }
-    
+
     public String remover(LoginAdmin ad) {
         try {
             service.remover(ad.getId());
@@ -96,7 +95,7 @@ public class Administrador implements Serializable {
     public void buscarPorNome() {
         try {
             admin = service.buscarPorCampo("login", admin.getNome());
-             adminTemp = admin;
+            adminTemp = admin;
             System.out.println(admin.getId());
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
