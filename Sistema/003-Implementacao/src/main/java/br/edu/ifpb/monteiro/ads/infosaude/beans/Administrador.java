@@ -58,7 +58,6 @@ public class Administrador implements Serializable {
             Funcionario f1 = new Funcionario();
             f1 = f.buscarPorCampo("matricula", matFuncionario);
             admin.setFuncionario(f1);
-            System.out.println(matFuncionario);
             service.salvar(admin);
             administradores = service.buscarTudo();
             admin = new LoginAdmin();
@@ -71,7 +70,6 @@ public class Administrador implements Serializable {
     public String atualizar() throws ServiceExcecoes {
         adminTemp.setNome(admin.getNome());
         adminTemp.setSenha(admin.getSenha());
-        System.out.println(adminTemp.getId());
         admin = new LoginAdmin();
         try {
             service.atualizar(adminTemp);
@@ -96,7 +94,6 @@ public class Administrador implements Serializable {
         try {
             admin = service.buscarPorCampo("login", admin.getNome());
             adminTemp = admin;
-            System.out.println(admin.getId());
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }

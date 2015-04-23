@@ -60,7 +60,7 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
         } finally {
 //            em.close();
         }
-        return true;
+        return result;
     }
 
     @Override

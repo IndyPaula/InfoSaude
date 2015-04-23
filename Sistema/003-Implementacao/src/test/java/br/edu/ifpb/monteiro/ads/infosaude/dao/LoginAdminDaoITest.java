@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
  * @author Vanderlan Gomes<vanderlan.gs@gmail.com>
  * Criado em 16 de Abril de 2015
  */
-public class LoginAdminDaoIT {
+public class LoginAdminDaoITest {
 
-    public LoginAdminDaoIT() {
+    public LoginAdminDaoITest() {
     }
 
     @BeforeClass
