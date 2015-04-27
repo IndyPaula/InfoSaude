@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinadorDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
+import javax.persistence.EntityManager;
 
 /**
  *

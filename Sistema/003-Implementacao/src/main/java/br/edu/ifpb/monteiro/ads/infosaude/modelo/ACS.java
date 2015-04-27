@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,9 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "acs")
 @SequenceGenerator(name = "acs_seq", sequenceName = "acs_seq", initialValue = 1, allocationSize = 1)
-public class ACS implements Identificavel<ACS> {
+public class ACS implements Identificavel<ACS>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "acs_seq")
@@ -46,7 +49,7 @@ public class ACS implements Identificavel<ACS> {
 
     @Override
     public Long getId() {
-       return id;
+        return id;
     }
 
 }

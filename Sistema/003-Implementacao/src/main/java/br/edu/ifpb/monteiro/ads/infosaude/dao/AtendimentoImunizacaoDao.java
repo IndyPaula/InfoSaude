@@ -8,12 +8,10 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoImunizacao;
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 07/04/2015
  */
-public class AtendimentoImunizacaoDao extends GenericoDao<AtendimentoImunizacao> implements AtendimentoImunizacaoDaoIF{
+public class AtendimentoImunizacaoDao extends GenericoDao<AtendimentoImunizacao> implements AtendimentoImunizacaoDaoIF {
 
     public AtendimentoImunizacaoDao() {
         super(AtendimentoImunizacao.class);
     }
-    
-    
-    
+
 }

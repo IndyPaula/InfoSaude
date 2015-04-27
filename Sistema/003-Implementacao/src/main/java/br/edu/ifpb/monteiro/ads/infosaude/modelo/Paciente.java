@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -21,7 +22,9 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "paciente")
 @SequenceGenerator(name = "paciente_seq", sequenceName = "paciente_seq", initialValue = 1, allocationSize = 1)
-public class Paciente implements Identificavel<Paciente> {
+public class Paciente implements Identificavel<Paciente>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "paciente_seq")
@@ -36,10 +39,10 @@ public class Paciente implements Identificavel<Paciente> {
 
     @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private Pessoa pessoa;
-    
+
     @Override
     public Long getId() {
         return id;
@@ -98,9 +101,5 @@ public class Paciente implements Identificavel<Paciente> {
         }
         return true;
     }
-    
-    
-    
-    
 
 }

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,19 +26,19 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class Administrador implements Serializable {
 
+    @Inject
     private LoginAdminServiceIF service;
     private FacesContext contexto;
     private String confirmarSenha;
+    @Inject
     private LoginAdmin admin;
     private Integer matFuncionario;
     private List<LoginAdmin> administradores;
+    @Inject
     private LoginAdmin adminTemp;
 
     public Administrador() throws ServiceExcecoes {
         this.contexto = FacesContext.getCurrentInstance();
-        service = new LoginAdminService();
-        admin = new LoginAdmin();
-        adminTemp = new LoginAdmin();
         matriculas();
         administradores = service.buscarTudo();
     }
@@ -82,7 +83,7 @@ public class Administrador implements Serializable {
 
     public String remover(LoginAdmin ad) {
         try {
-            service.remover(ad.getId());
+            service.remover(ad);
             administradores = service.buscarTudo();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);

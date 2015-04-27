@@ -14,6 +14,4 @@ public class FornecedorDao extends GenericoDao<Fornecedor> implements Fornecedor
         super(Fornecedor.class);
     }
 
-    
-    
 }
