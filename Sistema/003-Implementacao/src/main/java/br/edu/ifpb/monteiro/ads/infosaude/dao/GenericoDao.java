@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
@@ -24,11 +25,13 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
     private static final Long serialVersionUID = 1L;
 
     private Class<T> classePersistente;
-
-    @Inject
+    
     private EntityManager em;
 
     public GenericoDao(Class<T> clazz) {
+        
+        em = EntityManagerProducer.getInstance();
+        
         this.classePersistente = clazz;
     }
 
@@ -37,6 +40,8 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
     }
 
     public GenericoDao() {
+        
+        
     }
 
     @Override

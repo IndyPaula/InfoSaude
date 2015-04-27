@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.GenericoDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 /**
@@ -19,9 +21,14 @@ import javax.inject.Inject;
  */
 public abstract class GenericoService<T extends Identificavel> implements Serializable, ServiceIF<T> {
     
-    @Inject
     public DaoIF dao;
 
+    public GenericoService() {
+    
+        dao = new GenericoDao();
+    }
+
+    
     @Override
     public T salvar(T identificadorGenerico) throws ServiceExcecoes {
         try {

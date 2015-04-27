@@ -3,7 +3,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.FuncionarioService;
-import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
@@ -26,15 +25,12 @@ import javax.inject.Inject;
 @SessionScoped
 public class Administrador implements Serializable {
 
-    @Inject
     private LoginAdminServiceIF service;
     private FacesContext contexto;
     private String confirmarSenha;
-    @Inject
     private LoginAdmin admin;
     private Integer matFuncionario;
     private List<LoginAdmin> administradores;
-    @Inject
     private LoginAdmin adminTemp;
 
     public Administrador() throws ServiceExcecoes {
