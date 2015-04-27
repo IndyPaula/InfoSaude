@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumDoseVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstrategiaImunizacao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -25,7 +26,9 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "atendimento_imunizacao")
 @SequenceGenerator(name = "atendimento_imunizacao_seq", sequenceName = "atendimento_imunizacao_seq", initialValue = 1, allocationSize = 1)
-public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizacao> {
+public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizacao>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "atendimento_imunizacao_seq")

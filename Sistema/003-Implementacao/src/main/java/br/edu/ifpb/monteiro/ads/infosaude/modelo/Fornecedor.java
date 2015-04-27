@@ -1,17 +1,13 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -21,7 +17,9 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "fornecedor")
 @SequenceGenerator(name = "fornecedor_seq", sequenceName = "fornecedor_seq", initialValue = 1, allocationSize = 1)
-public class Fornecedor implements Identificavel<Fornecedor> {
+public class Fornecedor implements Identificavel<Fornecedor>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "fornecedor_seq")
@@ -41,7 +39,7 @@ public class Fornecedor implements Identificavel<Fornecedor> {
 
     @Column(name = "email", nullable = true, length = 45)
     private String email;
-    
+
     @Override
     public Long getId() {
         return id;
@@ -108,5 +106,5 @@ public class Fornecedor implements Identificavel<Fornecedor> {
         }
         return true;
     }
-    
+
 }

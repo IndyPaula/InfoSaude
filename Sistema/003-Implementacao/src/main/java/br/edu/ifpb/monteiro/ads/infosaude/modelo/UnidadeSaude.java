@@ -1,16 +1,13 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -20,7 +17,9 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "unidade_saude")
 @SequenceGenerator(name = "unidade_saude_seq", sequenceName = "unidade_saude_seq", initialValue = 1, allocationSize = 1)
-public class UnidadeSaude implements Identificavel<UnidadeSaude> {
+public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "unidade_saude_seq")
@@ -37,7 +36,6 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude> {
 
     @Column(name = "numero", nullable = false, unique = true)
     private int numero;
-
 
     @Override
     public Long getId() {

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class UserLoginBean implements Serializable {
 
+    @Inject
     private LoginAdminServiceIF service;
     private String login;
     private String senha;
@@ -26,8 +28,6 @@ public class UserLoginBean implements Serializable {
     private boolean loggedIn;
 
     public UserLoginBean() {
-
-        service = new LoginAdminService();
     }
 
     public String getLogin() {
@@ -53,14 +53,13 @@ public class UserLoginBean implements Serializable {
     public void setAdmLogado(LoginAdmin admLogado) {
         this.admLogado = admLogado;
     }
-    
 
     public String doLogin() {
         LoginAdmin usuarioFound = service.efetuarLogin(login, senha);
 
         if (usuarioFound == null) {
             JsfUtil.addErrorMessage("Usuário e senha inválidos");
-            
+
             FacesContext.getCurrentInstance().validationFailed();
 
             return null;

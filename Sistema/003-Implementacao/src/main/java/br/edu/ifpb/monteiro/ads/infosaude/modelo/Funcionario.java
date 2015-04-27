@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -19,7 +19,9 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "funcionario")
 @SequenceGenerator(name = "funcionario_seq", sequenceName = "funcionario_seq", initialValue = 1, allocationSize = 1)
-public class Funcionario implements Identificavel<Funcionario> {
+public class Funcionario implements Identificavel<Funcionario>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "funcionario_seq")
@@ -30,19 +32,19 @@ public class Funcionario implements Identificavel<Funcionario> {
 
     @Column(name = "turno", length = 20, nullable = true)
     private String turno;
-    
+
     @Column(name = "codigo_euipe_ine", length = 15, nullable = false)
     private String codigoEquipeINE;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private Pessoa pessoa;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private UnidadeSaude unidadeSaude;
-    
+
     @Column(name = "nome_usuario", length = 45, unique = true, nullable = false)
     private String nomeUsuario;
-    
+
     @Column(name = "senha", length = 45, unique = false, nullable = false)
     private String senha;
 
@@ -128,9 +130,5 @@ public class Funcionario implements Identificavel<Funcionario> {
         }
         return true;
     }
-    
-    
-    
-    
-    
+
 }

@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,21 +19,22 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "login_admin")
 @SequenceGenerator(name = "login_admin_seq", sequenceName = "login_admin_seq", initialValue = 1, allocationSize = 1)
-public class LoginAdmin implements Identificavel<LoginAdmin> {
-    
+public class LoginAdmin implements Identificavel<LoginAdmin>, Serializable {
+
+    private static final Long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "login_admin_seq")
     private Long id;
-    
+
     @Column(name = "login", nullable = false, length = 45, unique = true)
     private String login;
-    
+
     @Column(name = "senha", nullable = false, length = 45, unique = false)
     private String senha;
-    
+
     @OneToOne
     private Funcionario funcionario;
-    
 
     /**
      *
@@ -88,7 +90,5 @@ public class LoginAdmin implements Identificavel<LoginAdmin> {
         }
         return true;
     }
-    
-    
-    
+
 }

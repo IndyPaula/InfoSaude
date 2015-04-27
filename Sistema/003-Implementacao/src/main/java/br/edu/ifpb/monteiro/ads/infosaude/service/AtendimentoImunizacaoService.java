@@ -2,7 +2,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.service;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.AtendimentoImunizacaoDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.AtendimentoImunizacaoDaoIF;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoImunizacao;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.AtendimentoImunizacaoServiceIF;
 
@@ -17,12 +16,6 @@ public class AtendimentoImunizacaoService extends GenericoService<AtendimentoImu
 
     public AtendimentoImunizacaoService() {
         this.dao = new AtendimentoImunizacaoDao();
-    }
-    
-    
-    @Override
-    public DaoIF getDao() {
-        return dao;
     }
 
 }

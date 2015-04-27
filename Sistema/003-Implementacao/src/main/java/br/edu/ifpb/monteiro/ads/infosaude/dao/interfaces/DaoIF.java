@@ -1,7 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import java.util.List;
 
 /**
@@ -12,11 +11,11 @@ import java.util.List;
  */
 public interface DaoIF<T> {
 
-    boolean salvar(T entidadeBase) throws DaoExcecoes;
+    T salvar(T identificadorGenerico) throws DaoExcecoes;
 
-    boolean atualizar(T entidadeBase) throws DaoExcecoes;
+    T atualizar(T identificadorGenerico) throws DaoExcecoes;
 
-    boolean remover(Long id) throws DaoExcecoes;
+    void remover(T identificadorGenerico) throws DaoExcecoes;
 
     T consultarPorId(Long id) throws DaoExcecoes;
 

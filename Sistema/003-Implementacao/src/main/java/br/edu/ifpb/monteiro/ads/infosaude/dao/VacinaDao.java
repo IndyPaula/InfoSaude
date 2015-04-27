@@ -13,5 +13,4 @@ public class VacinaDao extends GenericoDao<Vacina> implements VacinaDaoIF {
     public VacinaDao() {
         super(Vacina.class);
     }
-
 }

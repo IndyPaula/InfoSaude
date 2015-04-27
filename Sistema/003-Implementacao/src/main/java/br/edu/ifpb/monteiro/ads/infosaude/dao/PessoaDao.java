@@ -2,9 +2,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.PessoaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Pessoa;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
