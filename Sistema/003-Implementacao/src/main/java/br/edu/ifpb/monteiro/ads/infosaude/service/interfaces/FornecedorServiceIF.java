@@ -8,5 +8,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Fornecedor;
  * @date 14/04/2015
  */
 public interface FornecedorServiceIF extends ServiceIF<Fornecedor> {
-    
+
 }

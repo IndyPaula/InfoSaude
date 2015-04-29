@@ -1,8 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service.interfaces;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
-import java.util.List;
 
 /**
  *
@@ -12,5 +10,5 @@ import java.util.List;
 public interface LoginAdminServiceIF extends ServiceIF<LoginAdmin> {
 
     public LoginAdmin efetuarLogin(String login, String senha);
-    
+
 }

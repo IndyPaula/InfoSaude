@@ -1,10 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
 
-import javax.enterprise.inject.Disposes;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.eclipse.persistence.jpa.JpaHelper;
 
 /**
  *

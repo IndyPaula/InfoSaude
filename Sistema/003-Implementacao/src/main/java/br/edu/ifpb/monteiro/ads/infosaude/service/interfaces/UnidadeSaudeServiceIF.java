@@ -8,5 +8,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
  * @date 14/04/2015
  */
 public interface UnidadeSaudeServiceIF extends ServiceIF<UnidadeSaude> {
-    
+
 }

@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "administrador")
 @SessionScoped
 public class Administrador implements Serializable {
+    
 
     private LoginAdminServiceIF service;
     private FacesContext contexto;

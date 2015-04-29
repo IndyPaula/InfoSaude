@@ -13,6 +13,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF
  */
 public class LoginAdminService extends GenericoService<LoginAdmin> implements LoginAdminServiceIF {
 
+    private static final Long serialVersionUID = 1L;
+
     private LoginAdminDaoIF dao;
 
     public LoginAdminService() {

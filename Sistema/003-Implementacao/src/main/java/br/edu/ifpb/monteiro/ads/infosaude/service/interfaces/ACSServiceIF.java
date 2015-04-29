@@ -8,7 +8,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
  * @date 13/04/2015
  */
 public interface ACSServiceIF extends ServiceIF<ACS> {
-    
-    
-    
+
 }

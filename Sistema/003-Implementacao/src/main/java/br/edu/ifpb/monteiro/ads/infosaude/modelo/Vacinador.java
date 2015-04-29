@@ -20,16 +20,16 @@ import javax.persistence.SequenceGenerator;
 @Entity(name = "vacinador")
 @SequenceGenerator(name = "vacinador_seq", sequenceName = "vacinador_seq", initialValue = 1, allocationSize = 1)
 public class Vacinador implements Identificavel<Vacinador>, Serializable {
-    
+
     private static final Long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vacinador_seq")
     private Long id;
-    
+
     @Column(name = "registro_coren", nullable = false, unique = true)
     private int registroCoren;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private Funcionario funcionario;
 
@@ -76,6 +76,4 @@ public class Vacinador implements Identificavel<Vacinador>, Serializable {
         return true;
     }
 
-    
-    
 }

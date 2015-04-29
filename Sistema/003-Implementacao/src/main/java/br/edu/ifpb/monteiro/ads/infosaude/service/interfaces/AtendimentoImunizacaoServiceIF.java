@@ -8,5 +8,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoImunizacao;
  * @date 14/04/2015
  */
 public interface AtendimentoImunizacaoServiceIF extends ServiceIF<AtendimentoImunizacao> {
-    
+
 }

@@ -8,5 +8,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
  * @date 14/04/2015
  */
 public interface FuncionarioServiceIF extends ServiceIF<Funcionario> {
-    
+
 }

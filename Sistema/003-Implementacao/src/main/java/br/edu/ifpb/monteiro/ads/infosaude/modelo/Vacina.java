@@ -25,10 +25,10 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "vacina")
 @SequenceGenerator(name = "vacina_seq", sequenceName = "vacina_seq", initialValue = 1, allocationSize = 1)
-public class Vacina implements Identificavel<Vacina> , Serializable {
-    
+public class Vacina implements Identificavel<Vacina>, Serializable {
+
     private static final Long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vacina_seq")
     private Long id;
@@ -68,7 +68,7 @@ public class Vacina implements Identificavel<Vacina> , Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Fornecedor fornecedor;
-    
+
     @Override
     public Long getId() {
         return id;
@@ -161,7 +161,7 @@ public class Vacina implements Identificavel<Vacina> , Serializable {
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;

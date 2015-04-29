@@ -1,6 +1,5 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.GenericoDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
@@ -10,8 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
 
 /**
  *
@@ -20,17 +17,18 @@ import javax.inject.Inject;
  * @date 13/04/2015
  */
 public abstract class GenericoService<T extends Identificavel> implements Serializable, ServiceIF<T> {
-    
+
+    private static final Long serialVersionUID = 1L;
+
     public abstract DaoIF getDao();
 
     public GenericoService() {
     }
 
-    
     @Override
     public T salvar(T identificadorGenerico) throws ServiceExcecoes {
         try {
-             getDao().salvar(identificadorGenerico);
+            getDao().salvar(identificadorGenerico);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,9 +68,9 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
         try {
             return (T) getDao().buscarPorCampo(campo, valor);
         } catch (DaoExcecoes ex) {
-            
+
             throw new ServiceExcecoes("Erro no Service ao Buscar por Campo", ex);
-                        
+
         }
     }
 
@@ -86,7 +84,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    public List<T> buscarTudo() throws ServiceExcecoes{
+    public List<T> buscarTudo() throws ServiceExcecoes {
         try {
             return getDao().buscarTudo();
         } catch (DaoExcecoes ex) {
