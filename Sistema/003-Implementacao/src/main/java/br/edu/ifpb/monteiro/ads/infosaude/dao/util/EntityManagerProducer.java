@@ -16,16 +16,14 @@ public class EntityManagerProducer {
     private static EntityManager em = getEntityManager();
 
     private static EntityManager getEntityManager() {
-        
-        
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("InfoSaudePU");
 
-        
         return emf.createEntityManager();
     }
 
-    public static EntityManager getInstance(){
-        
+    public static EntityManager getInstance() {
+
         return em;
     }
 

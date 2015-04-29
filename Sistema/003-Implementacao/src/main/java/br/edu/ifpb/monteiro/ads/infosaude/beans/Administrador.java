@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.FuncionarioService;
+import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
@@ -14,7 +15,6 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 
 /**
  *
@@ -35,6 +35,9 @@ public class Administrador implements Serializable {
 
     public Administrador() throws ServiceExcecoes {
         this.contexto = FacesContext.getCurrentInstance();
+        service = new LoginAdminService();
+        admin = new LoginAdmin();
+        adminTemp = new LoginAdmin();
         matriculas();
         administradores = service.buscarTudo();
     }

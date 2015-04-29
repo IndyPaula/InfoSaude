@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.VacinaDao;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;
@@ -16,5 +17,10 @@ public class VacinadorService extends GenericoService<Vacinador> implements Vaci
 
     public VacinadorService() {
         this.dao = new VacinaDao();
+    }
+
+    @Override
+    public DaoIF getDao() {
+        return dao;
     }
 }

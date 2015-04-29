@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.UnidadeSaudeDao;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.UnidadeSaudeDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.UnidadeSaudeServiceIF;
@@ -16,6 +17,11 @@ public class UnidadeSaudeService extends GenericoService<UnidadeSaude> implement
 
     public UnidadeSaudeService() {
         this.dao = new UnidadeSaudeDao();
+    }
+
+    @Override
+    public DaoIF getDao() {
+        return dao;
     }
 
 }

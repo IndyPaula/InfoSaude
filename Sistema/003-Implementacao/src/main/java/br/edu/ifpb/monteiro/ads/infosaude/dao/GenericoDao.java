@@ -6,9 +6,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -24,24 +24,28 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     private static final Long serialVersionUID = 1L;
 
+    @PersistenceContext(unitName = "InfoSaudePU")
     private Class<T> classePersistente;
-    
+
     private EntityManager em;
 
     public GenericoDao(Class<T> clazz) {
-        
-        em = EntityManagerProducer.getInstance();
-        
+
         this.classePersistente = clazz;
+        em = EntityManagerProducer.getInstance();
+
     }
 
     public EntityManager getEntityManager() {
         return em;
     }
 
+    public Class<T> getClassePersistente() {
+        return classePersistente;
+    }
+
     public GenericoDao() {
-        
-        
+
     }
 
     @Override

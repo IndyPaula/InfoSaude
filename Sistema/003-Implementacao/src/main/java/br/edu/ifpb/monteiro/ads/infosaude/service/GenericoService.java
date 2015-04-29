@@ -21,18 +21,16 @@ import javax.inject.Inject;
  */
 public abstract class GenericoService<T extends Identificavel> implements Serializable, ServiceIF<T> {
     
-    public DaoIF dao;
+    public abstract DaoIF getDao();
 
     public GenericoService() {
-    
-        dao = new GenericoDao();
     }
 
     
     @Override
     public T salvar(T identificadorGenerico) throws ServiceExcecoes {
         try {
-             dao.salvar(identificadorGenerico);
+             getDao().salvar(identificadorGenerico);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -42,7 +40,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     public T atualizar(T identificadorGenerico) throws ServiceExcecoes {
         try {
-            dao.atualizar(identificadorGenerico);
+            getDao().atualizar(identificadorGenerico);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,7 +50,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     public void remover(T identificadorGenerico) throws ServiceExcecoes {
         try {
-            dao.remover(identificadorGenerico);
+            getDao().remover(identificadorGenerico);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,7 +59,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     public T consultarPorId(Long id) throws ServiceExcecoes {
         try {
-            return (T) dao.consultarPorId(id);
+            return (T) getDao().consultarPorId(id);
         } catch (DaoExcecoes ex) {
             throw new ServiceExcecoes("Erro no Service ao Consultar por ID", ex);
         }
@@ -70,7 +68,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     public T buscarPorCampo(String campo, Object valor) throws ServiceExcecoes {
         try {
-            return (T) dao.buscarPorCampo(campo, valor);
+            return (T) getDao().buscarPorCampo(campo, valor);
         } catch (DaoExcecoes ex) {
             
             throw new ServiceExcecoes("Erro no Service ao Buscar por Campo", ex);
@@ -81,7 +79,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     public List<T> buscarTodosPorCampo(String campo, Object valor) throws ServiceExcecoes {
         try {
-            return dao.buscarTodosPorCampo(campo, valor);
+            return getDao().buscarTodosPorCampo(campo, valor);
         } catch (DaoExcecoes ex) {
             throw new ServiceExcecoes("Erro no Service ao Buscar Todos", ex);
         }
@@ -90,7 +88,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     public List<T> buscarTudo() throws ServiceExcecoes{
         try {
-            return dao.buscarTudo();
+            return getDao().buscarTudo();
         } catch (DaoExcecoes ex) {
             throw new ServiceExcecoes("Erro no Service ao Buscar Todos", ex);
         }

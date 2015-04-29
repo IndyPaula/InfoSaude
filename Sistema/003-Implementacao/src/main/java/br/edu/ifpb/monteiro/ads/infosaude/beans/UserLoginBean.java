@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 
 /**
  *
@@ -19,7 +18,6 @@ import javax.inject.Inject;
 @SessionScoped
 public class UserLoginBean implements Serializable {
 
-    @Inject
     private LoginAdminServiceIF service;
     private String login;
     private String senha;
@@ -28,6 +26,7 @@ public class UserLoginBean implements Serializable {
     private boolean loggedIn;
 
     public UserLoginBean() {
+        service = new LoginAdminService();
     }
 
     public String getLogin() {
