@@ -87,8 +87,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
     }
 
     @Override
-    public void remover(T id) throws DaoExcecoes {
-        T entity = em.find(classePersistente, id);
+    public void remover(T entity) throws DaoExcecoes {
         try {
             if (em.getTransaction().isActive()) {
             } else {
