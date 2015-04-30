@@ -20,20 +20,16 @@ import javax.persistence.criteria.Root;
  * @param <T>
  * @date 04/04/2015
  */
-public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
-
-    private static final Long serialVersionUID = 1L;
+public abstract class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
 
     @PersistenceContext(unitName = "InfoSaudePU")
-    private Class<T> classePersistente;
-
     private EntityManager em;
 
+    private Class<T> classePersistente;
+
     public GenericoDao(Class<T> clazz) {
-
         this.classePersistente = clazz;
-        em = EntityManagerProducer.getInstance();
-
+        this.em = EntityManagerProducer.getInstance();
     }
 
     public EntityManager getEntityManager() {
@@ -44,39 +40,85 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
         return classePersistente;
     }
 
-    public GenericoDao() {
-
-    }
-
     @Override
-    public T salvar(T identificadorGenerico) throws DaoExcecoes {
-        if (identificadorGenerico.getId() == null) {
-            em.persist(identificadorGenerico);
+    public T salvar(T entity) throws DaoExcecoes {
+        try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerProducer.getInstance();
+            }
+            em.getTransaction().begin();
+            if (entity.getId() == null) {
+                em.persist(entity);
+                em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new DaoExcecoes(e.getMessage(), e);
+        } finally {
+//            em.close();
         }
-        return identificadorGenerico;
+        return entity;
     }
 
     @Override
-    public T atualizar(T identificadorGenerico) throws DaoExcecoes {
-        if (identificadorGenerico.getId() != null) {
-            em.merge(identificadorGenerico);
+    public T atualizar(T entity) throws DaoExcecoes {
+        try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerProducer.getInstance();
+            }
+            em.getTransaction().begin();
+            if (entity.getId() != null) {
+                em.merge(entity);
+                em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            if (!em.contains(entity)) {
+                if (em.find(entity.getClass(), entity.getId()) == null) {
+                    throw new DaoExcecoes("Erro ao persistir " + entity, e);
+                }
+            }
+        } finally {
+//            em.close();
         }
-        return identificadorGenerico;
+        return entity;
     }
 
     @Override
-    public void remover(T identificadorGenerico) throws DaoExcecoes {
-        if (identificadorGenerico.getId() == null) {
-            identificadorGenerico = consultarPorId(identificadorGenerico.getId());
-            em.remove(identificadorGenerico);
+    public void remover(T id) throws DaoExcecoes {
+        T entity = em.find(classePersistente, id);
+        try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerProducer.getInstance();
+            }
+            em.getTransaction().begin();
+            em.remove(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new DaoExcecoes("Erro ao remover " + entity, e);
+        } finally {
+//            em.close();
         }
     }
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        T identificadorGenerico = null;
-        identificadorGenerico = em.find(classePersistente, id);
-        return identificadorGenerico;
+        T entity = null;
+        try {
+            if (em.getTransaction().isActive()) {
+            } else {
+                this.em = EntityManagerProducer.getInstance();
+            }
+            entity = em.find(classePersistente, id);
+        } catch (Exception e) {
+            throw new DaoExcecoes("Erro ao buscar por " + entity, e);
+        } finally {
+//            em.close();
+        }
+        return entity;
     }
 
     @Override
@@ -130,8 +172,8 @@ public class GenericoDao<T extends Identificavel> implements Serializable, DaoIF
 
     @Override
     public List<T> buscarTudo() throws DaoExcecoes {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(classePersistente));
-        return em.createQuery(cq).getResultList();
+        return getEntityManager().createQuery(cq).getResultList();
     }
 }

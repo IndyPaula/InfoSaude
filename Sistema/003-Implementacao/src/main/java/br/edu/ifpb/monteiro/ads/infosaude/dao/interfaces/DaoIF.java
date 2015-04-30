@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface DaoIF<T> {
 
-    T salvar(T identificadorGenerico) throws DaoExcecoes;
+    T salvar(T entity) throws DaoExcecoes;
 
-    T atualizar(T identificadorGenerico) throws DaoExcecoes;
+    T atualizar(T entity) throws DaoExcecoes;
 
-    void remover(T identificadorGenerico) throws DaoExcecoes;
+    void remover(T entity) throws DaoExcecoes;
 
     T consultarPorId(Long id) throws DaoExcecoes;
 
@@ -23,6 +23,6 @@ public interface DaoIF<T> {
 
     List<T> buscarTodosPorCampo(String campo, Object valor) throws DaoExcecoes;
 
-    List<T> buscarTudo() throws DaoExcecoes;
+    List<T> buscarTudo() throws DaoExcecoes;   
 
 }
