@@ -48,6 +48,11 @@ public class Paciente implements Identificavel<Paciente>, Serializable {
         return id;
     }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public int getNumeroProntuario() {
         return numeroProntuario;
     }

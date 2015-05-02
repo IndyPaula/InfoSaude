@@ -17,7 +17,7 @@ public class Teste {
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin adm = new LoginAdmin();
         
-        adm.setNome("JUNIT-TEST-USER-TO-LOGIN");
+        adm.setLogin("JUNIT-TEST-USER-TO-LOGIN");
         adm.setSenha("202cb962ac59075b964b07152d234b70");
         
         try {

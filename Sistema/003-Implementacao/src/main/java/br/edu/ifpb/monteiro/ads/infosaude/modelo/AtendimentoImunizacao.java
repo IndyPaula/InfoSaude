@@ -64,6 +64,11 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
         return id;
     }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Vacinador getVacinador() {
         return vacinador;
     }

@@ -38,6 +38,11 @@ public class Vacinador implements Identificavel<Vacinador>, Serializable {
         return id;
     }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public int getRegistroCoren() {
         return registroCoren;
     }
@@ -75,5 +80,7 @@ public class Vacinador implements Identificavel<Vacinador>, Serializable {
         }
         return true;
     }
+
+    
 
 }

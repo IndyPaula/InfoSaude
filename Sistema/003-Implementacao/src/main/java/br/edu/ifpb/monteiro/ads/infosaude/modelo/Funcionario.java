@@ -53,6 +53,11 @@ public class Funcionario implements Identificavel<Funcionario>, Serializable {
         return id;
     }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public int getMatricula() {
         return matricula;
     }

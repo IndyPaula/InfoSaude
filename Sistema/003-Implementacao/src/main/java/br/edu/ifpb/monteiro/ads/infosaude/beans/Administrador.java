@@ -7,14 +7,12 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.LoginAdminService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -23,28 +21,20 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "administrador")
 @SessionScoped
-public class Administrador implements Serializable {
-    
+public class Administrador extends GenericoBeans<LoginAdmin> {
 
-    private LoginAdminServiceIF service;
-    private FacesContext contexto;
     private String confirmarSenha;
-    private LoginAdmin admin;
     private Integer matFuncionario;
-    private List<LoginAdmin> administradores;
-    private LoginAdmin adminTemp;
+    private FuncionarioServiceIF f;
 
     public Administrador() throws ServiceExcecoes {
-        this.contexto = FacesContext.getCurrentInstance();
         service = new LoginAdminService();
-        admin = new LoginAdmin();
-        adminTemp = new LoginAdmin();
+        identificavel = new LoginAdmin();
+        f = new FuncionarioService();
         matriculas();
-        administradores = service.buscarTudo();
     }
 
     public List<Integer> matriculas() throws ServiceExcecoes {
-        FuncionarioServiceIF f = new FuncionarioService();
         List<Funcionario> f1 = f.buscarTudo();
         List<Integer> lista = new ArrayList<>();
         for (Funcionario f11 : f1) {
@@ -53,59 +43,26 @@ public class Administrador implements Serializable {
         return lista;
     }
 
+    @Override
     public String salvar() {
         try {
-            FuncionarioServiceIF f = new FuncionarioService();
             Funcionario f1 = new Funcionario();
             f1 = f.buscarPorCampo("matricula", matFuncionario);
-            admin.setFuncionario(f1);
-            service.salvar(admin);
-            administradores = service.buscarTudo();
-            admin = new LoginAdmin();
+            getEntidade().setFuncionario(f1);
+            service.salvar(getEntidade());
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "/resources/paginas/ubs/buscar_admin.xhtml";
     }
 
-    public String atualizar() throws ServiceExcecoes {
-        adminTemp.setNome(admin.getNome());
-        adminTemp.setSenha(admin.getSenha());
-        admin = new LoginAdmin();
-        try {
-            service.atualizar(adminTemp);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return null;
-    }
-
-    public String remover(LoginAdmin ad) {
-        try {
-            service.remover(ad);
-            administradores = service.buscarTudo();
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
     public void buscarPorNome() {
         try {
-            admin = service.buscarPorCampo("login", admin.getNome());
-            adminTemp = admin;
+            identificavel = (LoginAdmin) service.buscarPorCampo("login", identificavel.getLogin());
+            setEntidade(identificavel);
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public LoginAdmin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(LoginAdmin admin) {
-        this.admin = admin;
     }
 
     public String getConfirmarSenha() {
@@ -117,7 +74,7 @@ public class Administrador implements Serializable {
     }
 
     public LoginAdminServiceIF getService() {
-        return service;
+        return (LoginAdminService) service;
     }
 
     public void setService(LoginAdminServiceIF service) {
@@ -132,12 +89,17 @@ public class Administrador implements Serializable {
         this.matFuncionario = matFuncionario;
     }
 
-    public List<LoginAdmin> getAdministradores() {
-        return administradores;
+    @Override
+    public LoginAdmin getEntidade() {
+        if (identificavel == null) {
+            identificavel = new LoginAdmin();
+        }
+        return (LoginAdmin) identificavel;
     }
 
-    public void setAdministradores(List<LoginAdmin> administradores) {
-        this.administradores = administradores;
+    @Override
+    public void setEntidade(LoginAdmin identificavel) {
+        this.identificavel = identificavel;
     }
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -45,11 +46,16 @@ public class LoginAdmin implements Identificavel<LoginAdmin>, Serializable {
         return id;
     }
 
-    public String getNome() {
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
         return login;
     }
 
-    public void setNome(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 

@@ -52,4 +52,9 @@ public class ACS implements Identificavel<ACS>, Serializable {
         return id;
     }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

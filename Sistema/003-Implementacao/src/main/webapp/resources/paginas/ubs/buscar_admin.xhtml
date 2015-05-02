@@ -17,7 +17,7 @@
                        <span id="titulo_pagina">Lista de administradres</span>
                     <p:fieldset legend="Usuário Administrador" 
                                 style="background: transparent; width: 90%; text-align: center; margin-top: 80px;" >
-                        <p:dataTable id="tableAdministrador" var="admin" value="#{administrador.administradores}" editable="true"
+                        <p:dataTable id="tableAdministrador" var="admin" value="#{administrador.buscarTudo()}" editable="true"
                                      style="border: 0; width: 100%; margin-top: 3%; ">
                             <f:facet name="header">
                                 Lista de Administradores
@@ -29,7 +29,7 @@
 
 
                             <p:column   headerText="Nome do Usuário" style="text-align: center" >
-                                <h:outputText value="#{admin.nome}" style="text-align: center" />
+                                <h:outputText value="#{admin.login}" style="text-align: center" />
                             </p:column>
 
 
@@ -39,11 +39,11 @@
                                 <p:panelGrid style="border: 0;">
                                     <p:button value="Atualizar" icon="ui-icon-refresh" 
                                               outcome="/resources/paginas/ubs/atualizar_admin.xhtml" target="_new" style="margin-right: 6px">
-                                        <f:param value="#{admin.nome}" name="admin"/> 
+                                        <f:param value="#{admin.login}" name="admin"/> 
                                     </p:button>
 
                                     <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover(admin)}" 
-                                                     oncomplete="#{administrador.administradores}"/>
+                                                     oncomplete="#{administrador.buscarTudo()}"/>
                                 </p:panelGrid>
                             </p:column>
 

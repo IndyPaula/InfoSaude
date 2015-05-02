@@ -21,30 +21,31 @@ public class LoginAdminDaoITest {
     }
 
     @BeforeClass
-    public static void inserirDados(){
-        
+    public static void inserirDados() {
+
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin adm = new LoginAdmin();
-        
-        adm.setNome("JUNIT-TEST-USER-TO-LOGIN");
+
+        adm.setLogin("JUNIT-TEST-USER-TO-LOGIN");
         adm.setSenha("202cb962ac59075b964b07152d234b70");
-        
+
         try {
             instance.salvar(adm);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @AfterClass
-    public static void removerDados(){
-        
+    public static void removerDados() {
+
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin adm;
-        
+
         try {
             adm = instance.buscarPorCampo("login", "JUNIT-TEST-USER-TO-LOGIN");
             instance.remover(adm);
-            
+
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,10 +86,10 @@ public class LoginAdminDaoITest {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = new LoginAdmin();
-        expResult.setNome("JUNIT-TEST-USER-TO-LOGIN");
+        expResult.setLogin("JUNIT-TEST-USER-TO-LOGIN");
 
         LoginAdmin result = instance.efetuarLogin("JUNIT-TEST-USER-TO-LOGIN", "202cb962ac59075b964b07152d234b70");
 
-        assertEquals(expResult.getNome(), result.getNome());
+        assertEquals(expResult.getLogin(), result.getLogin());
     }
 }

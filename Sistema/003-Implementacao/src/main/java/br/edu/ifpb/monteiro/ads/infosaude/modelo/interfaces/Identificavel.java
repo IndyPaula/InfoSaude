@@ -9,5 +9,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces;
 public interface Identificavel<T> {
 
     public Long getId();
+    
+    public void setId(Long id);
 
 }
