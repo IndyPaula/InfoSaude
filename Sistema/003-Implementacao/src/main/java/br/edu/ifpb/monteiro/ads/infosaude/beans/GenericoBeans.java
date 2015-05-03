@@ -39,6 +39,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     public String salvar() throws BeanExcecao {
 
         try {
+            
             getService().salvar(getEntidade());
             entities = getService().buscarTudo();
             T T = null;
@@ -100,4 +101,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
         return new ArrayList<T>();
     }
 
+    
+    
+    
 }
