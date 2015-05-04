@@ -32,7 +32,7 @@
 
 
                             <h:outputText value="Senha*: "/>
-                            <p:password value="#{administrador.entidade.senha}" size="15" requiredMessage="Senha de Usuário é necessária" feedback="true" 
+                            <p:password value="#{administrador.entidade.senha}" size="15" required="true" requiredMessage="Senha de Usuário é necessária" feedback="true" 
                                         promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"   
                                         goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
                                         match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Senha" />

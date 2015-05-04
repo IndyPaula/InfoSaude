@@ -1,10 +1,13 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +34,24 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
     @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @Column(name = "endereco", nullable = true, length = 80)
-    private String endereco;
+    @Column(name = "endereco_logradouro", nullable = true, length = 80)
+    private String logradouro;
+
+    @Column(name = "endereco_numero", nullable = true)
+    private int enderecoNumero;
+
+    @Column(name = "endereco_cep", nullable = true, length = 8)
+    private String cep;
+
+    @Column(name = "endereco_bairro", nullable = true, length = 80)
+    private String bairro;
+
+    @Column(name = "endereco_cidade", nullable = true, length = 30)
+    private String cidade;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "endereco_estado", nullable = true, length = 30)
+    private EnumEstados estado;
 
     @Column(name = "numero", nullable = false, unique = true)
     private int numero;
@@ -63,12 +82,44 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public int getEnderecoNumero() {
+        return enderecoNumero;
+    }
+
+    public void setEnderecoNumero(int enderecoNumero) {
+        this.enderecoNumero = enderecoNumero;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public EnumEstados getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EnumEstados estado) {
+        this.estado = estado;
     }
 
     public int getNumero() {
@@ -77,6 +128,14 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     @Override

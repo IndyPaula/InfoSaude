@@ -66,8 +66,8 @@ public class Pessoa implements Identificavel<Pessoa>, Serializable {
     @Column(name = "peso_nascer", nullable = true, scale = 2)
     private double pesoNascer;
 
-    @Column(name = "endereco_rua", nullable = true, length = 80)
-    private String rua;
+    @Column(name = "endereco_logradouro", nullable = true, length = 80)
+    private String logradouro;
 
     @Column(name = "endereco_numero", nullable = true)
     private int numero;
@@ -77,6 +77,9 @@ public class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Column(name = "endereco_bairro", nullable = true, length = 80)
     private String bairro;
+
+    @Column(name = "endereco_cidade", nullable = true, length = 30)
+    private String cidade;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "endereco_estado", nullable = true, length = 30)
@@ -172,12 +175,12 @@ public class Pessoa implements Identificavel<Pessoa>, Serializable {
         this.pesoNascer = pesoNascer;
     }
 
-    public String getRua() {
-        return rua;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public int getNumero() {
@@ -194,6 +197,14 @@ public class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public String getBairro() {

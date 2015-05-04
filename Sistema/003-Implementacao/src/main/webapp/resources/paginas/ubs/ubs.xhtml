@@ -11,88 +11,93 @@
         <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
-                
-                
-                  <h:form id="cadastrarUBS" >
 
-                    
-                    <p:panel header="Informações da Unidade Básica de Saúde" style="background: transparent; border: 0; width: 1000px" >
-                    <h:panelGrid columns="2"  >
 
-                        <h:outputText value="Nome: "/>
-                        <p:inputText value="" size="85"
-                                     />
-                        
-                        
-                         <h:outputText value="Número: "/>
-                         
-                           <p:row>
-                            <p:column colspan="2" style="position: absolute">
-                                <h:panelGrid columns="3" >
-                                    
-                                    <p:inputText value="" size="3" style="margin-right: 40px"
-                                     />
-                        
-                         <h:outputText value="Código CNES: "/>
-                        <p:inputText value="" size="15"
-                                     />
-                          </h:panelGrid>
-                            </p:column>
-                        </p:row> 
 
-                        <h:outputText value="Endereço: "/>
-                        <p:inputText value="" 
-                                     size="85" />
+                <img src="${facesContext.externalContext.requestContextPath}/resources/imagens/icon/new_icon/ubs.png" style="height: 150px"/>
 
-                        <h:outputText value="Bairro: "/>
-                        <p:inputText value=""
-                                     size="85" />
+                <span id="titulo_pagina">Unidade Básica de Saúde</span>
+                <h:form id="cadastrarAdministrador" >
+                    <p:growl id="growl"  showDetail="false" life="3000"  />
+                    <p:fieldset legend="Usuário Administrador" 
+                                style="background: transparent; width: 40%; text-align: center; margin-top: 80px;" >
 
-                        <h:outputText value="Cidade: "/>
 
-                        <p:row>
-                            <p:column colspan="2" style="position: absolute">
-                                <h:panelGrid columns="6" >
-                                    <p:inputText value=""
-                                                 size="40" style="margin-right: 40px"/>
-                                    <h:outputText value="UF: "/>
-                                    <p:selectOneMenu id="ufEndereco" value="">
-                                        <f:selectItem itemLabel="Selecione"/>
-                                        <f:selectItems var="uf" value="" 
-                                                       itemLabel="#{uf}" itemValue="#{uf}"
-                                                       />
-                                    </p:selectOneMenu>
-                                </h:panelGrid>
-                            </p:column>
-                        </p:row> 
+                        <h:panelGrid columns="2"  style="text-align: left;">
 
-                        <h:outputText value="Observações: "/>
-                        <p:row>
-                            <p:column colspan="2" style="position: absolute">
-                                <h:panelGrid columns="6" >
+                            <h:outputText value="Nome: "/>
+                            <p:inputText value="#{ubs.entidade.nome}" size="85"/>
 
-                                    <p:inputTextarea maxlength="670"  style="width: 670px;" 
-                                                     value=""
-                                                     rows="3" autoResize="false"
+
+                            <h:outputText value="Unidade N.º: "/>
+
+                            <p:row>
+                                <p:column colspan="2">
+                                    <h:panelGrid columns="3" >
+
+                                        <p:inputText value="#{ubs.entidade.numero}" size="3" style="margin-right: 40px"
                                                      />
 
-                                    <p:commandLink >
-                                        <p:graphicImage value="/resources/imagens/icon/salvar2.png" 
-                                                        style="margin-top: 30%; margin-left: 38%; height: 60px" />
-                                    </p:commandLink>
+                                        <h:outputText value="Código CNES: "/>
+                                        <p:inputText value="#{ubs.entidade.cnes}" size="15"
+                                                     />
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
 
-                                </h:panelGrid>
-                            </p:column>
-                        </p:row> 
+                            <h:outputText value="Logradouro: "/>
+                            <p:inputText value="#{ubs.entidade.logradouro}" 
+                                         size="85" />
 
-                    </h:panelGrid>
 
-                    </p:panel> 
+                            <h:outputText value="Número: "/>
+
+                            <p:row>
+                                <p:column colspan="2" style="position: absolute">
+                                    <h:panelGrid columns="6" >
+
+                                        <p:inputText value="#{ubs.entidade.enderecoNumero}" size="3" style="margin-right: 40px"
+                                                     />
+                                        
+                                        <h:outputText value="Bairro: "/>
+                                        <p:inputText value="#{ubs.entidade.bairro}"
+                                                     size="60" />
+
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row>
+
+                            <h:outputText value="Cidade: "/>
+
+                            <p:row>
+                                <p:column colspan="2" style="position: absolute">
+                                    <h:panelGrid columns="6" >
+                                        
+                                        <p:inputText value="#{ubs.entidade.cidade}"
+                                                     size="40" style="margin-right: 40px"/>
+                                        
+                                        
+                                        <h:outputText value="UF: "/>
+                                        <p:selectOneMenu id="estado" value="#{ubs.entidade.estado}">
+                                            <f:selectItem itemLabel="Selecione"/>
+                                            <f:selectItems var="uf" value="#{ubs.estado}" 
+                                                           itemLabel="#{uf}" itemValue="#{uf}"
+                                                           />
+                                        </p:selectOneMenu>
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
+
+                            <p:spacer/>
+                            <p:commandButton value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                                             action="#{ubs.salvar()}"/>
+
+                        </h:panelGrid>
+
+
+                    </p:fieldset> 
                 </h:form>
 
-                
-                
-                
             </ui:define>
 
         </ui:composition>
