@@ -18,7 +18,7 @@
 
                 <span id="titulo_pagina">Unidade Básica de Saúde</span>
                 <h:form id="cadastrarAdministrador" >
-                    <p:growl id="growl"  showDetail="false" life="3000"  />
+                    <p:growl id="growl"  showDetail="false" life="5000" autoUpdate="true" />
                     <p:fieldset legend="Usuário Administrador" 
                                 style="background: transparent; width: 40%; text-align: center; margin-top: 80px;" >
 
@@ -35,7 +35,7 @@
                                 <p:column colspan="2">
                                     <h:panelGrid columns="3" >
 
-                                        <p:inputText value="#{ubs.entidade.numero}" size="3" style="margin-right: 40px"
+                                        <p:inputMask mask="9?99" value="#{ubs.entidade.numero}" size="3" style="margin-right: 40px"
                                                      />
 
                                         <h:outputText value="Código CNES: "/>
@@ -56,12 +56,16 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="#{ubs.entidade.enderecoNumero}" size="3" style="margin-right: 40px"
+                                        <p:inputMask mask="9?9999" value="#{ubs.entidade.enderecoNumero}" size="5" style="margin-right: 40px"
                                                      />
                                         
                                         <h:outputText value="Bairro: "/>
                                         <p:inputText value="#{ubs.entidade.bairro}"
-                                                     size="60" />
+                                                     size="34" style="margin-right: 30px"/>
+                                        
+                                        <h:outputText value="CEP: "/>
+                                        <p:inputMask mask="99.999-999" value="#{ubs.entidade.cep}" 
+                                                     size="8" />
 
                                     </h:panelGrid>
                                 </p:column>
@@ -74,7 +78,7 @@
                                     <h:panelGrid columns="6" >
                                         
                                         <p:inputText value="#{ubs.entidade.cidade}"
-                                                     size="40" style="margin-right: 40px"/>
+                                                     size="58" style="margin-right: 40px"/>
                                         
                                         
                                         <h:outputText value="UF: "/>
@@ -89,8 +93,11 @@
                             </p:row> 
 
                             <p:spacer/>
-                            <p:commandButton value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
-                                             action="#{ubs.salvar()}"/>
+                            <p:commandButton value="Salvar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                                             action="#{ubs.salvar()}" rendered="#{ubs.operacaoCriar}"/>
+                            
+                            <p:commandButton value="Atualizar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                                             action="#{ubs.atualizar()}" rendered="#{ubs.operacaoAtualizar}"/>
 
                         </h:panelGrid>
 

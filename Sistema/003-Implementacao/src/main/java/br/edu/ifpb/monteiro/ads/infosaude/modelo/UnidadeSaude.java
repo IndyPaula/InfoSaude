@@ -34,23 +34,23 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
     @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @Column(name = "endereco_logradouro", nullable = true, length = 80)
+    @Column(name = "endereco_logradouro", nullable = false, length = 80)
     private String logradouro;
 
-    @Column(name = "endereco_numero", nullable = true)
+    @Column(name = "endereco_numero", nullable = false)
     private int enderecoNumero;
 
-    @Column(name = "endereco_cep", nullable = true, length = 8)
+    @Column(name = "endereco_cep", nullable = false, length = 10)
     private String cep;
 
-    @Column(name = "endereco_bairro", nullable = true, length = 80)
+    @Column(name = "endereco_bairro", nullable = false, length = 80)
     private String bairro;
 
-    @Column(name = "endereco_cidade", nullable = true, length = 30)
+    @Column(name = "endereco_cidade", nullable = false, length = 30)
     private String cidade;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "endereco_estado", nullable = true, length = 30)
+    @Column(name = "endereco_estado", nullable = false, length = 30)
     private EnumEstados estado;
 
     @Column(name = "numero", nullable = false, unique = true)

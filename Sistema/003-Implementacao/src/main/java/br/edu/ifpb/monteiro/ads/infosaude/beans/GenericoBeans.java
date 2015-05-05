@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.beans.interfaces.BeanIF;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.FacesMensagens;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
@@ -23,7 +24,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
 
     public abstract ServiceIF getService();
     public ServiceIF service;
-    private List<T> entities;
+    private FacesMensagens mensagem;
 
     protected T identificavel;
 
@@ -32,18 +33,19 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     public abstract void setEntidade(T identificavel);
 
     public GenericoBeans() {
-        entities = new ArrayList<T>();
+        mensagem = new FacesMensagens();
     }
 
     @Override
     public String salvar() throws BeanExcecao {
 
         try {
-            
+
             getService().salvar(getEntidade());
-            entities = getService().buscarTudo();
+            buscarTudo();
             T T = null;
             setEntidade(T);
+            mensagem.info("Salvo com Sucesso!");
         } catch (ServiceExcecoes ex) {
 
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,10 +57,11 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     @Override
     public String atualizar() throws BeanExcecao {
         try {
-            service.atualizar(getEntidade());
+            getService().atualizar(getEntidade());
             T T = null;
             setEntidade(T);
-            service.buscarTudo();
+            buscarTudo();
+            mensagem.info("Atualizado com Sucesso!");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,8 +71,9 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     @Override
     public void remover(T identificavel) throws BeanExcecao {
         try {
-            service.remover(identificavel);
-            service.buscarTudo();
+            getService().remover(identificavel);
+            buscarTudo();
+            mensagem.info("Removido com Sucesso!");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,14 +98,11 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     @Override
     public List<T> buscarTudo() throws BeanExcecao {
         try {
-            return service.buscarTudo();
+            return getService().buscarTudo();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new ArrayList<T>();
     }
 
-    
-    
-    
 }
