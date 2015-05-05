@@ -12,9 +12,9 @@
 
             <ui:define name="centro">
                 <h:form id="cadastrarPaciente" >
-
-
-                    <p:panel header="Cadastrar Usuário" style="background: transparent; border: 0; width: 99,99%; text-align: center" >
+                    
+                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
+                    <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde" >
                         <h:panelGrid columns="2"  style="text-align: left">
 
                             <h:outputText value="Nome: "/>
@@ -147,13 +147,13 @@
                                                          rows="3" autoResize="false"
                                                          />
                                     </h:panelGrid>
-                                    <p:commandButton value="Cadastrar" style="top: 20px; margin-left: 50%;"/>
+                                    <p:commandButton value="Cadastrar" style="top: 20px; margin-left: 40%; bottom: 10px;"/>
                                 </p:column>
                             </p:row> 
 
                         </h:panelGrid>
 
-                    </p:panel> 
+                    </p:fieldset> 
                 </h:form>
 
             </ui:define>
