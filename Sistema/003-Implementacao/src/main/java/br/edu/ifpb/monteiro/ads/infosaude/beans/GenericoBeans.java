@@ -57,7 +57,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     @Override
     public String atualizar() throws BeanExcecao {
         try {
-            service.atualizar(getEntidade());
+            getService().atualizar(getEntidade());
             T T = null;
             setEntidade(T);
             buscarTudo();
@@ -71,8 +71,8 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     @Override
     public void remover(T identificavel) throws BeanExcecao {
         try {
-            service.remover(identificavel);
-            service.buscarTudo();
+            getService().remover(identificavel);
+            buscarTudo();
             mensagem.info("Removido com Sucesso!");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,7 +98,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     @Override
     public List<T> buscarTudo() throws BeanExcecao {
         try {
-            return service.buscarTudo();
+            return getService().buscarTudo();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
