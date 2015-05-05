@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.beans.interfaces.BeanIF;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.FacesMensagens;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
@@ -24,6 +25,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
     public abstract ServiceIF getService();
     public ServiceIF service;
     private List<T> entities;
+    private FacesMensagens mensagem;
 
     protected T identificavel;
 
@@ -33,6 +35,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
 
     public GenericoBeans() {
         entities = new ArrayList<T>();
+        mensagem = new FacesMensagens();
     }
 
     @Override
@@ -44,6 +47,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
             entities = getService().buscarTudo();
             T T = null;
             setEntidade(T);
+            mensagem.info("Salvo com Sucesso!");
         } catch (ServiceExcecoes ex) {
 
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,6 +63,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
             T T = null;
             setEntidade(T);
             service.buscarTudo();
+            mensagem.info("Atualizado com Sucesso!");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,6 +75,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
         try {
             service.remover(identificavel);
             service.buscarTudo();
+            mensagem.info("Removido com Sucesso!");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
