@@ -61,7 +61,11 @@
                                         
                                         <h:outputText value="Bairro: "/>
                                         <p:inputText value="#{ubs.entidade.bairro}"
-                                                     size="60" />
+                                                     size="34" style="margin-right: 30px"/>
+                                        
+                                        <h:outputText value="CEP: "/>
+                                        <p:inputMask mask="99.999-999" value="#{ubs.entidade.cep}" 
+                                                     size="8" />
 
                                     </h:panelGrid>
                                 </p:column>
@@ -74,7 +78,7 @@
                                     <h:panelGrid columns="6" >
                                         
                                         <p:inputText value="#{ubs.entidade.cidade}"
-                                                     size="40" style="margin-right: 40px"/>
+                                                     size="58" style="margin-right: 40px"/>
                                         
                                         
                                         <h:outputText value="UF: "/>
@@ -89,8 +93,11 @@
                             </p:row> 
 
                             <p:spacer/>
-                            <p:commandButton value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
-                                             action="#{ubs.salvar()}"/>
+                            <p:commandButton value="Salvar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                                             action="#{ubs.salvar()}" rendered="#{ubs.operacaoCriar}"/>
+                            
+                            <p:commandButton value="Atualizar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                                             action="#{ubs.atualizar()}" rendered="#{ubs.operacaoAtualizar}"/>
 
                         </h:panelGrid>
 
