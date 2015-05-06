@@ -42,8 +42,8 @@
                                         <f:param value="#{pac.id}" name="id"/> 
                                     </p:button>
 
-                                    <p:commandButton value="Remover" icon="ui-icon-trash" action="#{pacienteBean.remover(pac)}" 
-                                                     oncomplete="#{pacienteBean.pacientes}">
+                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{pacienteBean.remover(pac)}" 
+                                                     >
 
                                         <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
                                     </p:commandButton>
