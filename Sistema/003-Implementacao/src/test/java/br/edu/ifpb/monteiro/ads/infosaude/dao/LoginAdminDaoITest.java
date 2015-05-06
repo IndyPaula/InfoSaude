@@ -53,7 +53,7 @@ public class LoginAdminDaoITest {
         adm.setCpf("101.538.432-32");
         adm.setDataNascimento(new Date(2015, 5, 1));
         adm.setCodigoEquipeINE("2423432");
-        adm.setLogin("JUNIT-TEST-USER-TO-LOGIN");
+        adm.setLogin("vanderlan");
         adm.setSenhaAdm("123");
         adm.setSenha("fjhewiufhew");
         adm.setNomeUsuario("fhguwegyf");
@@ -73,7 +73,7 @@ public class LoginAdminDaoITest {
         LoginAdmin adm;
 
         try {
-            adm = instance.buscarPorCampo("login", "JUNIT-TEST-USER-TO-LOGIN");
+            adm = instance.buscarPorCampo("login", "vanderlan");
 //            instance.remover(adm);
 
         } catch (DaoExcecoes ex) {
@@ -96,7 +96,7 @@ public class LoginAdminDaoITest {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = null;
-        LoginAdmin result = instance.efetuarLogin("JUNIT-TEST-USER-TO-LOGIN", "irh328rhf8hh");
+        LoginAdmin result = instance.efetuarLogin("vanderlan", "irh328rhf8hh");
 
         assertEquals(expResult, result);
     }
@@ -116,9 +116,9 @@ public class LoginAdminDaoITest {
 
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin expResult = new LoginAdmin();
-        expResult.setLogin("JUNIT-TEST-USER-TO-LOGIN");
+        expResult.setLogin("vanderlan");
 
-        LoginAdmin result = instance.efetuarLogin("JUNIT-TEST-USER-TO-LOGIN", "123");
+        LoginAdmin result = instance.efetuarLogin("vanderlan", "123");
 
         assertEquals(expResult.getLogin(), result.getLogin());
     }

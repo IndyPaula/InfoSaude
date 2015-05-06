@@ -65,6 +65,16 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
     private String cpf;
+    
+    @Column(name = "rg", nullable = true, length = 15 , precision = 15)
+    private String rg;
+    
+    @Column(name = "orgao_emissor", nullable = true, length = 15, precision = 15)
+    private String orgaoEmissor;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "uf_orgao_emissor", nullable = true, length = 15,  precision = 15)
+    private EnumEstados ufOrgaoEmissor ;
 
     @Column(name = "peso_nascer", nullable = true, scale = 2)
     private double pesoNascer;
@@ -75,7 +85,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
     @Column(name = "endereco_numero", nullable = true)
     private int numero;
 
-    @Column(name = "endereco_cep", nullable = true, length = 8)
+    @Column(name = "endereco_cep", nullable = true, length = 10, precision = 10)
     private String cep;
 
     @Column(name = "endereco_bairro", nullable = true, length = 80)
@@ -221,6 +231,30 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
         this.estado = estado;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getOrgaoEmissor() {
+        return orgaoEmissor;
+    }
+
+    public void setOrgaoEmissor(String orgaoEmissor) {
+        this.orgaoEmissor = orgaoEmissor;
+    }
+
+    public EnumEstados getUfOrgaoEmissor() {
+        return ufOrgaoEmissor;
+    }
+
+    public void setUfOrgaoEmissor(EnumEstados ufOrgaoEmissor) {
+        this.ufOrgaoEmissor = ufOrgaoEmissor;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

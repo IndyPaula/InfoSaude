@@ -12,81 +12,97 @@
 
             <ui:define name="centro">
                 <h:form id="cadastrarPaciente" >
-                    
-                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
-                    <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde" >
+                    <p:growl id="mensages" showDetail="false" life="3000"/>
+                    <span id="titulo_pagina">Cadastro de usuários da UBS</span>
+                    <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde"
+                                style="width: 90%; text-align: center; margin-top: 80px; height: 600px;">
                         <h:panelGrid columns="2"  style="text-align: left">
 
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{pacienteBean.paciente.pessoa.nome}" size="40"
-                                         />
+                            <p:inputText value="#{pacienteBean.paciente.nome}" size="40"
+                                         required="true" requiredMessage="O campo Nome é obrigatório" />
 
                             <h:outputText value="CPF: "/>
-                            <p:inputMask value="#{pacienteBean.paciente.pessoa.cpf}" 
+                            <p:inputMask value="#{pacienteBean.paciente.cpf}" 
+                                         requiredMessage="O campo CPF é obrigatório"
                                          mask="999.999.999-99" required="true"/>
 
-                            <h:outputText value="RG: " style="text-align: center"/>
+                            <h:outputText value="RG: " />
 
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
-                                        <p:inputText value="" 
-                                                     style="margin-right: 40px; margin-left: -3px"   />
-                                        <h:outputText value="Orgão Emissor: "/>
-                                        <p:inputText value="" style="margin-right: 40px"/>
+                                <p:column colspan="2" >
+                                    <h:panelGrid columns="6">
+                                        <p:inputText  size="20" maxlength="20" value="#{pacienteBean.paciente.rg}"
+                                                      />
+                                        <h:outputText value="Órgão Emissor: "/>
+                                        <p:inputText  size="10" maxlength="7" value="#{pacienteBean.paciente.orgaoEmissor}"
+                                                      />
                                         <h:outputText value="UF: " style="margin-left: 36px; margin-right: 2px"/>
-                                        <p:selectOneMenu id="ufRG" value="">
+                                        <p:selectOneMenu id="ufRG" value="#{pacienteBean.paciente.ufOrgaoEmissor}" >
                                             <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="" 
+                                            <f:selectItems var="uf"  value="#{pacienteBean.estado}"
                                                            itemLabel="#{uf}" itemValue="#{uf}"/>
                                         </p:selectOneMenu>
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
 
+                            <h:outputText value="Cartão SUS:"/>
+                            <p:inputText  value="#{pacienteBean.paciente.cartaoSUS}" size="20" maxlength="15"
+                                          required="true" requiredMessage="O número do cartão SUS é obrigatório"
+                                          />
+
 
                             <h:outputText value="Data de nascimento: "/>
                             <p:calendar locale="pt_BR" navigator="true" 
                                         pattern="dd/mm/yyyy" mask="true"
-                                        value="#{pacienteBean.paciente.pessoa.dataNascimento}"/>
+                                        value="#{pacienteBean.paciente.dataNascimento}"
+                                        required="true" requiredMessage="A Data de Nascimento é obrigatória"
+                                        />
 
+                            <h:outputText value="Data de cadastro "/>
+                            <p:calendar locale="pt_BR" navigator="true" 
+                                        pattern="dd/mm/yyyy" mask="true"
+                                        value="#{pacienteBean.paciente.dataCadastro}" required="true" requiredMessage="A Data de Cadastro é obrigatória"
+                                        />
+
+                            <h:outputText value="Sexo: "/>
+                            <p:selectOneMenu id="sexo"  value="#{pacienteBean.paciente.sexo}" required="true"  requiredMessage="O campo Sexo é obrigatório">
+                                <f:selectItem itemLabel="Selecione"/>
+
+                                <f:selectItems var="sexo"  value="#{pacienteBean.sexo}"
+                                               itemLabel="#{sexo}" itemValue="#{sexo}"
+                                               />
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Peso:"/>
+                            <p:inputText value="#{pacienteBean.paciente.peso}" size="4" mask="9.99" maxlength="4"
+                                         />
+
+                            <h:outputText value="Etnia:"/>
+
+                            <p:selectOneMenu id="etnia"  value="#{pacienteBean.paciente.etnia}">
+                                <f:selectItem itemLabel="Selecione"/>
+
+                                <f:selectItems var="etnia"  value="#{pacienteBean.etnias}"
+                                               itemLabel="#{etnia}" itemValue="#{etnia}"
+                                               />
+
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Altura:"/>
+                            <p:inputText value="#{pacienteBean.paciente.altura}" size="4" mask="9.99" maxlength="4" 
+                                         />
 
                             <h:outputText value="Nome da mãe: "/>
-                            <p:inputText value="#{pacienteBean.paciente.pessoa.nomeMae}"
+                            <p:inputText value="#{pacienteBean.paciente.nomeMae}"
                                          size="40" />
 
                             <h:outputText value="Nome do pai: "/>
-                            <p:inputText value="#{pacienteBean.paciente.pessoa.nomePai}"
+                            <p:inputText value="#{pacienteBean.paciente.nomePai}"
                                          size="40" />
-
-                            <h:outputText value="Estado Cívil: "/>
-                            <p:selectOneMenu editable="true" value="">
-                                <f:selectItem itemLabel="Casado(a)"/>
-                                <f:selectItem itemLabel="União Estável(a)"/>
-                                <f:selectItem itemLabel="Solteiro(a)"/>
-                            </p:selectOneMenu>
-
-                            <h:outputText value="Nome do cônjugue: "/>
-                            <p:inputText value="" size="40" />
-
-                            <h:outputText value="Naturalidade: "/>
-
-                            <p:row>
-                                <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
-                                        <p:inputText value=""
-                                                     size="40" style="margin-right: 65px; "/>
-
-                                        <h:outputText  value="UF: "/>
-                                        <p:selectOneMenu id="uf" value="">
-                                            <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="" 
-                                                           itemLabel="#{uf}" itemValue="#{uf}"
-                                                           />
-                                        </p:selectOneMenu>
-                                    </h:panelGrid>
-                                </p:column>
-                            </p:row> 
 
                             <h:outputText value="Endereço: "/>
 
@@ -94,11 +110,9 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="3" >
 
-                                        <p:inputText value="" 
-                                                     size="45" style="margin-right: 25px"/>
+                                        <p:inputText value="#{pacienteBean.paciente.logradouro}" size="45" style="margin-right: 25px"/>
                                         <h:outputText value="Nº: "/>
-                                        <p:inputText value="" 
-                                                     size="6" />
+                                        <p:inputText value="#{pacienteBean.paciente.numero}" size="6" maxlength="8"/>
 
                                     </h:panelGrid>
                                 </p:column>
@@ -110,11 +124,11 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="3" >
 
-                                        <p:inputText value="" 
-                                                     size="45" style="margin-right: 25px"/>
+                                        <p:inputText  
+                                            size="45" style="margin-right: 25px" value="#{pacienteBean.paciente.bairro}"  maxlength="60"/>
                                         <h:outputText value="CEP: "/>
-                                        <p:inputMask mask="99.999-999" value="" 
-                                                     size="8" />
+                                        <p:inputMask mask="99.999-999"  
+                                                     size="8"  value="#{pacienteBean.paciente.cep}" maxlength="10"/>
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
@@ -124,12 +138,11 @@
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="3" >
-                                        <p:inputText value=""
-                                                     size="45" style="margin-right: 25px"/>
+                                        <p:inputText size="45" style="margin-right: 25px"  value="#{pacienteBean.paciente.cidade}"/>
                                         <h:outputText value="UF: "/>
-                                        <p:selectOneMenu id="ufEndereco" value="">
+                                        <p:selectOneMenu id="ufEndereco"  value="#{pacienteBean.paciente.estado}">
                                             <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="" 
+                                            <f:selectItems var="uf"  value="#{pacienteBean.estado}"
                                                            itemLabel="#{uf}" itemValue="#{uf}"
                                                            />
                                         </p:selectOneMenu>
@@ -137,20 +150,10 @@
                                 </p:column>
                             </p:row> 
 
-                            <h:outputText value="Observações: "/>
-                            <p:row>
-                                <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
-
-                                        <p:inputTextarea maxlength="200"  style="width: 400px;" 
-                                                         value=""
-                                                         rows="3" autoResize="false"
-                                                         />
-                                    </h:panelGrid>
-                                    <p:commandButton value="Cadastrar" style="top: 20px; margin-left: 40%; bottom: 10px;"/>
-                                </p:column>
-                            </p:row> 
-
+                            <h:outputText value=" "/>
+                            <p:commandButton value="Cadastrar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
+                                             update="mensages" ajax="false"
+                                             action="#{pacienteBean.salvar}"/>
                         </h:panelGrid>
 
                     </p:fieldset> 

@@ -21,7 +21,7 @@ public class Paciente extends Pessoa implements  Serializable {
     @Id
     private Long id;
 
-    @Column(name = "numero_prontuario", nullable = false, unique = true)
+    @Column(name = "numero_prontuario", nullable = true, unique = true)
     private int numeroProntuario;
 
     @Temporal(TemporalType.DATE)
