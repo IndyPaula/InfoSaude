@@ -4,6 +4,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.PacienteService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
@@ -11,6 +12,7 @@ import javax.faces.bean.ManagedBean;
  * @date 14/04/2015
  */
 @ManagedBean
+@RequestScoped
 public class PacienteBean {
 
     private PacienteServiceIF pacienteService;
@@ -18,6 +20,7 @@ public class PacienteBean {
     private Paciente paciente;
 
     public PacienteBean() {
+        paciente = new Paciente();
         pacienteService = new PacienteService();
     }
 

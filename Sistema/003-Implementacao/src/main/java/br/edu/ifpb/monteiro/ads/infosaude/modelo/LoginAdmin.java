@@ -1,16 +1,10 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 
 /**
  *
@@ -18,23 +12,18 @@ import javax.persistence.SequenceGenerator;
  * @date 06/04/2015
  */
 @Entity(name = "login_admin")
-@SequenceGenerator(name = "login_admin_seq", sequenceName = "login_admin_seq", initialValue = 1, allocationSize = 1)
-public class LoginAdmin implements Identificavel<LoginAdmin>, Serializable {
+public class LoginAdmin extends Funcionario implements Serializable {
 
     private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "login_admin_seq")
     private Long id;
 
     @Column(name = "login", nullable = false, length = 45, unique = true)
     private String login;
 
-    @Column(name = "senha", nullable = false, length = 45, unique = false)
-    private String senha;
-
-    @OneToOne
-    private Funcionario funcionario;
+    @Column(name = "senha_adm", nullable = false, length = 45, unique = false)
+    private String senhaAdm;
 
     /**
      *
@@ -45,10 +34,6 @@ public class LoginAdmin implements Identificavel<LoginAdmin>, Serializable {
         return id;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;
@@ -58,42 +43,12 @@ public class LoginAdmin implements Identificavel<LoginAdmin>, Serializable {
         this.login = login;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getSenhaAdm() {
+        return senhaAdm;
     }
 
-    public void setSenha(String senha) {
-        this.senha = CriptografiaUtil.convertStringToMd5(senha);
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final LoginAdmin other = (LoginAdmin) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+    public void setSenhaAdm(String senhaAdm) {
+        this.senhaAdm = CriptografiaUtil.convertStringToMd5(senhaAdm);
     }
 
 }

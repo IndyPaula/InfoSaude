@@ -23,7 +23,6 @@ import javax.persistence.criteria.Root;
  */
 public abstract class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
 
-    @PersistenceContext(unitName = "InfoSaudePU")
     private EntityManager em;
 
     private Class<T> classePersistente;

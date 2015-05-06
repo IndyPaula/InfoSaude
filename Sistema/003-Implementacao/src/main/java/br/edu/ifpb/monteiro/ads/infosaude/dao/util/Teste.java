@@ -18,7 +18,7 @@ public class Teste {
         LoginAdmin adm = new LoginAdmin();
         
         adm.setLogin("JUNIT-TEST-USER-TO-LOGIN");
-        adm.setSenha("202cb962ac59075b964b07152d234b70");
+        adm.setSenhaAdm("202cb962ac59075b964b07152d234b70");
         
         try {
             instance.salvar(adm);

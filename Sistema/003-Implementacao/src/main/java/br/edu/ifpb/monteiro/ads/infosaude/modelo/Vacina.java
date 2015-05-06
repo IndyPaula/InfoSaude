@@ -74,11 +74,6 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
         return id;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public EnumViaAdministracao getViaAdministracao() {
         return viaAdministracao;
     }

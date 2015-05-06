@@ -24,7 +24,7 @@ public class LoginAdminDao extends GenericoDao<LoginAdmin> implements LoginAdmin
 
             Query typedQuery = getEntityManager().createNativeQuery(
                     "SELECT * FROM login_admin  WHERE login =  '"
-                    + login + "' AND senha = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", LoginAdmin.class);
+                    + login + "' AND senha_adm = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", LoginAdmin.class);
 
             List users = typedQuery.getResultList();
 

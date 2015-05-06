@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
@@ -20,7 +20,7 @@ import javax.faces.bean.SessionScoped;
  * @date 16/04/2015
  */
 @ManagedBean(name = "administrador")
-@SessionScoped
+@RequestScoped
 public class AdministradorBean extends GenericoBeans<LoginAdmin> {
 
     private String confirmarSenha;
@@ -34,7 +34,7 @@ public class AdministradorBean extends GenericoBeans<LoginAdmin> {
         matriculas();
     }
 
-    public List<Integer> matriculas() throws ServiceExcecoes {
+    public  List<Integer> matriculas() throws ServiceExcecoes {
         List<Funcionario> f1 = f.buscarTudo();
         List<Integer> lista = new ArrayList<>();
         for (Funcionario f11 : f1) {
@@ -46,9 +46,8 @@ public class AdministradorBean extends GenericoBeans<LoginAdmin> {
     @Override
     public String salvar() {
         try {
-            Funcionario f1 = new Funcionario();
+            Funcionario f1 = new LoginAdmin();
             f1 = f.buscarPorCampo("matricula", matFuncionario);
-            getEntidade().setFuncionario(f1);
             service.salvar(getEntidade());
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);

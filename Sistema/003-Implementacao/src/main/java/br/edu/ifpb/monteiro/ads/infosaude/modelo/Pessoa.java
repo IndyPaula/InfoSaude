@@ -14,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +27,8 @@ import javax.persistence.TemporalType;
  */
 @Entity(name = "pessoa")
 @SequenceGenerator(name = "pessoa_seq", sequenceName = "pessoa_seq", initialValue = 1, allocationSize = 1)
-public class Pessoa implements Identificavel<Pessoa>, Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     private static final Long serialVersionUID = 1L;
 
@@ -60,7 +63,7 @@ public class Pessoa implements Identificavel<Pessoa>, Serializable {
     @Column(name = "peso", nullable = true, scale = 2)
     private double peso;
 
-    @Column(name = "cpf", nullable = false, length = 11, unique = true, precision = 11)
+    @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
     private String cpf;
 
     @Column(name = "peso_nascer", nullable = true, scale = 2)
@@ -88,11 +91,6 @@ public class Pessoa implements Identificavel<Pessoa>, Serializable {
     @Override
     public Long getId() {
         return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {

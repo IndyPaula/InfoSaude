@@ -1,8 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +17,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity(name = "funcionario")
 @SequenceGenerator(name = "funcionario_seq", sequenceName = "funcionario_seq", initialValue = 1, allocationSize = 1)
-public class Funcionario implements Identificavel<Funcionario>, Serializable {
+public  class Funcionario extends Pessoa implements  Serializable   {
 
     private static final Long serialVersionUID = 1L;
 
@@ -37,9 +35,6 @@ public class Funcionario implements Identificavel<Funcionario>, Serializable {
     private String codigoEquipeINE;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Pessoa pessoa;
-
-    @OneToOne(cascade = CascadeType.ALL)
     private UnidadeSaude unidadeSaude;
 
     @Column(name = "nome_usuario", length = 45, unique = true, nullable = false)
@@ -51,11 +46,6 @@ public class Funcionario implements Identificavel<Funcionario>, Serializable {
     @Override
     public Long getId() {
         return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getMatricula() {
@@ -82,14 +72,6 @@ public class Funcionario implements Identificavel<Funcionario>, Serializable {
         this.codigoEquipeINE = codigoEquipeINE;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
     public UnidadeSaude getUnidadeSaude() {
         return unidadeSaude;
     }
@@ -112,28 +94,6 @@ public class Funcionario implements Identificavel<Funcionario>, Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Funcionario other = (Funcionario) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
     }
 
 }
