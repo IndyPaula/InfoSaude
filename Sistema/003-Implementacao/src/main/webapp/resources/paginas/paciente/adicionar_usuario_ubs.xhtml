@@ -56,15 +56,16 @@
                             <h:outputText value="Data de nascimento: "/>
                             <p:calendar locale="pt_BR" navigator="true" 
                                         pattern="dd/mm/yyyy" mask="true"
-                                        value="#{pacienteBean.paciente.dataNascimento}"
                                         maxdate="06/05/2015"
+                                        value="#{pacienteBean.paciente.dataNascimento}"
                                         required="true" requiredMessage="A Data de Nascimento é obrigatória"
                                         />
 
                             <h:outputText value="Data de cadastro "/>
                             <p:calendar locale="pt_BR" navigator="true" 
                                         pattern="dd/mm/yyyy" mask="true"
-                                        value="06/05/2015" required="true" requiredMessage="A Data de Cadastro é obrigatória"
+                                        maxdate="06/05/2015"
+                                       required="true" requiredMessage="A Data de Cadastro é obrigatória"
                                         />
 
                             <h:outputText value="Sexo: "/>
