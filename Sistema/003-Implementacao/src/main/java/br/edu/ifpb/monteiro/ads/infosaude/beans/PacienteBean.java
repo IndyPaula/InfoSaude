@@ -33,6 +33,7 @@ public class PacienteBean {
     private PacienteServiceIF pacienteService;
     private List<Paciente> pacientes;
     private Paciente paciente;
+    private Long idAuxiliar;
 
     public PacienteBean() {
         paciente = new Paciente();
@@ -82,6 +83,14 @@ public class PacienteBean {
         this.paciente = paciente;
     }
 
+    public Long getIdAuxiliar() {
+        return idAuxiliar;
+    }
+
+    public void setIdAuxiliar(Long idAuxiliar) {
+        this.idAuxiliar = idAuxiliar;
+    }
+
     public String salvar() {
         try {
             pacienteService.salvar(paciente);
@@ -109,13 +118,13 @@ public class PacienteBean {
     public void preparaEdicao() {
 
         try {
-            paciente = pacienteService.buscarPorCampo("cpf", paciente.getCpf());
+            paciente = pacienteService.consultarPorId(idAuxiliar);
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    public void remover(Paciente p) throws BeanExcecao {
+    public String remover(Paciente p) throws BeanExcecao {
 
         if (p != null) {
 
@@ -123,31 +132,36 @@ public class PacienteBean {
 
                 pacienteService.remover(p);
                 JsfUtil.addSuccessMessage("Paciente removido com sucesso");
-
+                return "/buscar_usuario_ubs.xhtml";
+                
             } catch (ServiceExcecoes ex) {
 
                 JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
-                Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
             }
         }else{
             
             JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
-
+            return null;
         }
     }
     
-    public void update() throws BeanExcecao {
+    public String update() throws BeanExcecao {
 
             try {
                 
                 System.err.println("ID -------------------->>>>>>>>>" + paciente.getId());
+                
                 pacienteService.atualizar(paciente);
                 JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
+                return "editar_usuario_ubs.xhtml?id="+paciente.getId();
 
             } catch (ServiceExcecoes ex) {
 
                 JsfUtil.addErrorMessage("Erro ao tentar atualizar informações");
                 Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
+                
+                 return null;
             }
             
     }

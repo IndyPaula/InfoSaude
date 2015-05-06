@@ -14,7 +14,7 @@
 
                 <h:form id="paciente">
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
-                       <span id="titulo_pagina">Lista de Usuários da UBS</span>
+                    <span id="titulo_pagina">Lista de Usuários da UBS</span>
                     <p:fieldset legend="Usuários da UBS" 
                                 style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
                         <p:dataTable id="tablePaciente" var="pac" value="#{pacienteBean.pacientes}" editable="true"
@@ -22,13 +22,13 @@
                             <f:facet name="header">
                                 Lista de Usuários da UBS
                             </f:facet>
-                            
+
                             <p:column headerText="Nome"  width="150"  style="text-align: center" >
                                 <h:outputText value="#{pac.nome}" style="text-align: center" />
                             </p:column>
 
-                             <p:column   headerText="Cartão SUS" style="text-align: center" >
-                                 <h:outputText value="#{pac.cartaoSUS}" style="text-align: center" />
+                            <p:column   headerText="Cartão SUS" style="text-align: center" >
+                                <h:outputText value="#{pac.cartaoSUS}" style="text-align: center" />
                             </p:column>
 
                             <p:column   headerText="Endereço" style="text-align: center" >
@@ -39,20 +39,25 @@
                                 <p:panelGrid style="border: 0;">
                                     <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_usuario_ubs.xhtml"
                                               style="margin-right: 6px">
-                                        <f:param value="#{pac.cpf}" name="cpf"/> 
+                                        <f:param value="#{pac.id}" name="id"/> 
                                     </p:button>
 
-                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{pacienteBean.remover(pac)}" 
-                                                     oncomplete="#{pacienteBean.pacientes}"/>
+                                    <p:commandButton value="Remover" icon="ui-icon-trash" action="#{pacienteBean.remover(pac)}" 
+                                                     oncomplete="#{pacienteBean.pacientes}">
+
+                                        <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
                                 </p:panelGrid>
                             </p:column>
 
                         </p:dataTable>
                     </p:fieldset>
                 </h:form>
-
-
-
 
             </ui:define>
 

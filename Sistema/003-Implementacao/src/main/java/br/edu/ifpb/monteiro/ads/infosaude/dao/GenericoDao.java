@@ -109,8 +109,10 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
             if (em.getTransaction().isActive()) {
             } else {
                 this.em = EntityManagerProducer.getInstance();
+                this.em.getTransaction().begin();
             }
             entity = em.find(classePersistente, id);
+            em.getTransaction().commit();
         } catch (Exception e) {
             throw new DaoExcecoes("Erro ao buscar por " + entity, e);
         } finally {

@@ -13,7 +13,7 @@
             <ui:define name="centro">
 
                 <f:metadata>
-                    <f:viewParam name="cpf" value="#{pacienteBean.paciente.cpf}" />
+                    <f:viewParam name="id" value="#{pacienteBean.idAuxiliar}" />
                     <f:viewAction action="#{pacienteBean.preparaEdicao()}"  />
 
                 </f:metadata>
@@ -157,11 +157,12 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
-
+                            <h:inputHidden value="#{pacienteBean.idAuxiliar}" id="id_axuliar"/>
+                            
                             <h:outputText value=" "/>
                             <p:commandButton value="Atualizar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
-                                             update="mensages"
-                                             actionListener="#{pacienteBean.update}">
+                                             update="mensages" ajax="false"
+                                             action="#{pacienteBean.update}">
                                 <f:viewParam name="cpf" value="#{pacienteBean.paciente.cpf}"/>
                             </p:commandButton>
                         </h:panelGrid>
