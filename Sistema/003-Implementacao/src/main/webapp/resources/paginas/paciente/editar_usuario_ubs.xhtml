@@ -11,6 +11,14 @@
         <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
+
+                <f:metadata>
+                    <f:viewParam name="cpf" value="#{pacienteBean.paciente.cpf}" />
+                    <f:viewAction action="#{pacienteBean.preparaEdicao()}"  />
+
+                </f:metadata>
+
+
                 <h:form id="cadastrarPaciente" >
                     <p:growl id="mensages" showDetail="false" life="3000"/>
                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
@@ -151,9 +159,11 @@
                             </p:row> 
 
                             <h:outputText value=" "/>
-                            <p:commandButton value="Cadastrar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
-                                             update="mensages" ajax="false"
-                                             action="#{pacienteBean.salvar}"/>
+                            <p:commandButton value="Atualizar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
+                                             update="mensages"
+                                             actionListener="#{pacienteBean.update}">
+                                <f:viewParam name="cpf" value="#{pacienteBean.paciente.cpf}"/>
+                            </p:commandButton>
                         </h:panelGrid>
 
                     </p:fieldset> 

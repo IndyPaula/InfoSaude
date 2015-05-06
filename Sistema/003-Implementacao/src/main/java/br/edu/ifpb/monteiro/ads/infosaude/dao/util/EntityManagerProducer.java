@@ -12,6 +12,10 @@ import javax.persistence.Persistence;
 public class EntityManagerProducer {
 
     private static final EntityManager em = getEntityManager();
+    
+    private EntityManagerProducer(){
+        
+    }
 
     private static EntityManager getEntityManager() {
 

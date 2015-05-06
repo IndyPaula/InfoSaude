@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
+import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
@@ -9,8 +10,10 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.PacienteService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -26,56 +29,59 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class PacienteBean {
-    
+
     private PacienteServiceIF pacienteService;
-    
+    private List<Paciente> pacientes;
     private Paciente paciente;
-    
+
     public PacienteBean() {
         paciente = new Paciente();
-        
+        pacientes = new ArrayList<>();
         paciente.setDataCadastro(getDataAtual());
-        
+
         pacienteService = new PacienteService();
     }
 
     public Date getDataAtual() {
         Calendar calendar
                 = new Calendar.Builder()
-                        .setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"))
-                        .setLocale(new Locale("pt", "br"))
-                        .setInstant(new Date())
-                        .build();
+                .setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"))
+                .setLocale(new Locale("pt", "br"))
+                .setInstant(new Date())
+                .build();
         Instant instantAPartirDoCalendar = calendar.toInstant();
         Date hoje = Date.from(instantAPartirDoCalendar);
         return hoje;
     }
-    
+
     public PacienteServiceIF getPacienteService() {
         return pacienteService;
     }
-    
-     public EnumEstados[] getEstado() {
+
+    public EnumEstados[] getEstado() {
         return EnumEstados.values();
     }
+
     public EnumGeneros[] getSexo() {
         return EnumGeneros.values();
     }
+
     public EnumEtnias[] getEtnias() {
         return EnumEtnias.values();
     }
+
     public void setPacienteService(PacienteServiceIF pacienteService) {
         this.pacienteService = pacienteService;
     }
-    
+
     public Paciente getPaciente() {
         return paciente;
     }
-    
+
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-    
+
     public String salvar() {
         try {
             pacienteService.salvar(paciente);
@@ -85,5 +91,64 @@ public class PacienteBean {
             Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
+    }
+
+    public List<Paciente> getPacientes() {
+
+        try {
+
+            pacientes = pacienteService.buscarTudo();
+
+            return pacientes;
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void preparaEdicao() {
+
+        try {
+            paciente = pacienteService.buscarPorCampo("cpf", paciente.getCpf());
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    public void remover(Paciente p) throws BeanExcecao {
+
+        if (p != null) {
+
+            try {
+
+                pacienteService.remover(p);
+                JsfUtil.addSuccessMessage("Paciente removido com sucesso");
+
+            } catch (ServiceExcecoes ex) {
+
+                JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
+                Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            
+            JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
+
+        }
+    }
+    
+    public void update() throws BeanExcecao {
+
+            try {
+                
+                System.err.println("ID -------------------->>>>>>>>>" + paciente.getId());
+                pacienteService.atualizar(paciente);
+                JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
+
+            } catch (ServiceExcecoes ex) {
+
+                JsfUtil.addErrorMessage("Erro ao tentar atualizar informações");
+                Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
     }
 }

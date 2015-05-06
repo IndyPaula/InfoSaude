@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,9 +17,6 @@ public class Paciente extends Pessoa implements  Serializable {
 
     private static final Long serialVersionUID = 1L;
 
-    @Id
-    private Long id;
-
     @Column(name = "numero_prontuario", nullable = true, unique = true)
     private int numeroProntuario;
 
@@ -30,11 +26,6 @@ public class Paciente extends Pessoa implements  Serializable {
 
     @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
 
     public int getNumeroProntuario() {
         return numeroProntuario;
