@@ -132,7 +132,7 @@ public class PacienteBean {
 
                 pacienteService.remover(p);
                 JsfUtil.addSuccessMessage("Paciente removido com sucesso");
-                return "";
+                return "/buscar_usuario_ubs.xhtml";
                 
             } catch (ServiceExcecoes ex) {
 
