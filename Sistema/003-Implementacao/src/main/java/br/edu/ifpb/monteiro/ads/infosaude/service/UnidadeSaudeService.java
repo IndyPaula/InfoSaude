@@ -1,11 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.UnidadeSaudeDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.UnidadeSaudeDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.UnidadeSaudeServiceIF;
 import java.io.Serializable;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,10 +16,10 @@ public class UnidadeSaudeService extends GenericoService<UnidadeSaude> implement
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private UnidadeSaudeDaoIF dao;
 
     public UnidadeSaudeService() {
-        this.dao = new UnidadeSaudeDao();
     }
 
     @Override

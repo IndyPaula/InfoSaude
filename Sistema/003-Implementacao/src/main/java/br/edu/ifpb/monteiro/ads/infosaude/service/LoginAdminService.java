@@ -1,10 +1,10 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.LoginAdminDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.LoginAdminDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
+import javax.inject.Inject;
 
 /**
  *
@@ -15,10 +15,10 @@ public class LoginAdminService extends GenericoService<LoginAdmin> implements Lo
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private LoginAdminDaoIF dao;
 
     public LoginAdminService() {
-        this.dao = new LoginAdminDao();
     }
 
     @Override

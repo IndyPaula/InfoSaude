@@ -1,11 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.PessoaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Pessoa;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PessoaServiceIF;
 import java.io.Serializable;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,15 +16,14 @@ public class PessoaService extends GenericoService<Pessoa> implements PessoaServ
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private PessoaDaoIF dao;
 
     public PessoaService() {
-        this.dao = new PessoaDao();
     }
 
     @Override
     public DaoIF getDao() {
         return dao;
     }
-
 }

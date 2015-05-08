@@ -2,12 +2,11 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,102 +21,51 @@ import javax.persistence.criteria.Root;
  */
 public abstract class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
 
+    @Inject
     private EntityManager em;
 
-    private Class<T> classePersistente;
+    private Class<T> entity;
 
     public GenericoDao(Class<T> clazz) {
-        this.classePersistente = clazz;
-        this.em = EntityManagerProducer.getInstance();
+        this.entity = clazz;
     }
 
     public EntityManager getEntityManager() {
         return em;
     }
 
+    public Class<T> getEntity() {
+        return entity;
+    }
+
+    public void setEntity(Class<T> entity) {
+        this.entity = entity;
+    }
+
     public Class<T> getClassePersistente() {
-        return classePersistente;
+        return entity;
     }
 
     @Override
     public T salvar(T entity) throws DaoExcecoes {
-        try {
-            if (em.getTransaction().isActive()) {
-            } else {
-                this.em = EntityManagerProducer.getInstance();
-            }
-            EntityTransaction tx = em.getTransaction();
-            if (entity.getId() == null) {
-                tx.begin();
-                em.persist(entity);
-                tx.commit();
-            }
-        } catch (Exception e) {
-            throw new DaoExcecoes(e.getMessage(), e);
-        } finally {
-//            em.close();
-        }
+        em.persist(entity);
         return entity;
     }
 
     @Override
     public T atualizar(T entity) throws DaoExcecoes {
-        try {
-            if (em.getTransaction().isActive()) {
-            } else {
-                this.em = EntityManagerProducer.getInstance();
-            }
-            em.getTransaction().begin();
-            if (entity.getId() != null) {
-                em.merge(entity);
-                em.getTransaction().commit();
-            }
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            if (!em.contains(entity)) {
-                if (em.find(entity.getClass(), entity.getId()) == null) {
-                    throw new DaoExcecoes("Erro ao persistir " + entity, e);
-                }
-            }
-        } finally {
-//            em.close();
-        }
+        em.merge(entity);
         return entity;
     }
 
     @Override
     public void remover(T entity) throws DaoExcecoes {
-        try {
-            if (em.getTransaction().isActive()) {
-            } else {
-                this.em = EntityManagerProducer.getInstance();
-            }
-            em.getTransaction().begin();
-            em.remove(entity);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            throw new DaoExcecoes("Erro ao remover " + entity, e);
-        } finally {
-//            em.close();
-        }
+        em.remove(entity);
     }
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        T entity = null;
-        try {
-            if (em.getTransaction().isActive()) {
-            } else {
-                this.em = EntityManagerProducer.getInstance();
-                this.em.getTransaction().begin();
-            }
-            entity = em.find(classePersistente, id);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            throw new DaoExcecoes("Erro ao buscar por " + entity, e);
-        } finally {
-//            em.close();
-        }
+        T entity = em.find(this.entity, id);
         return entity;
     }
 
@@ -127,9 +75,9 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-            CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(classePersistente);
+            CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(entity);
 
-            Root<T> root = createQuery.from(classePersistente);
+            Root<T> root = createQuery.from(entity);
 
             Predicate predicate = criteriaBuilder.conjunction();
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.<T>get(campo), valor));
@@ -152,9 +100,9 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-            CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(classePersistente);
+            CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(entity);
 
-            Root<T> root = createQuery.from(classePersistente);
+            Root<T> root = createQuery.from(entity);
 
             Predicate predicate = criteriaBuilder.conjunction();
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.<T>get(campo), valor));
@@ -173,7 +121,8 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
     @Override
     public List<T> buscarTudo() throws DaoExcecoes {
         CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select(cq.from(classePersistente));
+        cq.select(cq.from(entity));
         return getEntityManager().createQuery(cq).getResultList();
     }
+
 }

@@ -1,11 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.ACSDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.ACSDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ACSServiceIF;
 import java.io.Serializable;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,10 +16,10 @@ public class ACSService extends GenericoService<ACS> implements ACSServiceIF, Se
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private ACSDaoIF dao;
 
     public ACSService() {
-        this.dao = new ACSDao();
     }
 
     @Override
