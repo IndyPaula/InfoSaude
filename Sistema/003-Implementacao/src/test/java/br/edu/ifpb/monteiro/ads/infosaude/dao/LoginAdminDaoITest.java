@@ -74,7 +74,7 @@ public class LoginAdminDaoITest {
 
         try {
             adm = instance.buscarPorCampo("login", "vanderlan");
-//            instance.remover(adm);
+            instance.remover(adm);
 
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
