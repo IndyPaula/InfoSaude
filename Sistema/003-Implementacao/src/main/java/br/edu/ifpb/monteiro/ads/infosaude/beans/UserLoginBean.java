@@ -69,11 +69,8 @@ public class UserLoginBean implements Serializable {
             return null;
         } else {
             
-            System.err.println("Logou");
             loggedIn = true;
             setAdmLogado(usuarioFound);
-            System.err.println(usuarioFound.getLogin());
-
             return "/resources/template/template_base.xhtml?faces-redirect=true";
         }
     }

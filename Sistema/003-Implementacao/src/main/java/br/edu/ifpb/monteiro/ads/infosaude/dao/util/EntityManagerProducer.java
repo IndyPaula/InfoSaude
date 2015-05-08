@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-    private EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
     public EntityManagerProducer() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("InfoSaudePU");

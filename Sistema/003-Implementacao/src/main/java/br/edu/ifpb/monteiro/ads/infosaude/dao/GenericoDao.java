@@ -23,7 +23,6 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Inject
     private EntityManager em;
-
     private Class<T> entity;
 
     public GenericoDao(Class<T> clazz) {
@@ -44,6 +43,14 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     public Class<T> getClassePersistente() {
         return entity;
+    }
+    
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
     @Override
