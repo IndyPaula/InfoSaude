@@ -49,12 +49,12 @@ public class LoginAdminDaoITest {
         ubs.setBairro("efjoewif");
         ubs.setCep("5487598");
         ubs.setCidade("Monteiro");
-        ubs.setCnes(4234);
+        ubs.setCnes(312);
         ubs.setEnderecoNumero(100);
         ubs.setEstado(EnumEstados.PE);
         ubs.setLogradouro("mfioejfie");
         ubs.setNome("UBS 08");
-        ubs.setNumero(312);
+        ubs.setNumero(12);
 
         try {
             daoUbs.salvar(ubs);
@@ -68,33 +68,48 @@ public class LoginAdminDaoITest {
         adm.setCpf("101.538.432-32");
         adm.setDataNascimento(new Date(2015, 5, 1));
         adm.setCodigoEquipeINE("2423432");
-        adm.setLogin("123");
-        adm.setSenhaAdm("123");
         adm.setSenha("fjhewiufhew");
         adm.setNomeUsuario("fhguwegyf");
+        
+        adm.setLogin("user");
+        adm.setSenhaAdm("123");
         
         daoAdm = new LoginAdminDao();
         daoAdm.setEm(em);
 
         try {
+            daoAdm.getEntityManager().getTransaction().begin();
             daoAdm.salvar(adm);
+            daoAdm.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @AfterClass
-    public static void removerDados() throws ServiceExcecoes {
+     @AfterClass
+    public static void removerDados() {
 
         LoginAdmin adm;
+        UnidadeSaude ubs;
 
         try {
-            adm = daoAdm.buscarPorCampo("login", "123");
+            ubs = daoUbs.buscarPorCampo("cnes",312);
+            
+            adm = daoAdm.buscarPorCampo("cpf", "101.538.432-32");
+            
+            daoAdm.getEntityManager().getTransaction().begin();
+            daoAdm.remover(adm);
+            daoAdm.getEntityManager().getTransaction().commit();
+
+            daoUbs.getEntityManager().getTransaction().begin();
+            daoUbs.remover(ubs);
+            daoUbs.getEntityManager().getTransaction().commit();
+            
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Test
     public void senhaNull() {
 
@@ -127,9 +142,9 @@ public class LoginAdminDaoITest {
     public void usuarioValido() {
 
         LoginAdmin expResult = new LoginAdmin();
-        expResult.setLogin("123");
+        expResult.setLogin("user");
 
-        LoginAdmin result = daoAdm.efetuarLogin("123", "123");
+        LoginAdmin result = daoAdm.efetuarLogin("user", "123");
 
         assertEquals(expResult.getLogin(), result.getLogin());
     }

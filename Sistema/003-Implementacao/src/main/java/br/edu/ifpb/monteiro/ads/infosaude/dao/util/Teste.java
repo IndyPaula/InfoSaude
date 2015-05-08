@@ -7,6 +7,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.UnidadeSaudeDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
 /**
@@ -17,7 +19,7 @@ public class Teste {
 
     static UnidadeSaudeDao dao = new UnidadeSaudeDao();
 
-    public static void main(String[] args) throws DaoExcecoes {
+    public static void main(String[] args)  {
 
         EntityManagerProducer emp = new EntityManagerProducer();
 
@@ -43,6 +45,14 @@ public class Teste {
         
         dao.setEm(em);
 
-        dao.salvar(ubs);
+        try {
+            dao.getEntityManager().getTransaction().begin();
+            dao.salvar(ubs);
+            
+            dao.getEntityManager().getTransaction().commit();
+            
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
