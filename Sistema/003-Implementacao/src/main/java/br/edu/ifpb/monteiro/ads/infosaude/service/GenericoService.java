@@ -2,7 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.service;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.Transacional;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.Transactional;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
@@ -27,7 +27,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public T salvar(T identificadorGenerico) throws ServiceExcecoes {
         try {
             getDao().salvar(identificadorGenerico);
@@ -38,7 +38,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public T atualizar(T identificadorGenerico) throws ServiceExcecoes {
         try {
             getDao().atualizar(identificadorGenerico);
@@ -49,7 +49,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public void remover(T identificadorGenerico) throws ServiceExcecoes {
         try {
             getDao().remover(identificadorGenerico);
@@ -59,7 +59,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public T consultarPorId(Long id) throws ServiceExcecoes {
         try {
             return (T) getDao().consultarPorId(id);
@@ -69,7 +69,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public T buscarPorCampo(String campo, Object valor) throws ServiceExcecoes {
         try {
             return (T) getDao().buscarPorCampo(campo, valor);
@@ -81,7 +81,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public List<T> buscarTodosPorCampo(String campo, Object valor) throws ServiceExcecoes {
         try {
             return getDao().buscarTodosPorCampo(campo, valor);
@@ -91,7 +91,7 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     }
 
     @Override
-    @Transacional
+    @Transactional
     public List<T> buscarTudo() throws ServiceExcecoes {
         try {
             return getDao().buscarTudo();

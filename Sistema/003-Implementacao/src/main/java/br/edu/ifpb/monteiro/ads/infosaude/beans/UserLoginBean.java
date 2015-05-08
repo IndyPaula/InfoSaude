@@ -20,6 +20,9 @@ public class UserLoginBean implements Serializable {
 
     @Inject
     private LoginAdminServiceIF service;
+    
+    private static final long serialVersionUID = 682119314630735490L;
+
     private String login;
     private String senha;
 
@@ -64,16 +67,15 @@ public class UserLoginBean implements Serializable {
 
             return null;
         } else {
+            
+            System.err.println("Logou");
             loggedIn = true;
             setAdmLogado(usuarioFound);
-
-            JsfUtil.addSuccessMessage("Bem vindo");
+            System.err.println(usuarioFound.getLogin());
 
             return "/resources/template/template_base.xhtml?faces-redirect=true";
         }
     }
-    //Realiza o logout do usuário logado
-
     public String doLogout() {
 
         admLogado = null;

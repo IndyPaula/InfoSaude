@@ -7,5 +7,4 @@
     <interceptors>
         <class>br.edu.ifpb.monteiro.ads.infosaude.dao.util.TransactionInterceptor</class>
     </interceptors>
-	
 </beans>
