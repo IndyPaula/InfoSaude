@@ -31,6 +31,7 @@ public class UserLoginBean implements Serializable {
     private boolean loggedIn;
 
     public UserLoginBean() {
+        
     }
 
     public String getLogin() {
