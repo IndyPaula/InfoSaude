@@ -1,11 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.FornecedorDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.FornecedorDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Fornecedor;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FornecedorServiceIF;
 import java.io.Serializable;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,10 +16,10 @@ public class FornecedorService extends GenericoService<Fornecedor> implements Fo
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private FornecedorDaoIF dao;
 
     public FornecedorService() {
-        this.dao = new FornecedorDao();
     }
 
     @Override

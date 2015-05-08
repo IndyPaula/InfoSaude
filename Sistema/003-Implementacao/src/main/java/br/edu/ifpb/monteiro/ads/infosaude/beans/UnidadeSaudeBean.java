@@ -1,10 +1,12 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
+import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.UnidadeSaudeService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -17,61 +19,95 @@ import javax.faces.bean.ManagedBean;
 @RequestScoped
 public class UnidadeSaudeBean extends GenericoBeans<UnidadeSaude> {
 
-    private boolean operacaoCriar;
-    private boolean operacaoAtualizar;
-
-    public UnidadeSaudeBean() throws ServiceExcecoes {
-        service = new UnidadeSaudeService();
-        verificarUnidade();
-    }
-
-    public void verificarUnidade() throws ServiceExcecoes {
-        if (service.buscarTudo().isEmpty()) {
-            setOperacaoCriar(true);
-            setOperacaoAtualizar(false);
-        } else {
-            identificavel = (UnidadeSaude) service.buscarTudo().get(0);
-            setOperacaoCriar(false);
-            setOperacaoAtualizar(true);
-        }
+    @Override
+    public String salvar() throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ServiceIF getService() {
-        return service;
+    public String atualizar() throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public UnidadeSaude getEntidade() {
-        if (identificavel == null) {
-            identificavel = new UnidadeSaude();
-        }
-        return (UnidadeSaude) identificavel;
+    public void remover(UnidadeSaude identificavel) throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setEntidade(UnidadeSaude identificavel) {
-        this.identificavel = identificavel;
+    public UnidadeSaude consultarPorId(Long id) throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public EnumEstados[] getEstado() {
-        return EnumEstados.values();
+    @Override
+    public UnidadeSaude buscarPorCampo(String campo, Object valor) throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean isOperacaoCriar() {
-        return operacaoCriar;
+    @Override
+    public List<UnidadeSaude> buscarTodosPorCampo(String campo, Object valor) throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setOperacaoCriar(boolean operacaoCriar) {
-        this.operacaoCriar = operacaoCriar;
+    @Override
+    public List<UnidadeSaude> buscarTudo() throws BeanExcecao {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean isOperacaoAtualizar() {
-        return operacaoAtualizar;
-    }
-
-    public void setOperacaoAtualizar(boolean operacaoAtualizar) {
-        this.operacaoAtualizar = operacaoAtualizar;
-    }
+//    private boolean operacaoCriar;
+//    private boolean operacaoAtualizar;
+//
+//    public UnidadeSaudeBean() throws ServiceExcecoes {
+//        verificarUnidade();
+//    }
+//
+//    public void verificarUnidade() throws ServiceExcecoes {
+//        if (service.buscarTudo().isEmpty()) {
+//            setOperacaoCriar(true);
+//            setOperacaoAtualizar(false);
+//        } else {
+//            identificavel = (UnidadeSaude) service.buscarTudo().get(0);
+//            setOperacaoCriar(false);
+//            setOperacaoAtualizar(true);
+//        }
+//    }
+//
+//    @Override
+//    public ServiceIF getService() {
+//        return service;
+//    }
+//
+//    @Override
+//    public UnidadeSaude getEntidade() {
+//        if (identificavel == null) {
+//            identificavel = new UnidadeSaude();
+//        }
+//        return (UnidadeSaude) identificavel;
+//    }
+//
+//    @Override
+//    public void setEntidade(UnidadeSaude identificavel) {
+//        this.identificavel = identificavel;
+//    }
+//
+//    public EnumEstados[] getEstado() {
+//        return EnumEstados.values();
+//    }
+//
+//    public boolean isOperacaoCriar() {
+//        return operacaoCriar;
+//    }
+//
+//    public void setOperacaoCriar(boolean operacaoCriar) {
+//        this.operacaoCriar = operacaoCriar;
+//    }
+//
+//    public boolean isOperacaoAtualizar() {
+//        return operacaoAtualizar;
+//    }
+//
+//    public void setOperacaoAtualizar(boolean operacaoAtualizar) {
+//        this.operacaoAtualizar = operacaoAtualizar;
+//    }
 
 }

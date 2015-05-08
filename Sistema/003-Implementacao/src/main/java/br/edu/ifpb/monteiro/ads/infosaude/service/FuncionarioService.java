@@ -1,11 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.FuncionarioDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.FuncionarioDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import java.io.Serializable;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,10 +16,10 @@ public class FuncionarioService extends GenericoService<Funcionario> implements 
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private FuncionarioDaoIF dao;
 
     public FuncionarioService() {
-        this.dao = new FuncionarioDao();
     }
 
     @Override

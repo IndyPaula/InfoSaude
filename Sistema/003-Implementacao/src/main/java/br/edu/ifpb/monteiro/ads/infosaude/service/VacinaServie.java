@@ -1,11 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.VacinaDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.io.Serializable;
+import javax.inject.Inject;
 
 /**
  *
@@ -16,10 +16,10 @@ public class VacinaServie extends GenericoService<Vacina> implements VacinaServi
 
     private static final Long serialVersionUID = 1L;
 
+    @Inject
     private VacinaDaoIF dao;
 
     public VacinaServie() {
-        this.dao = new VacinaDao();
     }
 
     @Override
