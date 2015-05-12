@@ -3,10 +3,10 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.LoginAdminDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.UnidadeSaudeDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.UnidadeSaudeDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -17,7 +17,7 @@ import javax.persistence.EntityManager;
  */
 public class Teste {
 
-    static UnidadeSaudeDao dao = new UnidadeSaudeDao();
+    static LoginAdminDao dao = new LoginAdminDao();
 
     public static void main(String[] args)  {
 
@@ -28,26 +28,22 @@ public class Teste {
         LoginAdminDao instance = new LoginAdminDao();
         LoginAdmin adm = new LoginAdmin();
 
-        adm.setLogin("JUNIT-TEST-USER-TO-LOGIN");
-        adm.setSenhaAdm("202cb962ac59075b964b07152d234b70");
+        adm.setLogin("user");
+        adm.setSenhaAdm("123");
 
-        UnidadeSaude ubs = new UnidadeSaude();
-
-        ubs.setBairro("diwdj");
-        ubs.setCep("645645654");
-        ubs.setCidade("Monteiro");
-        ubs.setCnes(123);
-        ubs.setEnderecoNumero(23);
-        ubs.setEstado(EnumEstados.AC);
-        ubs.setLogradouro("erneowirew");
-        ubs.setNome("UBS 9");
-        ubs.setNumero(9);
+        adm.setMatricula(44234);
+        adm.setNome("Vanderlan Gomes");
+        adm.setCpf("141.538.432-32");
+        adm.setDataNascimento(new Date(2015, 5, 1));
+        adm.setCodigoEquipeINE("2423432");
+        adm.setSenha("fjhewiufhew");
+        adm.setNomeUsuario("fhguwegyf");
         
         dao.setEm(em);
 
         try {
             dao.getEntityManager().getTransaction().begin();
-            dao.salvar(ubs);
+            dao.salvar(adm);
             
             dao.getEntityManager().getTransaction().commit();
             

@@ -6,11 +6,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
-import br.edu.ifpb.monteiro.ads.infosaude.service.PacienteService;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,29 +16,34 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.inject.Model;
+import javax.inject.Inject;
 
 /**
  *
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 14/04/2015
  */
-@ManagedBean
-@RequestScoped
+@Model
 public class PacienteBean {
 
+    @Inject
     private PacienteServiceIF pacienteService;
     private List<Paciente> pacientes;
+    @Inject
     private Paciente paciente;
     private Long idAuxiliar;
 
     public PacienteBean() {
-        paciente = new Paciente();
-        pacientes = new ArrayList<>();
+
+    }
+
+    @PostConstruct
+    public void init() {
+
         paciente.setDataCadastro(getDataAtual());
 
-        pacienteService = new PacienteService();
     }
 
     public Date getDataAtual() {
@@ -124,6 +127,7 @@ public class PacienteBean {
         }
 
     }
+
     public String remover(Paciente p) throws BeanExcecao {
 
         if (p != null) {
@@ -133,36 +137,34 @@ public class PacienteBean {
                 pacienteService.remover(p);
                 JsfUtil.addSuccessMessage("Paciente removido com sucesso");
                 return "/buscar_usuario_ubs.xhtml";
-                
+
             } catch (ServiceExcecoes ex) {
 
                 JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
                 return null;
             }
-        }else{
-            
+        } else {
+
             JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
             return null;
         }
     }
-    
+
     public String update() throws BeanExcecao {
 
-            try {
-                
-                System.err.println("ID -------------------->>>>>>>>>" + paciente.getId());
-                
-                pacienteService.atualizar(paciente);
-                JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
-                return "editar_usuario_ubs.xhtml?id="+paciente.getId();
+        try {
 
-            } catch (ServiceExcecoes ex) {
+            pacienteService.atualizar(paciente);
+            JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
+            return "editar_usuario_ubs.xhtml?id=" + paciente.getId();
 
-                JsfUtil.addErrorMessage("Erro ao tentar atualizar informações");
-                Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
-                
-                 return null;
-            }
-            
+        } catch (ServiceExcecoes ex) {
+
+            JsfUtil.addErrorMessage("Erro ao tentar atualizar informações");
+            Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
+
+            return null;
+        }
+
     }
 }
