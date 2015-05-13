@@ -163,9 +163,8 @@
                             
                             <h:outputText value=" "/>
                             <p:commandButton value="Atualizar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
-                                             update="mensages" ajax="false"
+                                             update="mensages"
                                              action="#{pacienteBean.update}">
-                                <f:viewParam name="cpf" value="#{pacienteBean.paciente.cpf}"/>
                             </p:commandButton>
                         </h:panelGrid>
 

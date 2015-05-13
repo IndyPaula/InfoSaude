@@ -6,22 +6,22 @@
         <properties>
 
             <!-- AMBIENTE DE TESTES - GitHub -->
-<!--            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:db"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:db"/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
-        -->
+        
             <!-- AMBIENTE DE PRODUÇÃO - Desenvolvimento e Cliente final -->
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/info_saude"/>
+<!--      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/info_saude"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="123"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
-            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.logging.parameters" value="true"/>-->
       
 
         </properties>

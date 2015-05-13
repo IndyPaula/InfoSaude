@@ -153,7 +153,9 @@ public class PacienteBean {
     public String update() throws BeanExcecao {
 
         try {
-
+            
+            paciente.setId(idAuxiliar);
+            System.err.println("ID PASSADO ---- "+idAuxiliar);
             pacienteService.atualizar(paciente);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
             return "editar_usuario_ubs.xhtml?id=" + paciente.getId();

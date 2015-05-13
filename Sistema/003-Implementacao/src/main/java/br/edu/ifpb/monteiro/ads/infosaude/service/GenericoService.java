@@ -28,31 +28,31 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
 
     @Override
     @Transactional
-    public T salvar(T identificadorGenerico) throws ServiceExcecoes {
+    public T salvar(T entidade) throws ServiceExcecoes {
         try {
-            getDao().salvar(identificadorGenerico);
+            getDao().salvar(entidade);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return identificadorGenerico;
+        return entidade;
     }
 
     @Override
     @Transactional
-    public T atualizar(T identificadorGenerico) throws ServiceExcecoes {
+    public T atualizar(T entidade) throws ServiceExcecoes {
         try {
-            getDao().atualizar(identificadorGenerico);
+            getDao().atualizar(entidade);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return identificadorGenerico;
+        return entidade;
     }
 
     @Override
     @Transactional
-    public void remover(T identificadorGenerico) throws ServiceExcecoes {
+    public void remover(T entidade) throws ServiceExcecoes {
         try {
-            getDao().remover(identificadorGenerico);
+            getDao().remover(entidade);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
