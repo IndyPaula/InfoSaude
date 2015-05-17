@@ -23,7 +23,15 @@ public class LoginAdminService extends GenericoService<LoginAdmin> implements Lo
 
     @Override
     public LoginAdmin efetuarLogin(String login, String senha) {
-        return dao.efetuarLogin(login, senha);
+        if (login != null && senha != null) {
+            return dao.efetuarLogin(login, senha);
+
+        }
+        else{
+        
+            return null;
+        }
+
     }
 
     @Override

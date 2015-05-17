@@ -16,20 +16,28 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-    private final EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     public EntityManagerProducer() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("InfoSaudePU");
     }
 
+    public EntityManagerProducer(String unidadePersistencia) {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory(unidadePersistencia);
+    }
     @Produces
     @RequestScoped
     public EntityManager create() {
         return entityManagerFactory.createEntityManager();
     }
     
-    /* This method close the EntityManager when is requested */
     public void close(@Disposes EntityManager entityManager) {
         entityManager.close();
+    }
+    
+    public void entityMangerForTest(){
+        
+         this.entityManagerFactory = Persistence.createEntityManagerFactory("InfoSaudePU");
+        
     }
 }

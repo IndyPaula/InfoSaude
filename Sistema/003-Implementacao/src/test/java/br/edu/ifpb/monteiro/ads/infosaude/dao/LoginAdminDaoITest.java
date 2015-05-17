@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -35,8 +34,7 @@ public class LoginAdminDaoITest {
     public static void inserirDados() throws ServiceExcecoes {
 
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
-        emp = new EntityManagerProducer();
-
+        emp = new EntityManagerProducer("InfoSaudePUTest");
         em = emp.create();
         
         daoUbs = new UnidadeSaudeDao();
@@ -86,30 +84,6 @@ public class LoginAdminDaoITest {
         }
     }
 
-     @AfterClass
-    public static void removerDados() {
-
-        LoginAdmin adm;
-        UnidadeSaude ubs;
-
-        try {
-            ubs = daoUbs.buscarPorCampo("cnes",312);
-            
-            adm = daoAdm.buscarPorCampo("cpf", "101.538.432-32");
-            
-            daoAdm.getEntityManager().getTransaction().begin();
-            daoAdm.remover(adm);
-            daoAdm.getEntityManager().getTransaction().commit();
-
-            daoUbs.getEntityManager().getTransaction().begin();
-            daoUbs.remover(ubs);
-            daoUbs.getEntityManager().getTransaction().commit();
-            
-        } catch (DaoExcecoes ex) {
-            Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     @Test
     public void senhaNull() {
 
