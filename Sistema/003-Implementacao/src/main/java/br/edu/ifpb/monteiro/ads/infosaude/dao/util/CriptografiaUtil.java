@@ -18,7 +18,10 @@ public class CriptografiaUtil {
     public static String convertStringToMd5(String valor) {
         MessageDigest mDigest;
         StringBuffer sb;
-        
+        if(valor == null){
+            
+            return null;
+        }
         try {
             mDigest = MessageDigest.getInstance("MD5");
 

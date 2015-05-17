@@ -1,16 +1,15 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
 
-
-/**
- *
- * @author Vanderlan Gomes
- */
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+/**
+ *
+ * @author Vanderlan Gomes
+ */
 public class JsfUtil {
 
     public static void addSuccessMessage(String message) {
@@ -26,7 +25,7 @@ public class JsfUtil {
     }
 
     public static void redirect(String locate) {
-        
+
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(locate);
         } catch (IOException ex) {

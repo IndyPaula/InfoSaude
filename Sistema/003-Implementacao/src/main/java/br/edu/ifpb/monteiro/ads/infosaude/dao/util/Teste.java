@@ -1,11 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.LoginAdminDao;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.UnidadeSaudeDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;

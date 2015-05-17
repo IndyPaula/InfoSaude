@@ -17,7 +17,7 @@ public class Paciente extends Pessoa implements  Serializable {
 
     private static final Long serialVersionUID = 1L;
 
-    @Column(name = "numero_prontuario", nullable = true, unique = true)
+    @Column(name = "numero_prontuario", nullable = true, unique = true, columnDefinition = "DEFAULT NULL")
     private int numeroProntuario;
 
     @Temporal(TemporalType.DATE)

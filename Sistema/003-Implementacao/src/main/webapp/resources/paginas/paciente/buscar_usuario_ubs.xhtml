@@ -18,7 +18,13 @@
                     <p:fieldset legend="Usuários da UBS" 
                                 style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
                         <p:dataTable id="tablePaciente" var="pac" value="#{pacienteBean.pacientes}" editable="true"
-                                     style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado">
+                                     rowsPerPageTemplate="5,10,20,50,100, 200" paginator="true" rows="10" widgetVar="tabela_pacientes"
+                                      paginatorAlwaysVisible="true"
+                                      sortOrder="DESCENDING" 
+                                      sortBy="#{pac.id}"
+                                     style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado"  
+                                     
+                                     >
                             <f:facet name="header">
                                 Lista de Usuários da UBS
                             </f:facet>
@@ -42,8 +48,8 @@
                                         <f:param value="#{pac.id}" name="id"/> 
                                     </p:button>
 
-                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{pacienteBean.remover(pac)}" 
-                                                     >
+                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash" action="#{pacienteBean.remover(pac)}" 
+                                                       >
 
                                         <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
                                     </p:commandButton>

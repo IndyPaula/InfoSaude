@@ -102,7 +102,7 @@ public class PacienteBean {
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "";
+        return "buscar_usuario_ubs";
     }
 
     public List<Paciente> getPacientes() {
@@ -128,25 +128,22 @@ public class PacienteBean {
 
     }
 
-    public String remover(Paciente p) throws BeanExcecao {
+    public void remover(Paciente p) throws BeanExcecao {
 
         if (p != null) {
 
             try {
-
+                System.err.println("MY NAME IS ---->>>   "+p.getNome());
                 pacienteService.remover(p);
                 JsfUtil.addSuccessMessage("Paciente removido com sucesso");
-                return "/buscar_usuario_ubs.xhtml";
 
             } catch (ServiceExcecoes ex) {
 
                 JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
-                return null;
             }
         } else {
 
             JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
-            return null;
         }
     }
 
@@ -155,7 +152,6 @@ public class PacienteBean {
         try {
             
             paciente.setId(idAuxiliar);
-            System.err.println("ID PASSADO ---- "+idAuxiliar);
             pacienteService.atualizar(paciente);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
             return "editar_usuario_ubs.xhtml?id=" + paciente.getId();

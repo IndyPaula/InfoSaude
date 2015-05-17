@@ -59,7 +59,7 @@ public class LoginAdminServiceTest {
     }
 
     @Test
-    public void loginSenhaValidos() {
+    public void usuarioValido() {
 
         adm = new LoginAdmin();
         adm.setLogin("User");
@@ -73,9 +73,25 @@ public class LoginAdminServiceTest {
     }
     
     @Test
-    public void senhaInvalida() {
+    public void senhaIcorreta() {
 
         LoginAdmin admResult = dao.efetuarLogin("User", "123");
+        
+        assertEquals(null, admResult);
+    }
+    
+    @Test
+    public void senhaInvalida() {
+
+        LoginAdmin admResult = dao.efetuarLogin("User", null);
+        
+        assertEquals(null, admResult);
+    }
+    
+    @Test
+    public void usuarioInexistente() {
+
+        LoginAdmin admResult = dao.efetuarLogin("Usedsr", "123456");
         
         assertEquals(null, admResult);
     }

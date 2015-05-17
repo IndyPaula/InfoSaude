@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface ServiceIF<T> {
 
-    T salvar(T identificadorGenerico) throws ServiceExcecoes;
+    T salvar(T entity) throws ServiceExcecoes;
 
-    T atualizar(T identificadorGenerico) throws ServiceExcecoes;
+    T atualizar(T entity) throws ServiceExcecoes;
 
-    void remover(T identificadorGenerico) throws ServiceExcecoes;
+    void remover(T entity) throws ServiceExcecoes;
 
     T consultarPorId(Long id) throws ServiceExcecoes;
 
