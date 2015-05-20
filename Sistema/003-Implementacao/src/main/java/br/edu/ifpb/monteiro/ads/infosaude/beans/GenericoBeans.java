@@ -25,7 +25,7 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
 
     public abstract ServiceIF getService();
 
-    @Inject
+    
     private FacesMensagens mensagem;
 
     protected T identificavel;
@@ -98,13 +98,12 @@ public abstract class GenericoBeans<T extends Identificavel> implements Serializ
 
     @Override
     public List<T> buscarTudo() throws BeanExcecao {
-        List<T> lista = new ArrayList<>();
         try {
-            lista = getService().buscarTudo();
+            return getService().buscarTudo();
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;
+        return null;
     }
 
 }
