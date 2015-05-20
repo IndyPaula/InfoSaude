@@ -2,7 +2,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.service;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.LoginAdminDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
-import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -44,11 +43,6 @@ public class LoginAdminServiceTest {
         
         when(dao.efetuarLogin("User", "123456")).thenReturn(adm);
     }
-
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of efetuarLogin method, of class LoginAdminService.
      */

@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.PacienteDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
+import javax.persistence.Query;
 
 /**
  *
@@ -14,4 +15,26 @@ public class PacienteDao extends GenericoDao<Paciente> implements PacienteDaoIF 
         super(Paciente.class);
     }
 
+    @Override
+    public void remover(Paciente entity) {
+
+        if (getEntityManager().getTransaction().isActive()) {
+
+            System.out.println("ATIVA");
+        } else {
+
+            System.out.println("DESATIVADA");
+
+        }
+        Query queryPaciente = getEntityManager().createNativeQuery("DELETE FROM paciente WHERE id = " + entity.getId());
+        queryPaciente.executeUpdate();
+
+        Query queryPessoa = getEntityManager().createNativeQuery("DELETE FROM pessoa WHERE id = " + entity.getId());
+        queryPessoa.executeUpdate();
+
+        getEntityManager().getTransaction().commit();
+
+        getEntityManager().close();
+
+    }
 }
