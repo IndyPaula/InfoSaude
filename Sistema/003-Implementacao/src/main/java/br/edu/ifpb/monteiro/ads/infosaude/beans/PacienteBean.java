@@ -143,11 +143,17 @@ public class PacienteBean {
             try {
                 pacienteService.remover(p);
                 JsfUtil.addSuccessMessage("Paciente removido com sucesso");
-                return "buscar_usuario_ubs.xhtml";
+                
+                Thread.sleep(1000);
+                
+                JsfUtil.redirect("/InfoSaude/resources/paginas/paciente/buscar_usuario_ubs.xhtml?faces-redirect=true");
+                return "buscar_usuarios_ubs.xhtml";
 
             } catch (ServiceExcecoes ex) {
 
                 JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
 
