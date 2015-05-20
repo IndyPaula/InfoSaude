@@ -93,10 +93,14 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
     @Override
     @Transactional
     public List<T> buscarTudo() throws ServiceExcecoes {
+        List<T> t = null;
         try {
-            return getDao().buscarTudo();
+            if (getDao().buscarTudo().isEmpty()) {
+                t = getDao().buscarTudo();
+            }
         } catch (DaoExcecoes ex) {
-            throw new ServiceExcecoes("Erro no Service ao Buscar Todos", ex);
+            Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return t;
     }
 }

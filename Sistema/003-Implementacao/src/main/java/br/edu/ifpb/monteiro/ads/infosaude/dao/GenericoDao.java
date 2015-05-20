@@ -23,6 +23,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Inject
     private EntityManager em;
+    
     private Class<T> entity;
 
     public GenericoDao(Class<T> clazz) {
