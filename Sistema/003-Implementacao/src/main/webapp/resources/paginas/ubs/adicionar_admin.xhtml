@@ -21,30 +21,30 @@
                                 style="background: transparent; width: 40%; text-align: center; margin-top: 80px;" >
                         <h:panelGrid columns="2"  style="text-align: left; ">
 
-                            <h:outputLabel for="matFuncionario" value="Matrícula*: "/>
-                            <p:selectOneMenu id="matFuncionario" value="#{administrador.matFuncionario}">
-                                <f:selectItems value="#{administrador.matriculas()}"
+                            <h:outputLabel for="matFuncionario" value="Matrícula: "/>
+                            <p:selectOneMenu id="matFuncionario" value="#{administradorBean.matFuncionario}">
+                                <f:selectItems value="#{administradorBean.matriculas()}"
                                                />
                             </p:selectOneMenu>
 
-                            <h:outputText value="Nome de Usuário*: "/>
-                            <p:inputText value="#{administrador.entidade.login}" size="15" required="true" requiredMessage="Nome de Usuário necessário" />
+                            <h:outputText value="Nome de Usuário: "/>
+                            <p:inputText value="#{administradorBean.entidade.login}" size="15" required="true" requiredMessage="Nome de Usuário necessário" />
 
 
-                            <h:outputText value="Senha*: "/>
-                            <p:password value="#{administrador.entidade.senha}" size="15" required="true" requiredMessage="Senha de Usuário é necessária" feedback="true" 
+                            <h:outputText value="Senha: "/>
+                            <p:password value="#{administradorBean.entidade.senha}" size="15" required="true" requiredMessage="Senha de Usuário é necessária" feedback="true" 
                                         promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"   
                                         goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
                                         match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Senha" />
 
 
-                            <h:outputText  value=" Confirmar Senha*: "/>
-                            <p:password value="#{administrador.confirmarSenha}" size="15" required="true" requiredMessage="É necessário confirmar senha" 
+                            <h:outputText  value=" Confirmar Senha: "/>
+                            <p:password value="#{administradorBean.confirmarSenha}" size="15" required="true" requiredMessage="É necessário confirmar senha" 
                                         id="confirmarSenha" label="Confirmar Senha"
                                         />
 
                             <p:commandButton value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
-                                             action="#{administrador.salvar()}"/>
+                                             action="#{administradorBean.salvar()}"/>
                         </h:panelGrid>
 
                     </p:fieldset> 

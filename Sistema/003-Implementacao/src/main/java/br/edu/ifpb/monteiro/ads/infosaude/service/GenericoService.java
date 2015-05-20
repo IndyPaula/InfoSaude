@@ -96,7 +96,8 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
         try {
             return getDao().buscarTudo();
         } catch (DaoExcecoes ex) {
-            throw new ServiceExcecoes("Erro no Service ao Buscar Todos", ex);
+            Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 }
