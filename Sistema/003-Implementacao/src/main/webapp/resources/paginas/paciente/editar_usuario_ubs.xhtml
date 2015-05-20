@@ -20,32 +20,32 @@
 
 
                 <h:form id="cadastrarPaciente" >
-                    <p:growl id="mensages" showDetail="false" life="3000"/>
+                    <p:growl id="mensages" showDetail="false" life="6000"/>
                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
                     <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde"
                                 style="width: 90%; text-align: center; margin-top: 80px; height: 600px;">
                         <h:panelGrid columns="2"  style="text-align: left">
 
-                            <h:outputText value="Nome: "/>
-                            <p:inputText value="#{pacienteBean.paciente.nome}" size="40"
+                            <p:outputLabel value="Nome: " for="txtNome"/>
+                            <p:inputText id="txtNome" value="#{pacienteBean.paciente.nome}" size="40"
                                          required="true" requiredMessage="O campo Nome é obrigatório" />
 
-                            <h:outputText value="CPF: "/>
-                            <p:inputMask value="#{pacienteBean.paciente.cpf}" 
+                            <p:outputLabel value="CPF: " for="txtCpf"/>
+                            <p:inputMask id="txtCpf" value="#{pacienteBean.paciente.cpf}" 
                                          requiredMessage="O campo CPF é obrigatório"
-                                         mask="999.999.999-99" required="true"/>
+                                         mask="999.999.999-99" required="true" validator="cpfValidator" converter="cpfConverter"/>
 
-                            <h:outputText value="RG: " />
+                            <p:outputLabel value="RG: " />
 
                             <p:row>
                                 <p:column colspan="2" >
                                     <h:panelGrid columns="6">
                                         <p:inputText  size="20" maxlength="20" value="#{pacienteBean.paciente.rg}"
                                                       />
-                                        <h:outputText value="Órgão Emissor: "/>
+                                        <p:outputLabel value="Órgão Emissor: "/>
                                         <p:inputText  size="10" maxlength="7" value="#{pacienteBean.paciente.orgaoEmissor}"
                                                       />
-                                        <h:outputText value="UF: " style="margin-left: 36px; margin-right: 2px"/>
+                                        <p:outputLabel value="UF: " style="margin-left: 36px; margin-right: 2px"/>
                                         <p:selectOneMenu id="ufRG" value="#{pacienteBean.paciente.ufOrgaoEmissor}" >
                                             <f:selectItem itemLabel="Selecione"/>
                                             <f:selectItems var="uf"  value="#{pacienteBean.estado}"
@@ -55,29 +55,38 @@
                                 </p:column>
                             </p:row> 
 
-                            <h:outputText value="Cartão SUS:"/>
-                            <p:inputText  value="#{pacienteBean.paciente.cartaoSUS}" size="20" maxlength="15"
+                            <p:outputLabel value="Cartão SUS:" for="txtSus"/>
+                            <p:inputText  id="txtSus" value="#{pacienteBean.paciente.cartaoSUS}" size="20" maxlength="15"
                                           required="true" requiredMessage="O número do cartão SUS é obrigatório"
-                                          />
+                                          >
+                                <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
+                            </p:inputText>
+
+                            <p:outputLabel value="Número prontuário: " for="txtNumeroProntuario" />
+
+                            <p:inputText id="txtNumeroProntuario" value="#{pacienteBean.paciente.numeroProntuario}" size="20" maxlength="15"
+                                         required="true" requiredMessage="O número do prontuário é obrigatório"  
+                                         >
+                                <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
+                            </p:inputText>
 
 
-                            <h:outputText value="Data de nascimento: "/>
-                            <p:calendar locale="pt_BR" navigator="true" 
-                                        pattern="dd/mm/yyyy" mask="true"
-                                         maxdate="06/05/2015"
+                            <p:outputLabel value="Data de nascimento: " for="txtDataNascimento"/>
+                            <p:calendar id="txtDataNascimento" locale="pt_BR" navigator="true" 
+                                        maxdate="#{pacienteBean.dataAtual}"
                                         value="#{pacienteBean.paciente.dataNascimento}"
                                         required="true" requiredMessage="A Data de Nascimento é obrigatória"
                                         />
 
-                            <h:outputText value="Data de cadastro "/>
-                            <p:calendar locale="pt_BR" navigator="true" 
-                                        pattern="dd/mm/yyyy" mask="true"
-                                         maxdate="06/05/2015"
-                                        value="#{pacienteBean.paciente.dataCadastro}" required="true" requiredMessage="A Data de Cadastro é obrigatória"
+                            <p:outputLabel value="Data de cadastro: " for="txtDataCadastro"/>
+                            <p:calendar id="txtDataCadastro" locale="pt_BR" navigator="true" 
+                                        maxdate="#{pacienteBean.dataAtual}"
+                                        value="#{pacienteBean.paciente.dataCadastro}"
+                                        required="true" requiredMessage="A Data de Cadastro é obrigatória"
                                         />
 
-                            <h:outputText value="Sexo: "/>
-                            <p:selectOneMenu id="sexo"  value="#{pacienteBean.paciente.sexo}" required="true"  requiredMessage="O campo Sexo é obrigatório">
+                            <p:outputLabel value="Sexo: " for="txtSexo"/>
+                            <p:selectOneMenu id="txtSexo"  value="#{pacienteBean.paciente.sexo}" required="true"  requiredMessage="O campo Sexo é obrigatório">
                                 <f:selectItem itemLabel="Selecione"/>
 
                                 <f:selectItems var="sexo"  value="#{pacienteBean.sexo}"
@@ -87,13 +96,13 @@
                             </p:selectOneMenu>
 
 
-                            <h:outputText value="Peso:"/>
+                            <p:outputLabel value="Peso:"/>
                             <p:inputText value="#{pacienteBean.paciente.peso}" size="4" maxlength="4"
                                          />
 
-                            <h:outputText value="Etnia:"/>
+                            <p:outputLabel value="Etnia:" for="txtEtnia"/>
 
-                            <p:selectOneMenu id="etnia"  value="#{pacienteBean.paciente.etnia}">
+                            <p:selectOneMenu id="txtEtnia"  value="#{pacienteBean.paciente.etnia}">
                                 <f:selectItem itemLabel="Selecione"/>
 
                                 <f:selectItems var="etnia"  value="#{pacienteBean.etnias}"
@@ -102,26 +111,26 @@
 
                             </p:selectOneMenu>
 
-                            <h:outputText value="Altura:"/>
+                            <p:outputLabel value="Altura:"/>
                             <p:inputText value="#{pacienteBean.paciente.altura}" size="4" maxlength="4" 
                                          />
 
-                            <h:outputText value="Nome da mãe: "/>
+                            <p:outputLabel value="Nome da mãe: "/>
                             <p:inputText value="#{pacienteBean.paciente.nomeMae}"
                                          size="40" />
 
-                            <h:outputText value="Nome do pai: "/>
+                            <p:outputLabel value="Nome do pai: "/>
                             <p:inputText value="#{pacienteBean.paciente.nomePai}"
                                          size="40" />
 
-                            <h:outputText value="Endereço: "/>
+                            <p:outputLabel value="Endereço: "/>
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="3" >
 
                                         <p:inputText value="#{pacienteBean.paciente.logradouro}" size="45" style="margin-right: 25px"/>
-                                        <h:outputText value="Nº: "/>
+                                        <p:outputLabel value="Nº: "/>
                                         <p:inputText value="#{pacienteBean.paciente.numero}" size="6" maxlength="8"/>
 
                                     </h:panelGrid>
@@ -129,27 +138,27 @@
                             </p:row>
 
 
-                            <h:outputText value="Bairro: "/>
+                            <p:outputLabel value="Bairro: "/>
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="3" >
 
                                         <p:inputText  
                                             size="45" style="margin-right: 25px" value="#{pacienteBean.paciente.bairro}"  maxlength="60"/>
-                                        <h:outputText value="CEP: "/>
+                                        <p:outputLabel value="CEP: "/>
                                         <p:inputMask mask="99.999-999"  
                                                      size="8"  value="#{pacienteBean.paciente.cep}" maxlength="10"/>
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
 
-                            <h:outputText value="Cidade: "/>
+                            <p:outputLabel value="Cidade: "/>
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="3" >
                                         <p:inputText size="45" style="margin-right: 25px"  value="#{pacienteBean.paciente.cidade}"/>
-                                        <h:outputText value="UF: "/>
+                                        <p:outputLabel value="UF: "/>
                                         <p:selectOneMenu id="ufEndereco"  value="#{pacienteBean.paciente.estado}">
                                             <f:selectItem itemLabel="Selecione"/>
                                             <f:selectItems var="uf"  value="#{pacienteBean.estado}"
@@ -160,7 +169,7 @@
                                 </p:column>
                             </p:row> 
                             <h:inputHidden value="#{pacienteBean.idAuxiliar}" id="id_axuliar"/>
-                            
+
                             <h:outputText value=" "/>
                             <p:commandButton value="Salvar Alterações" style="top: 20px; left: 300px; bottom: 10px;"
                                              update="mensages"

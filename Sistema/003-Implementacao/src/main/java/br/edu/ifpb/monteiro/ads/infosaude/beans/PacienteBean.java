@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
@@ -8,6 +9,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
+import br.edu.ifpb.monteiro.ads.infosaude.validadores.CPFValidator;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
@@ -133,7 +135,7 @@ public class PacienteBean {
         if (p != null) {
 
             try {
-                System.err.println("MY NAME IS ---->>>   "+p.getNome());
+                System.err.println("MY NAME IS ---->>>   " + p.getNome());
                 pacienteService.remover(p);
                 JsfUtil.addSuccessMessage("Paciente removido com sucesso");
 
@@ -150,7 +152,9 @@ public class PacienteBean {
     public String update() throws BeanExcecao {
 
         try {
-            
+
+            pacienteService.cpfExiste(idAuxiliar, paciente.getCpf());
+
             paciente.setId(idAuxiliar);
             pacienteService.atualizar(paciente);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
@@ -162,7 +166,11 @@ public class PacienteBean {
             Logger.getLogger(GenericoBeans.class.getName()).log(Level.SEVERE, null, ex);
 
             return null;
+        } catch (DaoExcecoes ex) {
+
+            JsfUtil.addErrorMessage(ex.getMessage());
         }
+        return null;
 
     }
 }
