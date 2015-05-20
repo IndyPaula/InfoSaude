@@ -6,39 +6,45 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
+
     <body>
 
-        <ui:composition template="./../../template/template_vacinador.xhtml">
+        <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
-
-
                 <h:form id="cadastrarVacinador" >
+                    <p:growl id="mensages" showDetail="false" life="7000"/>
+                    <span id="titulo_pagina">Cadastro de Vacinador da UBS</span>
+                    <p:fieldset legend="Cadastrar Vacinador da Unidade Básica de Saúde"
+                                style="width: 90%; text-align: center; margin-top: 80px; height: 600px; " >
+                        <h:panelGrid columns="2"  style="text-align: left">
 
-
-                    <p:panel header="Cadastrar Vacinador" style="background: transparent; border: 0; width: 1000px" >
-                        <h:panelGrid columns="2"  >
-
-                            <h:outputText value="Nome: "/>
-                            <p:inputText value="" size="60"
+                            <p:outputLabel for="nome" value="Nome: "/>
+                            <p:inputText id="nome" required="true" value="#{vacinadorBean.vacinador.nome}" size="60"
                                          />
 
-                            <h:outputText value="CPF: "/>
-                            <p:inputMask value="" 
-                                         mask="999.999.999-99" required="true"/>
-                            <h:outputText value="RG: " style="text-align: center"/>
+                            <p:outputLabel value="CPF: " for="txtCpf"/>
+                            <p:inputMask id="txtCpf" value="#{vacinadorBean.vacinador.cpf}" 
+                                         requiredMessage="O campo CPF é obrigatório"
+                                         mask="999.999.999-99" required="true" validator="cpfValidator" converter="cpfConverter"/>
+
+
+                            <p:outputLabel value="RG: " style="text-align: center"/>
 
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
+                                <p:column colspan="2" >
                                     <h:panelGrid columns="6" >
-                                        <p:inputText value="" 
+                                        <p:inputText value="#{vacinadorBean.vacinador.rg}" 
                                                      style="margin-right: 40px; margin-left: -3px"   />
-                                        <h:outputText value="Orgão Emissor: "/>
-                                        <p:inputText value="" style="margin-right: 40px"/>
-                                        <h:outputText value="UF: " style="margin-left: 36px; margin-right: 2px"/>
-                                        <p:selectOneMenu id="ufRG" value="">
+
+                                        <p:outputLabel value="Orgão Emissor: "/>
+                                        <p:inputText value="#{vacinadorBean.vacinador.orgaoEmissor}" style="margin-right: 40px"/>
+
+                                        <p:outputLabel value="UF: " style="margin-left: 36px; margin-right: 2px"/>
+                                        <p:selectOneMenu id="ufRG" value="#{vacinadorBean.vacinador.ufOrgaoEmissor}">
                                             <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="" 
+                                            <f:selectItems var="uf" value="#{vacinadorBean.estado}" 
                                                            itemLabel="#{uf}" itemValue="#{uf}"/>
                                         </p:selectOneMenu>
                                     </h:panelGrid>
@@ -46,52 +52,66 @@
                             </p:row> 
 
 
-                            <h:outputText value="Registro Coren: " style="text-align: center"/>
+                            <p:outputLabel for="registroCoren" value="Registro Coren: " style="text-align: center"/>
 
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
+                                <p:column colspan="2">
                                     <h:panelGrid columns="4" >
-                                        <p:inputText value="" 
+
+                                        <p:inputText id="registroCoren" value="#{vacinadorBean.vacinador.registroCoren}" required="true" 
                                                      style="margin-right: 40px; margin-left: -3px"   />
-                                        <h:outputText value="Matrícula: " style="margin-right: 30px"/>
-                                        <p:inputText value="" style="margin-right: 40px"/>
+
+
+                                        <p:outputLabel for="matricula" value="Matrícula: " style="margin-right: 30px"/>
+                                        <p:inputText id="matricula" value="#{vacinadorBean.vacinador.matricula}" style="margin-right: 40px" required="true"/>
+
+
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
 
-                            <h:outputText value="Código INE: "/>
+                            <p:outputLabel value="Código INE: "/>
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
+                                <p:column colspan="2">
                                     <h:panelGrid columns="4" >
-                                        <p:inputText value="" style="margin-right: 40px"/>
+                                        <p:inputText value="#{vacinadorBean.vacinador.codigoEquipeINE}" style="margin-right: 40px"/>
 
-                                        <h:outputText value="Data de Nascimento: "/>
-                                        <p:calendar locale="pt_BR" navigator="true" 
-                                                    pattern="dd/mm/yyyy" mask="true"
+
+
+                                        <p:outputLabel value="Data de nascimento: " for="txtDataNascimento"/>
+                                        <p:calendar id="txtDataNascimento" locale="pt_BR" navigator="true" 
+                                                    maxdate="#{vacinadorBean.dataAtual}"
+                                                    value="#{vacinadorBean.vacinador.dataNascimento}"
+                                                    required="true" requiredMessage="A Data de Nascimento é obrigatória"
                                                     />
 
-
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
 
-                            <h:outputText value="Estado Cívil: "/>
-                            <p:selectOneMenu editable="true" value="">
-                                <f:selectItem itemLabel="Casado(a)"/>
-                                <f:selectItem itemLabel="União Estável(a)"/>
-                                <f:selectItem itemLabel="Solteiro(a)"/>
-                            </p:selectOneMenu>
+                            <p:spacer/>
+                            <!--Fazer depois não tem estado civil no modelo-->
+                            <!--                            <p:outputLabel value="Estado Cívil: "/>
+                                                        
+                                                        <p:selectOneMenu editable="true" value="">
+                                                            <f:selectItem itemLabel="Casado(a)"/>
+                                                            <f:selectItem itemLabel="União Estável(a)"/>
+                                                            <f:selectItem itemLabel="Solteiro(a)"/>
+                                                            <f:selectItem itemLabel="Divorciado"/>
+                                                        </p:selectOneMenu>-->
 
-                              <h:outputText value="Endereço: "/>
+                            <p:outputLabel value="Endereço: "/>
 
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
+                                <p:column colspan="2">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="" 
+                                        <p:inputText value="#{vacinadorBean.vacinador.logradouro}" 
                                                      size="70" style="margin-right: 25px"/>
-                                        <h:outputText value="Nº.: "/>
-                                        <p:inputText value="" 
+
+
+                                        <p:outputLabel value="Nº.: "/>
+                                        <p:inputText value="#{vacinadorBean.vacinador.numero}" 
                                                      size="6" />
 
                                     </h:panelGrid>
@@ -99,31 +119,36 @@
                             </p:row>
 
 
-                            <h:outputText value="Bairro: "/>
+                            <p:outputLabel value="Bairro: "/>
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
+                                <p:column colspan="2">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="" 
+                                        <p:inputText value="#{vacinadorBean.vacinador.bairro}" 
                                                      size="70" style="margin-right: 25px"/>
-                                        <h:outputText value="CEP: "/>
-                                        <p:inputMask mask="99.999-999" value="" 
+
+                                        <p:outputLabel value="CEP: "/>
+                                        <p:inputMask mask="99.999-999" value="#{vacinadorBean.vacinador.cep}" 
                                                      size="8" />
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
 
-                            <h:outputText value="Cidade: "/>
+                            <p:outputLabel value="Cidade: "/>
 
                             <p:row>
-                                <p:column colspan="2" style="position: absolute">
+                                <p:column colspan="2" >
                                     <h:panelGrid columns="6" >
-                                        <p:inputText value=""
+
+                                        <p:inputText value="#{vacinadorBean.vacinador.cidade}"
                                                      size="40" style="margin-right: 40px"/>
-                                        <h:outputText value="UF: "/>
-                                        <p:selectOneMenu id="ufEndereco" value="">
+
+
+                                        <p:outputLabel value="UF: "/>
+                                        <p:selectOneMenu id="ufEndereco" value="#{vacinadorBean.vacinador.estado}">
+
                                             <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="" 
+                                            <f:selectItems var="uf" value="#{vacinadorBean.estado}" 
                                                            itemLabel="#{uf}" itemValue="#{uf}"
                                                            />
                                         </p:selectOneMenu>
@@ -131,46 +156,51 @@
                                 </p:column>
                             </p:row> 
 
-                            
-                             <h:outputText value="Nome de Usuário: " style="text-align: center"/>
+
+                            <p:outputLabel for="nomeUsuario" value="Nome de Usuário: " style="text-align: center"/>
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
-                                        <p:inputText value="" 
-                                                     style="margin-right: 40px; margin-left: -3px"   />
-                                        <h:outputText value="Senha: "/>
-                                        <p:password value="" style="margin-right: 40px"/>
-                                        <h:outputText value="Confirmar Senha: "/>
-                                        <p:password value="" style="margin-right: 40px"/>
-                                        
+
+                                        <p:inputText value="#{vacinadorBean.vacinador.nomeUsuario}" id="nomeUsuario" required="true"
+                                                     style="margin-right: 30px; margin-left: -3px"   />
+
+                                        <p:outputLabel for="senha" value="Senha: "/>
+                                        <p:password value="#{vacinadorBean.vacinador.senha}" size="15" required="true" requiredMessage="Senha de Vacinador é necessária" feedback="true" 
+                                                    promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senha"
+                                                    goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
+                                                    match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Senha"  />
+
+
+                                        <p:outputLabel for="confirmarSenha"  value=" Confirmar Senha: " style="margin-left: 20px"/>
+                                        <p:password value="#{vacinadorBean.confirmarSenha}" size="15" required="true" requiredMessage="É necessário confirmar senha" 
+                                                    id="confirmarSenha" label="Confirmar Senha" 
+                                                    />
+
+
+
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
 
+                            <!--                            <p:outputLabel value="Observações: "/>
                             
-                            <h:outputText value="Observações: "/>
-                            <p:row>
-                                <p:column colspan="2" style="position: absolute">
-                                    <h:panelGrid columns="6" >
+                                                        <p:inputTextarea maxlength="670"  style="width: 685px;" 
+                                                                         value=""
+                                                                         rows="3" autoResize="false"
+                                                                         />-->
 
-                                        <p:inputTextarea maxlength="670"  style="width: 670px;" 
-                                                         value=""
-                                                         rows="3" autoResize="false"
-                                                         />
+                            <p:spacer/>
 
-                                        <p:commandLink >
-                                            <p:graphicImage value="/resources/imagens/icon/salvar2.png" 
-                                                            style="margin-top: 30%; margin-left: 38%; height: 60px" />
-                                        </p:commandLink>
-
-                                    </h:panelGrid>
-                                </p:column>
-                            </p:row> 
+                            <p:outputLabel value=" "/>
+                            <p:commandButton value="Cadastrar Vacinador" style="top: 20px; margin-left: 50%; bottom: 10px;"
+                                             update="mensages" ajax="false" 
+                                             action="#{vacinadorBean.salvar()}"/>
 
                         </h:panelGrid>
 
-                    </p:panel> 
+                    </p:fieldset> 
                 </h:form>
 
             </ui:define>
@@ -178,4 +208,8 @@
         </ui:composition>
 
     </body>
+
+
+
+
 </html>
