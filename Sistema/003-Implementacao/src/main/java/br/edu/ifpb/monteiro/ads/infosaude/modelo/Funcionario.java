@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -33,6 +34,10 @@ public  class Funcionario extends Pessoa implements  Serializable   {
 
     @Column(name = "codigo_euipe_ine", length = 15, nullable = false)
     private String codigoEquipeINE;
+    
+    @NotNull
+    @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
+    private String cpf;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UnidadeSaude unidadeSaude;
@@ -94,6 +99,14 @@ public  class Funcionario extends Pessoa implements  Serializable   {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
 }

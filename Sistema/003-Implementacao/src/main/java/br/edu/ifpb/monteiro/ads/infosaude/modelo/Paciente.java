@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -26,7 +27,11 @@ public class Paciente extends Pessoa implements  Serializable {
 
     @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
-
+    
+    @NotNull
+    @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
+    private String cpf;
+    
     public int getNumeroProntuario() {
         return numeroProntuario;
     }
@@ -50,4 +55,13 @@ public class Paciente extends Pessoa implements  Serializable {
     public void setCartaoSUS(String cartaoSUS) {
         this.cartaoSUS = cartaoSUS;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
 }

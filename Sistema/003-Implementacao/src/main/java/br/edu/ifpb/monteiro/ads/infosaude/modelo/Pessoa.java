@@ -19,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -62,9 +63,6 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Column(name = "peso", nullable = true, scale = 2)
     private double peso;
-
-    @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
-    private String cpf;
     
     @Column(name = "rg", nullable = true, length = 15 , precision = 15)
     private String rg;
@@ -169,14 +167,6 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     public void setPeso(double peso) {
         this.peso = peso;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public double getPesoNascer() {
