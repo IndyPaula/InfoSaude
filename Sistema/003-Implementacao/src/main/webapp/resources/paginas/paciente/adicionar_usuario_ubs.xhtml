@@ -12,7 +12,7 @@
 
             <ui:define name="centro">
                 <h:form id="cadastrarPaciente" >
-                    <p:growl id="mensages" showDetail="false" life="6000"/>
+                    <p:growl id="mensages" showDetail="false" life="7000"/>
                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
                     <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde"
                                 style="width: 90%; text-align: center; margin-top: 80px; height: 600px;">
@@ -162,7 +162,7 @@
 
                             <p:outputLabel value=" "/>
                             <p:commandButton value="Cadastrar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
-                                             update="mensagem" ajax="false"
+                                             update="mensages" ajax="false" 
                                              action="#{pacienteBean.salvar}"/>
                         </h:panelGrid>
 

@@ -1,15 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.validadores;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
-import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import javax.inject.Inject;
 
 /**
  * Classe que representa um validador e tem como responsabilidade validar um CPF

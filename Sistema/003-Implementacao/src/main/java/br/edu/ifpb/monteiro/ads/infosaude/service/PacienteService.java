@@ -32,14 +32,26 @@ public class PacienteService extends GenericoService<Paciente> implements Pacien
     @Override
     public boolean cpfExiste(Long id, String cpf) throws ServiceExcecoes, DaoExcecoes {
 
-        Paciente paciente = dao.buscarPorCampo("cpf", cpf);
+        Paciente paciente = null;
+        if (id == null) {
+            paciente = dao.buscarPorCampo("cpf", cpf);
 
-        if (paciente != null && id != paciente.getId()) {
+            if (paciente != null) {
 
-            throw new DaoExcecoes("O CPF informado pertence a "+paciente.getNome()+", por favor informe outro.");
+                throw new DaoExcecoes("O CPF informado pertence a " + paciente.getNome() + ", por favor informe outro.");
+            }
+        } else {
+            
+            paciente = dao.buscarPorCampo("cpf", cpf);
+            
+            if (paciente != null && id != paciente.getId()) {
+
+                throw new DaoExcecoes("O CPF informado pertence a " + paciente.getNome() + ", por favor informe outro.");
+            }
+
+            return true;
         }
-
-        return false;
-
+        return true;
     }
+
 }
