@@ -9,9 +9,15 @@
     <body>
 
         <ui:composition template="./../../template/template_base.xhtml">
-CHAMAR MÉTODO
+
             <ui:define name="centro">
 
+                 <f:metadata>
+                     <f:viewParam name="faces-redirect" value="#{pacienteBean.mensangem}" />
+                     <f:viewAction action="#{pacienteBean.mensagem()}"  />
+
+                </f:metadata>
+                
                 <h:form id="paciente">
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
                     <span id="titulo_pagina">Lista de Usuários da UBS</span>

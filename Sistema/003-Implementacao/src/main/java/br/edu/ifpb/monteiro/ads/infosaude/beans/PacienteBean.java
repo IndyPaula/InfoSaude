@@ -35,6 +35,7 @@ public class PacienteBean {
     @Inject
     private Paciente paciente;
     private Long idAuxiliar;
+    private String mensangem;
 
     public PacienteBean() {
 
@@ -95,6 +96,23 @@ public class PacienteBean {
         this.idAuxiliar = idAuxiliar;
     }
 
+    public String getMensangem() {
+        return mensangem;
+    }
+
+    public void setMensangem(String mensangem) {
+        this.mensangem = mensangem;
+    }
+
+  
+
+    public void mensagem() {
+        if ("true".equals(mensangem)) {
+            JsfUtil.addSuccessMessage("Paciente removido com sucesso");
+
+        }
+    }
+
     public String salvar() {
         try {
 
@@ -104,9 +122,9 @@ public class PacienteBean {
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
-            
+
             JsfUtil.addErrorMessage(ex.getMessage());
-            
+
             return null;
 
         }
@@ -142,10 +160,9 @@ public class PacienteBean {
 
             try {
                 pacienteService.remover(p);
-                JsfUtil.addSuccessMessage("Paciente removido com sucesso");
-                
+
                 Thread.sleep(1000);
-                
+
                 JsfUtil.redirect("/InfoSaude/resources/paginas/paciente/buscar_usuario_ubs.xhtml?faces-redirect=true");
                 return "buscar_usuarios_ubs.xhtml";
 
