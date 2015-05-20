@@ -47,9 +47,8 @@
                                         <f:param value="#{pac.id}" name="id"/> 
                                     </p:button>
 
-                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash" action="#{pacienteBean.remover(pac)}" 
-                                                     >
-                                        <p:ajax listener="#{pacienteBean.remover(pac)}" update="tablePaciente" />
+                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash" actionListener="#{pacienteBean.remover(pac)}" 
+                                                      onsuccess="tablePaciente">
                                         
                                         <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
                                     </p:commandButton>
