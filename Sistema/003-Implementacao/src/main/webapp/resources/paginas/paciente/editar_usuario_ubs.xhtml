@@ -56,11 +56,11 @@
                             </p:row> 
 
                             <p:outputLabel value="Cartão SUS:" for="txtSus"/>
-                             <p:inputMask  id="txtSus" value="#{pacienteBean.paciente.cartaoSUS}" size="20" maxlength="15"
+                          <p:inputMask  id="txtSus" value="#{pacienteBean.paciente.cartaoSUS}" size="20" maxlength="15"
                                           required="true" requiredMessage="O número do cartão SUS é obrigatório" mask="999999999999999"
                                           >
-                                <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
-                            </p:inputText>
+                            <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
+                            </p:inputMask >
 
                             <p:outputLabel value="Número prontuário: " for="txtNumeroProntuario" />
 
