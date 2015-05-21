@@ -5,7 +5,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
-import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +30,7 @@ public class LoginAdminDaoITest {
     }
 
     @BeforeClass
-    public static void inserirDados() throws ServiceExcecoes {
+    public static void inserirDados(){
 
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
