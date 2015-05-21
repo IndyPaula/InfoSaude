@@ -35,9 +35,4 @@ public class EntityManagerProducer {
         entityManager.close();
     }
     
-    public void entityMangerForTest(){
-        
-         this.entityManagerFactory = Persistence.createEntityManagerFactory("InfoSaudePU");
-        
-    }
 }

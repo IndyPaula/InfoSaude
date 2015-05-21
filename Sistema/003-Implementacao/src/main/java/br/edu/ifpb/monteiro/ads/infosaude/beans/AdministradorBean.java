@@ -6,6 +6,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
@@ -17,7 +18,7 @@ import javax.inject.Inject;
  * @date 16/04/2015
  */
 @Model
-public class AdministradorBean extends GenericoBeans<LoginAdmin> {
+public class AdministradorBean implements Serializable {
 
     private String confirmarSenha;
     private Integer matFuncionario;
@@ -79,23 +80,5 @@ public class AdministradorBean extends GenericoBeans<LoginAdmin> {
 
     public void setMatFuncionario(Integer matFuncionario) {
         this.matFuncionario = matFuncionario;
-    }
-
-    @Override
-    public LoginAdmin getEntidade() {
-        if (identificavel == null) {
-            identificavel = loginAdmin;
-        }
-        return (LoginAdmin) identificavel;
-    }
-
-    @Override
-    public void setEntidade(LoginAdmin identificavel) {
-        this.identificavel = identificavel;
-    }
-
-    @Override
-    public ServiceIF getService() {
-        return service;
     }
 }

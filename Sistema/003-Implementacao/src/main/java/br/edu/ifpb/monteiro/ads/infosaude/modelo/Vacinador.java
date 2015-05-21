@@ -15,17 +15,9 @@ public class Vacinador extends Funcionario implements Serializable {
 
     private static final Long serialVersionUID = 1L;
 
-    @Id
-    private Long id;
-
     @Column(name = "registro_coren", nullable = false, unique = true)
     private int registroCoren;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-    
     public int getRegistroCoren() {
         return registroCoren;
     }

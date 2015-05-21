@@ -26,7 +26,7 @@
                         <h:panelGrid columns="2"  style="text-align: left;">
 
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{unidadeSaudeBean.entidade.nome}" size="85"/>
+                            <p:inputText value="#{unidadeSaudeBean.unidadeSaude.nome}" size="85"/>
 
 
                             <h:outputText value="Unidade N.º: "/>
@@ -35,18 +35,18 @@
                                 <p:column colspan="2">
                                     <h:panelGrid columns="3" >
 
-                                        <p:inputMask mask="9?99" value="#{unidadeSaudeBean.entidade.numero}" size="3" style="margin-right: 40px"
+                                        <p:inputMask mask="9?99" value="#{unidadeSaudeBean.unidadeSaude.numero}" size="3" style="margin-right: 40px"
                                                      />
 
                                         <h:outputText value="Código CNES: "/>
-                                        <p:inputText value="#{unidadeSaudeBean.entidade.cnes}" size="15"
+                                        <p:inputText value="#{unidadeSaudeBean.unidadeSaude.cnes}" size="15"
                                                      />
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
 
                             <h:outputText value="Logradouro: "/>
-                            <p:inputText value="#{unidadeSaudeBean.entidade.logradouro}" 
+                            <p:inputText value="#{unidadeSaudeBean.unidadeSaude.logradouro}" 
                                          size="85" />
 
 
@@ -56,15 +56,15 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputMask mask="9?9999" value="#{unidadeSaudeBean.entidade.enderecoNumero}" size="5" style="margin-right: 40px"
+                                        <p:inputMask mask="9?9999" value="#{unidadeSaudeBean.unidadeSaude.enderecoNumero}" size="5" style="margin-right: 40px"
                                                      />
                                         
                                         <h:outputText value="Bairro: "/>
-                                        <p:inputText value="#{unidadeSaudeBean.entidade.bairro}"
+                                        <p:inputText value="#{unidadeSaudeBean.unidadeSaude.bairro}"
                                                      size="34" style="margin-right: 30px"/>
                                         
                                         <h:outputText value="CEP: "/>
-                                        <p:inputMask mask="99.999-999" value="#{unidadeSaudeBean.entidade.cep}" 
+                                        <p:inputMask mask="99.999-999" value="#{unidadeSaudeBean.unidadeSaude.cep}" 
                                                      size="8" />
 
                                     </h:panelGrid>
@@ -77,12 +77,12 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
                                         
-                                        <p:inputText value="#{unidadeSaudeBean.entidade.cidade}"
+                                        <p:inputText value="#{unidadeSaudeBean.unidadeSaude.cidade}"
                                                      size="58" style="margin-right: 40px"/>
                                         
                                         
                                         <h:outputText value="UF: "/>
-                                        <p:selectOneMenu id="estado" value="#{unidadeSaudeBean.entidade.estado}">
+                                        <p:selectOneMenu id="estado" value="#{unidadeSaudeBean.unidadeSaude.estado}">
                                             <f:selectItem itemLabel="Selecione"/>
                                             <f:selectItems var="uf" value="#{unidadeSaudeBean.estado}" 
                                                            itemLabel="#{uf}" itemValue="#{uf}"

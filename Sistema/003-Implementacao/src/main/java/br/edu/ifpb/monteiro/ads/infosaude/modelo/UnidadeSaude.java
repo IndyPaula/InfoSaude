@@ -61,6 +61,11 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
         return id;
     }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public int getCnes() {
         return cnes;
     }

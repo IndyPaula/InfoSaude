@@ -19,7 +19,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -63,16 +62,16 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Column(name = "peso", nullable = true, scale = 2)
     private double peso;
-    
-    @Column(name = "rg", nullable = true, length = 15 , precision = 15)
+
+    @Column(name = "rg", nullable = true, length = 15, precision = 15)
     private String rg;
-    
+
     @Column(name = "orgao_emissor", nullable = true, length = 15, precision = 15)
     private String orgaoEmissor;
-    
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "uf_orgao_emissor", nullable = true, length = 15,  precision = 15)
-    private EnumEstados ufOrgaoEmissor ;
+    @Column(name = "uf_orgao_emissor", nullable = true, length = 15, precision = 15)
+    private EnumEstados ufOrgaoEmissor;
 
     @Column(name = "peso_nascer", nullable = true, scale = 2)
     private double pesoNascer;
@@ -101,6 +100,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -248,7 +248,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
     public void setUfOrgaoEmissor(EnumEstados ufOrgaoEmissor) {
         this.ufOrgaoEmissor = ufOrgaoEmissor;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;

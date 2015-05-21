@@ -4,7 +4,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  *
@@ -16,24 +15,11 @@ public class LoginAdmin extends Funcionario implements Serializable {
 
     private static final Long serialVersionUID = 1L;
 
-    @Id
-    private Long id;
-
     @Column(name = "login", nullable = false, length = 45, unique = true)
     private String login;
 
     @Column(name = "senha_adm", nullable = false, length = 45, unique = false)
     private String senhaAdm;
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public Long getId() {
-        return id;
-    }
-
 
     public String getLogin() {
         return login;

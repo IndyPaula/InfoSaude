@@ -10,7 +10,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import java.time.Instant;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

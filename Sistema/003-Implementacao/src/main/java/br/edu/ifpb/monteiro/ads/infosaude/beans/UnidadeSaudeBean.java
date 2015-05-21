@@ -1,65 +1,72 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
-import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
-import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
+import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.UnidadeSaudeServiceIF;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 /**
  *
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
- * @date 04/05/2015
+ * @date 21/05/2015
  */
 @Model
-public class UnidadeSaudeBean extends GenericoBeans<UnidadeSaude> {
-
-    private boolean operacaoCriar;
-    private boolean operacaoAtualizar;
+public class UnidadeSaudeBean {
 
     @Inject
-    private UnidadeSaudeServiceIF service;
+    private UnidadeSaudeServiceIF unidadeSaudeService;
 
     @Inject
     private UnidadeSaude unidadeSaude;
 
-    public UnidadeSaudeBean() throws BeanExcecao {
+    private boolean operacaoCriar;
+    private boolean operacaoAtualizar;
+
+    public UnidadeSaudeBean() {
         verificarUnidade();
     }
 
-    public void verificarUnidade() throws BeanExcecao {
-        if (buscarTudo().isEmpty()) {
-            setOperacaoCriar(true);
-            setOperacaoAtualizar(false);
-        } else {
-            identificavel = (UnidadeSaude) buscarTudo().get(0);
-            setOperacaoCriar(false);
-            setOperacaoAtualizar(true);
+    private void verificarUnidade() {
+        try {
+            if (unidadeSaudeService.buscarTudo().isEmpty()) {
+                setOperacaoCriar(true);
+                setOperacaoAtualizar(false);
+            } else {
+                setOperacaoCriar(false);
+                setOperacaoAtualizar(true);
+            }
+        } catch (ServiceExcecoes ex) {
+            System.out.println("Erro");
         }
     }
-
-    @Override
-    public ServiceIF getService() {
-        return service;
+    
+    public String salvar (){
+        
+        return null;
+    }
+    
+     public String atualizar (){
+        
+        return null;
     }
 
-    @Override
-    public UnidadeSaude getEntidade() {
-        if (identificavel == null) {
-            identificavel = unidadeSaude;
-        }
-        return (UnidadeSaude) identificavel;
+    public UnidadeSaudeServiceIF getUnidadeSaudeService() {
+        return unidadeSaudeService;
     }
 
-    @Override
-    public void setEntidade(UnidadeSaude identificavel) {
-        this.identificavel = identificavel;
+    public void setUnidadeSaudeService(UnidadeSaudeServiceIF unidadeSaudeService) {
+        this.unidadeSaudeService = unidadeSaudeService;
     }
 
-    public EnumEstados[] getEstado() {
-        return EnumEstados.values();
+    public UnidadeSaude getUnidadeSaude() {
+        return unidadeSaude;
+    }
+
+    public void setUnidadeSaude(UnidadeSaude unidadeSaude) {
+        this.unidadeSaude = unidadeSaude;
     }
 
     public boolean isOperacaoCriar() {
