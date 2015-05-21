@@ -10,6 +10,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import java.time.Instant;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,8 @@ public class PacienteBean {
     private Paciente paciente;
     private Long idAuxiliar;
     private String mensangem;
+    
+    private List<Paciente> pacientesFilter;
 
     public PacienteBean() {
 
@@ -44,7 +48,7 @@ public class PacienteBean {
     @PostConstruct
     public void init() {
 
-        paciente.setDataCadastro(getDataAtual());
+        pacientesFilter = new ArrayList<>();
 
     }
 
@@ -104,11 +108,17 @@ public class PacienteBean {
         this.mensangem = mensangem;
     }
 
-  
+    public List<Paciente> getPacientesFilter() {
+        return pacientesFilter;
+    }
+
+    public void setPacientesFilter(List<Paciente> pacientesFilter) {
+        this.pacientesFilter = pacientesFilter;
+    }
 
     public void mensagem() {
         if ("true".equals(mensangem)) {
-            JsfUtil.addSuccessMessage("Paciente removido com sucesso");
+            JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
 
         }
     }
@@ -174,7 +184,7 @@ public class PacienteBean {
             }
         } else {
 
-            JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
+            JsfUtil.addErrorMessage("Erro ao tentar remover Usuário da UBS");
         }
         return null;
     }

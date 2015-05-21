@@ -37,7 +37,7 @@
             <h:form>
                 <p:growl id="growl"   life="3000"  />
 
-                <p:fieldset legend="Login" style="width: 20%;margin-top:10%; "  >
+                <p:fieldset legend="Login" style="width: 20%;margin-top:10%; "  id="painelLogin">
 
                     <h:panelGrid columns="2" cellpadding="5" style="margin-top: 10%;">
                         <h:outputLabel for="usuario" value="Usuário:" />
@@ -47,7 +47,7 @@
                         <p:password id="senha" value="#{usuarioBean.senha}" required="true" label="senha" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Entrar" update="growl" action="#{usuarioBean.doLogin}"
+                            <p:commandButton id="btEntrar" value="Entrar" update="growl" action="#{usuarioBean.doLogin}"
                                              icon="fa fa-check"
                                              style="left: 70%" />
                         </f:facet>  
@@ -55,6 +55,10 @@
 
                 </p:fieldset>
 
+                <p:blockUI block="painelLogin" trigger="btEntrar" >
+                    Verificando informações<br />
+                    <img src="res/imagens/loading.gif" alt="Carregando ..."  />
+                </p:blockUI>
             </h:form>
         </div>
         <div style="

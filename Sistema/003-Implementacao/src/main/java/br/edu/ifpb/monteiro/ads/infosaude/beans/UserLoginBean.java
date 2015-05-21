@@ -4,6 +4,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -59,6 +61,12 @@ public class UserLoginBean implements Serializable {
     }
 
     public String doLogin() {
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(UserLoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         LoginAdmin usuarioFound = service.efetuarLogin(login, senha);
 
         if (usuarioFound == null) {

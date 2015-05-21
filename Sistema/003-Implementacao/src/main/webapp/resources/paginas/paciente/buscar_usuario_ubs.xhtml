@@ -12,34 +12,55 @@
 
             <ui:define name="centro">
 
-                 <f:metadata>
-                     <f:viewParam name="faces-redirect" value="#{pacienteBean.mensangem}" />
-                     <f:viewAction action="#{pacienteBean.mensagem()}"  />
+                <f:metadata>
+                    <f:viewParam name="faces-redirect" value="#{pacienteBean.mensangem}" />
+                    <f:viewAction action="#{pacienteBean.mensagem()}"  />
 
                 </f:metadata>
-                
+
                 <h:form id="paciente">
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
                     <span id="titulo_pagina">Lista de Usuários da UBS</span>
                     <p:fieldset legend="Usuários da UBS" 
                                 style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
-                        <p:dataTable id="tablePaciente" var="pac" value="#{pacienteBean.pacientes}" editable="true"
-                                     rowsPerPageTemplate="5,10,20,50,100, 200" paginator="true" rows="10" widgetVar="tabela_pacientes"
-                                     paginatorAlwaysVisible="true"
-                                     style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado"  
-                                     >
-                           
+                        <p:dataTable 
+                            var="pac" value="#{pacienteBean.pacientes}" 
+                            filteredValue="#{pacienteBean.pacientesFilter}"
+                            rowsPerPageTemplate="5,10,20,50,100, 200" 
+                            paginator="true" 
+                            rows="10" 
+                            widgetVar="tabela_pacientes"
+                            style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado"  
+                            >
+
                             <f:facet name="header">
-                                Lista de Usuários da UBS
+                                <p:outputPanel>
+                                    <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('tabela_pacientes').filter()" 
+                                                 size="60" placeholder="Digite sua busca por CPF, Nome ou Cartão SUS" />
+                                </p:outputPanel>
                             </f:facet>
 
+                            <p:column filterBy="#{pac.nome}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{pac.nome}" style="text-align: center" />
+                            </p:column>
+                            
                             <p:column headerText="Nome"  width="150"  style="text-align: center" >
                                 <h:outputText value="#{pac.nome}" style="text-align: center" />
                             </p:column>
 
+                            <p:column   filterBy="#{pac.cartaoSUS}" headerText="Cartão SUS" style="text-align: center"  visible="false">
+                                <h:outputText value="#{pac.cartaoSUS}" style="text-align: center" />
+                            </p:column>
+                            
                             <p:column   headerText="Cartão SUS" style="text-align: center" >
                                 <h:outputText value="#{pac.cartaoSUS}" style="text-align: center" />
                             </p:column>
+                            
+                            <p:column   filterBy="#{pac.cpf}" headerText="CPF" style="text-align: center"  visible="false">
+                                <h:outputText value="#{pac.cpf}" style="text-align: center" />
+                            </p:column>
+                            
 
                             <p:column   headerText="Endereço" style="text-align: center" >
                                 <h:outputText value="#{pac.logradouro}" style="text-align: center" />
@@ -53,13 +74,13 @@
                                     </p:button>
 
                                     <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{pacienteBean.remover(pac)}">
-                                        
+
                                         <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
                                     </p:commandButton>
 
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                         <p:commandButton 
-                                                         value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                         <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                     </p:confirmDialog>
                                 </p:panelGrid>
@@ -70,13 +91,13 @@
                 </h:form>
 
             </ui:define>
-            
+
             <script type="text/javascript" language="javascript">
-                
-                function reload(){
-                    
+
+                function reload() {
+
                     window.location.reload();
-                    
+
                 }
             </script>
 
