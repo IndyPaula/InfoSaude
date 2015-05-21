@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import java.util.Date;
@@ -11,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -29,20 +30,15 @@ public class PacienteDaoTest {
 
     }
 
-    @Before
-    public void setUpMethod() {
-
+    @BeforeClass
+    public static void preparaDao() {
         daoPaciente = new PacienteDao();
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
         em = emp.create();
         //SETANTO ENTITY MANAGER MANUALMENTE
         daoPaciente.setEm(em);
-        daoPaciente.getEntityManager().getTransaction().begin();
-        daoPaciente.getEntityManager().createNativeQuery("DELETE FROM paciente").executeUpdate();
-        daoPaciente.getEntityManager().createNativeQuery("DELETE FROM pessoa").executeUpdate();
 
-        daoPaciente.getEntityManager().getTransaction().commit();
     }
 
     @Test
@@ -68,6 +64,7 @@ public class PacienteDaoTest {
         }
         Paciente result = new Paciente();
         try {
+
             result = daoPaciente.buscarPorCampo("cpf", "10145473422");
 
         } catch (DaoExcecoes ex) {
@@ -87,7 +84,7 @@ public class PacienteDaoTest {
         paciente.setSexo(EnumGeneros.MASCULINO);
 
         boolean validadation = true;
-        
+
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
@@ -99,6 +96,7 @@ public class PacienteDaoTest {
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
 
         } catch (ConstraintViolationException ex) {
+            daoPaciente.getEntityManager().getTransaction().rollback();
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, "Erro de validação, CPF inválido");
             validadation = false;
         }
@@ -118,6 +116,7 @@ public class PacienteDaoTest {
         paciente.setNumeroProntuario(55555555);
         paciente.setDataCadastro(new Date());
         paciente.setSexo(EnumGeneros.MASCULINO);
+        paciente.setEstado(EnumEstados.PE);
 
         Paciente paciente2 = new Paciente();
         paciente2.setCartaoSUS("53424534");
@@ -151,8 +150,7 @@ public class PacienteDaoTest {
 
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
 
-        }
-        catch (RollbackException ex) {
+        } catch (RollbackException ex) {
 
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, "CPF já cadastrado");
 
