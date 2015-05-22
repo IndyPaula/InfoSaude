@@ -28,11 +28,11 @@
                             </p:selectOneMenu>
 
                             <h:outputText value="Nome de Usuário: "/>
-                            <p:inputText value="#{administradorBean.entidade.login}" size="15" required="true" requiredMessage="Nome de Usuário necessário" />
+                            <p:inputText value="#{administradorBean.loginAdmin.login}" size="15" required="true" requiredMessage="Nome de Usuário necessário" />
 
 
                             <h:outputText value="Senha: "/>
-                            <p:password value="#{administradorBean.entidade.senha}" size="15" required="true" requiredMessage="Senha de Usuário é necessária" feedback="true" 
+                            <p:password value="#{administradorBean.loginAdmin.senha}" size="15" required="true" requiredMessage="Senha de Usuário é necessária" feedback="true" 
                                         promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"   
                                         goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
                                         match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Senha" />
@@ -44,7 +44,7 @@
                                         />
 
                             <p:commandButton value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
-                                             action="#{administradorBean.salvar()}"/>
+                                             />
                         </h:panelGrid>
 
                     </p:fieldset> 

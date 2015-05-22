@@ -8,6 +8,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -31,20 +34,28 @@ public class AdministradorBean implements Serializable {
     @Inject
     private LoginAdmin loginAdmin;
 
-    public AdministradorBean() throws ServiceExcecoes {
-        matriculas();
+    public AdministradorBean() {
     }
-
-    public List<Integer> matriculas() throws ServiceExcecoes {
+    
+    
+    @PostConstruct
+    public void init(){
+//        matriculas();
+        
+    }
+    public List<Integer> matriculas() {
         List<Integer> lista = new ArrayList<>();
-        for (Funcionario f : funcionarioServiceIF.buscarTudo()) {
-            System.out.println(f.getId());
-            lista.add(f.getMatricula());
+        try {
+            for (Funcionario f : funcionarioServiceIF.buscarTudo()) {
+                System.out.println(f.getId());
+                lista.add(f.getMatricula());
+            }
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }
 
-//    @Override
 //    public String salvar() {
 //        try {
 //            Funcionario f1 = new LoginAdmin();
@@ -64,7 +75,7 @@ public class AdministradorBean implements Serializable {
 //            Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-//
+
     public String getConfirmarSenha() {
         return confirmarSenha;
     }
@@ -80,4 +91,29 @@ public class AdministradorBean implements Serializable {
     public void setMatFuncionario(Integer matFuncionario) {
         this.matFuncionario = matFuncionario;
     }
+
+    public LoginAdminServiceIF getService() {
+        return service;
+    }
+
+    public void setService(LoginAdminServiceIF service) {
+        this.service = service;
+    }
+
+    public FuncionarioServiceIF getFuncionarioServiceIF() {
+        return funcionarioServiceIF;
+    }
+
+    public void setFuncionarioServiceIF(FuncionarioServiceIF funcionarioServiceIF) {
+        this.funcionarioServiceIF = funcionarioServiceIF;
+    }
+
+    public LoginAdmin getLoginAdmin() {
+        return loginAdmin;
+    }
+
+    public void setLoginAdmin(LoginAdmin loginAdmin) {
+        this.loginAdmin = loginAdmin;
+    }
+    
 }

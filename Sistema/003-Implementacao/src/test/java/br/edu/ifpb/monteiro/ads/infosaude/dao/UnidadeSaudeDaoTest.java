@@ -55,7 +55,6 @@ public class UnidadeSaudeDaoTest {
 
     }
 
-    @Test
     public void ubsValida() {
 
         UnidadeSaude ubs = new UnidadeSaude();
@@ -86,12 +85,13 @@ public class UnidadeSaudeDaoTest {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        assertEquals(ubs.getCnes(), result.getCnes());
     }
 
     @Test
     public void ubsCnesDuplicado() {
 
+        ubsValida();
+        
         UnidadeSaude ubs = new UnidadeSaude();
         ubs.setBairro("efjoewif");
         ubs.setCep("5487598");
