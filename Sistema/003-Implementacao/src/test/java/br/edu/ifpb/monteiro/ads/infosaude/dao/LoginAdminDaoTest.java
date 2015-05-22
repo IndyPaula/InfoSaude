@@ -9,37 +9,38 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import org.junit.Test;
+import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
  * @author Vanderlan Gomes<vanderlan.gs@gmail.com>
  * Criado em 16 de Abril de 2015
  */
-public class LoginAdminDaoITest {
+public class LoginAdminDaoTest {
 
     private static EntityManagerProducer emp;
     private static EntityManager em;
-    private static UnidadeSaudeDao daoUbs ;
+    private static UnidadeSaudeDao daoUbs;
     private static LoginAdminDao daoAdm;
-    
-    public LoginAdminDaoITest() {
+
+    public LoginAdminDaoTest() {
 
     }
 
     @BeforeClass
-    public static void inserirDados(){
+    public static void inserirDados() {
 
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
         em = emp.create();
-        
+
         daoUbs = new UnidadeSaudeDao();
         //SETANTO ENTITY MANAGER MANUALMENTE
         daoUbs.setEm(em);
-        
+
         LoginAdmin adm = new LoginAdmin();
 
         UnidadeSaude ubs = new UnidadeSaude();
@@ -56,7 +57,7 @@ public class LoginAdminDaoITest {
         try {
             daoUbs.salvar(ubs);
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         adm.setUnidadeSaude(ubs);
@@ -67,20 +68,43 @@ public class LoginAdminDaoITest {
         adm.setCodigoEquipeINE("2423432");
         adm.setSenha("fjhewiufhew");
         adm.setNomeUsuario("fhguwegyf");
-        
+
         adm.setLogin("user");
         adm.setSenhaAdm("123");
-        
+
         daoAdm = new LoginAdminDao();
         daoAdm.setEm(em);
 
         try {
-            daoAdm.getEm().getTransaction().begin();
+            daoAdm.getEntityManager().getTransaction().begin();
             daoAdm.salvar(adm);
-            daoAdm.getEm().getTransaction().commit();
+            daoAdm.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @AfterClass
+    public static void removerDados() {
+
+        LoginAdmin expResult = new LoginAdmin();
+        expResult.setLogin("user");
+
+        LoginAdmin result = null;
+        try {
+            result = daoAdm.buscarPorCampo("login", "user");
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            daoAdm.getEntityManager().getTransaction().begin();
+            daoAdm.remover(result);
+            daoAdm.getEntityManager().getTransaction().commit();
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Test
