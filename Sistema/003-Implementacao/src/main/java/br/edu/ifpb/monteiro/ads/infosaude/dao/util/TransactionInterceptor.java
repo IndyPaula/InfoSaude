@@ -1,6 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
@@ -50,7 +52,7 @@ public class TransactionInterceptor implements Serializable {
             try {
                 throw e;
             } catch (Exception ex) {
-//                Logger.getLogger(TransactionInterceptor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TransactionInterceptor.class.getName()).log(Level.SEVERE, null, ex);
             }
         } finally {
             if (entityTransaction != null && entityTransaction.isActive() && owner) {

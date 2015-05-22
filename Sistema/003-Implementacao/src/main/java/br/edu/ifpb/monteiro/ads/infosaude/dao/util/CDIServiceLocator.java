@@ -1,6 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
@@ -18,7 +20,8 @@ public class CDIServiceLocator {
         try {
             InitialContext initialContext = new InitialContext();
             return (BeanManager) initialContext.lookup("java:comp/BeanManager");
-        } catch (NamingException e) {
+        } catch (NamingException ex) {
+            Logger.getLogger(InitialContext.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("BeanManager não encontrado.");
         }
     }

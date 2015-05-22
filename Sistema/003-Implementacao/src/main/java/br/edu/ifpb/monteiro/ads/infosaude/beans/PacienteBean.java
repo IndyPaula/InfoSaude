@@ -37,7 +37,7 @@ public class PacienteBean {
     private Paciente paciente;
     private Long idAuxiliar;
     private String mensangem;
-    
+
     private List<Paciente> pacientesFilter;
 
     public PacienteBean() {
@@ -131,7 +131,7 @@ public class PacienteBean {
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
-
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
 
             return null;
@@ -163,7 +163,7 @@ public class PacienteBean {
 
     }
 
-    public String remover(Paciente p) throws BeanExcecao {
+    public String remover(Paciente p) {
 
         if (p != null) {
 
@@ -176,7 +176,7 @@ public class PacienteBean {
                 return "buscar_usuarios_ubs.xhtml";
 
             } catch (ServiceExcecoes ex) {
-
+                Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
             } catch (InterruptedException ex) {
                 Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +200,7 @@ public class PacienteBean {
         } catch (ServiceExcecoes | DaoExcecoes ex) {
 
             JsfUtil.addErrorMessage(ex.getMessage());
-
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

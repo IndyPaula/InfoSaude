@@ -33,10 +33,10 @@ public class UnidadeSaudeBean {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         verificarUnidade();
     }
-    
+
     public void verificarUnidade() {
         try {
             if (unidadeSaudeService.buscarTudo().isEmpty()) {
@@ -48,35 +48,35 @@ public class UnidadeSaudeBean {
                 setOperacaoAtualizar(true);
             }
         } catch (ServiceExcecoes ex) {
-            System.out.println("Erro");
+            Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String salvar (){
+
+    public String salvar() {
         try {
             unidadeSaudeService.salvar(unidadeSaude);
-              JsfUtil.addSuccessMessage("Unidade de Saúde cadastrada com sucesso");
-              return "";
+            JsfUtil.addSuccessMessage("Unidade de Saúde cadastrada com sucesso");
+            return "ubs.xhtml";
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "ubs.xhtml";
     }
-    
-     public String atualizar (){
+
+    public String atualizar() {
         try {
             unidadeSaudeService.atualizar(unidadeSaude);
-             JsfUtil.addSuccessMessage("Unidade de Saúde atualizada com sucesso");
+            JsfUtil.addSuccessMessage("Unidade de Saúde atualizada com sucesso");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-     
 
-     public EnumEstados[] getEstado() {
+    public EnumEstados[] getEstado() {
         return EnumEstados.values();
     }
+
     public UnidadeSaudeServiceIF getUnidadeSaudeService() {
         return unidadeSaudeService;
     }
