@@ -7,33 +7,58 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.transaction.RollbackException;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
- * @author vanderlan
+ * @author Vanderlan Gomes
+ * @date 21/05/2015
  */
 public class UnidadeSaudeDaoTest {
-    
+
     private static EntityManagerProducer emp;
     private static EntityManager em;
-    private static UnidadeSaudeDao daoUbs ;
-    
+    private static UnidadeSaudeDao daoUbs;
+
     public UnidadeSaudeDaoTest() {
-        
-         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
+
+    }
+
+    @BeforeClass
+    public static void configurarDao() {
+
+        //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
         em = emp.create();
-        
+
         daoUbs = new UnidadeSaudeDao();
         //SETANTO ENTITY MANAGER MANUALMENTE
         daoUbs.setEm(em);
-        
+
     }
-     @Test
+
+    @AfterClass
+    public static void removerDados() {
+
+        try {
+            UnidadeSaude ubs = daoUbs.buscarPorCampo("cnes", 312);
+
+            daoUbs.getEntityManager().getTransaction().begin();
+            daoUbs.remover(ubs);
+            daoUbs.getEntityManager().getTransaction().commit();
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @Test
     public void ubsValida() {
-        
+
         UnidadeSaude ubs = new UnidadeSaude();
         ubs.setBairro("efjoewif");
         ubs.setCep("5487598");
@@ -44,23 +69,58 @@ public class UnidadeSaudeDaoTest {
         ubs.setLogradouro("mfioejfie");
         ubs.setNome("UBS 08");
         ubs.setNumero(12);
-        
-        try {
-            daoUbs.salvar(ubs);
-        } catch (DaoExcecoes ex) {
-            Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        UnidadeSaude ubs2 = null;
+
         try {
             daoUbs.getEntityManager().getTransaction().begin();
-            ubs2 = daoUbs.buscarPorCampo("numero", 312);
+            daoUbs.salvar(ubs);
             daoUbs.getEntityManager().getTransaction().commit();
-            
-            
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        UnidadeSaude result = null;
+        try {
+            daoUbs.getEntityManager().getTransaction().begin();
+            result = daoUbs.buscarPorCampo("cnes", 312);
+            daoUbs.getEntityManager().getTransaction().commit();
+
         } catch (DaoExcecoes ex) {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        assertEquals(ubs.getCnes(), result.getCnes());
     }
-    
+
+    @Test
+    public void ubsCnesDuplicado() {
+
+        UnidadeSaude ubs = new UnidadeSaude();
+        ubs.setBairro("efjoewif");
+        ubs.setCep("5487598");
+        ubs.setCidade("Monteiro");
+        ubs.setCnes(312);
+        ubs.setEnderecoNumero(100);
+        ubs.setEstado(EnumEstados.PE);
+        ubs.setLogradouro("mfioejfie");
+        ubs.setNome("UBS 08");
+        ubs.setNumero(12);
+
+        boolean salvo = true;
+
+        try {
+            daoUbs.getEntityManager().getTransaction().begin();
+            daoUbs.salvar(ubs);
+            daoUbs.getEntityManager().getTransaction().commit();
+        } catch (javax.persistence.RollbackException ex) {
+            
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).
+                    log(Level.SEVERE, null, "Erro ao salvar UBS - CNES já existe");
+            salvo = false;
+
+        } catch (DaoExcecoes ex) {
+
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertEquals(false, salvo);
+    }
+
 }
