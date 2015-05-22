@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 
 /**
  *
@@ -29,7 +27,6 @@ public class LoginAdminDaoITest {
 
     }
 
-    @BeforeClass
     public static void inserirDados(){
 
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
@@ -83,7 +80,6 @@ public class LoginAdminDaoITest {
         }
     }
 
-    @Test
     public void senhaNull() {
 
         LoginAdmin expResult = null;
@@ -93,7 +89,6 @@ public class LoginAdminDaoITest {
         assertEquals(expResult, result);
     }
 
-    @Test
     public void senhaIncorreta() {
 
         LoginAdmin expResult = null;
@@ -102,7 +97,6 @@ public class LoginAdminDaoITest {
         assertEquals(expResult, result);
     }
 
-    @Test
     public void usuarioInexistente() {
 
         LoginAdmin expResult = null;
@@ -111,7 +105,6 @@ public class LoginAdminDaoITest {
         assertEquals(expResult, result);
     }
 
-    @Test
     public void usuarioValido() {
 
         LoginAdmin expResult = new LoginAdmin();
