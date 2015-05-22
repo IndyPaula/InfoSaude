@@ -8,9 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import org.junit.AfterClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
@@ -46,7 +46,9 @@ public class UnidadeSaudeDaoTest {
         try {
             UnidadeSaude ubs = daoUbs.buscarPorCampo("cnes", 312);
 
-            daoUbs.getEntityManager().getTransaction().begin();
+            if(!daoUbs.getEntityManager().getTransaction().isActive()){
+                daoUbs.getEntityManager().getTransaction().begin();
+            }
             daoUbs.remover(ubs);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
@@ -55,6 +57,7 @@ public class UnidadeSaudeDaoTest {
 
     }
 
+    @Test
     public void ubsValida() {
 
         UnidadeSaude ubs = new UnidadeSaude();
@@ -88,20 +91,18 @@ public class UnidadeSaudeDaoTest {
     }
 
     @Test
-    public void ubsCnesDuplicado() {
+    public void ubsDuplicada() {
 
-        ubsValida();
-        
         UnidadeSaude ubs = new UnidadeSaude();
-        ubs.setBairro("efjoewif");
+        ubs.setBairro("Centro");
         ubs.setCep("5487598");
         ubs.setCidade("Monteiro");
-        ubs.setCnes(312);
-        ubs.setEnderecoNumero(100);
-        ubs.setEstado(EnumEstados.PE);
-        ubs.setLogradouro("mfioejfie");
-        ubs.setNome("UBS 08");
-        ubs.setNumero(12);
+        ubs.setCnes(392);
+        ubs.setEnderecoNumero(200);
+        ubs.setEstado(EnumEstados.PB);
+        ubs.setLogradouro("Av. Principal");
+        ubs.setNome("UBS 09");
+        ubs.setNumero(1276);
 
         boolean salvo = true;
 
@@ -110,14 +111,15 @@ public class UnidadeSaudeDaoTest {
             daoUbs.salvar(ubs);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (javax.persistence.RollbackException ex) {
-            
+
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).
                     log(Level.SEVERE, null, "Erro ao salvar UBS - CNES já existe");
             salvo = false;
 
         } catch (DaoExcecoes ex) {
 
-            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS");
+            salvo = false;
         }
         assertEquals(false, salvo);
     }

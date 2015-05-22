@@ -96,7 +96,7 @@ public class LoginAdminDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         try {
             daoAdm.getEntityManager().getTransaction().begin();
             daoAdm.remover(result);
@@ -104,7 +104,6 @@ public class LoginAdminDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Test
