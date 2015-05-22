@@ -17,14 +17,14 @@
                        <span id="titulo_pagina">Lista de administradres</span>
                     <p:fieldset legend="Usuário Administrador" 
                                 style="background: transparent; width: 90%; text-align: center; margin-top: 80px;" >
-                        <p:dataTable id="tableAdministrador" var="admin" value="#{administrador.buscarTudo()}" editable="true"
+                        <p:dataTable id="tableAdministrador" var="admin" value="#{administradorBean.buscarTodos()}" editable="true"
                                      style="border: 0; width: 100%; margin-top: 3%; ">
                             <f:facet name="header">
                                 Lista de Administradores
                             </f:facet>
 
                             <p:column headerText="Matrícula"  width="150"  style="text-align: center" >
-                                <h:outputText value="#{admin.funcionario.matricula}" style="text-align: center" />
+                                <h:outputText value="#{admin.matricula}" style="text-align: center" />
                             </p:column>
 
 
@@ -42,8 +42,8 @@
                                         <f:param value="#{admin.login}" name="admin"/> 
                                     </p:button>
 
-                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administrador.remover(admin)}" 
-                                                     oncomplete="#{administrador.buscarTudo()}"/>
+                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administradorBean.service.remover(admin)}" 
+                                                     oncomplete="#{administradorBean.buscarTodos()}"/>
                                 </p:panelGrid>
                             </p:column>
 

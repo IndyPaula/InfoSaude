@@ -5,6 +5,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -92,7 +94,8 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
             return resultado;
 
-        } catch (NoResultException e) {
+        } catch (NoResultException ex) {
+            Logger.getLogger(Identificavel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } catch (Exception e) {
             throw new DaoExcecoes("Informação não encontrada", e);
@@ -127,8 +130,6 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
         CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entity));
         return entityManager.createQuery(cq).getResultList();
-//        Query query = getEntityManager().createQuery("Select t from " + entity.getName() + " t");
-//        return query.getResultList();
 
     }
 

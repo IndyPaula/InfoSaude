@@ -1,6 +1,5 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
@@ -13,6 +12,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -51,7 +52,7 @@ public class VacinadorBean {
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 
         } catch (ServiceExcecoes ex) {
-
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
 
             return null;
