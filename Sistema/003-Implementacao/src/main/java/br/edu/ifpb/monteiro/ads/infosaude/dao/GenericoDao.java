@@ -22,7 +22,7 @@ import javax.persistence.criteria.Root;
 public abstract class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
 
     @Inject
-    private transient EntityManager em;
+    private transient EntityManager entityManager;
 
     private Class<T> entity;
 
@@ -42,34 +42,34 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
         return entity;
     }
 
-    public EntityManager getEm() {
-        return em;
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
-    public void setEm(EntityManager em) {
-        this.em = em;
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
     public T salvar(T entity) throws DaoExcecoes {
-        em.persist(entity);
+        entityManager.persist(entity);
         return entity;
     }
 
     @Override
     public T atualizar(T entity) throws DaoExcecoes {
-        em.merge(entity);
+        entityManager.merge(entity);
         return entity;
     }
 
     @Override
     public void remover(T entity) throws DaoExcecoes {
-        em.remove(entity);
+        entityManager.remove(entity);
     }
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        T entity = em.find(this.entity, id);
+        T entity = entityManager.find(this.entity, id);
         return entity;
     }
 
@@ -77,7 +77,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
     public T buscarPorCampo(String campo, Object valor) throws DaoExcecoes {
 
         try {
-            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
             CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(entity);
 
@@ -88,7 +88,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
             createQuery.where(predicate);
 
-            T resultado = em.createQuery(createQuery).getSingleResult();
+            T resultado = entityManager.createQuery(createQuery).getSingleResult();
 
             return resultado;
 
@@ -102,7 +102,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
     @Override
     public List<T> buscarTodosPorCampo(String campo, Object valor) throws DaoExcecoes {
         try {
-            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
             CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(entity);
 
@@ -113,7 +113,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
             createQuery.where(predicate);
 
-            List<T> resultado = em.createQuery(createQuery).getResultList();
+            List<T> resultado = entityManager.createQuery(createQuery).getResultList();
 
             return resultado;
 
@@ -124,9 +124,9 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public List<T> buscarTudo() throws DaoExcecoes {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entity));
-        return em.createQuery(cq).getResultList();
+        return entityManager.createQuery(cq).getResultList();
 //        Query query = getEntityManager().createQuery("Select t from " + entity.getName() + " t");
 //        return query.getResultList();
 

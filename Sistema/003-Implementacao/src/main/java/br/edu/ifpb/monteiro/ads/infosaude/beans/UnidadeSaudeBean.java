@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
@@ -54,15 +55,18 @@ public class UnidadeSaudeBean {
     public String salvar (){
         try {
             unidadeSaudeService.salvar(unidadeSaude);
+              JsfUtil.addSuccessMessage("Unidade de Saúde cadastrada com sucesso");
+              return "";
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return "ubs.xhtml";
     }
     
      public String atualizar (){
         try {
             unidadeSaudeService.atualizar(unidadeSaude);
+             JsfUtil.addSuccessMessage("Unidade de Saúde atualizada com sucesso");
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
         }

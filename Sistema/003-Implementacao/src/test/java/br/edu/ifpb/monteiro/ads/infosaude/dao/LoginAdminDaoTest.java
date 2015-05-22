@@ -39,7 +39,7 @@ public class LoginAdminDaoTest {
 
         daoUbs = new UnidadeSaudeDao();
         //SETANTO ENTITY MANAGER MANUALMENTE
-        daoUbs.setEm(em);
+        daoUbs.setEntityManager(em);
 
         LoginAdmin adm = new LoginAdmin();
 
@@ -73,7 +73,7 @@ public class LoginAdminDaoTest {
         adm.setSenhaAdm("123");
 
         daoAdm = new LoginAdminDao();
-        daoAdm.setEm(em);
+        daoAdm.setEntityManager(em);
 
         try {
             daoAdm.getEntityManager().getTransaction().begin();

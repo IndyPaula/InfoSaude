@@ -36,13 +36,13 @@ public class Teste {
         adm.setSenha("fjhewiufhew");
         adm.setNomeUsuario("fhguwegyf");
         
-        dao.setEm(em);
+        dao.setEntityManager(em);
 
         try {
-            dao.getEm().getTransaction().begin();
+            dao.getEntityManager().getTransaction().begin();
             dao.salvar(adm);
             
-            dao.getEm().getTransaction().commit();
+            dao.getEntityManager().getTransaction().commit();
             
         } catch (DaoExcecoes ex) {
             Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);

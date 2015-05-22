@@ -18,7 +18,7 @@ public class PacienteDao extends GenericoDao<Paciente> implements PacienteDaoIF 
     @Override
     public void remover(Paciente entity) {
 
-        if (getEm().getTransaction().isActive()) {
+        if (getEntityManager().getTransaction().isActive()) {
 
             System.out.println("ATIVA");
         } else {
@@ -26,15 +26,15 @@ public class PacienteDao extends GenericoDao<Paciente> implements PacienteDaoIF 
             System.out.println("DESATIVADA");
 
         }
-        Query queryPaciente = getEm().createNativeQuery("DELETE FROM paciente WHERE id = " + entity.getId());
+        Query queryPaciente = getEntityManager().createNativeQuery("DELETE FROM paciente WHERE id = " + entity.getId());
         queryPaciente.executeUpdate();
 
-        Query queryPessoa = getEm().createNativeQuery("DELETE FROM pessoa WHERE id = " + entity.getId());
+        Query queryPessoa = getEntityManager().createNativeQuery("DELETE FROM pessoa WHERE id = " + entity.getId());
         queryPessoa.executeUpdate();
 
-        getEm().getTransaction().commit();
+        getEntityManager().getTransaction().commit();
 
-        getEm().close();
+        getEntityManager().close();
 
     }
 }

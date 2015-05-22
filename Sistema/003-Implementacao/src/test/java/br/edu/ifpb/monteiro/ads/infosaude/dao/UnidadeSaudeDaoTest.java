@@ -36,7 +36,7 @@ public class UnidadeSaudeDaoTest {
 
         daoUbs = new UnidadeSaudeDao();
         //SETANTO ENTITY MANAGER MANUALMENTE
-        daoUbs.setEm(em);
+        daoUbs.setEntityManager(em);
 
     }
 

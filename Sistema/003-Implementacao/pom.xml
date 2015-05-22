@@ -21,6 +21,7 @@
     </properties>
     
     <dependencies>
+        
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
@@ -154,7 +155,7 @@
                     <destFile>${sonar.jacoco.reportPath}</destFile>
                 </configuration>
             </plugin>
-             <!-- PLUGUIN DO JACOCO -->
+            <!-- PLUGUIN DO JACOCO -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
