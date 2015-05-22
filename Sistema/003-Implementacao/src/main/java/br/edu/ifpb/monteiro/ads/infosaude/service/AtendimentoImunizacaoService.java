@@ -17,7 +17,7 @@ public class AtendimentoImunizacaoService extends GenericoService<AtendimentoImu
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private AtendimentoImunizacaoDaoIF dao;
+    private transient AtendimentoImunizacaoDaoIF dao;
 
     public AtendimentoImunizacaoService() {
     }

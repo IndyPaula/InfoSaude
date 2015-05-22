@@ -52,10 +52,8 @@ public class UnidadeSaudeBean {
     }
     
     public String salvar (){
-        
         try {
             unidadeSaudeService.salvar(unidadeSaude);
-            return null;
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -63,9 +61,14 @@ public class UnidadeSaudeBean {
     }
     
      public String atualizar (){
-        
+        try {
+            unidadeSaudeService.atualizar(unidadeSaude);
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
+     
 
      public EnumEstados[] getEstado() {
         return EnumEstados.values();

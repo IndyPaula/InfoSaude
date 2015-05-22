@@ -17,7 +17,7 @@ public class ACSService extends GenericoService<ACS> implements ACSServiceIF, Se
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private ACSDaoIF dao;
+    private transient ACSDaoIF dao;
 
     public ACSService() {
     }

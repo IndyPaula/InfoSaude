@@ -17,7 +17,7 @@ public class UnidadeSaudeService extends GenericoService<UnidadeSaude> implement
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private UnidadeSaudeDaoIF dao;
+    private transient UnidadeSaudeDaoIF dao;
 
     public UnidadeSaudeService() {
     }

@@ -16,7 +16,7 @@ public class LoginAdminService extends GenericoService<LoginAdmin> implements Lo
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private LoginAdminDaoIF dao;
+    private transient LoginAdminDaoIF dao;
 
     public LoginAdminService() {
     }

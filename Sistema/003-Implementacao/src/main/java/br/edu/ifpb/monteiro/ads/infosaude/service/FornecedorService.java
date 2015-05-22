@@ -17,7 +17,7 @@ public class FornecedorService extends GenericoService<Fornecedor> implements Fo
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private FornecedorDaoIF dao;
+    private transient FornecedorDaoIF dao;
 
     public FornecedorService() {
     }

@@ -21,7 +21,7 @@ import javax.inject.Named;
 public class UserLoginBean implements Serializable {
 
     @Inject
-    private LoginAdminServiceIF service;
+    private transient LoginAdminServiceIF service;
     
     private static final long serialVersionUID = 682119314630735490L;
 

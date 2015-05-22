@@ -17,7 +17,7 @@ public class VacinadorService extends GenericoService<Vacinador> implements Vaci
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private VacinaDaoIF dao;
+    private transient VacinaDaoIF dao;
 
     public VacinadorService() {
     }

@@ -17,7 +17,7 @@ public class PessoaService extends GenericoService<Pessoa> implements PessoaServ
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private PessoaDaoIF dao;
+    private transient PessoaDaoIF dao;
 
     public PessoaService() {
     }

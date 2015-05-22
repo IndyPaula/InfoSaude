@@ -17,7 +17,7 @@ public class FuncionarioService extends GenericoService<Funcionario> implements 
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private FuncionarioDaoIF dao;
+    private transient FuncionarioDaoIF dao;
 
     public FuncionarioService() {
     }

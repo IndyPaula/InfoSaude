@@ -5,7 +5,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
-import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +23,10 @@ public class AdministradorBean implements Serializable {
     private Integer matFuncionario;
 
     @Inject
-    private LoginAdminServiceIF service;
+    private transient LoginAdminServiceIF service;
 
     @Inject
-    private FuncionarioServiceIF funcionarioServiceIF;
+    private transient FuncionarioServiceIF funcionarioServiceIF;
 
     @Inject
     private LoginAdmin loginAdmin;

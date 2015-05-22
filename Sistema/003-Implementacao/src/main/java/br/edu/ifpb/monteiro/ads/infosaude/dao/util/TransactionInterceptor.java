@@ -21,7 +21,7 @@ public class TransactionInterceptor implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private EntityManager entityManager;
+    private transient EntityManager entityManager;
 
     /* The annotation @AroundInvoke sign this method for to be called automatically before the 
      method annotated with @Transactional */

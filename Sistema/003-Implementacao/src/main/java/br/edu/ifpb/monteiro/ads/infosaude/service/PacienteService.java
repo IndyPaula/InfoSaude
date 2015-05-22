@@ -19,7 +19,7 @@ public class PacienteService extends GenericoService<Paciente> implements Pacien
     private static final Long serialVersionUID = 1L;
 
     @Inject
-    private PacienteDaoIF dao;
+    private transient PacienteDaoIF dao;
 
     public PacienteService() {
     }

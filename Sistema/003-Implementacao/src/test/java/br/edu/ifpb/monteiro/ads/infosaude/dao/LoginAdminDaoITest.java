@@ -75,9 +75,9 @@ public class LoginAdminDaoITest {
         daoAdm.setEm(em);
 
         try {
-            daoAdm.getEntityManager().getTransaction().begin();
+            daoAdm.getEm().getTransaction().begin();
             daoAdm.salvar(adm);
-            daoAdm.getEntityManager().getTransaction().commit();
+            daoAdm.getEm().getTransaction().commit();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginAdminDaoITest.class.getName()).log(Level.SEVERE, null, ex);
         }

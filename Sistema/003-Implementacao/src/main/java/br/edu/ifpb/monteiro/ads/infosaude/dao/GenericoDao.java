@@ -8,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -23,16 +22,12 @@ import javax.persistence.criteria.Root;
 public abstract class GenericoDao<T extends Identificavel> implements Serializable, DaoIF<T> {
 
     @Inject
-    private EntityManager em;
-    
+    private transient EntityManager em;
+
     private Class<T> entity;
 
     public GenericoDao(Class<T> clazz) {
         this.entity = clazz;
-    }
-
-    public EntityManager getEntityManager() {
-        return em;
     }
 
     public Class<T> getEntity() {
@@ -46,7 +41,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
     public Class<T> getClassePersistente() {
         return entity;
     }
-    
+
     public EntityManager getEm() {
         return em;
     }
@@ -129,12 +124,12 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public List<T> buscarTudo() throws DaoExcecoes {
-        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        cq.select( cq.from(entity));
-        return getEntityManager().createQuery(cq).getResultList();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entity));
+        return em.createQuery(cq).getResultList();
 //        Query query = getEntityManager().createQuery("Select t from " + entity.getName() + " t");
 //        return query.getResultList();
-        
+
     }
 
 }

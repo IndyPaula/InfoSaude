@@ -39,10 +39,10 @@ public class Teste {
         dao.setEm(em);
 
         try {
-            dao.getEntityManager().getTransaction().begin();
+            dao.getEm().getTransaction().begin();
             dao.salvar(adm);
             
-            dao.getEntityManager().getTransaction().commit();
+            dao.getEm().getTransaction().commit();
             
         } catch (DaoExcecoes ex) {
             Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
