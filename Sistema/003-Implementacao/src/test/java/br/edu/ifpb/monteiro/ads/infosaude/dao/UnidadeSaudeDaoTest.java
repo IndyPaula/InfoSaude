@@ -89,37 +89,37 @@ public class UnidadeSaudeDaoTest {
         assertEquals(ubs.getCnes(), result.getCnes());
     }
 
-    @Test
-    public void ubsCnesDuplicado() {
-
-        UnidadeSaude ubs = new UnidadeSaude();
-        ubs.setBairro("efjoewif");
-        ubs.setCep("5487598");
-        ubs.setCidade("Monteiro");
-        ubs.setCnes(312);
-        ubs.setEnderecoNumero(100);
-        ubs.setEstado(EnumEstados.PE);
-        ubs.setLogradouro("mfioejfie");
-        ubs.setNome("UBS 08");
-        ubs.setNumero(12);
-
-        boolean salvo = true;
-
-        try {
-            daoUbs.getEntityManager().getTransaction().begin();
-            daoUbs.salvar(ubs);
-            daoUbs.getEntityManager().getTransaction().commit();
-        } catch (javax.persistence.RollbackException ex) {
-            
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).
-                    log(Level.SEVERE, null, "Erro ao salvar UBS - CNES já existe");
-            salvo = false;
-
-        } catch (DaoExcecoes ex) {
-
-            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        assertEquals(false, salvo);
-    }
+//    @Test
+//    public void ubsCnesDuplicado() {
+//
+//        UnidadeSaude ubs = new UnidadeSaude();
+//        ubs.setBairro("efjoewif");
+//        ubs.setCep("5487598");
+//        ubs.setCidade("Monteiro");
+//        ubs.setCnes(312);
+//        ubs.setEnderecoNumero(100);
+//        ubs.setEstado(EnumEstados.PE);
+//        ubs.setLogradouro("mfioejfie");
+//        ubs.setNome("UBS 08");
+//        ubs.setNumero(12);
+//
+//        boolean salvo = true;
+//
+//        try {
+//            daoUbs.getEntityManager().getTransaction().begin();
+//            daoUbs.salvar(ubs);
+//            daoUbs.getEntityManager().getTransaction().commit();
+//        } catch (javax.persistence.RollbackException ex) {
+//            
+//            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).
+//                    log(Level.SEVERE, null, "Erro ao salvar UBS - CNES já existe");
+//            salvo = false;
+//
+//        } catch (DaoExcecoes ex) {
+//
+//            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        assertEquals(false, salvo);
+//    }
 
 }
