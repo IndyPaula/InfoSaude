@@ -7,7 +7,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.transaction.RollbackException;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
