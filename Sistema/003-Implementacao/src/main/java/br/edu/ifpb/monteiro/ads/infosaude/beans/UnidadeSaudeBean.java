@@ -3,8 +3,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.UnidadeSaudeServiceIF;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
