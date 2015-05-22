@@ -37,7 +37,7 @@ public class PacienteDaoTest {
         emp = new EntityManagerProducer("InfoSaudePUTest");
         em = emp.create();
         //SETANTO ENTITY MANAGER MANUALMENTE
-        daoPaciente.setEm(em);
+        daoPaciente.setEntityManager(em);
 
     }
 
