@@ -1,8 +1,12 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.UnidadeSaudeServiceIF;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -24,15 +28,21 @@ public class UnidadeSaudeBean {
     private boolean operacaoAtualizar;
 
     public UnidadeSaudeBean() {
-        verificarUnidade();
+
     }
 
-    private void verificarUnidade() {
+    @PostConstruct
+    public void init(){
+        verificarUnidade();
+    }
+    
+    public void verificarUnidade() {
         try {
             if (unidadeSaudeService.buscarTudo().isEmpty()) {
                 setOperacaoCriar(true);
                 setOperacaoAtualizar(false);
             } else {
+                unidadeSaude = unidadeSaudeService.buscarTudo().get(0);
                 setOperacaoCriar(false);
                 setOperacaoAtualizar(true);
             }
@@ -43,6 +53,12 @@ public class UnidadeSaudeBean {
     
     public String salvar (){
         
+        try {
+            unidadeSaudeService.salvar(unidadeSaude);
+            return null;
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(UnidadeSaudeBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
     
@@ -51,6 +67,9 @@ public class UnidadeSaudeBean {
         return null;
     }
 
+     public EnumEstados[] getEstado() {
+        return EnumEstados.values();
+    }
     public UnidadeSaudeServiceIF getUnidadeSaudeService() {
         return unidadeSaudeService;
     }
