@@ -1,15 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
-import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.FuncionarioServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
@@ -29,9 +22,6 @@ public class AdministradorBean implements Serializable {
     private transient LoginAdminServiceIF service;
 
     @Inject
-    private transient FuncionarioServiceIF funcionarioServiceIF;
-
-    @Inject
     private LoginAdmin loginAdmin;
 
     public AdministradorBean() {
@@ -43,18 +33,18 @@ public class AdministradorBean implements Serializable {
 //        matriculas();
         
     }
-    public List<Integer> matriculas() {
-        List<Integer> lista = new ArrayList<>();
-        try {
-            for (Funcionario f : funcionarioServiceIF.buscarTudo()) {
-                System.out.println(f.getId());
-                lista.add(f.getMatricula());
-            }
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lista;
-    }
+//    public List<Integer> matriculas() {
+//        List<Integer> lista = new ArrayList<>();
+//        try {
+//            for (Funcionario f : funcionarioServiceIF.buscarTudo()) {
+//                System.out.println(f.getId());
+//                lista.add(f.getMatricula());
+//            }
+//        } catch (ServiceExcecoes ex) {
+//            Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return lista;
+//    }
 
 //    public String salvar() {
 //        try {
@@ -98,14 +88,6 @@ public class AdministradorBean implements Serializable {
 
     public void setService(LoginAdminServiceIF service) {
         this.service = service;
-    }
-
-    public FuncionarioServiceIF getFuncionarioServiceIF() {
-        return funcionarioServiceIF;
-    }
-
-    public void setFuncionarioServiceIF(FuncionarioServiceIF funcionarioServiceIF) {
-        this.funcionarioServiceIF = funcionarioServiceIF;
     }
 
     public LoginAdmin getLoginAdmin() {
