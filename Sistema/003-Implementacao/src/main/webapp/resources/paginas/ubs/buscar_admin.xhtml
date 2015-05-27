@@ -12,38 +12,69 @@
 
             <ui:define name="centro">
 
+                <f:metadata>
+                    <f:viewParam name="faces-redirect" value="#{administradorBean.mensangem}" />
+                    <f:viewAction action="#{administradorBean.mensagem()}"  />
+
+                </f:metadata>
+
                 <h:form id="administrador">
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
-                       <span id="titulo_pagina">Lista de administradres</span>
-                    <p:fieldset legend="Usuário Administrador" 
-                                style="background: transparent; width: 90%; text-align: center; margin-top: 80px;" >
-                        <p:dataTable id="tableAdministrador" var="admin" value="#{administradorBean.buscarTodos()}" editable="true"
-                                     style="border: 0; width: 100%; margin-top: 3%; ">
+                    <span id="titulo_pagina">Lista de Administradores da UBS</span>
+                    <p:fieldset legend="Usuários da UBS" 
+                                style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
+                        <p:dataTable 
+                            var="adminLoc" value="#{administradorBean.adminsitradores}" 
+                            filteredValue="#{administradorBean.loginAdminFilter }"
+                            rowsPerPageTemplate="5,10,20,50,100, 200" 
+                            paginator="true" 
+                            rows="10" 
+                            widgetVar="tabela_administradores"
+                            style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Administrador Cadastrado"  
+                            >
+
                             <f:facet name="header">
-                                Lista de Administradores
+                                <p:outputPanel>
+                                    <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('tabela_administradores').filter()" 
+                                                 size="60" placeholder="Digite sua busca por Matricula ou Login" />
+                                </p:outputPanel>
                             </f:facet>
 
+                            <p:column filterBy="#{adminLoc.matricula}" headerText="Matrícula"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{adminLoc.matricula}" style="text-align: center" />
+                            </p:column>
+                            
                             <p:column headerText="Matrícula"  width="150"  style="text-align: center" >
-                                <h:outputText value="#{admin.matricula}" style="text-align: center" />
+                                <h:outputText value="#{adminLoc.matricula}" style="text-align: center" />
                             </p:column>
 
-
-                            <p:column   headerText="Nome do Usuário" style="text-align: center" >
-                                <h:outputText value="#{admin.login}" style="text-align: center" />
+                            <p:column   filterBy="#{adminLoc.login}" headerText="Login" style="text-align: center"  visible="false">
+                                <h:outputText value="#{adminLoc.login}" style="text-align: center" />
                             </p:column>
-
-
-
+                            
+                            <p:column   headerText="Login" style="text-align: center" >
+                                <h:outputText value="#{adminLoc.login}" style="text-align: center" />
+                            </p:column>
+                                                      
 
                             <p:column headerText="Opções" width="220" style="text-align: center" >
                                 <p:panelGrid style="border: 0;">
-                                    <p:button value="Atualizar" icon="ui-icon-refresh" 
-                                              outcome="/resources/paginas/ubs/atualizar_admin.xhtml" target="_new" style="margin-right: 6px">
-                                        <f:param value="#{admin.login}" name="admin"/> 
+                                    <p:button value="Atualizar" icon="ui-icon-refresh" outcome="atualizar_admin.xhtml"
+                                              style="margin-right: 6px">
+                                        <f:param value="#{adminLoc.id}" name="id"/> 
                                     </p:button>
 
-                                    <p:commandButton value="Remover" icon="ui-icon-trash" actionListener="#{administradorBean.service.remover(admin)}" 
-                                                     oncomplete="#{administradorBean.buscarTodos()}"/>
+                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{adminLoc.remover(adminLoc)}">
+
+                                        <p:confirm header="Confirmação" message="Excluir administrador da UBS?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton 
+                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
                                 </p:panelGrid>
                             </p:column>
 
@@ -51,10 +82,16 @@
                     </p:fieldset>
                 </h:form>
 
-
-
-
             </ui:define>
+
+            <script type="text/javascript" language="javascript">
+
+                function reload() {
+
+                    window.location.reload();
+
+                }
+            </script>
 
         </ui:composition>
 

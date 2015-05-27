@@ -22,10 +22,7 @@
                         <h:panelGrid columns="2"  style="text-align: left; ">
 
                             <p:outputLabel for="matFuncionario" value="Matrícula: "/>
-                            <p:selectOneMenu id="matFuncionario" value="#{administradorBean.matFuncionario}"  rendered="true">
-                                <f:selectItems value="#{administradorBean.matriculas()}" 
-                                              />
-                            </p:selectOneMenu>
+                            <p:inputText id="matFuncionario" value="#{administradorBean.loginAdmin.matricula}" required="true"/>
 
                             <p:outputLabel for="login" value="Nome de Usuário: "/>
                             <p:inputText id="login" value="#{administradorBean.loginAdmin.login}" size="15" required="true" requiredMessage="Nome de Usuário necessário" />
@@ -42,7 +39,7 @@
                                         id="confirmarSenha" label="Confirmar Senha"
                                         />
 
-                            <p:commandButton value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                            <p:commandButton action="#{administradorBean.salvar()}" value="Cadastrar" style="margin-top: 18px; margin-left: 50%;" update="growl"
                                              />
                         </h:panelGrid>
 

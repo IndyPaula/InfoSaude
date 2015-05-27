@@ -2,50 +2,104 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
-        <ui:composition template="./../../template/template_vacinador.xhtml">
+        <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
 
-                <h:form id="vacinador">
-                    <p:dataTable id="tableVacinador" var="vacinador" value="#{p}" selectionMode="single"
-                                 selection="#{p}" rowKey="#{p}"
-                                 rows="10" paginator="true" style="border: 0; width: 80%">
-                        <f:facet name="header">
-                            Lista de Vacinadores 
-                        </f:facet>
-                        <p:column headerText="Registro Coren"  width="150" filterBy="#{p}" >
-                            <h:outputText value="#{p}"/>
-                        </p:column>
-                        <p:column   headerText="Nome" filterBy="#{p}" >
-                            <h:outputText value="#{p}"/>
-                        </p:column>
-                        <p:column headerText="Matrícula"  width="200" 
-                                  style="text-align: center" filterBy="#{p}">
-                            <h:outputText value="#{p}" />
-                        </p:column>
-                        <p:column headerText="Opções" width="130">
-                            <p:button value="imprimir Ficha" icon="ui-icon-print" outcome="p" target="_new">
-                                <f:param value="#{p}" name="vacinador"/> 
-                            </p:button>
+                <f:metadata>
+                    <f:viewParam name="faces-redirect" value="#{vacinadorBean.mensangem}" />
+                    <f:viewAction action="#{vacinadorBean.mensagem()}"  />
 
-                            <p:button value="Atualizar Ficha" icon="ui-icon-refresh" 
-                                      outcome="p" target="_new">
-                                <f:param value="#{p}" name="p"/> 
-                            </p:button>
-                        </p:column>
-                    </p:dataTable>
+                </f:metadata>
+
+                <h:form id="paciente">
+                    <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
+                    <span id="titulo_pagina">Lista de Vacinadores da UBS</span>
+                    <p:fieldset legend="Usuários da UBS" 
+                                style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
+                        <p:dataTable 
+                            var="vac" value="#{vacinadorBean.vacinadores}" 
+                            filteredValue="#{vacinadorBean.vacinadoresFilter}"
+                            rowsPerPageTemplate="5,10,20,50,100, 200" 
+                            paginator="true" 
+                            rows="10" 
+                            widgetVar="tabela_pacientes"
+                            style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado"  
+                            >
+
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('tabela_pacientes').filter()" 
+                                                 size="60" placeholder="Digite sua busca por CPF, Nome ou Cartão SUS" />
+                                </p:outputPanel>
+                            </f:facet>
+
+                            <p:column filterBy="#{vac.matricula}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{vac.matricula}" style="text-align: center" />
+                            </p:column>
+                            
+                            <p:column headerText="Nome"  width="150"  style="text-align: center" >
+                                <h:outputText value="#{vac.matricula}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.nome}" headerText="Cartão SUS" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+                            
+                            <p:column   headerText="Cartão SUS" style="text-align: center" >
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+                            
+                            <p:column   filterBy="#{vac.registroCoren}" headerText="CPF" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.registroCoren}" style="text-align: center" />
+                            </p:column>
+                            
+
+                            <p:column   headerText="Endereço" style="text-align: center" >
+                                <h:outputText value="#{vac.registroCoren}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column headerText="Opções" width="220" style="text-align: center" >
+                                <p:panelGrid style="border: 0;">
+                                    <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_usuario_ubs.xhtml"
+                                              style="margin-right: 6px">
+                                        <f:param value="#{pac.id}" name="id"/> 
+                                    </p:button>
+
+                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{pacienteBean.remover(pac)}">
+
+                                        <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton 
+                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+                                </p:panelGrid>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:fieldset>
                 </h:form>
 
-
-
-
             </ui:define>
+
+            <script type="text/javascript" language="javascript">
+
+                function reload() {
+
+                    window.location.reload();
+
+                }
+            </script>
 
         </ui:composition>
 

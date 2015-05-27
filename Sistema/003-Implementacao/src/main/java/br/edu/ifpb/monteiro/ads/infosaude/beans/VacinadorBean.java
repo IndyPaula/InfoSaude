@@ -8,12 +8,15 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -32,6 +35,16 @@ public class VacinadorBean {
 
     @Inject
     private VacinadorServiceIF serviceIF;
+    private String mensangem;
+
+    private List<Vacinador> vacinadoresFilter;
+
+    @PostConstruct
+    public void init() {
+
+        vacinadoresFilter = new ArrayList<>();
+
+    }
 
     public Date getDataAtual() {
         Calendar calendar
@@ -61,6 +74,31 @@ public class VacinadorBean {
         return "";
     }
 
+    public List<Vacinador> getVacinadores() {
+
+        try {
+            return serviceIF.buscarTudo();
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void mensagem() {
+        if ("true".equals(mensangem)) {
+            JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
+
+        }
+    }
+
+    public List<Vacinador> getVacinadoresFilter() {
+        return vacinadoresFilter;
+    }
+
+    public void setVacinadoresFilter(List<Vacinador> vacinadoresFilter) {
+        this.vacinadoresFilter = vacinadoresFilter;
+    }
+
     public Vacinador getVacinador() {
         return vacinador;
     }
@@ -87,6 +125,14 @@ public class VacinadorBean {
 
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
+    }
+
+    public void setMensangem(String mensangem) {
+        this.mensangem = mensangem;
+    }
+
+    public String getMensangem() {
+        return mensangem;
     }
 
 }

@@ -4,6 +4,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.LoginAdminDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
+import java.io.Serializable;
 import javax.inject.Inject;
 
 /**
@@ -11,7 +12,7 @@ import javax.inject.Inject;
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 14/04/2015
  */
-public class LoginAdminService extends GenericoService<LoginAdmin> implements LoginAdminServiceIF {
+public class LoginAdminService extends GenericoService<LoginAdmin> implements LoginAdminServiceIF, Serializable {
 
     private static final Long serialVersionUID = 1L;
 
@@ -22,21 +23,20 @@ public class LoginAdminService extends GenericoService<LoginAdmin> implements Lo
     }
 
     @Override
+    public DaoIF getDao() {
+        return dao;
+    }
+
+    @Override
     public LoginAdmin efetuarLogin(String login, String senha) {
         if (login != null && senha != null) {
             return dao.efetuarLogin(login, senha);
 
-        }
-        else{
-        
+        } else {
+
             return null;
         }
 
-    }
-
-    @Override
-    public DaoIF getDao() {
-        return dao;
     }
 
 }

@@ -127,6 +127,7 @@
                     <target>1.7</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
+                        <proc:none/>
                     </compilerArguments>
                 </configuration>
             </plugin>
