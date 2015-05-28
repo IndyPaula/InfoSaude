@@ -11,78 +11,85 @@
         <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
-
-
-
-                <img src="${facesContext.externalContext.requestContextPath}/resources/imagens/icon/new_icon/unidadeSaudeBean.png" style="height: 150px"/>
-
-                <span id="titulo_pagina">Unidade Básica de Saúde</span>
+                <div style="float: left;margin-left: 5%;width: 201px; height: 200px;">
+                    <img src="../../../resources/imagens/ubs.jpg" width="200"/>
+                </div>
+                <div style="float: left;margin-left: 5%; width: 401px; height: 100px;padding-top: 100px;">
+                    <span id="titulo_pagina" style="margin-top: 40px;">Unidade Básica de Saúde</span>
+                </div>
+                
                 <h:form id="cadastrarAdministrador" >
+
                     <p:growl id="growl"  showDetail="false" life="5000" autoUpdate="true" />
-                    <p:fieldset legend="Dados da Unidade de Saúde" 
-                                style="background: transparent; width: 40%; text-align: center; margin-top: 80px;" >
+                    <p:fieldset legend="Dados da Unidade de Saúde" id="painel_ubs" rendered="true" toggleable="true" collapsed="true"
+                                style="background: transparent; width: 80%;  margin-top: 80px;" >
+
+                        <span style="color: cornflowerblue;float: left;margin-left: 4%;">Todos os campos devem ser preenchidos.</span>
+                        <h:panelGrid columns="2"  style="text-align: left; padding: 30px;">
+
+                            <p:outputLabel value="Nome: " />
+                            <p:inputText id="nome" value="#{unidadeSaudeBean.unidadeSaude.nome}" size="60" 
+                                         required="true" requiredMessage="O campo nome é obrigatório"/>
 
 
-                        <h:panelGrid columns="2"  style="text-align: left;">
-
-                            <h:outputText value="Nome: "/>
-                            <p:inputText value="#{unidadeSaudeBean.unidadeSaude.nome}" size="85"/>
-
-
-                            <h:outputText value="Unidade N.º: "/>
+                            <p:outputLabel value="Und. N º: " />
 
                             <p:row>
                                 <p:column colspan="2">
                                     <h:panelGrid columns="3" >
 
-                                        <p:inputMask mask="9?99" value="#{unidadeSaudeBean.unidadeSaude.numero}" size="3" style="margin-right: 40px"
-                                                     />
+                                        <p:inputMask id="numeroUbs" mask="9?99" value="#{unidadeSaudeBean.unidadeSaude.numero}" size="3" style="margin-right: 40px"
+                                                     required="true" requiredMessage="O campo Número da Unidade de Saúde é obrigatório" />
 
-                                        <h:outputText value="Código CNES: "/>
-                                        <p:inputText value="#{unidadeSaudeBean.unidadeSaude.cnes}" size="15"
+                                        <p:outputLabel value="Código CNES: " />
+                                        <p:inputText id="cnes" value="#{unidadeSaudeBean.unidadeSaude.cnes}" 
+
+                                                     size="15" required="true" requiredMessage="O campo CNES é obrigatório"
                                                      />
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
 
-                            <h:outputText value="Logradouro: "/>
-                            <p:inputText value="#{unidadeSaudeBean.unidadeSaude.logradouro}" 
-                                         size="85" />
+                            <p:outputLabel value="Logradouro: " />
+                            <p:inputText id="logradouro" value="#{unidadeSaudeBean.unidadeSaude.logradouro}" 
+                                         size="60" required="true" requiredMessage="O campo Logradouro é obrigatório"/>
 
 
-                            <h:outputText value="Número: "/>
+                            <p:outputLabel value="Número: " />
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputMask mask="9?9999" value="#{unidadeSaudeBean.unidadeSaude.enderecoNumero}" size="5" style="margin-right: 40px"
-                                                     />
-                                        
-                                        <h:outputText value="Bairro: "/>
-                                        <p:inputText value="#{unidadeSaudeBean.unidadeSaude.bairro}"
-                                                     size="34" style="margin-right: 30px"/>
-                                        
-                                        <h:outputText value="CEP: "/>
-                                        <p:inputMask mask="99.999-999" value="#{unidadeSaudeBean.unidadeSaude.cep}" 
-                                                     size="8" />
+                                        <p:inputMask id="numero" mask="9?9999" value="#{unidadeSaudeBean.unidadeSaude.enderecoNumero}" 
+                                                     size="5" style="margin-right: 40px"
+                                                     required="true" requiredMessage="O campo Número é obrigatório" />
+
+                                        <p:outputLabel value="Bairro: " />
+                                        <p:inputText id="bairro" value="#{unidadeSaudeBean.unidadeSaude.bairro}"
+                                                     size="34" style="margin-right: 30px" required="true" requiredMessage="O campo Bairro é obrigatório"/>
+
+                                        <p:outputLabel value="CEP: " style="margin-left: 27px;"/>
+                                        <p:inputMask id="cep" mask="99.999-999" value="#{unidadeSaudeBean.unidadeSaude.cep}" 
+                                                     size="10" required="true" requiredMessage="O campo CEP é obrigatório" />
 
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
 
-                            <h:outputText value="Cidade: "/>
+                            <p:outputLabel value="Cidade: " />
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
-                                        
-                                        <p:inputText value="#{unidadeSaudeBean.unidadeSaude.cidade}"
-                                                     size="58" style="margin-right: 40px"/>
-                                        
-                                        
-                                        <h:outputText value="UF: "/>
-                                        <p:selectOneMenu id="estado" value="#{unidadeSaudeBean.unidadeSaude.estado}">
+
+                                        <p:inputText id="cidade" value="#{unidadeSaudeBean.unidadeSaude.cidade}"
+                                                     size="60" style="margin-right: 10px" required="true" requiredMessage="O campo Cidade é obrigatório"/>
+
+
+                                        <p:outputLabel value="UF: "/>
+                                        <p:selectOneMenu id="estado" value="#{unidadeSaudeBean.unidadeSaude.estado}"
+                                                         required="true" requiredMessage="O campo UF é obrigatório">
                                             <f:selectItem itemLabel="Selecione"/>
                                             <f:selectItems var="uf" value="#{unidadeSaudeBean.estado}" 
                                                            itemLabel="#{uf}" itemValue="#{uf}"
@@ -93,10 +100,10 @@
                             </p:row> 
 
                             <p:spacer/>
-                            <p:commandButton value="Salvar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+                            <p:commandButton value="Salvar" style="margin-top: 18px; margin-left: 35%;" update="growl"
                                              action="#{unidadeSaudeBean.salvar()}" rendered="#{unidadeSaudeBean.operacaoCriar}" />
-                            
-                            <p:commandButton value="Atualizar" style="margin-top: 18px; margin-left: 50%;" update="growl"
+
+                            <p:commandButton value="Atualizar" style="margin-top: 18px; margin-left: 35%;" update="growl"
                                              action="#{unidadeSaudeBean.atualizar()}" rendered="#{unidadeSaudeBean.operacaoAtualizar}"/>
 
                         </h:panelGrid>
