@@ -71,8 +71,8 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        T entity = entityManager.find(this.entity, id);
-        return entity;
+        T entityLoc = entityManager.find(this.entity, id);
+        return entityLoc;
     }
 
     @Override

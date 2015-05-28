@@ -68,9 +68,9 @@
 
                             <p:column headerText="Opções" width="220" style="text-align: center" >
                                 <p:panelGrid style="border: 0;">
-                                    <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_usuario_ubs.xhtml"
+                                    <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_vacinador.xhtml"
                                               style="margin-right: 6px">
-                                        <f:param value="#{pac.id}" name="id"/> 
+                                        <f:param value="#{vac.id}" name="id"/> 
                                     </p:button>
 
                                     <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{pacienteBean.remover(pac)}">

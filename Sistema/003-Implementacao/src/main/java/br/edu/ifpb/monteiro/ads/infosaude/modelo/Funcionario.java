@@ -39,6 +39,12 @@ public class Funcionario extends Pessoa implements Serializable {
     @Column(name = "senha", length = 45, unique = false, nullable = false)
     private String senha;
 
+    @Column(name = "login_admin", length = 45, unique = true, nullable = true)
+    private String loginAdmin;
+
+    @Column(name = "senha_admin", length = 45, unique = true, nullable = true)
+    private String senhaAdmin;
+
     public int getMatricula() {
         return matricula;
     }
@@ -93,6 +99,22 @@ public class Funcionario extends Pessoa implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getLoginAdmin() {
+        return loginAdmin;
+    }
+
+    public void setLoginAdmin(String loginAdmin) {
+        this.loginAdmin = loginAdmin;
+    }
+
+    public String getSenhaAdmin() {
+        return senhaAdmin;
+    }
+
+    public void setSenhaAdmin(String senhaAdmin) {
+        this.senhaAdmin = senhaAdmin;
     }
 
 }

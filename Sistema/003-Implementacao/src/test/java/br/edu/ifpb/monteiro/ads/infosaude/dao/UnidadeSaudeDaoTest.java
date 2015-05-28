@@ -52,7 +52,7 @@ public class UnidadeSaudeDaoTest {
             daoUbs.remover(ubs);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -76,7 +76,7 @@ public class UnidadeSaudeDaoTest {
             daoUbs.salvar(ubs);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         UnidadeSaude result = null;
         try {
@@ -118,7 +118,7 @@ public class UnidadeSaudeDaoTest {
 
         } catch (DaoExcecoes ex) {
 
-            Logger.getLogger(LoginAdminDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS");
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS");
             salvo = false;
         }
         assertEquals(false, salvo);

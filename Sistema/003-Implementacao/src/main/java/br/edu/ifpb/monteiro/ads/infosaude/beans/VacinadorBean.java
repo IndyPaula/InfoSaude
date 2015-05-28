@@ -33,6 +33,8 @@ public class VacinadorBean {
     @Inject
     private Vacinador vacinador;
 
+    private Long idAuxiliar;
+
     @Inject
     private VacinadorServiceIF serviceIF;
     private String mensangem;
@@ -79,11 +81,22 @@ public class VacinadorBean {
         try {
             return serviceIF.buscarTudo();
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(AdministradorBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
+    
+    public void preparaEdicao() {
+
+        try {
+            vacinador = serviceIF.consultarPorId(idAuxiliar);
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(Vacinador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     public void mensagem() {
         if ("true".equals(mensangem)) {
             JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
@@ -133,6 +146,14 @@ public class VacinadorBean {
 
     public String getMensangem() {
         return mensangem;
+    }
+
+    public Long getIdAuxiliar() {
+        return idAuxiliar;
+    }
+
+    public void setIdAuxiliar(Long idAuxiliar) {
+        this.idAuxiliar = idAuxiliar;
     }
 
 }

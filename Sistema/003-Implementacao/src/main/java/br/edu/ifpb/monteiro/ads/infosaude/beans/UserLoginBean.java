@@ -1,8 +1,9 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.LoginAdmin;
-import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginAdminServiceIF;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
+import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginServiceIF;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,19 +22,19 @@ import javax.inject.Named;
 public class UserLoginBean implements Serializable {
 
     @Inject
-    private transient LoginAdminServiceIF service;
-    
+    private transient LoginServiceIF service;
+
     private static final long serialVersionUID = 682119314630735490L;
 
     private String login;
     private String senha;
 
-    private LoginAdmin admLogado;
+    private Funcionario admLogado;
 
     private boolean loggedIn;
 
     public UserLoginBean() {
-        
+
     }
 
     public String getLogin() {
@@ -52,22 +53,22 @@ public class UserLoginBean implements Serializable {
         this.senha = senha;
     }
 
-    public LoginAdmin getAdmLogado() {
+    public Funcionario getAdmLogado() {
         return admLogado;
     }
 
-    public void setAdmLogado(LoginAdmin admLogado) {
+    public void setAdmLogado(Funcionario admLogado) {
         this.admLogado = admLogado;
     }
 
     public String doLogin() {
-        
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
             Logger.getLogger(UserLoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        LoginAdmin usuarioFound = service.efetuarLogin(login, senha);
+        Vacinador usuarioFound = (Vacinador) service.efetuarLogin(login, senha);
 
         if (usuarioFound == null) {
             JsfUtil.addErrorMessage("Usuário e senha inválidos");
@@ -76,12 +77,13 @@ public class UserLoginBean implements Serializable {
 
             return null;
         } else {
-            
+
             loggedIn = true;
             setAdmLogado(usuarioFound);
             return "/resources/template/template_base.xhtml?faces-redirect=true";
         }
     }
+
     public String doLogout() {
 
         admLogado = null;

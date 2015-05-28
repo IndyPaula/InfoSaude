@@ -21,11 +21,11 @@
                 <h:form id="administrador">
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
                     <span id="titulo_pagina">Lista de Administradores da UBS</span>
-                    <p:fieldset legend="Usuários da UBS" 
+                    <p:fieldset legend="Administradores da UBS" 
                                 style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
                         <p:dataTable 
-                            var="adminLoc" value="#{administradorBean.adminsitradores}" 
-                            filteredValue="#{administradorBean.loginAdminFilter }"
+                            var="adminLoc" value="#{administradorBean.loginAdmins}" 
+                            filteredValue="#{administradorBean.loginAdminFilter}"
                             rowsPerPageTemplate="5,10,20,50,100, 200" 
                             paginator="true" 
                             rows="10" 
@@ -56,8 +56,7 @@
                             <p:column   headerText="Login" style="text-align: center" >
                                 <h:outputText value="#{adminLoc.login}" style="text-align: center" />
                             </p:column>
-                                                      
-
+                            
                             <p:column headerText="Opções" width="220" style="text-align: center" >
                                 <p:panelGrid style="border: 0;">
                                     <p:button value="Atualizar" icon="ui-icon-refresh" outcome="atualizar_admin.xhtml"
