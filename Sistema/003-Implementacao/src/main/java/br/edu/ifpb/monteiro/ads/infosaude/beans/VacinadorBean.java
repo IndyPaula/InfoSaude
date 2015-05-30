@@ -7,13 +7,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -48,23 +44,11 @@ public class VacinadorBean {
 
     }
 
-    public Date getDataAtual() {
-        Calendar calendar
-                = new Calendar.Builder()
-                .setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"))
-                .setLocale(new Locale("pt", "br"))
-                .setInstant(new Date())
-                .build();
-        Instant instantAPartirDoCalendar = calendar.toInstant();
-        Date hoje = Date.from(instantAPartirDoCalendar);
-        return hoje;
-    }
-
     public String salvar() {
         try {
 
             serviceIF.salvar(vacinador);
-            JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
+            JsfUtil.addSuccessMessage("Vacinador da UBS cadastrado com sucesso");
 
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,6 +58,12 @@ public class VacinadorBean {
 
         }
         return "";
+    }
+    
+    
+    public Date getDataAtual() {
+
+        return new Date();
     }
 
     public List<Vacinador> getVacinadores() {
@@ -86,7 +76,6 @@ public class VacinadorBean {
         return null;
     }
 
-    
     public void preparaEdicao() {
 
         try {
@@ -96,10 +85,10 @@ public class VacinadorBean {
         }
 
     }
-    
+
     public void mensagem() {
         if ("true".equals(mensangem)) {
-            JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
+            JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
 
         }
     }

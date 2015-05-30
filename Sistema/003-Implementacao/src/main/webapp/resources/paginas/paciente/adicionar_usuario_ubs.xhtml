@@ -72,7 +72,8 @@
 
                             <p:outputLabel value="Data de cadastro: " for="txtDataCadastro"/>
                             <p:calendar id="txtDataCadastro" locale="pt_BR" navigator="true" 
-                                        maxdate="#{pacienteBean.dataAtual}"
+                                        maxdate="#{pacienteBean.dataAtual}" 
+                                        value="#{pacienteBean.paciente.dataCadastro}"
                                        required="true" requiredMessage="A Data de Cadastro é obrigatória"
                                         />
 

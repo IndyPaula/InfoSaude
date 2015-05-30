@@ -9,13 +9,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -52,15 +48,8 @@ public class PacienteBean {
     }
 
     public Date getDataAtual() {
-        Calendar calendar
-                = new Calendar.Builder()
-                .setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"))
-                .setLocale(new Locale("pt", "br"))
-                .setInstant(new Date())
-                .build();
-        Instant instantAPartirDoCalendar = calendar.toInstant();
-        Date hoje = Date.from(instantAPartirDoCalendar);
-        return hoje;
+
+        return new Date();
     }
 
     public PacienteServiceIF getPacienteService() {

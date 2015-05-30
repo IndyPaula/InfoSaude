@@ -68,7 +68,7 @@ public class UserLoginBean implements Serializable {
         } catch (InterruptedException ex) {
             Logger.getLogger(UserLoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Vacinador usuarioFound = (Vacinador) service.efetuarLogin(login, senha);
+        Funcionario usuarioFound = service.efetuarLogin(login, senha);
 
         if (usuarioFound == null) {
             JsfUtil.addErrorMessage("Usuário e senha inválidos");
