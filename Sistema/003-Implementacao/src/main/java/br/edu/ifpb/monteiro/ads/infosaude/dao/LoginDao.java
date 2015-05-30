@@ -26,12 +26,12 @@ public class LoginDao extends GenericoDao<Funcionario> implements LoginDaoIF {
         if (login != null && senha != null) {
 
             Query queryAcs = getEntityManager().createNativeQuery(
-                    "SELECT * FROM funcionario WHERE login_admin =  '"
-                    + login + "' AND senha_admin = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", ACS.class);
+                    "SELECT * FROM funcionario WHERE login =  '"
+                    + login + "' AND senha = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", ACS.class);
 
             Query queryVacinador = getEntityManager().createNativeQuery(
-                    "SELECT * FROM funcionario  WHERE login_admin =  '"
-                    + login + "' AND senha_admin = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", Vacinador.class);
+                    "SELECT * FROM funcionario  WHERE login =  '"
+                    + login + "' AND senha = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", Vacinador.class);
 
             List users = new ArrayList<>();
 

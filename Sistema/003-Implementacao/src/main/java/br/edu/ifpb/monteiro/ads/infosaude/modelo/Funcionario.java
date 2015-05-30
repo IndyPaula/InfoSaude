@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,17 +34,11 @@ public class Funcionario extends Pessoa implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private UnidadeSaude unidadeSaude;
 
-    @Column(name = "nome_usuario", length = 45, unique = true, nullable = false)
-    private String nomeUsuario;
-
     @Column(name = "senha", length = 45, unique = false, nullable = false)
     private String senha;
 
-    @Column(name = "login_admin", length = 45, unique = true, nullable = true)
-    private String loginAdmin;
-
-    @Column(name = "senha_admin", length = 45, unique = true, nullable = true)
-    private String senhaAdmin;
+    @Column(name = "login", length = 45, unique = true, nullable = true)
+    private String login;
 
     public int getMatricula() {
         return matricula;
@@ -77,20 +72,12 @@ public class Funcionario extends Pessoa implements Serializable {
         this.unidadeSaude = unidadeSaude;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha = CriptografiaUtil.convertStringToMd5(senha);
     }
 
     public String getCpf() {
@@ -101,20 +88,12 @@ public class Funcionario extends Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getLoginAdmin() {
-        return loginAdmin;
+    public String getLogin() {
+        return login;
     }
 
-    public void setLoginAdmin(String loginAdmin) {
-        this.loginAdmin = loginAdmin;
-    }
-
-    public String getSenhaAdmin() {
-        return senhaAdmin;
-    }
-
-    public void setSenhaAdmin(String senhaAdmin) {
-        this.senhaAdmin = senhaAdmin;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
 }
