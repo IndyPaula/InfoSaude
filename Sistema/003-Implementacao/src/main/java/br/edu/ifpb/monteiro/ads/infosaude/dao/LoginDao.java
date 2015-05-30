@@ -5,8 +5,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Query;
 
 /**

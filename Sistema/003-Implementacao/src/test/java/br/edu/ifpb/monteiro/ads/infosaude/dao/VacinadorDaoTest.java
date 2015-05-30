@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,7 +17,7 @@ import org.junit.Test;
  * @author Vanderlan Gomes
  * @date 30/05/2015
  */
-public class AutenticacaoTest {
+public class VacinadorDaoTest {
 
     private static EntityManagerProducer emp;
     private static EntityManager em;
@@ -37,6 +36,11 @@ public class AutenticacaoTest {
         daoLogin = new LoginDao();
         daoLogin.setEntityManager(em);
 
+    }
+
+    @Test
+    public void tesUsuarioSenhaInvalido() {
+
         Vacinador v = new Vacinador();
 
         v.setNome("InfoSaude");
@@ -48,69 +52,18 @@ public class AutenticacaoTest {
         v.setSenha("fjosijfew9urj3");
         v.setCodigoEquipeINE("4234");
 
+        Vacinador result = null;
         try {
             daoVacinador.getEntityManager().getTransaction().begin();
             daoVacinador.salvar(v);
             daoVacinador.getEntityManager().getTransaction().commit();
+
+            result = daoVacinador.buscarPorCampo("cpf", v.getCpf());
         } catch (DaoExcecoes ex) {
             Logger.getLogger(CriaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        assertEquals(432432, result.getMatricula());
     }
 
-    @Test
-    public void tesUsuarioSenhaInvalido() {
-
-        Vacinador result = (Vacinador) daoLogin.efetuarLogin(null, null);
-
-        assertEquals(null, result);
-    }
-
-    @Test
-    public void tesUsuarioValidoSenhaNull() {
-
-        Vacinador result = (Vacinador) daoLogin.efetuarLogin("InfoSaude", null);
-
-        assertEquals(null, result);
-    }
-
-    @Test
-    public void tesUsuarioValidoSenhaIncorreta() {
-
-        Vacinador result = (Vacinador) daoLogin.efetuarLogin("InfoSaude", "32r8932r8932y");
-
-        assertEquals(null, result);
-    }
-
-    @Test
-    public void tesUsuarioValidoSenhaValida() {
-
-        Vacinador result = (Vacinador) daoLogin.efetuarLogin("InfoSaude", "fjosijfew9urj3");
-
-        assertEquals("111.233.324-23", result.getCpf());
-    }
-
-    @Test
-    public void tesUsuarioSenhaIncorretos() {
-
-        Vacinador result = (Vacinador) daoLogin.efetuarLogin("User", "8389ueçfjfwe");
-
-        assertEquals(null, result);
-    }
-    
-    @AfterClass
-    public static void limparDados(){
-        
-        try {
-            Vacinador v = daoVacinador.buscarPorCampo("cpf", "111.233.324-23");
-            
-            daoVacinador.getEntityManager().getTransaction().begin();
-            daoVacinador.remover(v);
-            daoVacinador.getEntityManager().getTransaction().commit();
-            
-            
-        } catch (DaoExcecoes ex) {
-            Logger.getLogger(AutenticacaoTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
