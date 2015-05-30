@@ -26,42 +26,25 @@ public class LoginDao extends GenericoDao<Funcionario> implements LoginDaoIF {
         if (login != null && senha != null) {
 
             Query queryAcs = getEntityManager().createNativeQuery(
-                    "SELECT * FROM funcionario WHERE login =  '"
-                    + login + "' AND senha = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", ACS.class);
+                    "SELECT * FROM funcionario, acs WHERE funcionario.id = acs.id AND "
+                    + "login =  '"+ login + "' AND senha = '"
+                    + CriptografiaUtil.convertStringToMd5(senha) + "'", ACS.class);
 
             Query queryVacinador = getEntityManager().createNativeQuery(
-                    "SELECT * FROM funcionario  WHERE login =  '"
-                    + login + "' AND senha = '" + CriptografiaUtil.convertStringToMd5(senha) + "'", Vacinador.class);
+                    "SELECT * FROM funcionario, vacinador  WHERE funcionario.id = vacinador.id AND "
+                    + "login =  '" + login + "' AND senha = '"
+                    + CriptografiaUtil.convertStringToMd5(senha) + "'", Vacinador.class);
 
-            List users = new ArrayList<>();
-
-            try {
-                if (queryAcs.getResultList().get(0) != null) {
-                    users.add(queryAcs.getResultList().get(0));
-                    ACS a = (ACS) queryAcs.getResultList().get(0);
-                    return a;
-
-                }
-            } catch (IndexOutOfBoundsException ex) {
-            }
-
-            try {
-                if (queryVacinador.getResultList().get(0) != null) {
-                    users.add(queryVacinador.getResultList().get(0));
-                    Vacinador v = (Vacinador) queryVacinador.getResultList().get(0);
-                    return v;
-                }
-            } catch (IndexOutOfBoundsException ex) {
-            }
-
-            if (users.size() == 1) {
-
-                Funcionario userFound = (Funcionario) users.get(0);
-
-                return userFound;
+            if (queryAcs.getResultList().size() > 0) {
+                ACS a = (ACS) queryAcs.getResultList().get(0);
+                return a;
 
             }
-            return null;
+
+            if (queryVacinador.getResultList().size() > 0) {
+                Vacinador v = (Vacinador) queryVacinador.getResultList().get(0);
+                return v;
+            }
         }
         return null;
     }
