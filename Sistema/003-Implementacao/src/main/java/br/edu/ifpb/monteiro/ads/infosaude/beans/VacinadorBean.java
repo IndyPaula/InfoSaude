@@ -72,7 +72,7 @@ public class VacinadorBean {
     public List<Vacinador> getVacinadores() {
         
         try {
-            vacinadores = vacinadorService.buscarTudo();
+            this.vacinadores = vacinadorService.buscarTudo();
             return vacinadores;
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,9 +88,9 @@ public class VacinadorBean {
     public void preparaEdicao() {
         
         try {
-            vacinador = vacinadorService.consultarPorId(idAuxiliar);
+            this.vacinador = vacinadorService.consultarPorId(idAuxiliar);
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(Vacinador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
