@@ -2,7 +2,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginServiceIF;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -28,37 +27,12 @@ public class UserLoginBean implements Serializable {
 
     private String login;
     private String senha;
-
     private Funcionario admLogado;
 
     private boolean loggedIn;
 
     public UserLoginBean() {
 
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public Funcionario getAdmLogado() {
-        return admLogado;
-    }
-
-    public void setAdmLogado(Funcionario admLogado) {
-        this.admLogado = admLogado;
     }
 
     public String doLogin() {
@@ -68,7 +42,16 @@ public class UserLoginBean implements Serializable {
         } catch (InterruptedException ex) {
             Logger.getLogger(UserLoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Funcionario usuarioFound = service.efetuarLogin(login, senha);
+
+        Funcionario usuarioFound = null;
+        try {
+
+             usuarioFound = service.efetuarLogin(login, senha);
+        } catch (Exception ex) {
+            
+             JsfUtil.addErrorMessage("Não foi possível conectar-se ao Banco de Dados");
+             return null;
+        }
 
         if (usuarioFound == null) {
             JsfUtil.addErrorMessage("Usuário e senha inválidos");
@@ -94,5 +77,29 @@ public class UserLoginBean implements Serializable {
 
     public boolean isLoggedIn() {
         return loggedIn;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Funcionario getAdmLogado() {
+        return admLogado;
+    }
+
+    public void setAdmLogado(Funcionario admLogado) {
+        this.admLogado = admLogado;
     }
 }

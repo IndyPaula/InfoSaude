@@ -1,13 +1,13 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriaUsuarios;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolationException;
 import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,7 +39,7 @@ public class VacinadorDaoTest {
     }
 
     @Test
-    public void tesUsuarioSenhaInvalido() {
+    public void testDadosValidos() {
 
         Vacinador v = new Vacinador();
 
@@ -60,10 +60,33 @@ public class VacinadorDaoTest {
 
             result = daoVacinador.buscarPorCampo("cpf", v.getCpf());
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(CriaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         assertEquals(432432, result.getMatricula());
     }
 
+    @Test(expected = ConstraintViolationException.class)
+    public void testCpfInvalido() {
+
+        Vacinador v = new Vacinador();
+
+        v.setNome("InfoSaude");
+        v.setDataNascimento(new Date());
+        v.setMatricula(432432);
+        v.setRegistroCoren(423423);
+        v.setLogin("InfoSaude");
+        v.setSenha("fjosijfew9urj3");
+        v.setCodigoEquipeINE("4234");
+
+        try {
+            daoVacinador.getEntityManager().getTransaction().begin();
+            daoVacinador.salvar(v);
+            daoVacinador.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

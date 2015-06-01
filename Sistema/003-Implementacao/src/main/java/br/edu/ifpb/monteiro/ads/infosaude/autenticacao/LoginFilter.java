@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginFilter implements Filter {
 
     @Inject
-    private UserLoginBean usuarioMB;
+    private UserLoginBean  usuarioMB;
 
     @Override
     public void destroy() {
@@ -30,7 +30,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        
+
         if (usuarioMB == null || !usuarioMB.isLoggedIn()) {
 
             String contextPath = ((HttpServletRequest) request).getContextPath();
