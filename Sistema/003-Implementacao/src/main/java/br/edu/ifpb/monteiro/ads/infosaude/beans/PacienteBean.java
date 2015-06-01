@@ -145,6 +145,7 @@ public class PacienteBean {
     public void preparaEdicao() {
 
         try {
+            System.out.println(idAuxiliar);
             paciente = pacienteService.consultarPorId(idAuxiliar);
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);

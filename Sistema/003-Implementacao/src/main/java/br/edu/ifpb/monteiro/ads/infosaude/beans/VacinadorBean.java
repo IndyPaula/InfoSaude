@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
+import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
@@ -23,126 +24,174 @@ import javax.inject.Inject;
  */
 @Model
 public class VacinadorBean {
-
+    
     private String confirmarSenha;
-
+    
+    private List<Vacinador> vacinadores;
+    
     @Inject
     private Vacinador vacinador;
-
+    
     private Long idAuxiliar;
-
+    
     @Inject
-    private VacinadorServiceIF serviceIF;
+    private VacinadorServiceIF vacinadorService;
+    
     private String mensangem;
-
+    
     private List<Vacinador> vacinadoresFilter;
-
+    
     @PostConstruct
     public void init() {
-
-        vacinadoresFilter = new ArrayList<>();
-
+        
+        vacinadoresFilter = new ArrayList<Vacinador>();
+        
     }
-
+    
     public String salvar() {
         try {
-
-            serviceIF.salvar(vacinador);
+            
+            vacinadorService.salvar(vacinador);
             JsfUtil.addSuccessMessage("Vacinador da UBS cadastrado com sucesso");
-
+            
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
-
+            
             return null;
-
+            
         }
-        return "";
+        return "buscar_vacinador.xhtml";
     }
-    
     
     public Date getDataAtual() {
-
+        
         return new Date();
     }
-
+    
     public List<Vacinador> getVacinadores() {
-
+        
         try {
-            return serviceIF.buscarTudo();
+            this.vacinadores = vacinadorService.buscarTudo();
+            return vacinadores;
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public void preparaEdicao() {
-
-        try {
-            vacinador = serviceIF.consultarPorId(idAuxiliar);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(Vacinador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    public void setVacinadores(List<Vacinador> vacinadores) {
+        this.vacinadores = vacinadores;
     }
-
+    
+    
+    public void preparaEdicao() {
+        
+        try {
+            this.vacinador = vacinadorService.consultarPorId(idAuxiliar);
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public void mensagem() {
         if ("true".equals(mensangem)) {
             JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
-
+            
         }
     }
-
+    
+    public String remover(Vacinador vacinadorLocal) {
+        
+        if (vacinadorLocal != null) {
+            
+            try {
+                vacinadorService.remover(vacinadorLocal);
+                
+                Thread.sleep(1000);
+                
+                JsfUtil.redirect("/InfoSaude/resources/paginas/imunizacao/buscar_vacinador.xhtml?faces-redirect=true");
+                return "buscar_vacinador.xhtml";
+                
+            } catch (ServiceExcecoes ex) {
+                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage("Erro ao tentar remover vacinador");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            
+            JsfUtil.addErrorMessage("Erro ao tentar remover Vacinador da UBS");
+        }
+        return null;
+    }
+    
+    public String update() throws BeanExcecao {
+        
+        try {
+            vacinador.setId(idAuxiliar);
+            vacinadorService.atualizar(vacinador);
+            JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
+            return "buscar_vacinador.xhtml";
+        } catch (ServiceExcecoes ex) {
+            
+            JsfUtil.addErrorMessage(ex.getMessage());
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public List<Vacinador> getVacinadoresFilter() {
         return vacinadoresFilter;
     }
-
+    
     public void setVacinadoresFilter(List<Vacinador> vacinadoresFilter) {
         this.vacinadoresFilter = vacinadoresFilter;
     }
-
+    
     public Vacinador getVacinador() {
         return vacinador;
     }
-
+    
     public void setVacinador(Vacinador vacinador) {
         this.vacinador = vacinador;
     }
-
+    
     public EnumEstados[] getEstado() {
         return EnumEstados.values();
     }
-
+    
     public EnumGeneros[] getSexo() {
         return EnumGeneros.values();
     }
-
+    
     public EnumEtnias[] getEtnias() {
         return EnumEtnias.values();
     }
-
+    
     public String getConfirmarSenha() {
         return confirmarSenha;
     }
-
+    
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
     }
-
+    
     public void setMensangem(String mensangem) {
         this.mensangem = mensangem;
     }
-
+    
     public String getMensangem() {
         return mensangem;
     }
-
+    
     public Long getIdAuxiliar() {
         return idAuxiliar;
     }
-
+    
     public void setIdAuxiliar(Long idAuxiliar) {
         this.idAuxiliar = idAuxiliar;
     }
-
+    
 }

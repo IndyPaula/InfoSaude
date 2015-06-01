@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinadorDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
+import javax.persistence.Query;
 
 /**
  *
@@ -12,6 +13,29 @@ public class VacinadorDao extends GenericoDao<Vacinador> implements VacinadorDao
 
     public VacinadorDao() {
         super(Vacinador.class);
+    }
+
+    @Override
+    public void remover(Vacinador entity) {
+
+        if (getEntityManager().getTransaction().isActive()) {
+
+            System.out.println("ATIVA");
+        } else {
+
+            System.out.println("DESATIVADA");
+
+        }
+        Query queryPaciente = getEntityManager().createNativeQuery("DELETE FROM vacinador WHERE id = " + entity.getId());
+        queryPaciente.executeUpdate();
+
+        Query queryPessoa = getEntityManager().createNativeQuery("DELETE FROM vacinador WHERE id = " + entity.getId());
+        queryPessoa.executeUpdate();
+
+        getEntityManager().getTransaction().commit();
+
+        getEntityManager().close();
+
     }
 
 }

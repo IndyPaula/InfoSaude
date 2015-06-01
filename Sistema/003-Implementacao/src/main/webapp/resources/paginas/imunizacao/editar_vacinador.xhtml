@@ -15,7 +15,7 @@
             
             <f:metadata>
                 <f:viewParam name="id" value="#{vacinadorBean.idAuxiliar}" />
-                    <f:viewAction action="#{pacienteBean.preparaEdicao()}"  />
+                <f:viewAction action="#{vacinadorBean.preparaEdicao()}"  />
 
                 </f:metadata>
             
@@ -65,7 +65,6 @@
                             <p:row>
                                 <p:column colspan="2">
                                     <h:panelGrid columns="4" >
-
                                         <p:inputText id="registroCoren" value="#{vacinadorBean.vacinador.registroCoren}" required="true" 
                                                      style="margin-right: 40px; margin-left: -3px"   />
 
@@ -171,7 +170,7 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="#{vacinadorBean.vacinador.nomeUsuario}" id="nomeUsuario" required="true"
+                                        <p:inputText value="#{vacinadorBean.vacinador.login}" id="nomeUsuario" required="true"
                                                      style="margin-right: 30px; margin-left: -3px"   />
 
                                         <p:outputLabel for="senha" value="Senha: "/>
@@ -202,9 +201,9 @@
                             <p:spacer/>
 
                             <p:outputLabel value=" "/>
-                            <p:commandButton value="Cadastrar Vacinador" style="top: 20px; margin-left: 50%; bottom: 10px;"
+                            <p:commandButton value="Atualizar Vacinador" style="top: 20px; margin-left: 50%; bottom: 10px;"
                                              update="mensages" ajax="false" 
-                                             action="#{vacinadorBean.salvar()}"/>
+                                             action="#{vacinadorBean.update()}"/>
 
                         </h:panelGrid>
 
