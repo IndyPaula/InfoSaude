@@ -18,18 +18,14 @@ public class VacinadorDao extends GenericoDao<Vacinador> implements VacinadorDao
     @Override
     public void remover(Vacinador entity) {
 
-        if (getEntityManager().getTransaction().isActive()) {
-
-            System.out.println("ATIVA");
-        } else {
-
-            System.out.println("DESATIVADA");
-
-        }
         Query queryPaciente = getEntityManager().createNativeQuery("DELETE FROM vacinador WHERE id = " + entity.getId());
         queryPaciente.executeUpdate();
+        
+        Query queryFuncionario = getEntityManager().createNativeQuery("DELETE FROM funcionario WHERE id = " + entity.getId());
+        queryFuncionario.executeUpdate();
+        
 
-        Query queryPessoa = getEntityManager().createNativeQuery("DELETE FROM vacinador WHERE id = " + entity.getId());
+        Query queryPessoa = getEntityManager().createNativeQuery("DELETE FROM pessoa WHERE id = " + entity.getId());
         queryPessoa.executeUpdate();
 
         getEntityManager().getTransaction().commit();

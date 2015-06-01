@@ -106,7 +106,7 @@ public class AutenticacaoTest {
             
             daoVacinador.getEntityManager().getTransaction().begin();
             daoVacinador.remover(v);
-            daoVacinador.getEntityManager().getTransaction().commit();
+//            daoVacinador.getEntityManager().getTransaction().commit();
             
             
         } catch (DaoExcecoes ex) {

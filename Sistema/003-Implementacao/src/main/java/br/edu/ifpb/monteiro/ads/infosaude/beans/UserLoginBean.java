@@ -63,7 +63,7 @@ public class UserLoginBean implements Serializable {
 
             loggedIn = true;
             setAdmLogado(usuarioFound);
-            return "/resources/template/template_base.xhtml?faces-redirect=true";
+            return "/resources/index.xhtml?faces-redirect=true";
         }
     }
 

@@ -37,7 +37,7 @@
                                 <p:outputPanel>
                                     <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
                                     <p:inputText id="globalFilter" onkeyup="PF('tabela_vacinador').filter()" 
-                                                 size="60" placeholder="digite a matricula, login ou registro coren que deseja buscar" />
+                                                 size="60" placeholder="Pesquise por Matricula, Nome, Login ou Registro Coren" />
                                 </p:outputPanel>
                             </f:facet>
 
@@ -49,12 +49,16 @@
                                 <h:outputText value="#{vacinadorLocal.matricula}" style="text-align: center" />
                             </p:column>
 
+                            <p:column   filterBy="#{vacinadorLocal.nome}" headerText="Login" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vacinadorLocal.nome}" style="text-align: center" />
+                            </p:column>
+                            
                             <p:column   filterBy="#{vacinadorLocal.login}" headerText="Login" style="text-align: center"  visible="false">
                                 <h:outputText value="#{vacinadorLocal.login}" style="text-align: center" />
                             </p:column>
                             
-                            <p:column   headerText="Login" style="text-align: center" >
-                                <h:outputText value="#{vacinadorLocal.login}" style="text-align: center" />
+                            <p:column   headerText="Nome" style="text-align: center" >
+                                <h:outputText value="#{vacinadorLocal.nome}" style="text-align: center" />
                             </p:column>
                             
                             <p:column   filterBy="#{vacinadorLocal.registroCoren}" headerText="Registro Coren" style="text-align: center"  visible="false">

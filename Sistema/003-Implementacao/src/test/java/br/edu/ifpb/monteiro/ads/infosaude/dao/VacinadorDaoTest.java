@@ -44,13 +44,13 @@ public class VacinadorDaoTest {
         Vacinador v = new Vacinador();
 
         v.setNome("InfoSaude");
-        v.setCpf("111.233.324-23");
+        v.setCpf("111.293.324-23");
         v.setDataNascimento(new Date());
-        v.setMatricula(432432);
-        v.setRegistroCoren(423423);
-        v.setLogin("InfoSaude");
-        v.setSenha("fjosijfew9urj3");
-        v.setCodigoEquipeINE("4234");
+        v.setMatricula(12432);
+        v.setRegistroCoren(8748);
+        v.setLogin("Joelton");
+        v.setSenha("456");
+        v.setCodigoEquipeINE("487");
 
         Vacinador result = null;
         try {
@@ -63,7 +63,7 @@ public class VacinadorDaoTest {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        assertEquals(432432, result.getMatricula());
+        assertEquals(12432, result.getMatricula());
     }
 
     @Test(expected = ConstraintViolationException.class)
