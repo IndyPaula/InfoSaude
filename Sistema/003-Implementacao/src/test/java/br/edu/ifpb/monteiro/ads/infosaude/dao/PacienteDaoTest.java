@@ -48,7 +48,7 @@ public class PacienteDaoTest {
         paciente.setCartaoSUS("534534534");
         paciente.setNome("Vanderlan Gomes da Silva");
         paciente.setCpf("10145473422");
-        paciente.setDataNascimento(new Date(1993, 04, 01));
+        paciente.setDataNascimento(new Date());
         paciente.setNumeroProntuario(4234);
         paciente.setDataCadastro(new Date());
         paciente.setSexo(EnumGeneros.MASCULINO);
@@ -78,7 +78,7 @@ public class PacienteDaoTest {
         Paciente paciente = new Paciente();
         paciente.setCartaoSUS("534534534");
         paciente.setNome("Fulano Alves");
-        paciente.setDataNascimento(new Date(1993, 04, 01));
+        paciente.setDataNascimento(new Date());
         paciente.setNumeroProntuario(4234);
         paciente.setDataCadastro(new Date());
         paciente.setSexo(EnumGeneros.MASCULINO);
@@ -97,13 +97,13 @@ public class PacienteDaoTest {
 
         } catch (ConstraintViolationException ex) {
             daoPaciente.getEntityManager().getTransaction().rollback();
-            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, "Erro de validação, CPF inválido");
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, "Erro de validação, CPF inválido" + ex);
             validadation = false;
         }
         assertEquals(false, validadation);
     }
 
-    @Test
+    @Test(expected = RollbackException.class)
     public void testCpfDuplicado() {
 
         boolean salvo = false;
@@ -112,7 +112,7 @@ public class PacienteDaoTest {
         paciente.setCartaoSUS("24324325252");
         paciente.setNome("Vanderlan Gomes da Silva");
         paciente.setCpf("86745264871");
-        paciente.setDataNascimento(new Date(1993, 04, 01));
+        paciente.setDataNascimento(new Date());
         paciente.setNumeroProntuario(55555555);
         paciente.setDataCadastro(new Date());
         paciente.setSexo(EnumGeneros.MASCULINO);
@@ -122,7 +122,7 @@ public class PacienteDaoTest {
         paciente2.setCartaoSUS("53424534");
         paciente2.setCpf("86745264871");
         paciente2.setNome("Joelton Quirino Brito");
-        paciente2.setDataNascimento(new Date(1991, 04, 01));
+        paciente2.setDataNascimento(new Date());
         paciente2.setNumeroProntuario(7777777);
         paciente2.setDataCadastro(new Date());
         paciente2.setSexo(EnumGeneros.MASCULINO);
@@ -150,12 +150,7 @@ public class PacienteDaoTest {
 
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (RollbackException ex) {
-
-            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, "CPF já cadastrado");
-
         }
-
         assertEquals(false, salvo);
     }
 

@@ -106,8 +106,6 @@ public class AutenticacaoTest {
             
             daoVacinador.getEntityManager().getTransaction().begin();
             daoVacinador.remover(v);
-//            daoVacinador.getEntityManager().getTransaction().commit();
-            
             
         } catch (DaoExcecoes ex) {
             Logger.getLogger(AutenticacaoTest.class.getName()).log(Level.SEVERE, null, ex);

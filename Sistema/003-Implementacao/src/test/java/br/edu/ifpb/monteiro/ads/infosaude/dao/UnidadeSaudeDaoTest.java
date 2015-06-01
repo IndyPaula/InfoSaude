@@ -87,6 +87,8 @@ public class UnidadeSaudeDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        assertEquals(312, result.getCnes());
 
     }
 
@@ -110,15 +112,9 @@ public class UnidadeSaudeDaoTest {
             daoUbs.getEntityManager().getTransaction().begin();
             daoUbs.salvar(ubs);
             daoUbs.getEntityManager().getTransaction().commit();
-        } catch (javax.persistence.RollbackException ex) {
-
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).
-                    log(Level.SEVERE, null, "Erro ao salvar UBS - CNES já existe");
-            salvo = false;
-
         } catch (DaoExcecoes ex) {
 
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS");
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS"+ex);
             salvo = false;
         }
         assertEquals(false, salvo);
