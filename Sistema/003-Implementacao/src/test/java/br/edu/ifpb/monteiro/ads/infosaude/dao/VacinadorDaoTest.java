@@ -8,8 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolationException;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -24,8 +25,8 @@ public class VacinadorDaoTest {
     private static VacinadorDao daoVacinador;
     private static LoginDao daoLogin;
 
-    @BeforeClass
-    public static void preparaDados() {
+    @Before
+    public void preparaDados() {
         daoVacinador = new VacinadorDao();
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
@@ -66,6 +67,13 @@ public class VacinadorDaoTest {
         assertEquals(12432, result.getMatricula());
     }
 
+    @After
+    public void limpaEntityManager() {
+
+        daoVacinador.getEntityManager().clear();
+
+    }
+
     @Test(expected = ConstraintViolationException.class)
     public void testCpfInvalido() {
 
@@ -89,6 +97,55 @@ public class VacinadorDaoTest {
         }
 
     }
-    
-    
+
+    @Test
+    public void testRemocao() {
+        
+        inserirRegistro();
+        Vacinador v = null;
+        try {
+            
+            v = daoVacinador.buscarPorCampo("cpf", "101.523.466-99");
+            
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        daoVacinador.remover(v);
+        
+        Vacinador v2 = null;
+        try {
+            
+            v2 = daoVacinador.buscarPorCampo("cpf", "101.523.466-99");
+            
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        assertEquals(v2, null);
+
+    }
+
+    public void inserirRegistro() {
+
+        Vacinador v = new Vacinador();
+
+        v.setCpf("101.523.466-99");
+        v.setNome("InfoSaude");
+        v.setDataNascimento(new Date());
+        v.setMatricula(7777);
+        v.setRegistroCoren(102030);
+        v.setLogin("Teste");
+        v.setSenha("fjosijfew9urj3");
+        v.setCodigoEquipeINE("41343234");
+
+        try {
+            daoVacinador.getEntityManager().getTransaction().begin();
+            daoVacinador.salvar(v);
+            daoVacinador.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

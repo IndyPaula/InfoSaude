@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -30,8 +30,8 @@ public class PacienteDaoTest {
 
     }
 
-    @BeforeClass
-    public static void preparaDao() {
+    @Before
+    public void preparaDao() {
         daoPaciente = new PacienteDao();
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
@@ -39,6 +39,12 @@ public class PacienteDaoTest {
         //SETANTO ENTITY MANAGER MANUALMENTE
         daoPaciente.setEntityManager(em);
 
+    }
+
+    @After
+    public void limpaEntityManager() {
+
+        daoPaciente.getEntityManager().clear();
     }
 
     @Test
@@ -73,7 +79,7 @@ public class PacienteDaoTest {
         assertEquals(paciente.getId(), result.getId());
     }
 
-    @Test
+    @Test(expected = ConstraintViolationException.class)
     public void testCpfNull() {
         Paciente paciente = new Paciente();
         paciente.setCartaoSUS("534534534");
@@ -95,63 +101,43 @@ public class PacienteDaoTest {
 
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (ConstraintViolationException ex) {
-            daoPaciente.getEntityManager().getTransaction().rollback();
-            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, "Erro de validação, CPF inválido" + ex);
-            validadation = false;
         }
         assertEquals(false, validadation);
     }
 
-    @Test(expected = RollbackException.class)
-    public void testCpfDuplicado() {
-
-        boolean salvo = false;
+    @Test
+    public void testEdicao() {
 
         Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("24324325252");
-        paciente.setNome("Vanderlan Gomes da Silva");
-        paciente.setCpf("86745264871");
+        paciente.setCartaoSUS("99994325252");
+        paciente.setNome("Vanderlan Gomes");
+        paciente.setCpf("432.543.576-31");
         paciente.setDataNascimento(new Date());
-        paciente.setNumeroProntuario(55555555);
+        paciente.setNumeroProntuario(55655555);
         paciente.setDataCadastro(new Date());
         paciente.setSexo(EnumGeneros.MASCULINO);
         paciente.setEstado(EnumEstados.PE);
 
-        Paciente paciente2 = new Paciente();
-        paciente2.setCartaoSUS("53424534");
-        paciente2.setCpf("86745264871");
-        paciente2.setNome("Joelton Quirino Brito");
-        paciente2.setDataNascimento(new Date());
-        paciente2.setNumeroProntuario(7777777);
-        paciente2.setDataCadastro(new Date());
-        paciente2.setSexo(EnumGeneros.MASCULINO);
-
+        Paciente result = null;
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
             daoPaciente.salvar(paciente);
+
+            Paciente paciente2 = daoPaciente.buscarPorCampo("cpf", "432.543.576-31");
+            paciente2.setNome("Vanderlan Gomes da Silva");
+
+            daoPaciente.atualizar(paciente2);
             daoPaciente.getEntityManager().getTransaction().commit();
 
-        } catch (DaoExcecoes ex) {
+            result = daoPaciente.buscarPorCampo("cpf", "432.543.576-31");
 
+        } catch (DaoExcecoes ex) {
+            daoPaciente.getEntityManager().clear();
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-
-        try {
-
-            daoPaciente.getEntityManager().getTransaction().begin();
-            daoPaciente.salvar(paciente2);
-            daoPaciente.getEntityManager().getTransaction().commit();
-            salvo = true;
-
-        } catch (DaoExcecoes ex) {
-
-            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-        assertEquals(false, salvo);
+        assertEquals(result.getNome(), "Vanderlan Gomes da Silva");
     }
 
 }

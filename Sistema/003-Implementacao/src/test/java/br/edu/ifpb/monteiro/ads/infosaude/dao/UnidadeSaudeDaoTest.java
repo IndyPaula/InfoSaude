@@ -7,9 +7,10 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -27,8 +28,8 @@ public class UnidadeSaudeDaoTest {
 
     }
 
-    @BeforeClass
-    public static void configurarDao() {
+    @Before
+    public  void configurarDao() {
 
         //INSTANCIANDO A CLASSE MANUALMENTE pois não funcionaria com Injeção de dependências
         emp = new EntityManagerProducer("InfoSaudePUTest");
@@ -40,13 +41,20 @@ public class UnidadeSaudeDaoTest {
 
     }
 
+    @After
+    public void limpaEntityManager() {
+
+        daoUbs.getEntityManager().clear();
+
+    }
+
     @AfterClass
     public static void removerDados() {
 
         try {
             UnidadeSaude ubs = daoUbs.buscarPorCampo("cnes", 312);
 
-            if(!daoUbs.getEntityManager().getTransaction().isActive()){
+            if (!daoUbs.getEntityManager().getTransaction().isActive()) {
                 daoUbs.getEntityManager().getTransaction().begin();
             }
             daoUbs.remover(ubs);
@@ -87,34 +95,51 @@ public class UnidadeSaudeDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         assertEquals(312, result.getCnes());
 
     }
 
     @Test
     public void ubsDuplicada() {
-
+        
         UnidadeSaude ubs = new UnidadeSaude();
         ubs.setBairro("Centro");
-        ubs.setCep("5487598");
+        ubs.setCep("1244");
         ubs.setCidade("Monteiro");
-        ubs.setCnes(392);
-        ubs.setEnderecoNumero(200);
-        ubs.setEstado(EnumEstados.PB);
-        ubs.setLogradouro("Av. Principal");
-        ubs.setNome("UBS 09");
-        ubs.setNumero(1276);
-
-        boolean salvo = true;
+        ubs.setCnes(310902);
+        ubs.setEnderecoNumero(1200);
+        ubs.setEstado(EnumEstados.PE);
+        ubs.setLogradouro("Av Principal");
+        ubs.setNome("UBS 08");
+        ubs.setNumero(128);
 
         try {
             daoUbs.getEntityManager().getTransaction().begin();
             daoUbs.salvar(ubs);
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        UnidadeSaude ubs2 = new UnidadeSaude();
+        ubs2.setBairro("Centro");
+        ubs2.setCep("1244");
+        ubs2.setCidade("Monteiro");
+        ubs2.setCnes(310902);
+        ubs2.setEnderecoNumero(1200);
+        ubs2.setEstado(EnumEstados.PB);
+        ubs2.setLogradouro("Av. Principal");
+        ubs2.setNome("UBS 08");
+        ubs2.setNumero(128);
+
+        boolean salvo = true;
+
+        try {
+            daoUbs.salvar(ubs2);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
 
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS"+ex);
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS" + ex);
             salvo = false;
         }
         assertEquals(false, salvo);

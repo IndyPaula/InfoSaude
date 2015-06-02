@@ -104,7 +104,6 @@ public class AutenticacaoTest {
         try {
             Vacinador v = daoVacinador.buscarPorCampo("cpf", "111.233.324-23");
             
-            daoVacinador.getEntityManager().getTransaction().begin();
             daoVacinador.remover(v);
             
         } catch (DaoExcecoes ex) {
