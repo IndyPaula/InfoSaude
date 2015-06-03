@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8084/InfoSaude/resources/paginas/imunizacao/adicionar_vacinador.xhtml" />
+<title>Teste COREN Único</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Teste COREN Único</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/InfoSaude/resources/paginas/imunizacao/adicionar_vacinador.xhtml</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:nome</td>
+	<td>Nome</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:txtCpf</td>
+	<td>112.368.037-01</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt48</td>
+	<td>1234567</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt50</td>
+	<td>ssp</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:ufRG_focus</td>
+	<td>pb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:registroCoren</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:matricula</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt63</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:txtDataNascimento_input</td>
+	<td>15/10/1987</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt71</td>
+	<td>rua</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt73</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt78</td>
+	<td>c</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:j_idt85</td>
+	<td>s</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:ufEndereco_focus</td>
+	<td>pb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacinador:confirmarSenha</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cadastrarVacinador:funcionarioAdm']/div[3]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cadastrarVacinador:funcionarioAdm_panel']/div/ul/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cadastrarVacinador:j_idt102</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//div[@id='cadastrarVacinador:mensages_container']/div/div/div[2]/span</td>
+	<td>erroCOREN</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
