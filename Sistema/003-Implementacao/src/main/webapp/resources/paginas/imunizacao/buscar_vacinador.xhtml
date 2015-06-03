@@ -61,13 +61,13 @@
                                 <h:outputText value="#{vacinadorLocal.nome}" style="text-align: center" />
                             </p:column>
                             
-                            <p:column   filterBy="#{vacinadorLocal.registroCoren}" headerText="Registro Coren" style="text-align: center"  visible="false">
-                                <h:outputText value="#{vacinadorLocal.registroCoren}" style="text-align: center" />
+                            <p:column   filterBy="#{vacinadorLocal.coren}" headerText="Registro Coren" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vacinadorLocal.coren}" style="text-align: center" />
                             </p:column>
                             
 
                             <p:column   headerText="Regitro Coren" style="text-align: center" >
-                                <h:outputText value="#{vacinadorLocal.registroCoren}" style="text-align: center" />
+                                <h:outputText value="#{vacinadorLocal.coren}" style="text-align: center" />
                             </p:column>
 
                             <p:column headerText="Opções" width="220" style="text-align: center" >
@@ -84,7 +84,7 @@
 
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                         <p:commandButton 
-                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" action="#{vacinadorBean.remover(vacinadorLocal)}" />
                                         <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                     </p:confirmDialog>
                                 </p:panelGrid>

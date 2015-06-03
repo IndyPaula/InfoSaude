@@ -6,8 +6,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
-
     <body>
 
         <ui:composition template="./../../template/template_base.xhtml">
@@ -17,7 +15,7 @@
                     <p:growl id="mensages" showDetail="false" life="7000"/>
                     <span id="titulo_pagina">Cadastro de Vacinador da UBS</span>
                     <p:fieldset legend="Cadastrar Vacinador da Unidade Básica de Saúde"
-                                style="width: 90%; text-align: center; margin-top: 80px; height: 600px; " >
+                                style="width: 90%; text-align: center; margin-top: 80px;  max-height: 420px;" >
                         <h:panelGrid columns="2"  style="text-align: left">
 
                             <p:outputLabel for="nome" value="Nome: "/>
@@ -58,12 +56,12 @@
                                 <p:column colspan="2">
                                     <h:panelGrid columns="4" >
 
-                                        <p:inputText id="registroCoren" value="#{vacinadorBean.vacinador.registroCoren}" required="true" 
-                                                     style="margin-right: 40px; margin-left: -3px"   />
+                                        <p:inputText id="registroCoren" value="#{vacinadorBean.vacinador.coren}" required="true" 
+                                                     style="margin-right: 40px; margin-left: -3px"  maxlength="15" />
 
 
                                         <p:outputLabel for="matricula" value="Matrícula: " style="margin-right: 30px"/>
-                                        <p:inputText id="matricula" value="#{vacinadorBean.vacinador.matricula}" style="margin-right: 40px" required="true"/>
+                                        <p:inputText id="matricula" value="#{vacinadorBean.vacinador.matricula}" maxlength="15" style="margin-right: 40px" required="true"/>
 
 
                                     </h:panelGrid>
@@ -157,7 +155,7 @@
                             </p:row> 
 
 
-                            <p:outputLabel for="nomeUsuario" value="Nome de Usuário: " style="text-align: center"/>
+                            <p:outputLabel for="nomeUsuario" value="Login: " style="text-align: center"/>
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
@@ -178,38 +176,37 @@
                                                     id="confirmarSenha" label="Confirmar Senha" 
                                                     />
 
-
-
                                     </h:panelGrid>
                                 </p:column>
-                            </p:row> 
+                            </p:row>
 
-                            <!--                            <p:outputLabel value="Observações: "/>
-                            
-                                                        <p:inputTextarea maxlength="670"  style="width: 685px;" 
-                                                                         value=""
-                                                                         rows="3" autoResize="false"
-                                                                         />-->
+                            <p:outputLabel value="Administrador: "/>
 
-                            <p:spacer/>
+                            <p:row>
+                                <p:column colspan="2" >
+                                    <h:panelGrid columns="6">
+                                        <p:selectOneMenu id="funcionarioAdm" value="#{vacinadorBean.vacinador.adm}">
 
-                            <p:outputLabel value=" "/>
-                            <p:commandButton value="Cadastrar Vacinador" style="top: 20px; margin-left: 50%; bottom: 10px;"
-                                             update="mensages" ajax="false" 
-                                             action="#{vacinadorBean.salvar()}"/>
+                                            <f:selectItem  itemLabel="Não" itemValue="n"/>
+                                            <f:selectItem  itemLabel="Sim" itemValue="s"/>
 
+                                        </p:selectOneMenu>
+                                        <span style="color: cornflowerblue;float: left;margin-left: 2%; font-size: 10px;">Ao escolher SIM este funcionário terá acesso ao 
+                                            InfoSaúde WEB e será um administrador do sistema.</span>
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row>
                         </h:panelGrid>
 
                     </p:fieldset> 
+
+                    <p:commandButton value="Cadastrar Vacinador" style="top: 20px;"
+                                     update="mensages" ajax="false" 
+                                     action="#{vacinadorBean.salvar()}"/>
+
                 </h:form>
-
             </ui:define>
-
         </ui:composition>
 
     </body>
-
-
-
-
 </html>

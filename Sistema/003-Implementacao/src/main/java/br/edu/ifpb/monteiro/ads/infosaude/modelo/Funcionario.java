@@ -40,6 +40,10 @@ public class Funcionario extends Pessoa implements Serializable {
     @Column(name = "login", length = 45, unique = true, nullable = true)
     private String login;
 
+    @Column(name = "adm", length = 1, nullable = true)
+    private String adm;
+    
+    
     public int getMatricula() {
         return matricula;
     }
@@ -94,6 +98,14 @@ public class Funcionario extends Pessoa implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getAdm() {
+        return adm;
+    }
+
+    public void setAdm(String adm) {
+        this.adm = adm;
     }
 
 }

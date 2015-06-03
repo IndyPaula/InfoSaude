@@ -22,6 +22,7 @@ public class CriaUsuarios {
 
         preparaDao();
         cadastrarVacinador();
+        buscarVacinador();
 
     }
 
@@ -42,11 +43,12 @@ public class CriaUsuarios {
         v.setNome("InfoSaude");
         v.setCpf("42342342342");
         v.setDataNascimento(new Date());
-        v.setMatricula(432432);
-        v.setRegistroCoren(423423);
+        v.setMatricula(4321);
+        v.setCoren(12345);
         v.setLogin("InfoSaude");
         v.setSenha("123");
         v.setCodigoEquipeINE("4234");
+        v.setAdm("s");
 
         try {
             daoVacinador.getEntityManager().getTransaction().begin();
@@ -58,4 +60,15 @@ public class CriaUsuarios {
 
     }
 
+    static void buscarVacinador() {
+
+        try {
+            Vacinador v = daoVacinador.buscarPorCampo("coren", 12345);
+
+            System.err.println(v.getNome());
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(CriaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

@@ -38,7 +38,7 @@ public class UserLoginBean implements Serializable {
     public String doLogin() {
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(400);
         } catch (InterruptedException ex) {
             Logger.getLogger(UserLoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,7 +49,7 @@ public class UserLoginBean implements Serializable {
              usuarioFound = service.efetuarLogin(login, senha);
         } catch (Exception ex) {
             
-             JsfUtil.addErrorMessage("Não foi possível conectar-se ao Banco de Dados");
+             JsfUtil.addErrorMessage("Não foi possível conectar-se ao Banco de Dados "+ex);
              return null;
         }
 

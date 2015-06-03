@@ -7,6 +7,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 
 /**
@@ -53,5 +55,14 @@ public class PacienteService extends GenericoService<Paciente> implements Pacien
         }
         return true;
     }
-
+    @Override
+    public void remover(Paciente p){
+        
+        try {
+            dao.remover(p);
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(PacienteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

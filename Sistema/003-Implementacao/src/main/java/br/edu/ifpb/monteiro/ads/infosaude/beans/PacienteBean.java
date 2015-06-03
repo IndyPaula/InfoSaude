@@ -120,7 +120,7 @@ public class PacienteBean {
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
-            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+
             JsfUtil.addErrorMessage(ex.getMessage());
 
             return null;

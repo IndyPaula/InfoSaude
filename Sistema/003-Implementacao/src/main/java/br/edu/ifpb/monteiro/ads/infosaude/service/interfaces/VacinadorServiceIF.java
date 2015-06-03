@@ -1,6 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service.interfaces;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
+import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 
 /**
  *
@@ -9,4 +11,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
  */
 public interface VacinadorServiceIF extends ServiceIF<Vacinador> {
 
+    public boolean verificaCampoUnique(String campo, Object valor, Long id) throws ServiceExcecoes, DaoExcecoes; 
 }

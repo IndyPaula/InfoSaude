@@ -48,7 +48,7 @@ public class VacinadorDaoTest {
         v.setCpf("111.293.324-23");
         v.setDataNascimento(new Date());
         v.setMatricula(12432);
-        v.setRegistroCoren(8748);
+        v.setCoren(8748);
         v.setLogin("Joelton");
         v.setSenha("456");
         v.setCodigoEquipeINE("487");
@@ -82,7 +82,7 @@ public class VacinadorDaoTest {
         v.setNome("InfoSaude");
         v.setDataNascimento(new Date());
         v.setMatricula(432432);
-        v.setRegistroCoren(423423);
+        v.setCoren(423423);
         v.setLogin("InfoSaude");
         v.setSenha("fjosijfew9urj3");
         v.setCodigoEquipeINE("4234");
@@ -133,7 +133,7 @@ public class VacinadorDaoTest {
         v.setNome("InfoSaude");
         v.setDataNascimento(new Date());
         v.setMatricula(7777);
-        v.setRegistroCoren(102030);
+        v.setCoren(102030);
         v.setLogin("Teste");
         v.setSenha("fjosijfew9urj3");
         v.setCodigoEquipeINE("41343234");

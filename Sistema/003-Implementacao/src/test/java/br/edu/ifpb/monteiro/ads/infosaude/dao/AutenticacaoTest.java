@@ -43,10 +43,11 @@ public class AutenticacaoTest {
         v.setCpf("111.233.324-23");
         v.setDataNascimento(new Date());
         v.setMatricula(432432);
-        v.setRegistroCoren(423423);
+        v.setCoren(423423);
         v.setLogin("InfoSaude");
         v.setSenha("fjosijfew9urj3");
         v.setCodigoEquipeINE("4234");
+        v.setAdm("s");
 
         try {
             daoVacinador.getEntityManager().getTransaction().begin();
