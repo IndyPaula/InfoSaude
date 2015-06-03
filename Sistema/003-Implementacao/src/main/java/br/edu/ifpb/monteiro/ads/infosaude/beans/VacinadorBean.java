@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
@@ -39,6 +40,8 @@ public class VacinadorBean {
     private VacinadorServiceIF vacinadorService;
 
     private String mensangem;
+    private String senhaAtual;
+    private String senhaTemp;
 
     private List<Vacinador> vacinadoresFilter;
 
@@ -56,6 +59,7 @@ public class VacinadorBean {
             vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), null);
             vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), null);
 
+            vacinador.setSenha(CriptografiaUtil.convertStringToMd5(vacinador.getSenha()));
             vacinadorService.salvar(vacinador);
             JsfUtil.addSuccessMessage("Vacinador da UBS cadastrado com sucesso");
 
@@ -103,28 +107,24 @@ public class VacinadorBean {
     }
 
     public void mensagem() {
-        if ("true".equals(mensangem)) {
-            JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
-
-        }
+        JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
     }
 
-    public String remover(Vacinador vacinadorLocal) {
+    public String remover(Vacinador v) {
 
-        if (vacinadorLocal != null) {
+        if (v != null) {
 
             try {
-                vacinadorService.remover(vacinadorLocal);
+                vacinadorService.remover(v);
 
                 Thread.sleep(1000);
 
                 JsfUtil.redirect("/InfoSaude/resources/paginas/imunizacao/buscar_vacinador.xhtml?faces-redirect=true");
                 return "buscar_vacinador.xhtml";
 
-            } catch (ServiceExcecoes ex) {
-                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage("Erro ao tentar remover vacinador");
             } catch (InterruptedException ex) {
+                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ServiceExcecoes ex) {
                 Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
@@ -136,24 +136,45 @@ public class VacinadorBean {
 
     public String update() throws BeanExcecao {
 
-        try {
+        if (verificaSenhaAtual()) {
+            try {
 
-            vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), idAuxiliar);
-            vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), idAuxiliar);
-            vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), idAuxiliar);
-            vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), idAuxiliar);
+                vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), idAuxiliar);
+                vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), idAuxiliar);
+                vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), idAuxiliar);
+                vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), idAuxiliar);
 
-            vacinador.setId(idAuxiliar);
-            vacinadorService.atualizar(vacinador);
-            JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
-            return "buscar_vacinador.xhtml";
+                verificaSenhaAtual();
 
-        } catch (ServiceExcecoes | DaoExcecoes ex) {
+                vacinador.setId(idAuxiliar);
+                vacinadorService.atualizar(vacinador);
+                JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
+                return "buscar_vacinador.xhtml";
 
-            JsfUtil.addErrorMessage(ex.getMessage());
-            return "editar_vacinador.xhtml?id=" + vacinador.getId();
+            } catch (ServiceExcecoes | DaoExcecoes ex) {
 
+                JsfUtil.addErrorMessage(ex.getMessage());
+                return "editar_vacinador.xhtml?id=" + idAuxiliar + "&faces-redirect=true";
+
+            }
         }
+        return "editar_vacinador.xhtml?id=" + idAuxiliar;
+    }
+
+    public boolean verificaSenhaAtual() {
+
+        try {
+            if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha())) {
+                vacinador.setSenha(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha());
+                return true;
+            } else {
+                JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
+            }
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
     }
 
     public List<Vacinador> getVacinadoresFilter() {
@@ -170,6 +191,14 @@ public class VacinadorBean {
 
     public void setVacinador(Vacinador vacinador) {
         this.vacinador = vacinador;
+    }
+
+    public String getSenhaTemp() {
+        return senhaTemp;
+    }
+
+    public void setSenhaTemp(String senhaTemp) {
+        this.senhaTemp = senhaTemp;
     }
 
     public EnumEstados[] getEstado() {
@@ -206,6 +235,14 @@ public class VacinadorBean {
 
     public void setIdAuxiliar(Long idAuxiliar) {
         this.idAuxiliar = idAuxiliar;
+    }
+
+    public String getSenhaAtual() {
+        return senhaAtual;
+    }
+
+    public void setSenhaAtual(String senhaAtual) {
+        this.senhaAtual = senhaAtual;
     }
 
 }

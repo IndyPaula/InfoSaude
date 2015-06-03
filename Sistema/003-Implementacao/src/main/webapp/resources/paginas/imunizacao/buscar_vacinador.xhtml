@@ -12,19 +12,16 @@
 
             <ui:define name="centro">
 
-                <f:metadata>
-                    <f:viewParam name="faces-redirect" value="#{vacinadorBean.mensangem}" />
-                    <f:viewAction action="#{vacinadorBean.mensagem()}"  />
-
-                </f:metadata>
-
-                <h:form id="paciente">
+                <h:form id="vacinador">
+                    
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
                     <span id="titulo_pagina">Lista de Vacinadores da UBS</span>
                     <p:fieldset legend="Vacinador da UBS" 
                                 style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
+                        
+                        
                         <p:dataTable 
-                            var="vacinadorLocal" value="#{vacinadorBean.vacinadores}" 
+                            var="vac" value="#{vacinadorBean.vacinadores}" 
                             filteredValue="#{vacinadorBean.vacinadoresFilter}"
                             rowsPerPageTemplate="5,10,20,50,100, 200" 
                             paginator="true" 
@@ -33,6 +30,7 @@
                             style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Vacinador Cadastrado"  
                             >
 
+                            
                             <f:facet name="header">
                                 <p:outputPanel>
                                     <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
@@ -41,50 +39,50 @@
                                 </p:outputPanel>
                             </f:facet>
 
-                            <p:column filterBy="#{vacinadorLocal.matricula}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
-                                <h:outputText value="#{vacinadorLocal.matricula}" style="text-align: center" />
+                            <p:column filterBy="#{vac.matricula}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{vac.matricula}" style="text-align: center" />
                             </p:column>
                             
                             <p:column headerText="Matricula"  width="150"  style="text-align: center" >
-                                <h:outputText value="#{vacinadorLocal.matricula}" style="text-align: center" />
+                                <h:outputText value="#{vac.matricula}" style="text-align: center" />
                             </p:column>
 
-                            <p:column   filterBy="#{vacinadorLocal.nome}" headerText="Login" style="text-align: center"  visible="false">
-                                <h:outputText value="#{vacinadorLocal.nome}" style="text-align: center" />
+                            <p:column   filterBy="#{vac.nome}" headerText="Login" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
                             </p:column>
                             
-                            <p:column   filterBy="#{vacinadorLocal.login}" headerText="Login" style="text-align: center"  visible="false">
-                                <h:outputText value="#{vacinadorLocal.login}" style="text-align: center" />
+                            <p:column   filterBy="#{vac.login}" headerText="Login" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.login}" style="text-align: center" />
                             </p:column>
                             
                             <p:column   headerText="Nome" style="text-align: center" >
-                                <h:outputText value="#{vacinadorLocal.nome}" style="text-align: center" />
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
                             </p:column>
                             
-                            <p:column   filterBy="#{vacinadorLocal.coren}" headerText="Registro Coren" style="text-align: center"  visible="false">
-                                <h:outputText value="#{vacinadorLocal.coren}" style="text-align: center" />
+                            <p:column   filterBy="#{vac.coren}" headerText="Registro Coren" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.coren}" style="text-align: center" />
                             </p:column>
                             
 
                             <p:column   headerText="Regitro Coren" style="text-align: center" >
-                                <h:outputText value="#{vacinadorLocal.coren}" style="text-align: center" />
+                                <h:outputText value="#{vac.coren}" style="text-align: center" />
                             </p:column>
 
                             <p:column headerText="Opções" width="220" style="text-align: center" >
+                                
                                 <p:panelGrid style="border: 0;">
+                                    
                                     <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_vacinador.xhtml"
                                               style="margin-right: 6px">
-                                        <f:param value="#{vacinadorLocal.id}" name="id"/> 
+                                        <f:param value="#{vac.id}" name="id"/> 
                                     </p:button>
 
-                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{vacinadorBean.remover(vacinadorLocal)}">
-
-                                        <p:confirm header="Confirmação" message="Excluir vacinador da UBS?" icon="ui-icon-alert" />
-                                    </p:commandButton>
-
+                                    <p:commandButton id="bt_excluir" icon="ui-icon-trash" process="@this"  update="mensagem" 
+                                                     action="#{vacinadorBean.mensagem}"/>
+                                        
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                         <p:commandButton 
-                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" action="#{vacinadorBean.remover(vacinadorLocal)}" />
+                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                         <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                     </p:confirmDialog>
                                 </p:panelGrid>

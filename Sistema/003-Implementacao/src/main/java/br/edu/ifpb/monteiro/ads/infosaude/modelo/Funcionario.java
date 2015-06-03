@@ -1,6 +1,5 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -81,7 +80,7 @@ public class Funcionario extends Pessoa implements Serializable {
     }
 
     public void setSenha(String senha) {
-        this.senha = CriptografiaUtil.convertStringToMd5(senha);
+        this.senha = senha;
     }
 
     public String getCpf() {

@@ -22,8 +22,8 @@ public class CriaUsuarios {
 
         preparaDao();
         cadastrarVacinador();
-        buscarVacinador();
-
+//        buscarVacinador();
+//        crip();
     }
 
     static void preparaDao() {
@@ -46,7 +46,7 @@ public class CriaUsuarios {
         v.setMatricula(4321);
         v.setCoren(12345);
         v.setLogin("InfoSaude");
-        v.setSenha("123");
+        v.setSenha(CriptografiaUtil.convertStringToMd5("123"));
         v.setCodigoEquipeINE("4234");
         v.setAdm("s");
 
@@ -70,5 +70,17 @@ public class CriaUsuarios {
             Logger.getLogger(CriaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private static void crip() {
+        
+        System.err.println( CriptografiaUtil.convertStringToMd5("123"));
+      
+         System.err.println( CriptografiaUtil.convertStringToMd5(CriptografiaUtil.convertStringToMd5("123")));
+         
+          System.err.println( CriptografiaUtil.convertStringToMd5(
+                  CriptografiaUtil.convertStringToMd5(CriptografiaUtil.convertStringToMd5("123"))));
+         
+         
     }
 }

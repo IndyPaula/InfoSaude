@@ -2,6 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriaUsuarios;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class AutenticacaoTest {
         v.setMatricula(432432);
         v.setCoren(423423);
         v.setLogin("InfoSaude");
-        v.setSenha("fjosijfew9urj3");
+        v.setSenha(CriptografiaUtil.convertStringToMd5("12345"));
         v.setCodigoEquipeINE("4234");
         v.setAdm("s");
 
@@ -86,7 +87,7 @@ public class AutenticacaoTest {
     @Test
     public void tesUsuarioValidoSenhaValida() {
 
-        Vacinador result = (Vacinador) daoLogin.efetuarLogin("InfoSaude", "fjosijfew9urj3");
+        Vacinador result = (Vacinador) daoLogin.efetuarLogin("InfoSaude","12345");
 
         assertEquals("111.233.324-23", result.getCpf());
     }
