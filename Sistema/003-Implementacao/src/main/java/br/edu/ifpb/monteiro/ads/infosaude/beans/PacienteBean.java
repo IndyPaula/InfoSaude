@@ -120,7 +120,7 @@ public class PacienteBean {
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
-
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
 
             return null;
@@ -145,7 +145,6 @@ public class PacienteBean {
     public void preparaEdicao() {
 
         try {
-            System.out.println(idAuxiliar);
             paciente = pacienteService.consultarPorId(idAuxiliar);
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);

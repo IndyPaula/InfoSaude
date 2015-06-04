@@ -10,6 +10,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -25,25 +27,27 @@ import javax.inject.Inject;
  * @date 20/05/2015
  */
 @Model
-public class VacinadorBean {
+public class VacinadorBean implements Serializable {
 
     private String confirmarSenha;
 
-    private List<Vacinador> vacinadores;
+    private transient List<Vacinador> vacinadores;
 
     @Inject
     private Vacinador vacinador;
+    private Vacinador vacinadorSelected;
 
     private Long idAuxiliar;
 
     @Inject
-    private VacinadorServiceIF vacinadorService;
+    private transient VacinadorServiceIF vacinadorService;
 
     private String mensangem;
     private String senhaAtual;
     private String senhaTemp;
 
-    private List<Vacinador> vacinadoresFilter;
+    private transient List<Vacinador> vacinadoresFilter;
+    private String mensagem;
 
     @PostConstruct
     public void init() {
@@ -63,17 +67,14 @@ public class VacinadorBean {
             vacinadorService.salvar(vacinador);
             JsfUtil.addSuccessMessage("Vacinador da UBS cadastrado com sucesso");
 
-        } catch (ServiceExcecoes ex) {
+        } catch (ServiceExcecoes | DaoExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
 
             return null;
 
-        } catch (DaoExcecoes ex) {
-            JsfUtil.addErrorMessage(ex.getMessage());
-            return null;
         }
-        return "buscar_vacinador.xhtml";
+        return null;
     }
 
     public Date getDataAtual() {
@@ -84,12 +85,12 @@ public class VacinadorBean {
     public List<Vacinador> getVacinadores() {
 
         try {
-            this.vacinadores = vacinadorService.buscarTudo();
-            return vacinadores;
+             vacinadores = vacinadorService.buscarTudo();
+
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return vacinadores;
     }
 
     public void setVacinadores(List<Vacinador> vacinadores) {
@@ -107,31 +108,24 @@ public class VacinadorBean {
     }
 
     public void mensagem() {
-        JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
+        if ("true".equals(mensagem)) {
+
+            JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
+        }
     }
 
-    public String remover(Vacinador v) {
+    public String remover() {
 
-        if (v != null) {
+        try {
+            vacinadorService.remover(vacinadorSelected);
 
-            try {
-                vacinadorService.remover(v);
+            return "buscar_vacinador.xhtml";
 
-                Thread.sleep(1000);
-
-                JsfUtil.redirect("/InfoSaude/resources/paginas/imunizacao/buscar_vacinador.xhtml?faces-redirect=true");
-                return "buscar_vacinador.xhtml";
-
-            } catch (InterruptedException ex) {
-                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ServiceExcecoes ex) {
-                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-
-            JsfUtil.addErrorMessage("Erro ao tentar remover Vacinador da UBS");
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+
     }
 
     public String update() throws BeanExcecao {
@@ -153,7 +147,7 @@ public class VacinadorBean {
 
             } catch (ServiceExcecoes | DaoExcecoes ex) {
 
-                JsfUtil.addErrorMessage(ex.getMessage());
+                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
                 return "editar_vacinador.xhtml?id=" + idAuxiliar + "&faces-redirect=true";
 
             }
@@ -177,6 +171,10 @@ public class VacinadorBean {
 
     }
 
+    public void onRowSelect(SelectEvent event) {
+
+    }
+
     public List<Vacinador> getVacinadoresFilter() {
         return vacinadoresFilter;
     }
@@ -187,6 +185,14 @@ public class VacinadorBean {
 
     public Vacinador getVacinador() {
         return vacinador;
+    }
+
+    public Vacinador getVacinadorSelected() {
+        return vacinadorSelected;
+    }
+
+    public void setVacinadorSelected(Vacinador vacinadorSelected) {
+        this.vacinadorSelected = vacinadorSelected;
     }
 
     public void setVacinador(Vacinador vacinador) {
