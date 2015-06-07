@@ -25,33 +25,32 @@
                             filteredValue="#{vacinadorBean.vacinadoresFilter}"
                             rowsPerPageTemplate="5,10,20,50,100, 200" 
                             paginator="true" 
-                            rows="10" 
+                            id="tabelaVacinador"
+                            rows="15" 
                             widgetVar="tabela_vacinador" 
                             selectionMode="single" selection="#{vacinadorBean.vacinadorSelected}" rowKey="#{vac.id}"
                             style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Vacinador Cadastrado"  
                             >
 
-
                             <f:facet name="header">
-                                <p:outputPanel>
+                                <p:outputPanel >
                                     <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
                                     <p:inputText id="globalFilter" onkeyup="PF('tabela_vacinador').filter()" 
-                                                 size="60" placeholder="Pesquise por Matricula, Nome, Login ou Registro Coren" />
-                                </p:outputPanel>
-                                <p:outputPanel>
-                                    <p:commandButton icon="ui-icon-trash" value="Remover" process="@this"  update="mensagem" 
-                                                     action="#{vacinadorBean.remover}">
-                                        <p:confirm icon="ui-icon-alert" header="Excluir Vacinador ?" message="Tem certeza que deseja excluir?"/>
-
-                                        <f:setPropertyActionListener value="#{vac}" target="#{vacinadorBean.vacinadorSelected}"> 
-                                            
-                                        </f:setPropertyActionListener>  
+                                                 size="50" placeholder="Pesquise por Matricula, Nome, Login ou Registro Coren" />
+                                    <p:spacer width="50" height="1"/>
+                                    
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{vacinadorBean.selecinaEditar()}" 
+                                                     id="btAtualizar" update="mensagem"/>
+                                    
+                                    <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaVacinador" 
+                                                      action="#{vacinadorBean.selecinaExcluir()}" style="margin-left: 10px;" id="btExcluir">
+                                        <p:confirm header="Confirmatição" message="Tem certeza que deseja excluir o Vacinador?" icon="ui-icon-alert" />
                                     </p:commandButton>
+
                                 </p:outputPanel>
                             </f:facet>
-
-                            <p:ajax event="rowSelect" listener="#{vacinadorBean.onRowSelect}" update=":vacinador:mensagem" />
-
+                             <p:ajax event="rowSelect" listener="#{vacinadorBean.onRowSelect}" update="btExcluir btAtualizar" />
+                             
                             <p:column filterBy="#{vac.matricula}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
                                 <h:outputText value="#{vac.matricula}" style="text-align: center" />
                             </p:column>
@@ -76,51 +75,20 @@
                                 <h:outputText value="#{vac.coren}" style="text-align: center" />
                             </p:column>
 
-
                             <p:column   headerText="Regitro Coren" style="text-align: center" >
                                 <h:outputText value="#{vac.coren}" style="text-align: center" />
                             </p:column>
-
-                            <p:column headerText="Opções" width="220" style="text-align: center" >
-
-
-                                <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_vacinador.xhtml"
-                                          style="margin-right: 6px">
-                                    <f:param value="#{vac.id}" name="id"/> 
-                                </p:button>
-                                
-                                <p:commandButton icon="ui-icon-trash" process="@this" update=":vacinador:mensagem" 
-                                                 action="#{vacinadorBean.remover}" >
-
-                                    <f:setPropertyActionListener value="#{vac}" target="#{vacinadorBean.vacinador}"/>
-
-                                    <p:confirm icon="ui-icon-alert" header="Excluir Vacinador ?" message="Tem certeza que deseja excluir?"/>
-
-                                </p:commandButton>
-
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                    <p:commandButton 
-                                        value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                                </p:confirmDialog>
-                            </p:column>
-
                         </p:dataTable>
                     </p:fieldset>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton 
+                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                 </h:form>
 
             </ui:define>
-
-            <script type="text/javascript" language="javascript">
-
-                function reload() {
-
-                    window.location.reload();
-
-                }
-            </script>
-
         </ui:composition>
-
     </body>
 </html>

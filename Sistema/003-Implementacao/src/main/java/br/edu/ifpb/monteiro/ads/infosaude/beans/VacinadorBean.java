@@ -1,6 +1,5 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
-import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
@@ -19,7 +18,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -42,12 +40,10 @@ public class VacinadorBean implements Serializable {
     @Inject
     private transient VacinadorServiceIF vacinadorService;
 
-    private String mensangem;
     private String senhaAtual;
     private String senhaTemp;
 
     private transient List<Vacinador> vacinadoresFilter;
-    private String mensagem;
 
     @PostConstruct
     public void init() {
@@ -66,12 +62,12 @@ public class VacinadorBean implements Serializable {
             vacinador.setSenha(CriptografiaUtil.convertStringToMd5(vacinador.getSenha()));
             vacinadorService.salvar(vacinador);
             JsfUtil.addSuccessMessage("Vacinador da UBS cadastrado com sucesso");
+            
+            return "buscar_vacinador.xhtml";
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
-
-            return null;
 
         }
         return null;
@@ -107,18 +103,13 @@ public class VacinadorBean implements Serializable {
 
     }
 
-    public void mensagem() {
-        if ("true".equals(mensagem)) {
-
-            JsfUtil.addSuccessMessage("Vacinador da UBS removido com sucesso");
-        }
-    }
-
     public String remover() {
 
         try {
             vacinadorService.remover(vacinadorSelected);
-
+            
+            JsfUtil.addSuccessMessage("Vacinador removido com sucesso");
+            
             return "buscar_vacinador.xhtml";
 
         } catch (ServiceExcecoes ex) {
@@ -128,7 +119,7 @@ public class VacinadorBean implements Serializable {
 
     }
 
-    public String update() throws BeanExcecao {
+    public String update() {
 
         if (verificaSenhaAtual()) {
             try {
@@ -171,8 +162,25 @@ public class VacinadorBean implements Serializable {
 
     }
 
-    public void onRowSelect(SelectEvent event) {
+     public String selecinaExcluir() {
 
+         if(vacinadorSelected == null){
+             JsfUtil.addErrorMessage("Selecione um item da tabela");
+                          
+         }
+         else{
+             remover();
+         }
+        return "buscar_vacinador.xhtml";
+    }
+     public void selecinaEditar() {
+
+         if(vacinadorSelected == null){
+             JsfUtil.addErrorMessage("Selecione um item da tabela");
+         }
+         else{
+             JsfUtil.redirect("editar_vacinador.xhtml?id="+vacinadorSelected.getId()+"&faces-redirect=true");
+         }
     }
 
     public List<Vacinador> getVacinadoresFilter() {
@@ -226,15 +234,6 @@ public class VacinadorBean implements Serializable {
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
     }
-
-    public void setMensangem(String mensangem) {
-        this.mensangem = mensangem;
-    }
-
-    public String getMensangem() {
-        return mensangem;
-    }
-
     public Long getIdAuxiliar() {
         return idAuxiliar;
     }
