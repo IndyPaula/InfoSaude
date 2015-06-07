@@ -27,7 +27,7 @@ public class UserLoginBean implements Serializable {
 
     private String login;
     private String senha;
-    private Funcionario admLogado;
+    private transient Funcionario admLogado;
 
     private boolean loggedIn;
 

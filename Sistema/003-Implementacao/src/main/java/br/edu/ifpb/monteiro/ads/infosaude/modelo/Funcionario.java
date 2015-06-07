@@ -31,7 +31,7 @@ public class Funcionario extends Pessoa implements Serializable {
     private String cpf;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private UnidadeSaude unidadeSaude;
+    private transient UnidadeSaude unidadeSaude;
 
     @Column(name = "senha", length = 45, unique = false, nullable = false)
     private String senha;

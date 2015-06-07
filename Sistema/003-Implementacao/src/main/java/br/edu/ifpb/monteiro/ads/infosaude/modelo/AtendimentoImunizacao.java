@@ -35,7 +35,7 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Vacinador vacinador;
+    private transient Vacinador vacinador;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_atendimento", nullable = false)
@@ -47,17 +47,17 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
 
     @Enumerated(EnumType.STRING)
     @Column(name = "dose", nullable = false, length = 20)
-    private EnumDoseVacina dose;
+    private transient EnumDoseVacina dose;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Vacina vacina;
+    private transient Vacina vacina;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estrategia_imunizacao", length = 25, nullable = false)
-    private EnumEstrategiaImunizacao estrategiaImunizacao;
+    private transient EnumEstrategiaImunizacao estrategiaImunizacao;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Paciente paciente;
+    private transient Paciente paciente;
 
     @Override
     public Long getId() {

@@ -5,17 +5,23 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <body>
 
         <ui:composition template="./../../template/template_base.xhtml">
 
+
+            <f:metadata>
+                <f:viewParam name="id" value="#{vacinadorBean.idAuxiliar}" />
+                <f:viewAction action="#{vacinadorBean.preparaEdicao()}"  />
+
+            </f:metadata>
+
             <ui:define name="centro">
-                <h:form id="cadastrarVacinador" >
+                <h:form id="editarVacinador" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
-                    <span id="titulo_pagina">Cadastro de Agentes comunitários de Saúde</span>
-                    <p:fieldset legend="Cadastrar ACS da Unidade Básica de Saúde"
-                                style="width: 90%; text-align: center; margin-top: 80px;  max-height: 420px;" >
+                    <span id="titulo_pagina">Cadastro de Vacinador da UBS</span>
+                    <p:fieldset legend="Atualizar Vacinador da Unidade Básica de Saúde"
+                                style="width: 90%; text-align: center; margin-top: 80px;  max-height: 460px;" >
                         <h:panelGrid columns="2"  style="text-align: left">
 
                             <p:outputLabel for="nome" value="Nome: "/>
@@ -88,8 +94,8 @@
                             </p:row> 
 
                             <p:spacer/>
-                            <!--Fazer depois não tem estado civil no modelo-->
-                            <!--                            <p:outputLabel value="Estado Cívil: "/>
+<!--                            Fazer depois não tem estado civil no modelo
+                                                        <p:outputLabel value="Estado Cívil: "/>
                                                         
                                                         <p:selectOneMenu editable="true" value="">
                                                             <f:selectItem itemLabel="Casado(a)"/>
@@ -153,26 +159,42 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
+                                
+                             <p:outputLabel for="nomeUsuario" value="Login:"/>
+                             <p:row>
+                                <p:column colspan="2" style="position: absolute">
+                                    <h:panelGrid columns="6" >
+                                       
+                                        
+                                        <p:inputText value="#{vacinadorBean.vacinador.login}" id="nomeUsuario" required="true"
+                                                     style="margin-right: 30px; margin-left: -3px"   />
+                                        
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row>
 
-
-                            <p:outputLabel for="nomeUsuario" value="Login: " style="text-align: center"/>
+                            <p:outputLabel for="senhaAtual" value="Senha atual: " style="text-align: center"/>
 
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="#{vacinadorBean.vacinador.login}" id="nomeUsuario" required="true"
-                                                     style="margin-right: 30px; margin-left: -3px"   />
+                                        <p:password value="#{vacinadorBean.senhaAtual}" size="15" required="true"
+                                                    requiredMessage="Senha Atual é necessária" feedback="true" 
+                                                    promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senhaAtual"
+                                                    goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
+                                                    label="Senha"/>
 
-                                        <p:outputLabel for="senha" value="Senha: "/>
-                                        <p:password value="#{vacinadorBean.vacinador.senha}" size="15" required="true" requiredMessage="Senha de Vacinador é necessária" feedback="true" 
+                                        <p:outputLabel for="senha" value="Nova Senha: "/>
+                                        <p:password value="#{vacinadorBean.vacinador.senha}" size="15"  
+                                                    requiredMessage="A Senha  é necessária" feedback="true" 
                                                     promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senha"
                                                     goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
-                                                    match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Senha"  />
+                                                    match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Nova Senha"  />
 
 
                                         <p:outputLabel for="confirmarSenha"  value=" Confirmar Senha: " style="margin-left: 20px"/>
-                                        <p:password value="#{vacinadorBean.confirmarSenha}" size="15" required="true" requiredMessage="É necessário confirmar senha" 
+                                        <p:password value="#{vacinadorBean.confirmarSenha}" size="15" requiredMessage="É necessário confirmar senha" 
                                                     id="confirmarSenha" label="Confirmar Senha" 
                                                     />
 
@@ -200,13 +222,17 @@
 
                     </p:fieldset> 
 
-                    <p:commandButton value="Cadastrar Vacinador" style="top: 20px;"
-                                     update="mensages" ajax="false" 
-                                     action="#{vacinadorBean.salvar()}"/>
+                    <p:commandButton value="Atualizar Vacinador" style="top: 20px;" 
+                                     update="mensages" ajax="false"
+                                     action="#{vacinadorBean.update()}">
+                    </p:commandButton>
 
                 </h:form>
+
             </ui:define>
+
         </ui:composition>
 
     </body>
+
 </html>

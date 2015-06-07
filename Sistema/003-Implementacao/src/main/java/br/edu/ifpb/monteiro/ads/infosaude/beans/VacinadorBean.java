@@ -32,8 +32,8 @@ public class VacinadorBean implements Serializable {
     private transient List<Vacinador> vacinadores;
 
     @Inject
-    private Vacinador vacinador;
-    private Vacinador vacinadorSelected;
+    private transient Vacinador vacinador;
+    private transient Vacinador vacinadorSelected;
 
     private Long idAuxiliar;
 

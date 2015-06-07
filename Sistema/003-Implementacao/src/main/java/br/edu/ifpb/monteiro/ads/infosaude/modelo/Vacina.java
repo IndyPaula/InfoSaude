@@ -35,7 +35,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "via_administracao", nullable = false, length = 25)
-    private EnumViaAdministracao viaAdministracao;
+    private transient EnumViaAdministracao viaAdministracao;
 
     @Column(name = "nome", nullable = false, length = 45)
     private String nome;
@@ -67,7 +67,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     private String numeroLote;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Fornecedor fornecedor;
+    private transient Fornecedor fornecedor;
 
     @Override
     public Long getId() {

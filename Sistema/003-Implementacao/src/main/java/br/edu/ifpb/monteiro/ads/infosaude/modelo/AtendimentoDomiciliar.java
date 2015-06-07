@@ -33,7 +33,7 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
     private Date dataAtendimento;
 
     @OneToOne
-    private Paciente paciente;
+    private transient Paciente paciente;
 
     @Column(name = "motivo_visita", length = 45)
     private String motivoVisita;

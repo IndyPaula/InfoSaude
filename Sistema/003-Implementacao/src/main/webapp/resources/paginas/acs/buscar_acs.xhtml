@@ -2,56 +2,93 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
-        <ui:composition template="./../../template/template_acs.xhtml">
+        <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
-                
-                  <h:form id="acs">
-                <p:dataTable id="tableACS" var="acs" value="#{p}" selectionMode="single"
-                             selection="#{p}" rowKey="#{p}"
-                             rows="10" paginator="true" style="border: 0; width: 80%">
-                    <f:facet name="header">
-                        Lista de Agentes Comunitários de Saúde
-                    </f:facet>
-                    <p:column headerText="CBO"  width="150" filterBy="#{p}" >
-                        <h:outputText value="#{p}"/>
-                    </p:column>
-                    <p:column   headerText="Nome" filterBy="#{p}" >
-                        <h:outputText value="#{p}"/>
-                    </p:column>
-                    <p:column headerText="Matrícula"  width="200" 
-                              style="text-align: center" filterBy="#{p}">
-                        <h:outputText value="#{p}" />
-                    </p:column>
-                    <p:column headerText="Opções" width="130">
-                        <p:button value="imprimir Ficha" icon="ui-icon-print" outcome="p" target="_new">
-                            <f:param value="#{p}" name="acs"/> 
-                        </p:button>
-                        
-                         <p:button value="Atualizar Ficha" icon="ui-icon-refresh" 
-                                   outcome="p" target="_new">
-                            <f:param value="#{p}" name="p"/> 
-                        </p:button>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-                
-                
-                
-                
-                
-                
-                
-                
+
+                <h:form id="vacinador">
+
+                    <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
+                    <span id="titulo_pagina">Lista de Vacinadores da UBS</span>
+                    <p:fieldset legend="Vacinador da UBS" 
+                                style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
+
+
+                        <p:dataTable 
+                            var="vac" value="#{vacinadorBean.vacinadores}" 
+                            filteredValue="#{vacinadorBean.vacinadoresFilter}"
+                            rowsPerPageTemplate="5,10,20,50,100, 200" 
+                            paginator="true" 
+                            id="tabelaVacinador"
+                            rows="15" 
+                            widgetVar="tabela_vacinador" 
+                            selectionMode="single" selection="#{vacinadorBean.vacinadorSelected}" rowKey="#{vac.id}"
+                            style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Vacinador Cadastrado"  
+                            >
+
+                            <f:facet name="header">
+                                <p:outputPanel >
+                                    <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('tabela_vacinador').filter()" 
+                                                 size="50" placeholder="Pesquise por Matricula, Nome, Login ou Registro Coren" />
+                                    <p:spacer width="50" height="1"/>
+                                    
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{vacinadorBean.selecinaEditar()}" 
+                                                     id="btAtualizar" update="mensagem"/>
+                                    
+                                    <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaVacinador" 
+                                                      action="#{vacinadorBean.selecinaExcluir()}" style="margin-left: 10px;" id="btExcluir">
+                                        <p:confirm header="Confirmatição" message="Tem certeza que deseja excluir o Vacinador?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                </p:outputPanel>
+                            </f:facet>
+                             <p:ajax event="rowSelect" listener="#{vacinadorBean.onRowSelect}" update="btExcluir btAtualizar" />
+                             
+                            <p:column filterBy="#{vac.matricula}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{vac.matricula}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column headerText="Matricula"  width="150"  style="text-align: center" >
+                                <h:outputText value="#{vac.matricula}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.nome}" headerText="Login" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.login}" headerText="Login" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.login}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   headerText="Nome" style="text-align: center" >
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.coren}" headerText="Registro Coren" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.coren}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   headerText="Regitro Coren" style="text-align: center" >
+                                <h:outputText value="#{vac.coren}" style="text-align: center" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton 
+                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

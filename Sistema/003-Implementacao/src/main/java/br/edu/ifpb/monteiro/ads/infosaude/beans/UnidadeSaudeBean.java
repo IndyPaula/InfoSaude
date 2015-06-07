@@ -23,7 +23,7 @@ public class UnidadeSaudeBean {
     private UnidadeSaudeServiceIF unidadeSaudeService;
 
     @Inject
-    private UnidadeSaude unidadeSaude;
+    private  UnidadeSaude unidadeSaude;
 
     private boolean operacaoCriar;
     private boolean operacaoAtualizar;

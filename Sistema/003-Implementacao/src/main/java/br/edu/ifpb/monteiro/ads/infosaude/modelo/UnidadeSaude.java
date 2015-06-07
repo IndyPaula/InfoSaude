@@ -51,7 +51,7 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "endereco_estado", nullable = false, length = 30)
-    private EnumEstados estado;
+    private transient EnumEstados estado;
 
     @Column(name = "numero", nullable = false, unique = true)
     private int numero;
