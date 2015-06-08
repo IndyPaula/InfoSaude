@@ -94,15 +94,15 @@
                             </p:row> 
 
                             <p:spacer/>
-<!--                            Fazer depois não tem estado civil no modelo
-                                                        <p:outputLabel value="Estado Cívil: "/>
-                                                        
-                                                        <p:selectOneMenu editable="true" value="">
-                                                            <f:selectItem itemLabel="Casado(a)"/>
-                                                            <f:selectItem itemLabel="União Estável(a)"/>
-                                                            <f:selectItem itemLabel="Solteiro(a)"/>
-                                                            <f:selectItem itemLabel="Divorciado"/>
-                                                        </p:selectOneMenu>-->
+                            <!--                            Fazer depois não tem estado civil no modelo
+                                                                                    <p:outputLabel value="Estado Cívil: "/>
+                                                                                    
+                                                                                    <p:selectOneMenu editable="true" value="">
+                                                                                        <f:selectItem itemLabel="Casado(a)"/>
+                                                                                        <f:selectItem itemLabel="União Estável(a)"/>
+                                                                                        <f:selectItem itemLabel="Solteiro(a)"/>
+                                                                                        <f:selectItem itemLabel="Divorciado"/>
+                                                                                    </p:selectOneMenu>-->
 
                             <p:outputLabel value="Endereço: "/>
 
@@ -159,16 +159,15 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
-                                
                              <p:outputLabel for="nomeUsuario" value="Login:"/>
-                             <p:row>
+                            <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
-                                       
-                                        
-                                        <p:inputText value="#{vacinadorBean.vacinador.login}" id="nomeUsuario" required="true"
+
+                                        <p:inputText value="#{vacinadorBean.vacinador.login}" id="nomeUsuario" 
+                                                     required="true" 
                                                      style="margin-right: 30px; margin-left: -3px"   />
-                                        
+
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
@@ -179,17 +178,17 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:password value="#{vacinadorBean.senhaAtual}" size="15" required="true"
+                                        <p:password value="#{vacinadorBean.senhaAtual}" size="15" 
                                                     requiredMessage="Senha Atual é necessária" feedback="true" 
-                                                    promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senhaAtual"
-                                                    goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
+                                                    promptLabel="Digite a senha" weakLabel="Força da senha : Fraca" id="senhaAtual"
+                                                    goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte" 
                                                     label="Senha"/>
 
                                         <p:outputLabel for="senha" value="Nova Senha: "/>
                                         <p:password value="#{vacinadorBean.vacinador.senha}" size="15"  
                                                     requiredMessage="A Senha  é necessária" feedback="true" 
                                                     promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senha"
-                                                    goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
+                                                    goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte" 
                                                     match="confirmarSenha" label="Senha" validatorMessage="Confirmar senha: Deve ser igual a Nova Senha"  />
 
 
@@ -201,13 +200,13 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
-
+                            
                             <p:outputLabel value="Administrador: "/>
 
                             <p:row>
                                 <p:column colspan="2" >
                                     <h:panelGrid columns="6">
-                                        <p:selectOneMenu id="funcionarioAdm" value="#{vacinadorBean.vacinador.adm}">
+                                        <p:selectOneMenu id="funcionarioAdm" value="#{vacinadorBean.vacinador.adm}" >
 
                                             <f:selectItem  itemLabel="Não" itemValue="n"/>
                                             <f:selectItem  itemLabel="Sim" itemValue="s"/>
@@ -219,7 +218,6 @@
                                 </p:column>
                             </p:row>
                         </h:panelGrid>
-
                     </p:fieldset> 
 
                     <p:commandButton value="Atualizar Vacinador" style="top: 20px;" 
@@ -230,9 +228,6 @@
                 </h:form>
 
             </ui:define>
-
         </ui:composition>
-
     </body>
-
 </html>

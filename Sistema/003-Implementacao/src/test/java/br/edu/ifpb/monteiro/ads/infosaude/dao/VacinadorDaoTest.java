@@ -110,6 +110,7 @@ public class VacinadorDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+        daoVacinador.getEntityManager().getTransaction().begin();
         daoVacinador.remover(v);
         
         Vacinador v2 = null;

@@ -25,11 +25,11 @@ import javax.inject.Inject;
  * @date 20/05/2015
  */
 @Model
-public class ACSBean implements Serializable {
+public class AcsBean implements Serializable {
 
     private String confirmarSenha;
 
-    private transient List<ACS> acses;
+    private transient List<ACS> agentes;
 
     @Inject
     private transient ACS acs;
@@ -43,30 +43,30 @@ public class ACSBean implements Serializable {
     private String senhaAtual;
     private String senhaTemp;
 
-    private transient List<ACS> acsesFilter;
+    private transient List<ACS> agentesFilter;
 
     @PostConstruct
     public void init() {
 
-        acsesFilter = new ArrayList<ACS>();
+        agentesFilter = new ArrayList<ACS>();
 
     }
 
     public String salvar() {
         try {
             acsService.verificaCampoUnique("cpf", acs.getCpf(), null);
-            acsService.verificaCampoUnique("coren", "" + acs.getCbo(), null);
+            acsService.verificaCampoUnique("cbo", "" + acs.getCbo(), null);
             acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), null);
             acsService.verificaCampoUnique("login", "" + acs.getLogin(), null);
 
             acs.setSenha(CriptografiaUtil.convertStringToMd5(acs.getSenha()));
             acsService.salvar(acs);
-            JsfUtil.addSuccessMessage("ACS da UBS cadastrado com sucesso");
+            JsfUtil.addSuccessMessage("Agente comunitário de Saúde cadastrado com sucesso");
             
             return "buscar_acs.xhtml";
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
-            Logger.getLogger(ACSBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex.getMessage());
 
         }
@@ -78,19 +78,19 @@ public class ACSBean implements Serializable {
         return new Date();
     }
 
-    public List<ACS> getACSes() {
+    public List<ACS> getAgentes() {
 
         try {
-             acses = acsService.buscarTudo();
+             agentes = acsService.buscarTudo();
 
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(ACSBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return acses;
+        return agentes;
     }
 
-    public void setACSes(List<ACS> acses) {
-        this.acses = acses;
+    public void setAgentes(List<ACS> acses) {
+        this.agentes = acses;
     }
 
     public void preparaEdicao() {
@@ -98,7 +98,7 @@ public class ACSBean implements Serializable {
         try {
             this.acs = acsService.consultarPorId(idAuxiliar);
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(ACSBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -108,12 +108,12 @@ public class ACSBean implements Serializable {
         try {
             acsService.remover(acsSelected);
             
-            JsfUtil.addSuccessMessage("ACS removido com sucesso");
+            JsfUtil.addSuccessMessage("Agente comunitário de Saúde removido com sucesso");
             
             return "buscar_acs.xhtml";
 
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(ACSBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
 
@@ -125,11 +125,9 @@ public class ACSBean implements Serializable {
             try {
 
                 acsService.verificaCampoUnique("cpf", acs.getCpf(), idAuxiliar);
-                acsService.verificaCampoUnique("coren", "" + acs.getCbo(), idAuxiliar);
+                acsService.verificaCampoUnique("cbo", "" + acs.getCbo(), idAuxiliar);
                 acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), idAuxiliar);
                 acsService.verificaCampoUnique("login", "" + acs.getLogin(), idAuxiliar);
-
-                verificaSenhaAtual();
 
                 acs.setId(idAuxiliar);
                 acsService.atualizar(acs);
@@ -138,7 +136,7 @@ public class ACSBean implements Serializable {
 
             } catch (ServiceExcecoes | DaoExcecoes ex) {
 
-                Logger.getLogger(ACSBean.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
                 return "editar_acs.xhtml?id=" + idAuxiliar + "&faces-redirect=true";
 
             }
@@ -149,14 +147,21 @@ public class ACSBean implements Serializable {
     public boolean verificaSenhaAtual() {
 
         try {
-            if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(acsService.buscarPorCampo("id", idAuxiliar).getSenha())) {
-                acs.setSenha(acsService.buscarPorCampo("id", idAuxiliar).getSenha());
+            if (CriptografiaUtil.convertStringToMd5(senhaAtual).
+                    equals(acsService.buscarPorCampo("id", idAuxiliar).getSenha())) {
+              
                 return true;
+
             } else {
-                JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
+                if (senhaAtual.trim() == "") {
+                     acs.setSenha(acsService.buscarPorCampo("id", idAuxiliar).getSenha());
+                    return true;
+                } else {
+                    JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
+                }
             }
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(ACSBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
 
@@ -183,12 +188,12 @@ public class ACSBean implements Serializable {
          }
     }
 
-    public List<ACS> getACSesFilter() {
-        return acsesFilter;
+    public List<ACS> getAgentesFilter() {
+        return agentesFilter;
     }
 
-    public void setACSesFilter(List<ACS> acsesFilter) {
-        this.acsesFilter = acsesFilter;
+    public void setAgentesFilter(List<ACS> acsesFilter) {
+        this.agentesFilter = acsesFilter;
     }
 
     public ACS getACS() {

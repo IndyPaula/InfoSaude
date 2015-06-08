@@ -11,25 +11,25 @@
 
 
             <f:metadata>
-                <f:viewParam name="id" value="#{vacinadorBean.idAuxiliar}" />
-                <f:viewAction action="#{vacinadorBean.preparaEdicao()}"  />
+                <f:viewParam name="id" value="#{acsBean.idAuxiliar}" />
+                <f:viewAction action="#{acsBean.preparaEdicao()}"  />
 
             </f:metadata>
 
             <ui:define name="centro">
-                <h:form id="editarVacinador" >
+                <h:form id="editarACS" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
-                    <span id="titulo_pagina">Cadastro de Vacinador da UBS</span>
-                    <p:fieldset legend="Atualizar Vacinador da Unidade Básica de Saúde"
+                    <span id="titulo_pagina">Cadastro de ACS da UBS</span>
+                    <p:fieldset legend="Atualizar ACS da Unidade Básica de Saúde"
                                 style="width: 90%; text-align: center; margin-top: 80px;  max-height: 460px;" >
                         <h:panelGrid columns="2"  style="text-align: left">
 
                             <p:outputLabel for="nome" value="Nome: "/>
-                            <p:inputText id="nome" required="true" value="#{vacinadorBean.vacinador.nome}" size="60"
+                            <p:inputText id="nome" required="true" value="#{acsBean.ACS.nome}" size="60"
                                          />
 
                             <p:outputLabel value="CPF: " for="txtCpf"/>
-                            <p:inputMask id="txtCpf" value="#{vacinadorBean.vacinador.cpf}" 
+                            <p:inputMask id="txtCpf" value="#{acsBean.ACS.cpf}" 
                                          requiredMessage="O campo CPF é obrigatório"
                                          mask="999.999.999-99" required="true" validator="cpfValidator" converter="cpfConverter"/>
 
@@ -39,16 +39,16 @@
                             <p:row>
                                 <p:column colspan="2" >
                                     <h:panelGrid columns="6" >
-                                        <p:inputText value="#{vacinadorBean.vacinador.rg}" 
+                                        <p:inputText value="#{acsBean.ACS.rg}" 
                                                      style="margin-right: 40px; margin-left: -3px"   />
 
                                         <p:outputLabel value="Orgão Emissor: "/>
-                                        <p:inputText value="#{vacinadorBean.vacinador.orgaoEmissor}" style="margin-right: 40px"/>
+                                        <p:inputText value="#{acsBean.ACS.orgaoEmissor}" style="margin-right: 40px"/>
 
                                         <p:outputLabel value="UF: " style="margin-left: 36px; margin-right: 2px"/>
-                                        <p:selectOneMenu id="ufRG" value="#{vacinadorBean.vacinador.ufOrgaoEmissor}">
+                                        <p:selectOneMenu id="ufRG" value="#{acsBean.ACS.ufOrgaoEmissor}">
                                             <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="#{vacinadorBean.estado}" 
+                                            <f:selectItems var="uf" value="#{acsBean.estado}" 
                                                            itemLabel="#{uf}" itemValue="#{uf}"/>
                                         </p:selectOneMenu>
                                     </h:panelGrid>
@@ -56,18 +56,18 @@
                             </p:row> 
 
 
-                            <p:outputLabel for="registroCoren" value="Registro Coren: " style="text-align: center"/>
+                            <p:outputLabel for="cbo" value="CBO: " style="text-align: center"/>
 
                             <p:row>
                                 <p:column colspan="2">
                                     <h:panelGrid columns="4" >
 
-                                        <p:inputText id="registroCoren" value="#{vacinadorBean.vacinador.coren}" required="true" 
+                                        <p:inputText id="cbo" value="#{acsBean.ACS.cbo}" required="true" 
                                                      style="margin-right: 40px; margin-left: -3px"  maxlength="15" />
 
 
                                         <p:outputLabel for="matricula" value="Matrícula: " style="margin-right: 30px"/>
-                                        <p:inputText id="matricula" value="#{vacinadorBean.vacinador.matricula}" maxlength="15" style="margin-right: 40px" required="true"/>
+                                        <p:inputText id="matricula" value="#{acsBean.ACS.matricula}" maxlength="15" style="margin-right: 40px" required="true"/>
 
 
                                     </h:panelGrid>
@@ -78,14 +78,14 @@
                             <p:row>
                                 <p:column colspan="2">
                                     <h:panelGrid columns="4" >
-                                        <p:inputText value="#{vacinadorBean.vacinador.codigoEquipeINE}" style="margin-right: 40px"/>
+                                        <p:inputText value="#{acsBean.ACS.codigoEquipeINE}" style="margin-right: 40px"/>
 
 
 
                                         <p:outputLabel value="Data de nascimento: " for="txtDataNascimento"/>
                                         <p:calendar id="txtDataNascimento" locale="pt_BR" navigator="true" 
-                                                    maxdate="#{vacinadorBean.dataAtual}"
-                                                    value="#{vacinadorBean.vacinador.dataNascimento}"
+                                                    maxdate="#{acsBean.dataAtual}"
+                                                    value="#{acsBean.ACS.dataNascimento}"
                                                     required="true" requiredMessage="A Data de Nascimento é obrigatória"
                                                     />
 
@@ -110,12 +110,12 @@
                                 <p:column colspan="2">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="#{vacinadorBean.vacinador.logradouro}" 
+                                        <p:inputText value="#{acsBean.ACS.logradouro}" 
                                                      size="70" style="margin-right: 25px"/>
 
 
                                         <p:outputLabel value="Nº.: "/>
-                                        <p:inputText value="#{vacinadorBean.vacinador.numero}" 
+                                        <p:inputText value="#{acsBean.ACS.numero}" 
                                                      size="6" />
 
                                     </h:panelGrid>
@@ -128,11 +128,11 @@
                                 <p:column colspan="2">
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="#{vacinadorBean.vacinador.bairro}" 
+                                        <p:inputText value="#{acsBean.ACS.bairro}" 
                                                      size="70" style="margin-right: 25px"/>
 
                                         <p:outputLabel value="CEP: "/>
-                                        <p:inputMask mask="99.999-999" value="#{vacinadorBean.vacinador.cep}" 
+                                        <p:inputMask mask="99.999-999" value="#{acsBean.ACS.cep}" 
                                                      size="8" />
                                     </h:panelGrid>
                                 </p:column>
@@ -144,15 +144,15 @@
                                 <p:column colspan="2" >
                                     <h:panelGrid columns="6" >
 
-                                        <p:inputText value="#{vacinadorBean.vacinador.cidade}"
+                                        <p:inputText value="#{acsBean.ACS.cidade}"
                                                      size="40" style="margin-right: 40px"/>
 
 
                                         <p:outputLabel value="UF: "/>
-                                        <p:selectOneMenu id="ufEndereco" value="#{vacinadorBean.vacinador.estado}">
+                                        <p:selectOneMenu id="ufEndereco" value="#{acsBean.ACS.estado}">
 
                                             <f:selectItem itemLabel="Selecione"/>
-                                            <f:selectItems var="uf" value="#{vacinadorBean.estado}" 
+                                            <f:selectItems var="uf" value="#{acsBean.estado}" 
                                                            itemLabel="#{uf}" itemValue="#{uf}"
                                                            />
                                         </p:selectOneMenu>
@@ -166,7 +166,7 @@
                                     <h:panelGrid columns="6" >
                                        
                                         
-                                        <p:inputText value="#{vacinadorBean.vacinador.login}" id="nomeUsuario" required="true"
+                                        <p:inputText value="#{acsBean.ACS.login}" id="nomeUsuario" required="true"
                                                      style="margin-right: 30px; margin-left: -3px"   />
                                         
                                     </h:panelGrid>
@@ -179,14 +179,14 @@
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
 
-                                        <p:password value="#{vacinadorBean.senhaAtual}" size="15" required="true"
+                                        <p:password value="#{acsBean.senhaAtual}" size="15"
                                                     requiredMessage="Senha Atual é necessária" feedback="true" 
                                                     promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senhaAtual"
                                                     goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
                                                     label="Senha"/>
 
                                         <p:outputLabel for="senha" value="Nova Senha: "/>
-                                        <p:password value="#{vacinadorBean.vacinador.senha}" size="15"  
+                                        <p:password value="#{acsBean.ACS.senha}" size="15"  
                                                     requiredMessage="A Senha  é necessária" feedback="true" 
                                                     promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senha"
                                                     goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"
@@ -194,7 +194,7 @@
 
 
                                         <p:outputLabel for="confirmarSenha"  value=" Confirmar Senha: " style="margin-left: 20px"/>
-                                        <p:password value="#{vacinadorBean.confirmarSenha}" size="15" requiredMessage="É necessário confirmar senha" 
+                                        <p:password value="#{acsBean.confirmarSenha}" size="15" requiredMessage="É necessário confirmar senha" 
                                                     id="confirmarSenha" label="Confirmar Senha" 
                                                     />
 
@@ -207,7 +207,7 @@
                             <p:row>
                                 <p:column colspan="2" >
                                     <h:panelGrid columns="6">
-                                        <p:selectOneMenu id="funcionarioAdm" value="#{vacinadorBean.vacinador.adm}">
+                                        <p:selectOneMenu id="funcionarioAdm" value="#{acsBean.ACS.adm}">
 
                                             <f:selectItem  itemLabel="Não" itemValue="n"/>
                                             <f:selectItem  itemLabel="Sim" itemValue="s"/>
@@ -222,9 +222,9 @@
 
                     </p:fieldset> 
 
-                    <p:commandButton value="Atualizar Vacinador" style="top: 20px;" 
+                    <p:commandButton value="Atualizar ACS" style="top: 20px;" 
                                      update="mensages" ajax="false"
-                                     action="#{vacinadorBean.update()}">
+                                     action="#{acsBean.update()}">
                     </p:commandButton>
 
                 </h:form>

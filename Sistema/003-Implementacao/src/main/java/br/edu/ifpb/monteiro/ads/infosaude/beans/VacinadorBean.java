@@ -62,7 +62,7 @@ public class VacinadorBean implements Serializable {
             vacinador.setSenha(CriptografiaUtil.convertStringToMd5(vacinador.getSenha()));
             vacinadorService.salvar(vacinador);
             JsfUtil.addSuccessMessage("Vacinador da UBS cadastrado com sucesso");
-            
+
             return "buscar_vacinador.xhtml";
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
@@ -81,7 +81,7 @@ public class VacinadorBean implements Serializable {
     public List<Vacinador> getVacinadores() {
 
         try {
-             vacinadores = vacinadorService.buscarTudo();
+            vacinadores = vacinadorService.buscarTudo();
 
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,9 +107,9 @@ public class VacinadorBean implements Serializable {
 
         try {
             vacinadorService.remover(vacinadorSelected);
-            
+
             JsfUtil.addSuccessMessage("Vacinador removido com sucesso");
-            
+
             return "buscar_vacinador.xhtml";
 
         } catch (ServiceExcecoes ex) {
@@ -129,8 +129,6 @@ public class VacinadorBean implements Serializable {
                 vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), idAuxiliar);
                 vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), idAuxiliar);
 
-                verificaSenhaAtual();
-
                 vacinador.setId(idAuxiliar);
                 vacinadorService.atualizar(vacinador);
                 JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
@@ -138,8 +136,8 @@ public class VacinadorBean implements Serializable {
 
             } catch (ServiceExcecoes | DaoExcecoes ex) {
 
-                Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
-                return "editar_vacinador.xhtml?id=" + idAuxiliar + "&faces-redirect=true";
+                JsfUtil.addErrorMessage(ex.getMessage());
+                return "editar_vacinador.xhtml?id=" + idAuxiliar;
 
             }
         }
@@ -149,11 +147,19 @@ public class VacinadorBean implements Serializable {
     public boolean verificaSenhaAtual() {
 
         try {
-            if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha())) {
-                vacinador.setSenha(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha());
+            if (CriptografiaUtil.convertStringToMd5(senhaAtual).
+                    equals(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha())) {
+
                 return true;
+
             } else {
-                JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
+                if (senhaAtual.trim() == "") {
+
+                    vacinador.setSenha(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha());
+                    return true;
+                } else {
+                    JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
+                }
             }
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -162,25 +168,24 @@ public class VacinadorBean implements Serializable {
 
     }
 
-     public String selecinaExcluir() {
+    public String selecinaExcluir() {
 
-         if(vacinadorSelected == null){
-             JsfUtil.addErrorMessage("Selecione um item da tabela");
-                          
-         }
-         else{
-             remover();
-         }
+        if (vacinadorSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+
+        } else {
+            remover();
+        }
         return "buscar_vacinador.xhtml";
     }
-     public void selecinaEditar() {
 
-         if(vacinadorSelected == null){
-             JsfUtil.addErrorMessage("Selecione um item da tabela");
-         }
-         else{
-             JsfUtil.redirect("editar_vacinador.xhtml?id="+vacinadorSelected.getId()+"&faces-redirect=true");
-         }
+    public void selecinaEditar() {
+
+        if (vacinadorSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+        } else {
+            JsfUtil.redirect("editar_vacinador.xhtml?id=" + vacinadorSelected.getId());
+        }
     }
 
     public List<Vacinador> getVacinadoresFilter() {
@@ -234,6 +239,7 @@ public class VacinadorBean implements Serializable {
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
     }
+
     public Long getIdAuxiliar() {
         return idAuxiliar;
     }

@@ -27,7 +27,7 @@ public class Funcionario extends Pessoa implements Serializable {
     private String codigoEquipeINE;
 
     @NotNull
-    @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
+    @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 11)
     private String cpf;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -44,12 +44,11 @@
                                     
                                     <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaVacinador" 
                                                       action="#{vacinadorBean.selecinaExcluir()}" style="margin-left: 10px;" id="btExcluir">
-                                        <p:confirm header="Confirmatição" message="Tem certeza que deseja excluir o Vacinador?" icon="ui-icon-alert" />
+                                        <p:confirm header="Confirmação" message="Tem certeza que deseja excluir o Vacinador?" icon="ui-icon-alert" />
                                     </p:commandButton>
 
                                 </p:outputPanel>
                             </f:facet>
-                             <p:ajax event="rowSelect" listener="#{vacinadorBean.onRowSelect}" update="btExcluir btAtualizar" />
                              
                             <p:column filterBy="#{vac.matricula}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
                                 <h:outputText value="#{vac.matricula}" style="text-align: center" />
