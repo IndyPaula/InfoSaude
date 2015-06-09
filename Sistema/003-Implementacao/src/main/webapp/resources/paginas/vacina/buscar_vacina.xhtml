@@ -8,39 +8,97 @@
 
     <body>
 
-        <ui:composition template="./../../template/template_vacinador.xhtml">
+        <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
+
+                <f:metadata>
+                    <f:viewParam name="faces-redirect" value="#{pacienteBean.mensangem}" />
+                    <f:viewAction action="#{pacienteBean.mensagem()}"  />
+
+                </f:metadata>
                 <h:form id="vacina">
-                <p:dataTable id="tableVacina" var="vacina" value="#{v}" selectionMode="single"
-                             selection="#{v}" rowKey="#{v}"
-                             rows="10" paginator="true" style="border: 0px; width: 80%">
-                    <f:facet name="header">
-                        Lista de Vacinas
-                    </f:facet>
-                    <p:column headerText="Lote"  width="150" filterBy="#{v}" >
-                        <h:outputText value="#{v}"/>
-                    </p:column>
-                    <p:column   headerText="Nome" filterBy="#{v}" >
-                        <h:outputText value="#{v}"/>
-                    </p:column>
-                    <p:column headerText="Fabricante"  width="350" 
-                              style="text-align: center" filterBy="#{v}">
-                        <h:outputText value="#{v}" />
-                    </p:column>
-                    <p:column headerText="Opções" width="150">
-                        <p:button value="imprimir Registro" icon="ui-icon-print" outcome="p" target="_new">
-                            <f:param value="#{v}" name="paciente"/> 
-                        </p:button>
-                        
-                         <p:button value="Atualizar Registro" icon="ui-icon-refresh" 
-                                   outcome="p" target="_new">
-                            <f:param value="#{v}" name="p"/> 
-                        </p:button>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
+                    <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
+                    <span id="titulo_pagina">Lista de Vacinas na UBS</span>
+                    <p:fieldset legend="Vacina" 
+                                style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
+                        <p:dataTable 
+                            var="vac" value="#{vacinaBean.vacinas}" 
+                            filteredValue="#{vacinaBean.vacinasFilter}"
+                            rowsPerPageTemplate="5,10,20,50,100, 200" 
+                            paginator="true" 
+                            rows="10" 
+                            widgetVar="tabela_pacientes"
+                            style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado"  
+                            >
+
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('tabela_pacientes').filter()" 
+                                                 size="60" placeholder="Pesquise por Lote, Nome ou Laboratório" />
+                                </p:outputPanel>
+                            </f:facet>
+
+                            <p:column filterBy="#{vac.nome}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column headerText="Nome"  width="150"  style="text-align: center" >
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.lote}" headerText="Lote" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.lote}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   headerText="Lote" style="text-align: center" >
+                                <h:outputText value="#{vac.lote}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.laboratorio}" headerText="Laboratório" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.laboratorio}" style="text-align: center" />
+                            </p:column>
+
+
+                            <p:column   headerText="Laboratório" style="text-align: center" >
+                                <h:outputText value="#{vac.laboratorio}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column headerText="Opções" width="220" style="text-align: center" >
+                                <p:panelGrid style="border: 0;">
+                                    <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_vacina.xhtml"
+                                              style="margin-right: 6px">
+                                        <f:param value="#{vac.id}" name="id"/> 
+                                    </p:button>
+
+                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{vacinaBean.remover(vac)}">
+
+                                        <p:confirm header="Confirmação" message="Excluir Vacina?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton 
+                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+                                </p:panelGrid>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:fieldset>
+                </h:form>
+
             </ui:define>
+
+            <script type="text/javascript" language="javascript">
+
+                function reload() {
+
+                    window.location.reload();
+
+                }
+            </script>
 
         </ui:composition>
 
