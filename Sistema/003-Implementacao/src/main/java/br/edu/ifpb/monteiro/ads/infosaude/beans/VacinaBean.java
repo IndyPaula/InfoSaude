@@ -35,6 +35,8 @@ public class VacinaBean {
 
     private Long idAuxiliar;
 
+    private Vacina vacinaSelecionada;
+
     public VacinaBean() {
     }
 
@@ -50,6 +52,42 @@ public class VacinaBean {
         return new Date();
     }
 
+    public void selecinaEditar() {
+
+        if (vacinaSelecionada == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+        } else {
+            JsfUtil.redirect("editar_vacina.xhtml?id=" + vacinaSelecionada.getId());
+        }
+    }
+
+    public void selecinaExcluir() {
+
+        if (vacinaSelecionada == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+
+        } else {
+            remover();
+            
+        }
+    }
+
+    public String remover() {
+
+        try {
+            vacinaService.remover(vacinaSelecionada);
+
+            JsfUtil.addSuccessMessage("Vacina removida com sucesso");
+
+            return "buscar_vacina.xhtml";
+
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
     public String salvar() {
         try {
             vacinaService.salvar(vacina);
@@ -63,31 +101,6 @@ public class VacinaBean {
 
         }
         return "buscar_vacina.xhtml";
-    }
-
-    public String remover(Vacina vac) {
-
-        if (vac != null) {
-
-            try {
-                vacinaService.remover(vac);
-
-                Thread.sleep(1000);
-
-                JsfUtil.redirect("/InfoSaude/resources/paginas/vacina/buscar_vacina.xhtml?faces-redirect=true");
-                return "buscar_vacina.xhtml";
-
-            } catch (ServiceExcecoes ex) {
-                Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage("Erro ao tentar remover a vacina");
-            } catch (InterruptedException ex) {
-                Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-
-            JsfUtil.addErrorMessage("Erro ao tentar remover a Vacina");
-        }
-        return null;
     }
 
     public String update() throws BeanExcecao {
@@ -159,6 +172,14 @@ public class VacinaBean {
 
     public void setVacinasFilter(List<Vacina> vacinasFilter) {
         this.vacinasFilter = vacinasFilter;
+    }
+
+    public Vacina getVacinaSelecionada() {
+        return vacinaSelecionada;
+    }
+
+    public void setVacinaSelecionada(Vacina vacinaSelecionada) {
+        this.vacinaSelecionada = vacinaSelecionada;
     }
 
 }

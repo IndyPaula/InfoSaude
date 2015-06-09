@@ -1,10 +1,13 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 
 /**
@@ -27,4 +30,14 @@ public class VacinaServie extends GenericoService<Vacina> implements VacinaServi
         return dao;
     }
 
+    @Override
+    public void remover(Vacina vac) {
+
+        try {
+            dao.remover(vac);
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinaServie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
