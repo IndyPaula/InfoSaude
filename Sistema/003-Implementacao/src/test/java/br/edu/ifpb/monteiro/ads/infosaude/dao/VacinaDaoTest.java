@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  * @date 09/06/2015
  */
@@ -51,13 +50,11 @@ public class VacinaDaoTest {
     }
 
     @AfterClass
-    public static void removerDados() {
+    public static void removerTest() {
 
         try {
             Vacina vacina = vacinaDao.buscarPorCampo("nome", "123");
-
-          vacinaDao.remover(vacina);
-
+            vacinaDao.remover(vacina);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinaDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,7 +62,7 @@ public class VacinaDaoTest {
     }
 
     @Test
-    public void testValidarVacina() {
+    public void salvarTest() {
 
         Vacina vacina = new Vacina();
         vacina.setContraIndicacoes("123");
@@ -88,9 +85,9 @@ public class VacinaDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinaDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         Vacina result = new Vacina();
-        
+
         try {
             result = vacinaDao.buscarPorCampo("nome", "123");
 
@@ -103,7 +100,7 @@ public class VacinaDaoTest {
     }
 
     @Test(expected = RollbackException.class)
-    public void loteDuplicado() {
+    public void loteDuplicadoTest() {
 
         Vacina vacina = new Vacina();
         vacina.setContraIndicacoes("123");
@@ -151,6 +148,44 @@ public class VacinaDaoTest {
             salvo = false;
         }
         assertEquals(false, salvo);
+    }
+
+    @Test
+    public void atualizarTest() {
+        Vacina vacina = new Vacina();
+        vacina.setContraIndicacoes("1235");
+        vacina.setDataFabricacao(new Date());
+        vacina.setDataVencimento(new Date());
+        vacina.setId(4567895L);
+        vacina.setInstrucaoAdministracao("1235");
+        vacina.setInstrucaoArmazenamento("1235");
+        vacina.setLaboratorio("1235");
+        vacina.setLote("1235");
+        vacina.setNome("1235");
+        vacina.setQuantidadeDoses(35);
+        vacina.setReacoesAdversas("1235");
+        vacina.setViaAdministracao(EnumViaAdministracao.ORAL);
+
+        Vacina test = null;
+
+        try {
+            vacinaDao.getEntityManager().getTransaction().begin();
+            vacinaDao.salvar(vacina);
+
+            Vacina vacina2 = vacinaDao.consultarPorId(4567895L);
+            vacina2.setNome("1234");
+
+            vacinaDao.atualizar(vacina2);
+            vacinaDao.getEntityManager().getTransaction().commit();
+
+            test = vacinaDao.consultarPorId(4567895L);
+
+        } catch (DaoExcecoes ex) {
+            vacinaDao.getEntityManager().clear();
+            Logger.getLogger(VacinaDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        assertEquals(test.getNome(), "1234");
     }
 
 }
