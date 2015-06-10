@@ -35,8 +35,6 @@ public class AcsBean implements Serializable {
     private transient ACS acs;
     private transient ACS acsSelected;
 
-    private Long idAuxiliar;
-
     @Inject
     private transient ACSServiceIF acsService;
 
@@ -62,7 +60,7 @@ public class AcsBean implements Serializable {
             acs.setSenha(CriptografiaUtil.convertStringToMd5(acs.getSenha()));
             acsService.salvar(acs);
             JsfUtil.addSuccessMessage("Agente comunitário de Saúde cadastrado com sucesso");
-            
+
             return "buscar_acs.xhtml";
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
@@ -81,7 +79,7 @@ public class AcsBean implements Serializable {
     public List<ACS> getAgentes() {
 
         try {
-             agentes = acsService.buscarTudo();
+            agentes = acsService.buscarTudo();
 
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,23 +91,13 @@ public class AcsBean implements Serializable {
         this.agentes = acses;
     }
 
-    public void preparaEdicao() {
-
-        try {
-            this.acs = acsService.consultarPorId(idAuxiliar);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
     public String remover() {
 
         try {
             acsService.remover(acsSelected);
-            
+
             JsfUtil.addSuccessMessage("Agente comunitário de Saúde removido com sucesso");
-            
+
             return "buscar_acs.xhtml";
 
         } catch (ServiceExcecoes ex) {
@@ -121,71 +109,71 @@ public class AcsBean implements Serializable {
 
     public String update() {
 
-        if (verificaSenhaAtual()) {
-            try {
+        try {
+            Long id = acsService.buscarPorCampo("cbo", acs.getCbo()).getId();
 
-                acsService.verificaCampoUnique("cpf", acs.getCpf(), idAuxiliar);
-                acsService.verificaCampoUnique("cbo", "" + acs.getCbo(), idAuxiliar);
-                acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), idAuxiliar);
-                acsService.verificaCampoUnique("login", "" + acs.getLogin(), idAuxiliar);
+            if (verificaSenhaAtual()) {
 
-                acs.setId(idAuxiliar);
+                acs.setId(id);
+                acsService.verificaCampoUnique("cpf", acs.getCpf(), id);
+                acsService.verificaCampoUnique("cbo", "" + acs.getCbo(), id);
+                acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), id);
+                acsService.verificaCampoUnique("login", "" + acs.getLogin(), id);
+
                 acsService.atualizar(acs);
                 JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
                 return "buscar_acs.xhtml";
-
-            } catch (ServiceExcecoes | DaoExcecoes ex) {
-
-                Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
-                return "editar_acs.xhtml?id=" + idAuxiliar + "&faces-redirect=true";
-
+            } else {
+                JsfUtil.addErrorMessage("A senha informada não corresponde a senha atual");
             }
+
+        } catch (ServiceExcecoes | DaoExcecoes ex) {
+
+            JsfUtil.addErrorMessage(ex.getMessage());
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        return "editar_acs.xhtml?id=" + idAuxiliar;
+        return null;
     }
 
-    public boolean verificaSenhaAtual() {
+    public boolean verificaSenhaAtual() throws ServiceExcecoes {
 
-        try {
-            if (CriptografiaUtil.convertStringToMd5(senhaAtual).
-                    equals(acsService.buscarPorCampo("id", idAuxiliar).getSenha())) {
-              
-                return true;
+        acs.setSenha(acsService.buscarPorCampo("cbo", acs.getCbo()).getSenha());
 
-            } else {
-                if (senhaAtual.trim() == "") {
-                     acs.setSenha(acsService.buscarPorCampo("id", idAuxiliar).getSenha());
-                    return true;
-                } else {
-                    JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
-                }
-            }
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
+        if (senhaTemp.equals("")) {
+
+            return true;
+        }
+        if (!CriptografiaUtil.convertStringToMd5(senhaAtual).equals(acs.getSenha())) {
+
+            return false;
+        }
+        if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(acs.getSenha())) {
+
+            acs.setSenha(CriptografiaUtil.convertStringToMd5(senhaTemp));
+            return true;
         }
         return false;
-
     }
 
-     public String selecinaExcluir() {
+    public String selecinaExcluir() {
 
-         if(acsSelected == null){
-             JsfUtil.addErrorMessage("Selecione um item da tabela");
-                          
-         }
-         else{
-             remover();
-         }
+        if (acsSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+
+        } else {
+            remover();
+        }
         return "buscar_acs.xhtml";
     }
-     public void selecinaEditar() {
 
-         if(acsSelected == null){
-             JsfUtil.addErrorMessage("Selecione um item da tabela");
-         }
-         else{
-             JsfUtil.redirect("editar_acs.xhtml?id="+acsSelected.getId()+"&faces-redirect=true");
-         }
+    public void selecinaEditar() {
+
+        if (acsSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+        } else {
+            JsfUtil.redirect("editar_acs.xhtml?id=" + acsSelected.getId() + "&faces-redirect=true");
+        }
     }
 
     public List<ACS> getAgentesFilter() {
@@ -238,13 +226,6 @@ public class AcsBean implements Serializable {
 
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
-    }
-    public Long getIdAuxiliar() {
-        return idAuxiliar;
-    }
-
-    public void setIdAuxiliar(Long idAuxiliar) {
-        this.idAuxiliar = idAuxiliar;
     }
 
     public String getSenhaAtual() {

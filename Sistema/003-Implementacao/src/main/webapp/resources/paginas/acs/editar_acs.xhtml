@@ -9,13 +9,6 @@
 
         <ui:composition template="./../../template/template_base.xhtml">
 
-
-            <f:metadata>
-                <f:viewParam name="id" value="#{acsBean.idAuxiliar}" />
-                <f:viewAction action="#{acsBean.preparaEdicao()}"  />
-
-            </f:metadata>
-
             <ui:define name="centro">
                 <h:form id="editarACS" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
@@ -186,7 +179,7 @@
                                                     label="Senha"/>
 
                                         <p:outputLabel for="senha" value="Nova Senha: "/>
-                                        <p:password value="#{acsBean.ACS.senha}" size="15"  
+                                        <p:password value="#{acsBean.senhaTemp}" size="15"  
                                                     requiredMessage="A Senha  é necessária" feedback="true" 
                                                     promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senha"
                                                     goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"

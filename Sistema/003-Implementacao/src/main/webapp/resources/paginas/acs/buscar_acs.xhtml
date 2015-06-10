@@ -39,8 +39,12 @@
                                                  size="50" placeholder="Pesquise por Matricula, Nome, Login ou CBO" />
                                     <p:spacer width="50" height="1"/>
                                     
-                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{acsBean.selecinaEditar()}" 
-                                                     id="btAtualizar" update="mensagem"/>
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="editar_acs.xhtml" 
+                                                     id="btAtualizar" update="mensagem">
+                                
+                                        <f:setPropertyActionListener value="#{acsBean.ACSSelected}" target="#{acsBean.ACS}"/>
+                                    
+                                    </p:commandButton>
                                     
                                     <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaACS" 
                                                       action="#{acsBean.selecinaExcluir()}" style="margin-left: 10px;" id="btExcluir">

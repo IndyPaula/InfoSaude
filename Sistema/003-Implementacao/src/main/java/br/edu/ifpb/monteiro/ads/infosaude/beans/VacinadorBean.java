@@ -35,8 +35,6 @@ public class VacinadorBean implements Serializable {
     private transient Vacinador vacinador;
     private transient Vacinador vacinadorSelected;
 
-    private Long idAuxiliar;
-
     @Inject
     private transient VacinadorServiceIF vacinadorService;
 
@@ -93,16 +91,6 @@ public class VacinadorBean implements Serializable {
         this.vacinadores = vacinadores;
     }
 
-    public void preparaEdicao() {
-
-        try {
-            this.vacinador = vacinadorService.consultarPorId(idAuxiliar);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
     public String remover() {
 
         try {
@@ -121,51 +109,51 @@ public class VacinadorBean implements Serializable {
 
     public String update() {
 
-        if (verificaSenhaAtual()) {
-            try {
+        try {
+            Long id = vacinadorService.buscarPorCampo("coren", vacinador.getCoren()).getId();
 
-                vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), idAuxiliar);
-                vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), idAuxiliar);
-                vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), idAuxiliar);
-                vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), idAuxiliar);
+            if (verificaSenhaAtual()) {
 
-                vacinador.setId(idAuxiliar);
+                vacinador.setId(id);
+                vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), id);
+                vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), id);
+                vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), id);
+                vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), id);
+
                 vacinadorService.atualizar(vacinador);
                 JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
                 return "buscar_vacinador.xhtml";
-
-            } catch (ServiceExcecoes | DaoExcecoes ex) {
-
-                JsfUtil.addErrorMessage(ex.getMessage());
-                return "editar_vacinador.xhtml?id=" + idAuxiliar;
-
+            } else {
+                JsfUtil.addErrorMessage("A senha informada não corresponde a senha atual");
             }
+
+        } catch (ServiceExcecoes | DaoExcecoes ex) {
+
+            JsfUtil.addErrorMessage(ex.getMessage());
+            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        return "editar_vacinador.xhtml?id=" + idAuxiliar;
+        return null;
     }
 
-    public boolean verificaSenhaAtual() {
+    public boolean verificaSenhaAtual() throws ServiceExcecoes {
 
-        try {
-            if (CriptografiaUtil.convertStringToMd5(senhaAtual).
-                    equals(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha())) {
+        vacinador.setSenha(vacinadorService.buscarPorCampo("coren", vacinador.getCoren()).getSenha());
 
-                return true;
+        if(senhaTemp.equals("")){
+            
+            return true;
+        }
+        if (!CriptografiaUtil.convertStringToMd5(senhaAtual).equals(vacinador.getSenha())) {
 
-            } else {
-                if (senhaAtual.trim() == "") {
+            return false;
+        }
+        if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(vacinador.getSenha())) {
 
-                    vacinador.setSenha(vacinadorService.buscarPorCampo("id", idAuxiliar).getSenha());
-                    return true;
-                } else {
-                    JsfUtil.addErrorMessage("A senha digitada não corresponde a senha atual");
-                }
-            }
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(VacinadorBean.class.getName()).log(Level.SEVERE, null, ex);
+            vacinador.setSenha(CriptografiaUtil.convertStringToMd5(senhaTemp));
+            return true;
         }
         return false;
-
     }
 
     public String selecinaExcluir() {
@@ -177,15 +165,6 @@ public class VacinadorBean implements Serializable {
             remover();
         }
         return "buscar_vacinador.xhtml";
-    }
-
-    public void selecinaEditar() {
-
-        if (vacinadorSelected == null) {
-            JsfUtil.addErrorMessage("Selecione um item da tabela");
-        } else {
-            JsfUtil.redirect("editar_vacinador.xhtml?id=" + vacinadorSelected.getId());
-        }
     }
 
     public List<Vacinador> getVacinadoresFilter() {
@@ -238,14 +217,6 @@ public class VacinadorBean implements Serializable {
 
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
-    }
-
-    public Long getIdAuxiliar() {
-        return idAuxiliar;
-    }
-
-    public void setIdAuxiliar(Long idAuxiliar) {
-        this.idAuxiliar = idAuxiliar;
     }
 
     public String getSenhaAtual() {

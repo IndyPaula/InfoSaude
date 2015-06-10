@@ -39,8 +39,12 @@
                                                  size="50" placeholder="Pesquise por Matricula, Nome, Login ou Registro Coren" />
                                     <p:spacer width="50" height="1"/>
                                     
-                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{vacinadorBean.selecinaEditar()}" 
-                                                     id="btAtualizar" update="mensagem"/>
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="editar_vacinador.xhtml" 
+                                                     id="btAtualizar" update="mensagem">
+                                    
+                                        <f:setPropertyActionListener value="#{vacinadorBean.vacinadorSelected}" target="#{vacinadorBean.vacinador}"/>
+                                    
+                                    </p:commandButton>
                                     
                                     <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaVacinador" 
                                                       action="#{vacinadorBean.selecinaExcluir()}" style="margin-left: 10px;" id="btExcluir">

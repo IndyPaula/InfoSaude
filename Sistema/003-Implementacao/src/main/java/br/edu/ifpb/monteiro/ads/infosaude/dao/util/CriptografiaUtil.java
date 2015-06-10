@@ -20,7 +20,7 @@ public class CriptografiaUtil {
     public static String convertStringToMd5(String valor) {
         MessageDigest mDigest;
         StringBuffer sb;
-        if (valor == null) {
+        if (valor == "") {
 
             return null;
         }

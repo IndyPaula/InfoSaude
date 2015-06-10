@@ -35,31 +35,35 @@ public class VacinadorService extends GenericoService<Vacinador> implements Vaci
     @Override
     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws ServiceExcecoes, DaoExcecoes {
 
-        Vacinador vacinador = null;
-        try{
+        if (campo == "coren") {
+            return verificaCorenUnique(valor, id);
+        }else{
             
-        if (id == null) {
-
-            vacinador = dao.buscarPorCampo(campo, valor);
-            
-            if (vacinador != null) {
-
-                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-            }
-        } else {
-
-            vacinador = dao.buscarPorCampo(campo, valor);
-            if (vacinador != null && id != vacinador.getId()) {
-
-                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-            }
-
-            return true;
+            return dao.verificaCampoUnique(campo, valor, id);
         }
-        }catch(NoResultException ex){
-            
-             Logger.getLogger(VacinadorService.class.getName()).log(Level.SEVERE, null, ex);
-             
+       
+    }
+
+    public boolean verificaCorenUnique(Object valor, Long id) throws ServiceExcecoes, DaoExcecoes {
+
+        try {
+
+            Vacinador vacinador = null;
+
+            if (id == null) {
+                vacinador = dao.buscarPorCampo("coren", valor);
+                if (vacinador != null) {
+                    throw new DaoExcecoes("O COREN informado pertence a outra pessoa, por favor informe outro.");
+                }
+            } else {
+                vacinador = dao.buscarPorCampo("coren", valor);
+                if (vacinador != null && id != vacinador.getId()) {
+                    throw new DaoExcecoes("O COREN informado pertence a outra pessoa, por favor informe outro.");
+                }
+                return true;
+            }
+        } catch (NoResultException ex) {
+            Logger.getLogger(VacinadorService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }

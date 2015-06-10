@@ -30,7 +30,7 @@ public class CriptografiaUtilTest {
     
       @Test
     public void stringNula() {
-        String valor = null;
+        String valor = "";
         String expResult = null;
 
         String result = CriptografiaUtil.convertStringToMd5(valor);

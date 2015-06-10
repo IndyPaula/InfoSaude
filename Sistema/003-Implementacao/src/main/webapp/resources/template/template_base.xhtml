@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"  
       xmlns:f="http://java.sun.com/jsf/core"  
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,9 +18,10 @@
     </h:head>
 
     <h:body >
-        
-        <p:growl showDetail="false" id="mensagem" life="7000"/>
-        
+
+
+        <p:growl showDetail="false" id="mensagem" life="4000"/>
+
         <div style="height: 45px;background-color: skyblue;width: 100%; " >
             <div style="display: table; width: 100%;">
                 <div style="width: 50%;  float: left;margin-left: 5%;"> 
@@ -30,24 +32,33 @@
                 </div>
                 <div style="width: 35%; float: right;padding-top: 10px;" align="right"> 
                     <h:form>
+                        <p:notificationBar position="top" effect="slide" styleClass="top" widgetVar="bar"
+                                           style="height: 60px;background-color: skyblue;padding-left: 5%; text-align: center;">
+                            
+                            <span style="font-size: 12px; cursor: pointer;text-decoration: black;margin: 10px;" onclick="PF('bar').hide()" > fechar [x]</span>
+
+                            <h:outputText value="Nenhuma notificação no momento." style="font-size:16px;" />
+                        </p:notificationBar>
                         <p:outputLabel   value="Bem vindo, #{usuarioBean.login} "  style="color: #403c3c" />
 
-<!--                        <p:commandLink value="|  Relatórios " 
-                                       style="color: #403c3c"/>-->
-                        <p:commandLink  value="| Sair" action="${usuarioBean.doLogout()}" timeout="2000"
+                        <p:commandLink  value="| Sair" action="#{usuarioBean.doLogout()}" timeout="2000"
                                         style="margin-right: 70px;color: #403c3c"/>
-
+                        
                     </h:form>
                 </div>
             </div>
         </div>
 
         <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px; padding: 0px;height: 670px !important;"  >
-            
+
             <p:layoutUnit position="west"  size="260"  >
-                <span style="font-size: 23px ">
-                    <img src="${facesContext.externalContext.requestContextPath}/res/imagens/notificacao.png" height="30"/> 2 Notificações</span>
+
                 <h:form>
+                    <span style="font-size: 23px; cursor: pointer;" onmousemove="PF('bar').show()" >
+
+                        <img src="${facesContext.externalContext.requestContextPath}/res/imagens/notificacao.png" height="30"/>
+                        Notificações</span>
+
                     <p:menu style="width: 90%;  margin-top: 0%; margin-bottom: 0px;">
                         <p:submenu label="Cadastros">
                             <p:menuitem value="Usuários da UBS" icon="ui-icon-person" outcome="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
@@ -86,9 +97,9 @@
                     <ui:insert name="centro">
 
                     </ui:insert>
-                   </div>
-                </p:layoutUnit>
-         
+                </div>
+            </p:layoutUnit>
+
         </p:layout>
     </h:body>
 

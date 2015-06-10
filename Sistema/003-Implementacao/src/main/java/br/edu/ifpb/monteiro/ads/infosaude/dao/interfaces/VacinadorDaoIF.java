@@ -1,5 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 
 /**
@@ -9,4 +10,5 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
  */
 public interface VacinadorDaoIF extends DaoIF<Vacinador> {
     
+     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws  DaoExcecoes;
 }

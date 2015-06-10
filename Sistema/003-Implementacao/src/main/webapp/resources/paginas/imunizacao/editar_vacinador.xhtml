@@ -9,13 +9,6 @@
 
         <ui:composition template="./../../template/template_base.xhtml">
 
-
-            <f:metadata>
-                <f:viewParam name="id" value="#{vacinadorBean.idAuxiliar}" />
-                <f:viewAction action="#{vacinadorBean.preparaEdicao()}"  />
-
-            </f:metadata>
-
             <ui:define name="centro">
                 <h:form id="editarVacinador" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
@@ -32,7 +25,6 @@
                             <p:inputMask id="txtCpf" value="#{vacinadorBean.vacinador.cpf}" 
                                          requiredMessage="O campo CPF é obrigatório"
                                          mask="999.999.999-99" required="true" validator="cpfValidator" converter="cpfConverter"/>
-
 
                             <p:outputLabel value="RG: " style="text-align: center"/>
 
@@ -54,7 +46,6 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
-
 
                             <p:outputLabel for="registroCoren" value="Registro Coren: " style="text-align: center"/>
 
@@ -159,7 +150,7 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
-                             <p:outputLabel for="nomeUsuario" value="Login:"/>
+                            <p:outputLabel for="nomeUsuario" value="Login:"/>
                             <p:row>
                                 <p:column colspan="2" style="position: absolute">
                                     <h:panelGrid columns="6" >
@@ -185,7 +176,7 @@
                                                     label="Senha"/>
 
                                         <p:outputLabel for="senha" value="Nova Senha: "/>
-                                        <p:password value="#{vacinadorBean.vacinador.senha}" size="15"  
+                                        <p:password value="#{vacinadorBean.senhaTemp}" size="15"  
                                                     requiredMessage="A Senha  é necessária" feedback="true" 
                                                     promptLabel="Digite a senha" weakLabel="Força da senha : Fraca"    id="senha"
                                                     goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte" 
@@ -200,7 +191,7 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row>
-                            
+
                             <p:outputLabel value="Administrador: "/>
 
                             <p:row>
