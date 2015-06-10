@@ -38,7 +38,7 @@ public class UserLoginBean implements Serializable {
     public String doLogin() {
 
         try {
-            Thread.sleep(400);
+            Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(UserLoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }

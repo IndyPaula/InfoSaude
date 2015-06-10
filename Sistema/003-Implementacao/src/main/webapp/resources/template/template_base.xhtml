@@ -59,34 +59,32 @@
 
                     <p:menu style="width: 90%;  margin-top: 0%; margin-bottom: 0px;">
                         <p:submenu label="Cadastros">
-                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" outcome="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
-                            <p:menuitem value="Vacinadores" icon="ui-icon-person" outcome="/resources/paginas/imunizacao/adicionar_vacinador.xhtml"/>         
-                            <p:menuitem value="Agentes Comun. de Saúde" icon="ui-icon-person" outcome="/resources/paginas/acs/adicionar_acs.xhtml"/>   
-                            <p:menuitem value="Administradores" icon="ui-icon-person" outcome="/resources/paginas/ubs/adicionar_admin.xhtml"/>   
-                            <p:menuitem value="Vacina" icon="ui-icon-print" outcome="/resources/paginas/vacina/adicionar_vacina.xhtml"/>  
+                            <p:menuitem value="Usuários da UBS" icon="fa fa-users" outcome="/resources/paginas/paciente/adicionar_usuario_ubs.xhtml"/>
+                            <p:menuitem value="Vacinadores" icon="fa fa-fighter-jet" outcome="/resources/paginas/imunizacao/adicionar_vacinador.xhtml"/>         
+                            <p:menuitem value="Agentes Comun. de Saúde" icon="fa fa-male" outcome="/resources/paginas/acs/adicionar_acs.xhtml"/>   
+                            <p:menuitem value="Vacina" icon="fa fa-eyedropper" outcome="/resources/paginas/vacina/adicionar_vacina.xhtml"/>  
                         </p:submenu>
                         <p:submenu label="Consulta">
-                            <p:menuitem value="Usuários da UBS" icon="ui-icon-person" outcome="/resources/paginas/paciente/buscar_usuario_ubs.xhtml"/>
-                            <p:menuitem value="Vacinadores" icon="ui-icon-person" outcome="/resources/paginas/imunizacao/buscar_vacinador.xhtml"/>         
-                            <p:menuitem value="Agentes Comun. de Saúde" icon="ui-icon-person" outcome="/resources/paginas/acs/buscar_acs.xhtml"/>   
-                            <p:menuitem value="Administradores" icon="ui-icon-person" outcome="/resources/paginas/ubs/buscar_admin.xhtml"/>   
-                            <p:menuitem value="Vacinas" icon="ui-icon-print" outcome="/resources/paginas/vacina/buscar_vacina.xhtml"/>
+                            <p:menuitem value="Usuários da UBS" icon="fa fa-users" outcome="/resources/paginas/paciente/buscar_usuario_ubs.xhtml"/>
+                            <p:menuitem value="Vacinadores" icon="fa fa-fighter-jet" outcome="/resources/paginas/imunizacao/buscar_vacinador.xhtml"/>         
+                            <p:menuitem value="Agentes Comun. de Saúde" icon="fa fa-male" outcome="/resources/paginas/acs/buscar_acs.xhtml"/>   
+                            <p:menuitem value="Vacinas" icon="fa fa-eyedropper" outcome="/resources/paginas/vacina/buscar_vacina.xhtml"/>
                         </p:submenu>
-                        <p:submenu label="Relatórios">
-                            <p:menuitem value="Cobertura de vacina" icon="ui-icon-print" />         
-                            <p:menuitem value="Acomp. Nutricional" icon="ui-icon-copy" /> 
-                            <p:menuitem value="Acomp. de Gestantes" icon="ui-icon-copy" />     
+                        <p:submenu label="Relatórios" >
+                            <p:menuitem value="Cobertura de vacina" icon="fa fa-area-chart" />         
+                            <p:menuitem value="Acomp. Nutricional" icon="fa fa-pie-chart" /> 
+                            <p:menuitem value="Acomp. de Gestantes" icon="fa fa-bar-chart" />     
                         </p:submenu>
 
                         <p:submenu label="Agendamentos">
-                            <p:menuitem value="Vacinas" icon="ui-icon-print" />         
-                            <p:menuitem value="Visita médica" icon="ui-icon-copy" /> 
+                            <p:menuitem value="Vacinas" icon="fa fa-medkit" />         
+                            <p:menuitem value="Visita médica" icon="fa fa-user-md" /> 
                         </p:submenu>
 
                         <p:submenu label="Sistema">
-                            <p:menuitem value="Verificar visitas de ACS" icon="ui-icon-check" />    
-                            <p:menuitem value="Unidade de Saúde" icon="ui-icon-gear"  outcome="/resources/paginas/ubs/ubs.xhtml"/>  
-                            <p:menuitem value="Sair" icon="ui-icon-close" action="${usuarioBean.doLogout()}"/>         
+                            <p:menuitem value="Verificar visitas de ACS" icon="fa fa-tablet" />    
+                            <p:menuitem value="Unidade de Saúde" icon="fa fa-hospital-o"  outcome="/resources/paginas/ubs/ubs.xhtml"/>  
+                            <p:menuitem value="Sair" icon="fa fa-circle-o-notch" action="${usuarioBean.doLogout()}"/>         
                         </p:submenu>
                     </p:menu>
                 </h:form>
