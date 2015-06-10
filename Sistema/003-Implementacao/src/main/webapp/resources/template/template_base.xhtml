@@ -13,12 +13,10 @@
         <link href="${facesContext.externalContext.requestContextPath}/resources/css/styleTemplate.css" rel="stylesheet" type="text/css" />  
         <link rel="icon" type="image/png" href="${facesContext.externalContext.requestContextPath}/res/imagens/favicon.png"/>
         <style type="text/css">
-
         </style>
     </h:head>
 
     <h:body >
-
 
         <p:growl showDetail="false" id="mensagem" life="4000"/>
 
@@ -34,7 +32,7 @@
                     <h:form>
                         <p:notificationBar position="top" effect="slide" styleClass="top" widgetVar="bar"
                                            style="height: 60px;background-color: skyblue;padding-left: 5%; text-align: center;">
-                            
+
                             <span style="font-size: 12px; cursor: pointer;text-decoration: black;margin: 10px;" onclick="PF('bar').hide()" > fechar [x]</span>
 
                             <h:outputText value="Nenhuma notificação no momento." style="font-size:16px;" />
@@ -43,13 +41,13 @@
 
                         <p:commandLink  value="| Sair" action="#{usuarioBean.doLogout()}" timeout="2000"
                                         style="margin-right: 70px;color: #403c3c"/>
-                        
+
                     </h:form>
                 </div>
             </div>
         </div>
 
-        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px; padding: 0px;height: 670px !important;"  >
+        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px; padding: 0px;height: 750px !important;"  >
 
             <p:layoutUnit position="west"  size="260"  >
 
@@ -76,7 +74,7 @@
                         </p:submenu>
                         <p:submenu label="Relatórios">
                             <p:menuitem value="Cobertura de vacina" icon="ui-icon-print" />         
-                            <p:menuitem value="Acomp. Nnutricional" icon="ui-icon-copy" /> 
+                            <p:menuitem value="Acomp. Nutricional" icon="ui-icon-copy" /> 
                             <p:menuitem value="Acomp. de Gestantes" icon="ui-icon-copy" />     
                         </p:submenu>
 

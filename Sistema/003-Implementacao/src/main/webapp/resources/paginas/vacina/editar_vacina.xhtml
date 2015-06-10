@@ -5,7 +5,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <body>
 
         <ui:composition template="./../../template/template_base.xhtml">
@@ -17,14 +16,12 @@
 
                 </f:metadata>
 
-
                 <h:form id="cadastrarVacina" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
-                    <span id="titulo_pagina">Cadastro de Vacina</span>
-                    <p:fieldset legend="Cadastrar Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 450px;">
+                    <span id="titulo_pagina">Cadastro de Vacinas</span>
+                    <p:fieldset legend="Altualizar informações da Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 510px;">
 
                         <h:panelGrid columns="2"  style="text-align: left;">
-
 
                             <p:outputLabel for="lote" value="Lote: "/>
 
@@ -40,7 +37,6 @@
                                                      value="#{vacinaBean.vacina.dataFabricacao}"
                                                      style="margin-right: 50px;" required="true"/>
 
-
                                         <p:outputLabel value="Data de Venc.: " for="data_vencimento" />
                                         <p:calendar locale="pt_BR" navigator="true"  
                                                     mindate="#{vacinaBean.dataAtual}"
@@ -50,13 +46,11 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
-
                             <p:outputLabel value="Laboratório: " for="laboratorio"/>
                             <p:inputText value="#{vacinaBean.vacina.laboratorio}" id="laboratorio" required="true" size="60"/>
 
                             <p:outputLabel value="Nome da Vacina: " for="nome_vacina"/>
                             <p:inputText value="#{vacinaBean.vacina.nome}" size="60" required="true" id="nome_vacina"/>
-
 
                             <p:outputLabel value="Via de Administração:"/>
                             <p:selectOneMenu editable="true" id="viaAdmin" value="#{vacinaBean.vacina.viaAdministracao}">
@@ -65,7 +59,7 @@
                                                itemLabel="#{via}" itemValue="#{via}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="Quantidade de doses " for="quant_dose"/>
+                            <p:outputLabel value="Quant. doses " for="quant_dose"/>
                             <p:inputText id="quant_dose" required="true" value="#{vacinaBean.vacina.quantidadeDoses}" />
 
                             <p:outputLabel value="Instruções de Administração: "/>
@@ -85,9 +79,7 @@
                                              value="#{vacinaBean.vacina.contraIndicacoes}"
                                              rows="3" autoResize="false"
                                              />
-
                             <p:outputLabel value="Reações Adversas: "/>
-
                             <p:row>
                                 <p:column colspan="2">
                                     <h:panelGrid columns="2" >
@@ -99,7 +91,6 @@
                                     </h:panelGrid>
                                 </p:column>
                             </p:row> 
-
                         </h:panelGrid>
 
                     </p:fieldset>
@@ -108,8 +99,6 @@
 
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

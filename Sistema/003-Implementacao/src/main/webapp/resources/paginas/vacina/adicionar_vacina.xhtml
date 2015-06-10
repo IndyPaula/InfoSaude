@@ -12,14 +12,12 @@
 
             <ui:define name="centro">
 
-
                 <h:form id="cadastrarVacina" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
-                    <span id="titulo_pagina">Cadastro de Vacina</span>
-                    <p:fieldset legend="Cadastrar Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 450px;">
+                    <span id="titulo_pagina">Cadastro de Vacinas</span>
+                    <p:fieldset legend="Cadastrar Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 510px;">
 
                         <h:panelGrid columns="2"  style="text-align: left;">
-
 
                             <p:outputLabel for="lote" value="Lote: "/>
 
@@ -60,7 +58,7 @@
                                                itemLabel="#{via}" itemValue="#{via}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="Quantidade de doses " for="quant_dose"/>
+                            <p:outputLabel value="Quant. doses " for="quant_dose"/>
                             <p:inputText id="quant_dose" required="true" value="#{vacinaBean.vacina.quantidadeDoses}" />
 
                             <p:outputLabel value="Instruções de Administração: "/>
