@@ -51,15 +51,15 @@
                             <p:inputMask  id="txtSus" value="#{pacienteBean.paciente.cartaoSUS}" size="20" maxlength="15"
                                           required="true" requiredMessage="O número do cartão SUS é obrigatório" mask="999999999999999"
                                           >
-                            <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
+                                <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
                             </p:inputMask >
-                            
+
                             <p:outputLabel value="Número prontuário: " for="txtNumeroProntuario" />
-                            
+
                             <p:inputText id="txtNumeroProntuario" value="#{pacienteBean.paciente.numeroProntuario}" size="20" maxlength="15"
-                                          required="true" requiredMessage="O número do prontuário é obrigatório"  
-                                          >
-                            <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
+                                         required="true" requiredMessage="O número do prontuário é obrigatório"  
+                                         >
+                                <f:convertNumber integerOnly="true" minIntegerDigits="1"  /> 
                             </p:inputText>
 
 
@@ -74,7 +74,7 @@
                             <p:calendar id="txtDataCadastro" locale="pt_BR" navigator="true" 
                                         maxdate="#{pacienteBean.dataAtual}" 
                                         value="#{pacienteBean.paciente.dataCadastro}"
-                                       required="true" requiredMessage="A Data de Cadastro é obrigatória"
+                                        required="true" requiredMessage="A Data de Cadastro é obrigatória"
                                         />
 
                             <p:outputLabel value="Sexo: " for="txtSexo"/>
@@ -161,15 +161,17 @@
                                 </p:column>
                             </p:row> 
 
-                            <p:outputLabel value=" "/>
-                            <p:commandButton value="Cadastrar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
-                                             update="mensages" ajax="false" 
-                                             action="#{pacienteBean.salvar}"/>
+
                         </h:panelGrid>
 
                     </p:fieldset> 
-                </h:form>
 
+                    <p:commandButton value="Cadastrar Usuário da UBS" style="top: 20px; margin-left: 10%; bottom: 10px;"
+                                     update="mensages" ajax="false" 
+                                     action="#{pacienteBean.salvar}"/>
+
+                </h:form>
+                <p:spacer height="30px"/>
             </ui:define>
 
         </ui:composition>

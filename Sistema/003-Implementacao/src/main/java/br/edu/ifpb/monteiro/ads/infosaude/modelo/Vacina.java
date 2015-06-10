@@ -5,7 +5,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +32,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "via_administracao", nullable = false, length = 25)
+    @Column(name = "via_administracao", nullable = true, length = 25)
     private transient EnumViaAdministracao viaAdministracao;
 
     @Column(name = "nome", nullable = false, length = 45)
@@ -52,22 +50,22 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     @Column(name = "reacoes_adversas", length = 255)
     private String reacoesAdversas;
 
-    @Column(name = "volume", scale = 2)
-    private double volume;
+    @Column(name = "quantidade_doses", nullable = false)
+    private int quantidadeDoses;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_fabricacao", nullable = false)
     private Date dataFabricacao;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_validade", nullable = false)
-    private Date dataValidade;
+    @Column(name = "data_vencimento", nullable = false)
+    private Date dataVencimento;
 
-    @Column(name = "numero_lote", nullable = false, length = 20, unique = true)
-    private String numeroLote;
+    @Column(name = "lote", nullable = false, length = 20, unique = true)
+    private String lote;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private transient Fornecedor fornecedor;
+    @Column(name = "loboratorio", nullable = false, length = 45)
+    private String laboratorio;
 
     @Override
     public Long getId() {
@@ -127,14 +125,6 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
         this.reacoesAdversas = reacoesAdversas;
     }
 
-    public double getVolume() {
-        return volume;
-    }
-
-    public void setVolume(double volume) {
-        this.volume = volume;
-    }
-
     public Date getDataFabricacao() {
         return dataFabricacao;
     }
@@ -143,28 +133,36 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
         this.dataFabricacao = dataFabricacao;
     }
 
-    public Date getDataValidade() {
-        return dataValidade;
+    public Date getDataVencimento() {
+        return dataVencimento;
     }
 
-    public void setDataValidade(Date dataValidade) {
-        this.dataValidade = dataValidade;
+    public void setDataVencimento(Date dataVencimento) {
+        this.dataVencimento = dataVencimento;
     }
 
-    public String getNumeroLote() {
-        return numeroLote;
+    public String getLote() {
+        return lote;
     }
 
-    public void setNumeroLote(String numeroLote) {
-        this.numeroLote = numeroLote;
+    public void setLote(String lote) {
+        this.lote = lote;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
+    public int getQuantidadeDoses() {
+        return quantidadeDoses;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setQuantidadeDoses(int quantidadeDoses) {
+        this.quantidadeDoses = quantidadeDoses;
+    }
+
+    public String getLaboratorio() {
+        return laboratorio;
+    }
+
+    public void setLaboratorio(String laboratorio) {
+        this.laboratorio = laboratorio;
     }
 
     @Override

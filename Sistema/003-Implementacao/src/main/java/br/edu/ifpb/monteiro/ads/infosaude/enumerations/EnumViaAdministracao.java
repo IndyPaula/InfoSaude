@@ -6,10 +6,10 @@ package br.edu.ifpb.monteiro.ads.infosaude.enumerations;
  */
 public enum EnumViaAdministracao {
     
-    INTRAMUSCULAR("Intramuscular"),
+    INTRAMUSCULAR("Intramúscular"),
     ORAL("Oral"),
     SUBCUTANEA("Subcutanea"),
-    INTRADERMICA("Intradermica");
+    INTRADERMICA("Intradérmica");
 
 
     private String descricao;

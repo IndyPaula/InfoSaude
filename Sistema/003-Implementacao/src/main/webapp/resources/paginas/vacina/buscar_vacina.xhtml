@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template/template_base.xhtml">
+
+            <ui:define name="centro">
+
+                <h:form id="vacina">
+
+                    <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
+                    <span id="titulo_pagina">Lista de Vacina</span>
+                    <p:fieldset legend="Vacina" 
+                                style="background: transparent; width: 97%; text-align: center; margin-top: 80px;" >
+
+
+                        <p:dataTable 
+                            var="vac" value="#{vacinaBean.vacinas}" 
+                            filteredValue="#{vacinaBean.vacinasFilter}"
+                            rowsPerPageTemplate="5,10,20,50,100, 200" 
+                            paginator="true" 
+                            id="tabelaVacina"
+                            rows="15" 
+                            widgetVar="tabela_vacina" 
+                            selectionMode="single" selection="#{vacinaBean.vacinaSelecionada}" rowKey="#{vac.id}"
+                            style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhuma Vacina Cadastrada"  
+                            >
+
+                            <f:facet name="header">
+                                <p:outputPanel >
+                                    <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('tabela_vacina').filter()" 
+                                                 size="50" placeholder="Pesquise por Nome, Lote ou Laboratório" />
+                                    <p:spacer width="50" height="1"/>
+
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{vacinaBean.selecinaEditar()}" 
+                                                     id="btAtualizar" update="mensagem"/>
+
+                                    <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaVacina"  actionListener="#{vacinaBean.selecinaExcluir()}"
+                                                      action="buscar_vacina.xhtml?faces-redirect=true" style="margin-left: 10px;" id="btExcluir" >
+                                        <p:confirm header="Confirmação" message="Tem certeza que deseja excluir a Vacina?" icon="ui-icon-alert"  />
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </f:facet>
+
+                            <p:column filterBy="#{vac.nome}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column headerText="Nome"  width="150"  style="text-align: center" >
+                                <h:outputText value="#{vac.nome}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   filterBy="#{vac.lote}" headerText="Lote" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.lote}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column headerText="Lote"  width="150"  style="text-align: center" >
+                                <h:outputText value="#{vac.lote}" style="text-align: center" />
+                            </p:column>
+
+
+                            <p:column   filterBy="#{vac.laboratorio}" headerText="Laboratório" style="text-align: center"  visible="false">
+                                <h:outputText value="#{vac.laboratorio}" style="text-align: center" />
+                            </p:column>
+
+                            <p:column   headerText="Laboratório" style="text-align: center" >
+                                <h:outputText value="#{vac.laboratorio}" style="text-align: center" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton 
+                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

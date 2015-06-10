@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template/template_base.xhtml">
+
+            <ui:define name="centro">
+
+
+                <h:form id="cadastrarVacina" >
+                    <p:growl id="mensages" showDetail="false" life="7000"/>
+                    <span id="titulo_pagina">Cadastro de Vacina</span>
+                    <p:fieldset legend="Cadastrar Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 450px;">
+
+                        <h:panelGrid columns="2"  style="text-align: left;">
+
+
+                            <p:outputLabel for="lote" value="Lote: "/>
+
+                            <p:row>
+                                <p:column colspan="2">
+                                    <h:panelGrid columns="6" >
+                                        <p:inputText id="lote" value="#{vacinaBean.vacina.lote}"  required="true"
+                                                     style="margin-right: 40px; margin-left: -3px" />
+
+                                        <p:outputLabel for="data_fabricacao" value="Data de Fab.: "/>
+                                        <p:calendar  id="data_fabricacao" locale="pt_BR" navigator="true" 
+                                                    maxdate="#{vacinaBean.dataAtual}"
+                                                    value="#{vacinaBean.vacina.dataFabricacao}"
+                                                    style="margin-right: 50px;" required="true"/>
+                                        
+                                        
+                                        <p:outputLabel value="Data de Venc.: " for="data_vencimento" />
+                                        <p:calendar locale="pt_BR" navigator="true"  
+                                                    mindate="#{vacinaBean.dataAtual}"
+                                                    value="#{vacinaBean.vacina.dataVencimento}"
+                                                    required="true" id="data_vencimento"  />
+
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
+
+                            <p:outputLabel value="Laboratório: " for="laboratorio"/>
+                            <p:inputText value="#{vacinaBean.vacina.laboratorio}" id="laboratorio" required="true" size="60"/>
+
+                            <p:outputLabel value="Nome da Vacina: " for="nome_vacina"/>
+                            <p:inputText value="#{vacinaBean.vacina.nome}" size="60" required="true" id="nome_vacina"/>
+
+
+                            <p:outputLabel value="Via de Administração:"/>
+                            <p:selectOneMenu editable="true" id="viaAdmin" value="#{vacinaBean.vacina.viaAdministracao}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems var="via" value="#{vacinaBean.viaAdministracao}"
+                                               itemLabel="#{via}" itemValue="#{via}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Quantidade de doses " for="quant_dose"/>
+                            <p:inputText id="quant_dose" required="true" value="#{vacinaBean.vacina.quantidadeDoses}" />
+
+                            <p:outputLabel value="Instruções de Administração: "/>
+                            <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                             value="#{vacinaBean.vacina.instrucaoAdministracao}"
+                                             rows="3" autoResize="false"
+                                             />
+
+                            <p:outputLabel value="Instruções de Armazenamento: "/>
+                            <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                             value="#{vacinaBean.vacina.instrucaoArmazenamento}"
+                                             rows="3" autoResize="false"
+                                             />
+
+                            <p:outputLabel value="Contra Indicações: "/>
+                            <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                             value="#{vacinaBean.vacina.contraIndicacoes}"
+                                             rows="3" autoResize="false"
+                                             />
+
+                            <p:outputLabel value="Reações Adversas: "/>
+
+                            <p:row>
+                                <p:column colspan="2">
+                                    <h:panelGrid columns="2" >
+
+                                        <p:inputTextarea maxlength="670"  style="width: 670px;" 
+                                                         value="#{vacinaBean.vacina.reacoesAdversas}"
+                                                         rows="3" autoResize="false"
+                                                         />
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row> 
+
+                        </h:panelGrid>
+
+                    </p:fieldset>
+                    <p:commandButton value="Cadastrar Vacina" style="margin-top: 1%;" action="#{vacinaBean.salvar()}"
+                                     update="mensages" ajax="false" />
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
