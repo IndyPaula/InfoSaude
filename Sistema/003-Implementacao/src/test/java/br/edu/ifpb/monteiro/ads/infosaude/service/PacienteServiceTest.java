@@ -52,7 +52,7 @@ public class PacienteServiceTest {
         try {
             when(dao.salvar(paciente)).thenReturn(paciente);
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(UnidadeSaudeServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -63,7 +63,7 @@ public class PacienteServiceTest {
         try {
             result = dao.salvar(paciente);
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(UnidadeSaudeServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PacienteServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         assertEquals(result.getNome(), paciente.getNome());
