@@ -11,13 +11,6 @@
         <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
-
-                <f:metadata>
-                    <f:viewParam name="faces-redirect" value="#{pacienteBean.mensangem}" />
-                    <f:viewAction action="#{pacienteBean.mensagem()}"  />
-
-                </f:metadata>
-
                 <h:form id="paciente">
                     <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
                     <span id="titulo_pagina">Lista de Usuários da UBS</span>
@@ -29,7 +22,9 @@
                             rowsPerPageTemplate="5,10,20,50,100, 200" 
                             paginator="true" 
                             rows="10" 
+                            id="tabelaPaciente"
                             widgetVar="tabela_pacientes"
+                            selection="#{pacienteBean.pacienteSelected}" selectionMode="single" rowKey="#{pac.id}"
                             style="border: 0; width: 100%; margin-top: 3%;" emptyMessage="Nenhum Usuário Cadastrado"  
                             >
 
@@ -37,14 +32,28 @@
                                 <p:outputPanel>
                                     <p:outputLabel value="Digite sua busca: " for="globalFilter"/>
                                     <p:inputText id="globalFilter" onkeyup="PF('tabela_pacientes').filter()" 
-                                                 size="60" placeholder="Pesquise por CPF, Nome ou Cartão SUS" />
+                                                 size="50" placeholder="Pesquise por CPF, Nome ou Cartão SUS" />
+
+                                    <p:spacer width="50" height="1"/>
+
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{pacienteBean.selecinaEditar()}" 
+                                                     id="btAtualizar" >
+
+                                        <f:setPropertyActionListener value="#{pacienteBean.pacienteSelected}" target="#{pacienteBean.paciente}"/>
+
+                                    </p:commandButton>
+
+                                    <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaPaciente" actionListener="#{pacienteBean.selecinaExcluir()}"
+                                                      action="buscar_usuario_ubs.xhtml?faces-redirect=true;" style="margin-left: 10px;" id="btExcluir">
+                                        <p:confirm header="Confirmação" message="Tem certeza que deseja excluir o Usuário da UBS?" icon="ui-icon-alert" />
+                                    </p:commandButton>
                                 </p:outputPanel>
                             </f:facet>
 
                             <p:column filterBy="#{pac.nome}" headerText="Nome"  width="150"  style="text-align: center" visible="false">
                                 <h:outputText value="#{pac.nome}" style="text-align: center" />
                             </p:column>
-                            
+
                             <p:column headerText="Nome"  width="150"  style="text-align: center" >
                                 <h:outputText value="#{pac.nome}" style="text-align: center" />
                             </p:column>
@@ -52,55 +61,29 @@
                             <p:column   filterBy="#{pac.cartaoSUS}" headerText="Cartão SUS" style="text-align: center"  visible="false">
                                 <h:outputText value="#{pac.cartaoSUS}" style="text-align: center" />
                             </p:column>
-                            
+
                             <p:column   headerText="Cartão SUS" style="text-align: center" >
                                 <h:outputText value="#{pac.cartaoSUS}" style="text-align: center" />
                             </p:column>
-                            
+
                             <p:column   filterBy="#{pac.cpf}" headerText="CPF" style="text-align: center"  visible="false">
                                 <h:outputText value="#{pac.cpf}" style="text-align: center" />
                             </p:column>
-                            
+
 
                             <p:column   headerText="Endereço" style="text-align: center" >
                                 <h:outputText value="#{pac.logradouro}" style="text-align: center" />
                             </p:column>
-
-                            <p:column headerText="Opções" width="220" style="text-align: center" >
-                                <p:panelGrid style="border: 0;">
-                                    <p:button value="Atualizar" icon="ui-icon-refresh" outcome="editar_usuario_ubs.xhtml"
-                                              style="margin-right: 6px">
-                                        <f:param value="#{pac.id}" name="id"/> 
-                                    </p:button>
-
-                                    <p:commandButton id="bt_excluir" value="Remover" icon="ui-icon-trash"  action="#{pacienteBean.remover(pac)}">
-
-                                        <p:confirm header="Confirmação" message="Excluir usuário da UBS?" icon="ui-icon-alert" />
-                                    </p:commandButton>
-
-                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                        <p:commandButton 
-                                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                                    </p:confirmDialog>
-                                </p:panelGrid>
-                            </p:column>
-
                         </p:dataTable>
                     </p:fieldset>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton 
+                            value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                 </h:form>
 
             </ui:define>
-
-            <script type="text/javascript" language="javascript">
-
-                function reload() {
-
-                    window.location.reload();
-
-                }
-            </script>
-
         </ui:composition>
 
     </body>

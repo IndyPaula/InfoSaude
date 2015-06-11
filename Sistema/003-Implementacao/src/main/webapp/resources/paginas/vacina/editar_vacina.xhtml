@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
     <body>
 
         <ui:composition template="./../../template/template_base.xhtml">
@@ -60,8 +61,9 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel value="Quant. doses " for="quant_dose"/>
-                            <p:inputText id="quant_dose" required="true" value="#{vacinaBean.vacina.quantidadeDoses}" />
-
+                            <pe:inputNumber id="quant_dose" value="#{vacinaBean.vacina.quantidadeDoses}" 
+                                            maxValue="99" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses é obrigatória"
+                                            minValue="1"/>
                             <p:outputLabel value="Instruções de Administração: "/>
                             <p:inputTextarea maxlength="670"  style="width: 670px;" 
                                              value="#{vacinaBean.vacina.instrucaoAdministracao}"

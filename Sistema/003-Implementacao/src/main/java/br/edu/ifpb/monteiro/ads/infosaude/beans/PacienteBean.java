@@ -31,8 +31,7 @@ public class PacienteBean {
     private List<Paciente> pacientes;
     @Inject
     private Paciente paciente;
-    private Long idAuxiliar;
-    private String mensangem;
+    private Paciente pacienteSelected;
 
     private List<Paciente> pacientesFilter;
 
@@ -45,6 +44,91 @@ public class PacienteBean {
 
         pacientesFilter = new ArrayList<>();
 
+    }
+
+    public String salvar() {
+        try {
+
+            pacienteService.cpfExiste(null, paciente.getCpf());
+
+            pacienteService.salvar(paciente);
+            JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
+
+        } catch (ServiceExcecoes | DaoExcecoes ex) {
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex.getMessage());
+
+            return null;
+
+        }
+        return "buscar_usuario_ubs.xhtml";
+    }
+
+    public List<Paciente> getPacientes() {
+
+        try {
+
+            pacientes = pacienteService.buscarTudo();
+
+            return pacientes;
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void remover() {
+
+        try {
+            pacienteService.remover(pacienteSelected);
+            JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
+
+        } catch (ServiceExcecoes ex) {
+            JsfUtil.addErrorMessage("Erro ao tentar remover Usuário da UBS");
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public String update() throws BeanExcecao {
+
+        try {
+            Long id = pacienteService.buscarPorCampo("cpf", paciente.getCpf()).getId();
+
+            pacienteService.cpfExiste(id, paciente.getCpf());
+            paciente.setId(id);
+            pacienteService.atualizar(paciente);
+            JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
+            return "buscar_usuario_ubs.xhtml";
+
+        } catch (ServiceExcecoes | DaoExcecoes ex) {
+
+            JsfUtil.addErrorMessage(ex.getMessage());
+            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public String selecinaExcluir() {
+
+        if (pacienteSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+
+        } else {
+            remover();
+        }
+        return "buscar_usuario_ubs.xhtml";
+    }
+
+    public String selecinaEditar() {
+
+        if (pacienteSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+            return null;
+        } else {
+           return "editar_usuario_ubs.xhtml";
+        }
+        
     }
 
     public Date getDataAtual() {
@@ -80,20 +164,12 @@ public class PacienteBean {
         this.paciente = paciente;
     }
 
-    public Long getIdAuxiliar() {
-        return idAuxiliar;
+    public Paciente getPacienteSelected() {
+        return pacienteSelected;
     }
 
-    public void setIdAuxiliar(Long idAuxiliar) {
-        this.idAuxiliar = idAuxiliar;
-    }
-
-    public String getMensangem() {
-        return mensangem;
-    }
-
-    public void setMensangem(String mensangem) {
-        this.mensangem = mensangem;
+    public void setPacienteSelected(Paciente pacienteSelected) {
+        this.pacienteSelected = pacienteSelected;
     }
 
     public List<Paciente> getPacientesFilter() {
@@ -102,96 +178,6 @@ public class PacienteBean {
 
     public void setPacientesFilter(List<Paciente> pacientesFilter) {
         this.pacientesFilter = pacientesFilter;
-    }
-
-    public void mensagem() {
-        if ("true".equals(mensangem)) {
-            JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
-
-        }
-    }
-
-    public String salvar() {
-        try {
-
-            pacienteService.cpfExiste(null, paciente.getCpf());
-
-            pacienteService.salvar(paciente);
-            JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
-
-        } catch (ServiceExcecoes | DaoExcecoes ex) {
-            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex.getMessage());
-
-            return null;
-
-        }
-        return "buscar_usuario_ubs.xhtml";
-    }
-
-    public List<Paciente> getPacientes() {
-
-        try {
-
-            pacientes = pacienteService.buscarTudo();
-
-            return pacientes;
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    public void preparaEdicao() {
-
-        try {
-            paciente = pacienteService.consultarPorId(idAuxiliar);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public String remover(Paciente p) {
-
-        if (p != null) {
-
-            try {
-                pacienteService.remover(p);
-
-                Thread.sleep(1000);
-
-                JsfUtil.redirect("/InfoSaude/resources/paginas/paciente/buscar_usuario_ubs.xhtml?faces-redirect=true");
-                return "buscar_usuarios_ubs.xhtml";
-
-            } catch (ServiceExcecoes ex) {
-                Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage("Erro ao tentar remover paciente");
-            } catch (InterruptedException ex) {
-                Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-
-            JsfUtil.addErrorMessage("Erro ao tentar remover Usuário da UBS");
-        }
-        return null;
-    }
-
-    public String update() throws BeanExcecao {
-
-        try {
-            pacienteService.cpfExiste(idAuxiliar, paciente.getCpf());
-            paciente.setId(idAuxiliar);
-            pacienteService.atualizar(paciente);
-            JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
-            return "editar_usuario_ubs.xhtml?id=" + paciente.getId();
-
-        } catch (ServiceExcecoes | DaoExcecoes ex) {
-
-            JsfUtil.addErrorMessage(ex.getMessage());
-            Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
     }
 
 }

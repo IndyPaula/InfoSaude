@@ -166,7 +166,16 @@ public class VacinadorBean implements Serializable {
         }
         return "buscar_vacinador.xhtml";
     }
+   public String selecinaEditar() {
 
+        if (vacinadorSelected == null) {
+            JsfUtil.addErrorMessage("Selecione um item da tabela");
+            return null;
+        } else {
+           return "editar_vacinador.xhtml";
+        }
+        
+    }
     public List<Vacinador> getVacinadoresFilter() {
         return vacinadoresFilter;
     }
