@@ -32,33 +32,22 @@ public class ACSService extends GenericoService<ACS> implements ACSServiceIF, Se
         return dao;
     }
 
-        @Override
+    @Override
     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws ServiceExcecoes, DaoExcecoes {
-
-        if (campo == "cbo") {
-            return verificaCboUnique(valor, id);
-        }else{
-            
-            return dao.verificaCampoUnique(campo, valor, id);
-        }
-       
-    }
-
-    public boolean verificaCboUnique(Object valor, Long id) throws ServiceExcecoes, DaoExcecoes {
 
         try {
 
             ACS acs = null;
 
             if (id == null) {
-                acs = dao.buscarPorCampo("cbo", valor);
+                acs = dao.buscarPorCampo(campo, valor);
                 if (acs != null) {
-                    throw new DaoExcecoes("O CBO informado pertence a outra pessoa, por favor informe outro.");
+                    throw new DaoExcecoes("O "+campo+" informado pertence a outra pessoa, por favor informe outro.");
                 }
             } else {
-                acs = dao.buscarPorCampo("cbo", valor);
+                acs = dao.buscarPorCampo(campo, valor);
                 if (acs != null && id != acs.getId()) {
-                    throw new DaoExcecoes("O CBO informado pertence a outra pessoa, por favor informe outro.");
+                    throw new DaoExcecoes("O "+campo+" informado pertence a outra pessoa, por favor informe outro.");
                 }
                 return true;
             }

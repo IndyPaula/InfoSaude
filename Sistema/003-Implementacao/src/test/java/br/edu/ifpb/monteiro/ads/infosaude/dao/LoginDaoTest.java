@@ -19,7 +19,7 @@ import org.junit.Test;
  * @author Vanderlan Gomes
  * @date 30/05/2015
  */
-public class AutenticacaoTest {
+public class LoginDaoTest {
 
     private static EntityManagerProducer emp;
     private static EntityManager em;
@@ -109,7 +109,7 @@ public class AutenticacaoTest {
             daoVacinador.remover(v);
             
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(AutenticacaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

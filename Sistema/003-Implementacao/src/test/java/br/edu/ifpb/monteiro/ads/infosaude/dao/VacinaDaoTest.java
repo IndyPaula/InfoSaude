@@ -1,8 +1,10 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import java.util.Date;
 import java.util.logging.Level;
@@ -47,6 +49,21 @@ public class VacinaDaoTest {
 
         vacinaDao.getEntityManager().clear();
 
+    }
+
+    @Test
+    public void cpfDuplicadoTest() {
+        ACS acs = new ACS();
+        
+        acs.setAdm("s");
+        acs.setNome("InfoSaude ACS");
+        acs.setDataNascimento(new Date());
+        acs.setCpf("10145493421");
+        acs.setLogin("info");
+        acs.setSenha(CriptografiaUtil.convertStringToMd5("123"));
+        acs.setNumeroArea(342);
+                
+        
     }
 
     @AfterClass

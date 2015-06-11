@@ -53,7 +53,6 @@ public class AcsBean implements Serializable {
     public String salvar() {
         try {
             acsService.verificaCampoUnique("cpf", acs.getCpf(), null);
-            acsService.verificaCampoUnique("cbo", "" + acs.getCbo(), null);
             acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), null);
             acsService.verificaCampoUnique("login", "" + acs.getLogin(), null);
 
@@ -110,13 +109,12 @@ public class AcsBean implements Serializable {
     public String update() {
 
         try {
-            Long id = acsService.buscarPorCampo("cbo", acs.getCbo()).getId();
+            Long id = acsService.buscarPorCampo("cpf", acs.getCpf()).getId();
 
             if (verificaSenhaAtual()) {
 
                 acs.setId(id);
                 acsService.verificaCampoUnique("cpf", acs.getCpf(), id);
-                acsService.verificaCampoUnique("cbo", "" + acs.getCbo(), id);
                 acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), id);
                 acsService.verificaCampoUnique("login", "" + acs.getLogin(), id);
 
@@ -138,7 +136,7 @@ public class AcsBean implements Serializable {
 
     public boolean verificaSenhaAtual() throws ServiceExcecoes {
 
-        acs.setSenha(acsService.buscarPorCampo("cbo", acs.getCbo()).getSenha());
+        acs.setSenha(acsService.buscarPorCampo("cpf", acs.getCpf()).getSenha());
 
         if (senhaTemp.equals("")) {
 
