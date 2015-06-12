@@ -53,7 +53,7 @@ public class VacinadorBean implements Serializable {
     public String salvar() {
         try {
             vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), null);
-            vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), null);
+            vacinadorService.verificaCampoUnique("coren", + vacinador.getCoren(), null);
             vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), null);
             vacinadorService.verificaCampoUnique("cartao_sus", "" + vacinador.getCartaoSUS(), null);
             vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), null);

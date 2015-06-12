@@ -42,28 +42,27 @@ public class VacinadorDao extends GenericoDao<Vacinador> implements VacinadorDao
 
         try {
 
-            Funcionario vacinador = null;
+            Funcionario funcionario = null;
 
             if (id == null) {
 
                 Query queryVacinador = getEntityManager().createNativeQuery(
                         "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
                 
-                vacinador = (Funcionario) queryVacinador.getSingleResult();
+                funcionario = (Funcionario) queryVacinador.getSingleResult();
 
-                if (vacinador != null) {
+                if (funcionario != null) {
 
                     throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
                 }
             } else {
                 
-                System.err.println("SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ");
                 Query queryVacinador = getEntityManager().createNativeQuery(
                         "SELECT * FROM funcionario f,  pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
                 
-                vacinador = (Funcionario) queryVacinador.getSingleResult();
+                funcionario = (Funcionario) queryVacinador.getSingleResult();
                 
-                if (vacinador != null && id != vacinador.getId()) {
+                if (funcionario != null && id != funcionario.getId()) {
 
                     throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
                 }

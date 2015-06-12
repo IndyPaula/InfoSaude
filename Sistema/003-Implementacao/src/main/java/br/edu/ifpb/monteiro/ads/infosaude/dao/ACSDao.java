@@ -41,28 +41,27 @@ public class ACSDao extends GenericoDao<ACS> implements ACSDaoIF {
 
         try {
 
-            Funcionario vacinador = null;
+            Funcionario func = null;
 
             if (id == null) {
 
-                Query queryVacinador = getEntityManager().createNativeQuery(
+                Query queryAcs = getEntityManager().createNativeQuery(
                         "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
                 
-                vacinador = (Funcionario) queryVacinador.getSingleResult();
+                func = (Funcionario) queryAcs.getSingleResult();
 
-                if (vacinador != null) {
+                if (func != null) {
 
                     throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
                 }
             } else {
                 
-                System.err.println("SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ");
-                Query queryVacinador = getEntityManager().createNativeQuery(
+                Query queryAcs = getEntityManager().createNativeQuery(
                         "SELECT * FROM funcionario f,  pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
                 
-                vacinador = (Funcionario) queryVacinador.getSingleResult();
+                func = (Funcionario) queryAcs.getSingleResult();
                 
-                if (vacinador != null && id != vacinador.getId()) {
+                if (func != null && id != func.getId()) {
 
                     throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
                 }

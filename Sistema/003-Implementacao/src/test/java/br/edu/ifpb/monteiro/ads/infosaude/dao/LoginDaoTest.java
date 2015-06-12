@@ -1,7 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriaUsuarios;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
@@ -56,7 +55,7 @@ public class LoginDaoTest {
             daoVacinador.salvar(v);
             daoVacinador.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(CriaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
