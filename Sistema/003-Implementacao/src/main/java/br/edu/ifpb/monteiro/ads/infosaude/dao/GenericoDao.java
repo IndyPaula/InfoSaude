@@ -95,7 +95,7 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
             return resultado;
 
         } catch (NoResultException ex) {
-            Logger.getLogger(Identificavel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GenericoDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } catch (Exception e) {
             throw new DaoExcecoes("Informação não encontrada"+e, e);

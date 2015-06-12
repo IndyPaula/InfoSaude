@@ -47,14 +47,14 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
 
     @Enumerated(EnumType.STRING)
     @Column(name = "dose", nullable = false, length = 20)
-    private transient EnumDoseVacina dose;
+    private EnumDoseVacina dose;
 
     @OneToOne(cascade = CascadeType.ALL)
     private transient Vacina vacina;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estrategia_imunizacao", length = 25, nullable = false)
-    private transient EnumEstrategiaImunizacao estrategiaImunizacao;
+    private EnumEstrategiaImunizacao estrategiaImunizacao;
 
     @OneToOne(cascade = CascadeType.ALL)
     private transient Paciente paciente;

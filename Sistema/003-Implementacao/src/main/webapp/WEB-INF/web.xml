@@ -27,7 +27,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>InfomacoesUbs</servlet-name>
+        <servlet-name>InfomacoesUbsWS</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -35,10 +35,12 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    <!-- DECLARAÇÃO DE WEB SERVICES-->
     <servlet-mapping>
-        <servlet-name>InfomacoesUbs</servlet-name>
-        <url-pattern>/InfomacoesUbs</url-pattern>
+        <servlet-name>InfomacoesUbsWS</servlet-name>
+        <url-pattern>/InfomacoesUbsWS</url-pattern>
     </servlet-mapping>
+    <!-- DECLARAÇÃO DE WEB SERVICES-->
     <session-config>
         <session-timeout>
             240

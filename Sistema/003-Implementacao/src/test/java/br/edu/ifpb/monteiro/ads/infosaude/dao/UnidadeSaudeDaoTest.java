@@ -118,7 +118,7 @@ public class UnidadeSaudeDaoTest {
             daoUbs.getEntityManager().getTransaction().begin();
             daoUbs.salvar(ubs);
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
 
         UnidadeSaude ubs2 = new UnidadeSaude();

@@ -1,10 +1,12 @@
 package br.edu.ifpb.monteiro.ads.infosaude.enumerations;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
  */
-public enum EnumEstados {
+public enum EnumEstados implements Serializable{
 
     AC("Acre"),
     AL("Alagoas"),

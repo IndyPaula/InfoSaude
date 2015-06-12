@@ -45,7 +45,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sexo", nullable = true, length = 9)
-    private transient EnumGeneros sexo;
+    private EnumGeneros sexo;
 
     @Column(name = "nome_mae", nullable = true, length = 80)
     private String nomeMae;
@@ -55,7 +55,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "etnia", nullable = true, length = 20)
-    private transient EnumEtnias etnia;
+    private EnumEtnias etnia;
 
     @Column(name = "altura", nullable = true, scale = 2)
     private double altura;
@@ -71,7 +71,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "uf_orgao_emissor", nullable = true, length = 15, precision = 15)
-    private transient EnumEstados ufOrgaoEmissor;
+    private EnumEstados ufOrgaoEmissor;
 
     @Column(name = "peso_nascer", nullable = true, scale = 2)
     private double pesoNascer;
@@ -93,7 +93,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "endereco_estado", nullable = true, length = 30)
-    private transient EnumEstados estado;
+    private EnumEstados estado;
 
     @Override
     public Long getId() {

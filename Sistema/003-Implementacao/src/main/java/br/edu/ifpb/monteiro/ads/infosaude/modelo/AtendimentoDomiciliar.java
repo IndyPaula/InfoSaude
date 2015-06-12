@@ -48,4 +48,28 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
         this.id = id;
     }
 
+    public Date getDataAtendimento() {
+        return dataAtendimento;
+    }
+
+    public void setDataAtendimento(Date dataAtendimento) {
+        this.dataAtendimento = dataAtendimento;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public String getMotivoVisita() {
+        return motivoVisita;
+    }
+
+    public void setMotivoVisita(String motivoVisita) {
+        this.motivoVisita = motivoVisita;
+    }
+    
 }

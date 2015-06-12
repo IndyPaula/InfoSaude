@@ -33,7 +33,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "via_administracao", nullable = true, length = 25)
-    private transient EnumViaAdministracao viaAdministracao;
+    private EnumViaAdministracao viaAdministracao;
 
     @Column(name = "nome", nullable = false, length = 45)
     private String nome;
