@@ -18,7 +18,7 @@ public class Paciente extends Pessoa implements Serializable {
     private static final Long serialVersionUID = 1L;
 
     @Column(name = "numero_prontuario", nullable = false, unique = true)
-    private int numeroProntuario;
+    private Integer numeroProntuario;
 
     @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
@@ -30,11 +30,11 @@ public class Paciente extends Pessoa implements Serializable {
     @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
     private String cpf;
 
-    public int getNumeroProntuario() {
+    public Integer getNumeroProntuario() {
         return numeroProntuario;
     }
 
-    public void setNumeroProntuario(int numeroProntuario) {
+    public void setNumeroProntuario(Integer numeroProntuario) {
         this.numeroProntuario = numeroProntuario;
     }
 

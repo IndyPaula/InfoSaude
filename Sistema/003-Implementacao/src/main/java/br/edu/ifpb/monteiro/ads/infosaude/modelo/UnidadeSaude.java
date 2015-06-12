@@ -29,7 +29,7 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
     private Long id;
 
     @Column(name = "cnes", unique = true, nullable = false)
-    private int cnes;
+    private Integer cnes;
 
     @Column(name = "nome", nullable = false, length = 80)
     private String nome;
@@ -38,7 +38,7 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
     private String logradouro;
 
     @Column(name = "endereco_numero", nullable = false)
-    private int enderecoNumero;
+    private Integer enderecoNumero;
 
     @Column(name = "endereco_cep", nullable = false, length = 10)
     private String cep;
@@ -54,7 +54,7 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
     private EnumEstados estado;
 
     @Column(name = "numero", nullable = false, unique = true)
-    private int numero;
+    private Integer numero;
 
     @Override
     public Long getId() {
@@ -66,11 +66,11 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
         this.id = id;
     }
 
-    public int getCnes() {
+    public Integer getCnes() {
         return cnes;
     }
 
-    public void setCnes(int cnes) {
+    public void setCnes(Integer cnes) {
         this.cnes = cnes;
     }
 
@@ -90,11 +90,11 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
         this.logradouro = logradouro;
     }
 
-    public int getEnderecoNumero() {
+    public Integer getEnderecoNumero() {
         return enderecoNumero;
     }
 
-    public void setEnderecoNumero(int enderecoNumero) {
+    public void setEnderecoNumero(Integer enderecoNumero) {
         this.enderecoNumero = enderecoNumero;
     }
 
@@ -122,11 +122,11 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
         this.estado = estado;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

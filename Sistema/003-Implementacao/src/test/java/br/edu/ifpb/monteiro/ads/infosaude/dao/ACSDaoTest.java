@@ -120,6 +120,8 @@ public class ACSDaoTest {
         acs.setSenha(CriptografiaUtil.convertStringToMd5("534543"));
         acs.setLogin("Ze");
         acs.setEstado(EnumEstados.PE);
+        acs.setNumeroArea(12);
+        acs.setMatricula(124);
 
         ACS result = null;
         try {
@@ -157,6 +159,7 @@ public class ACSDaoTest {
         acs.setSenha(CriptografiaUtil.convertStringToMd5("1543"));
         acs.setLogin("Mary");
         acs.setEstado(EnumEstados.PA);
+        acs.setNumeroArea(12);
 
         try {
 
