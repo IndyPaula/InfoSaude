@@ -24,14 +24,14 @@ public class ACSDao extends GenericoDao<ACS> implements ACSDaoIF {
    @Override
     public void remover(ACS entity) {
 
-        Query queryVacinador = getEntityManager().createNativeQuery("DELETE FROM acs WHERE id = " + entity.getId());
-        queryVacinador.executeUpdate();
+        Query queryAcs = getEntityManager().createNativeQuery("DELETE FROM acs WHERE id = " + entity.getId());
+        queryAcs.executeUpdate();
         
-        Query queryFuncionario = getEntityManager().createNativeQuery("DELETE FROM funcionario WHERE id = " + entity.getId());
-        queryFuncionario.executeUpdate();
+        Query queryFunc = getEntityManager().createNativeQuery("DELETE FROM funcionario WHERE id = " + entity.getId());
+        queryFunc.executeUpdate();
 
-        Query queryPessoa = getEntityManager().createNativeQuery("DELETE FROM pessoa WHERE id = " + entity.getId());
-        queryPessoa.executeUpdate();
+        Query queryPess = getEntityManager().createNativeQuery("DELETE FROM pessoa WHERE id = " + entity.getId());
+        queryPess.executeUpdate();
 
         getEntityManager().getTransaction().commit();
 

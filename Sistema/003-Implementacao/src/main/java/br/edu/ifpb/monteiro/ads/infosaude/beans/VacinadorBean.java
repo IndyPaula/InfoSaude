@@ -3,9 +3,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;
@@ -25,9 +22,7 @@ import javax.inject.Inject;
  * @date 20/05/2015
  */
 @Model
-public class VacinadorBean implements Serializable {
-
-    private String confirmarSenha;
+public class VacinadorBean extends FuncionarioBeanGenerico implements Serializable {
 
     private transient List<Vacinador> vacinadores;
 
@@ -37,9 +32,6 @@ public class VacinadorBean implements Serializable {
 
     @Inject
     private transient VacinadorServiceIF vacinadorService;
-
-    private String senhaAtual;
-    private String senhaTemp;
 
     private transient List<Vacinador> vacinadoresFilter;
 
@@ -142,17 +134,17 @@ public class VacinadorBean implements Serializable {
 
         vacinador.setSenha(vacinadorService.buscarPorCampo("coren", vacinador.getCoren()).getSenha());
 
-        if(senhaTemp.equals("")){
+        if(getSenhaTemp().equals("")){
             
             return true;
         }
-        if (!CriptografiaUtil.convertStringToMd5(senhaAtual).equals(vacinador.getSenha())) {
+        if (!CriptografiaUtil.convertStringToMd5(getSenhaAtual()).equals(vacinador.getSenha())) {
 
             return false;
         }
-        if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(vacinador.getSenha())) {
+        if (CriptografiaUtil.convertStringToMd5(getSenhaAtual()).equals(vacinador.getSenha())) {
 
-            vacinador.setSenha(CriptografiaUtil.convertStringToMd5(senhaTemp));
+            vacinador.setSenha(CriptografiaUtil.convertStringToMd5(getSenhaTemp()));
             return true;
         }
         return false;
@@ -201,41 +193,4 @@ public class VacinadorBean implements Serializable {
     public void setVacinador(Vacinador vacinador) {
         this.vacinador = vacinador;
     }
-
-    public String getSenhaTemp() {
-        return senhaTemp;
-    }
-
-    public void setSenhaTemp(String senhaTemp) {
-        this.senhaTemp = senhaTemp;
-    }
-
-    public EnumEstados[] getEstado() {
-        return EnumEstados.values();
-    }
-
-    public EnumGeneros[] getSexo() {
-        return EnumGeneros.values();
-    }
-
-    public EnumEtnias[] getEtnias() {
-        return EnumEtnias.values();
-    }
-
-    public String getConfirmarSenha() {
-        return confirmarSenha;
-    }
-
-    public void setConfirmarSenha(String confirmarSenha) {
-        this.confirmarSenha = confirmarSenha;
-    }
-
-    public String getSenhaAtual() {
-        return senhaAtual;
-    }
-
-    public void setSenhaAtual(String senhaAtual) {
-        this.senhaAtual = senhaAtual;
-    }
-
 }

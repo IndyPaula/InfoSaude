@@ -3,9 +3,6 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
-import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ACSServiceIF;
@@ -25,9 +22,7 @@ import javax.inject.Inject;
  * @date 20/05/2015
  */
 @Model
-public class AcsBean implements Serializable {
-
-    private String confirmarSenha;
+public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
 
     private transient List<ACS> agentes;
 
@@ -37,9 +32,6 @@ public class AcsBean implements Serializable {
 
     @Inject
     private transient ACSServiceIF acsService;
-
-    private String senhaAtual;
-    private String senhaTemp;
 
     private transient List<ACS> agentesFilter;
 
@@ -140,17 +132,17 @@ public class AcsBean implements Serializable {
 
         acs.setSenha(acsService.buscarPorCampo("cpf", acs.getCpf()).getSenha());
 
-        if (senhaTemp.equals("")) {
+        if (getSenhaTemp().equals("")) {
 
             return true;
         }
-        if (!CriptografiaUtil.convertStringToMd5(senhaAtual).equals(acs.getSenha())) {
+        if (!CriptografiaUtil.convertStringToMd5(getSenhaAtual()).equals(acs.getSenha())) {
 
             return false;
         }
-        if (CriptografiaUtil.convertStringToMd5(senhaAtual).equals(acs.getSenha())) {
+        if (CriptografiaUtil.convertStringToMd5(getSenhaAtual()).equals(acs.getSenha())) {
 
-            acs.setSenha(CriptografiaUtil.convertStringToMd5(senhaTemp));
+            acs.setSenha(CriptografiaUtil.convertStringToMd5(getSenhaTemp()));
             return true;
         }
         return false;
@@ -201,41 +193,4 @@ public class AcsBean implements Serializable {
     public void setACS(ACS acs) {
         this.acs = acs;
     }
-
-    public String getSenhaTemp() {
-        return senhaTemp;
-    }
-
-    public void setSenhaTemp(String senhaTemp) {
-        this.senhaTemp = senhaTemp;
-    }
-
-    public EnumEstados[] getEstado() {
-        return EnumEstados.values();
-    }
-
-    public EnumGeneros[] getSexo() {
-        return EnumGeneros.values();
-    }
-
-    public EnumEtnias[] getEtnias() {
-        return EnumEtnias.values();
-    }
-
-    public String getConfirmarSenha() {
-        return confirmarSenha;
-    }
-
-    public void setConfirmarSenha(String confirmarSenha) {
-        this.confirmarSenha = confirmarSenha;
-    }
-
-    public String getSenhaAtual() {
-        return senhaAtual;
-    }
-
-    public void setSenhaAtual(String senhaAtual) {
-        this.senhaAtual = senhaAtual;
-    }
-
 }
