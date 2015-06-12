@@ -18,7 +18,7 @@ public class Funcionario extends Pessoa implements Serializable {
     private static final Long serialVersionUID = 1L;
 
     @Column(name = "matricula", unique = true, nullable = false)
-    private int matricula;
+    private Integer matricula;
 
     @Column(name = "turno", length = 20, nullable = true)
     private String turno;
@@ -45,11 +45,11 @@ public class Funcionario extends Pessoa implements Serializable {
     @Column(name = "adm", length = 1, nullable = true)
     private String adm;
 
-    public int getMatricula() {
+    public Integer getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(Integer matricula) {
         this.matricula = matricula;
     }
 

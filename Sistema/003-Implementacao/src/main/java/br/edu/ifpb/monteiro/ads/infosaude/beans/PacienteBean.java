@@ -126,9 +126,9 @@ public class PacienteBean {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
             return null;
         } else {
-           return "editar_usuario_ubs.xhtml";
+            return "editar_usuario_ubs.xhtml";
         }
-        
+
     }
 
     public Date getDataAtual() {
@@ -157,6 +157,7 @@ public class PacienteBean {
     }
 
     public Paciente getPaciente() {
+
         return paciente;
     }
 

@@ -80,7 +80,7 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
     private String logradouro;
 
     @Column(name = "endereco_numero", nullable = true)
-    private int numero;
+    private Integer numero;
 
     @Column(name = "endereco_cep", nullable = true, length = 10, precision = 10)
     private String cep;
@@ -185,11 +185,11 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
         this.logradouro = logradouro;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

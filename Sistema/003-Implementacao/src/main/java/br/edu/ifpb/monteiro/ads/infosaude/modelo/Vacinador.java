@@ -15,13 +15,13 @@ public class Vacinador extends Funcionario implements Serializable {
     private static final Long serialVersionUID = 1L;
 
     @Column(name = "coren", nullable = false, unique = true, length = 15)
-    private int coren;
+    private Integer coren;
 
-    public int getCoren() {
+    public Integer getCoren() {
         return coren;
     }
 
-    public void setCoren(int coren) {
+    public void setCoren(Integer coren) {
         this.coren = coren;
     }
 

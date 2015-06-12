@@ -95,8 +95,8 @@ public class UnidadeSaudeDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        assertEquals(312, result.getCnes());
+        Integer a = 312;
+        assertEquals(a, result.getCnes());
 
     }
 

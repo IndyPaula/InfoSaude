@@ -15,13 +15,13 @@ public class ACS extends Funcionario implements Serializable {
     private static final Long serialVersionUID = 1L;
 
     @Column(name = "numero_area", length = 15, nullable = false)
-    private int numeroArea;
+    private Integer numeroArea;
 
-    public int getNumeroArea() {
+    public Integer getNumeroArea() {
         return numeroArea;
     }
 
-    public void setNumeroArea(int numeroArea) {
+    public void setNumeroArea(Integer numeroArea) {
         this.numeroArea = numeroArea;
     }
 

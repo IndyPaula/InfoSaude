@@ -64,8 +64,8 @@ public class VacinadorDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        assertEquals(12432, result.getMatricula());
+        Integer a = 12432;
+        assertEquals(a, result.getMatricula());
     }
 
     @After

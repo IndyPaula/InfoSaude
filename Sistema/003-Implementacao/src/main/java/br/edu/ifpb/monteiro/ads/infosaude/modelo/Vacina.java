@@ -51,7 +51,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     private String reacoesAdversas;
 
     @Column(name = "quantidade_doses", nullable = false)
-    private int quantidadeDoses;
+    private Integer quantidadeDoses;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_fabricacao", nullable = false)
@@ -149,11 +149,11 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
         this.lote = lote;
     }
 
-    public int getQuantidadeDoses() {
+    public Integer getQuantidadeDoses() {
         return quantidadeDoses;
     }
 
-    public void setQuantidadeDoses(int quantidadeDoses) {
+    public void setQuantidadeDoses(Integer quantidadeDoses) {
         this.quantidadeDoses = quantidadeDoses;
     }
 
