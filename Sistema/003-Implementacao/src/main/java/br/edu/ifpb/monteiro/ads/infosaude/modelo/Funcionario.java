@@ -30,6 +30,9 @@ public class Funcionario extends Pessoa implements Serializable {
     @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 11)
     private String cpf;
 
+    @Column(name = "cartao_sus", nullable = false, length = 15, unique = true)
+    private String cartaoSUS;
+
     @OneToOne(cascade = CascadeType.ALL)
     private transient UnidadeSaude unidadeSaude;
 
@@ -41,8 +44,7 @@ public class Funcionario extends Pessoa implements Serializable {
 
     @Column(name = "adm", length = 1, nullable = true)
     private String adm;
-    
-    
+
     public int getMatricula() {
         return matricula;
     }
@@ -107,4 +109,12 @@ public class Funcionario extends Pessoa implements Serializable {
         this.adm = adm;
     }
 
+    public String getCartaoSUS() {
+        return cartaoSUS;
+    }
+
+    public void setCartaoSUS(String cartaoSUS) {
+        this.cartaoSUS = cartaoSUS;
+    }
+    
 }

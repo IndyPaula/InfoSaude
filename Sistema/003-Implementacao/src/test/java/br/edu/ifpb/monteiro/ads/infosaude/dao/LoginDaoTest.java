@@ -46,6 +46,7 @@ public class LoginDaoTest {
         v.setMatricula(432432);
         v.setCoren(423423);
         v.setLogin("InfoSaude");
+        v.setCartaoSUS("987623433223443");
         v.setSenha(CriptografiaUtil.convertStringToMd5("12345"));
         v.setCodigoEquipeINE("4234");
         v.setAdm("s");

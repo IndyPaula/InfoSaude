@@ -50,6 +50,7 @@ public class VacinadorDaoTest {
         v.setMatricula(12432);
         v.setCoren(8748);
         v.setLogin("Joelton");
+        v.setCartaoSUS("123435436546");
         v.setSenha("456");
         v.setCodigoEquipeINE("487");
 
@@ -135,6 +136,7 @@ public class VacinadorDaoTest {
         v.setDataNascimento(new Date());
         v.setMatricula(7777);
         v.setCoren(102030);
+        v.setCartaoSUS("123456789987654");
         v.setLogin("Teste");
         v.setSenha("fjosijfew9urj3");
         v.setCodigoEquipeINE("41343234");

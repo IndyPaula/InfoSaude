@@ -54,6 +54,7 @@ public class AcsBean implements Serializable {
         try {
             acsService.verificaCampoUnique("cpf", acs.getCpf(), null);
             acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), null);
+            acsService.verificaCampoUnique("cartao_sus", "" + acs.getCartaoSUS(), null);
             acsService.verificaCampoUnique("login", "" + acs.getLogin(), null);
 
             acs.setSenha(CriptografiaUtil.convertStringToMd5(acs.getSenha()));
@@ -116,6 +117,7 @@ public class AcsBean implements Serializable {
                 acs.setId(id);
                 acsService.verificaCampoUnique("cpf", acs.getCpf(), id);
                 acsService.verificaCampoUnique("matricula", "" + acs.getMatricula(), id);
+                acsService.verificaCampoUnique("cartao_sus", "" + acs.getCartaoSUS(), id);
                 acsService.verificaCampoUnique("login", "" + acs.getLogin(), id);
 
                 acsService.atualizar(acs);
@@ -165,13 +167,15 @@ public class AcsBean implements Serializable {
         return "buscar_acs.xhtml";
     }
 
-    public void selecinaEditar() {
+    public String selecinaEditar() {
 
         if (acsSelected == null) {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
+            return null;
         } else {
-            JsfUtil.redirect("editar_acs.xhtml?id=" + acsSelected.getId() + "&faces-redirect=true");
+           return "editar_usuario_ubs.xhtml";
         }
+        
     }
 
     public List<ACS> getAgentesFilter() {

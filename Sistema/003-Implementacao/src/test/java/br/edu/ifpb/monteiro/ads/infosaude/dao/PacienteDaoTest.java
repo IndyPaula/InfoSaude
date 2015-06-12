@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -79,7 +80,7 @@ public class PacienteDaoTest {
         assertEquals(paciente.getId(), result.getId());
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = RollbackException.class)
     public void testCpfNull() {
         Paciente paciente = new Paciente();
         paciente.setCartaoSUS("534534534");

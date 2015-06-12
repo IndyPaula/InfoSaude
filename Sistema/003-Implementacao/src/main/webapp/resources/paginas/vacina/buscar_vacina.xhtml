@@ -39,7 +39,11 @@
                                     <p:spacer width="50" height="1"/>
 
                                     <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{vacinaBean.selecinaEditar()}" 
-                                                     id="btAtualizar" update="mensagem"/>
+                                                     id="btAtualizar" update="mensagem">
+                                    
+                                        <f:setPropertyActionListener value="#{vacinaBean.vacinaSelecionada}" target="#{vacinaBean.vacina}"/>
+                                    
+                                    </p:commandButton>
 
                                     <p:commandButton  icon="ui-icon-trash" value="Remover" update="tabelaVacina"  actionListener="#{vacinaBean.selecinaExcluir()}"
                                                       action="buscar_vacina.xhtml?faces-redirect=true" style="margin-left: 10px;" id="btExcluir" >

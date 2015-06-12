@@ -33,8 +33,6 @@ public class VacinaBean {
 
     private List<Vacina> vacinasFilter;
 
-    private Long idAuxiliar;
-
     private Vacina vacinaSelecionada;
 
     public VacinaBean() {
@@ -52,15 +50,16 @@ public class VacinaBean {
         return new Date();
     }
 
-    public void selecinaEditar() {
+    public String selecinaEditar() {
 
         if (vacinaSelecionada == null) {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
+            return null;
         } else {
-            JsfUtil.redirect("editar_vacina.xhtml?id=" + vacinaSelecionada.getId());
+           return "editar_vacina.xhtml";
         }
+        
     }
-
     public void selecinaExcluir() {
 
         if (vacinaSelecionada == null) {
@@ -106,10 +105,9 @@ public class VacinaBean {
     public String update() throws BeanExcecao {
 
         try {
-            vacina.setId(idAuxiliar);
             vacinaService.atualizar(vacina);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
-            return "editar_vacina.xhtml?id=" + vacina.getId();
+            return "buscar_vacina.xhtml";
 
         } catch (ServiceExcecoes ex) {
 
@@ -118,25 +116,6 @@ public class VacinaBean {
         }
         return null;
     }
-
-    public void preparaEdicao() {
-
-        try {
-            vacina = vacinaService.consultarPorId(idAuxiliar);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public Long getIdAuxiliar() {
-        return idAuxiliar;
-    }
-
-    public void setIdAuxiliar(Long idAuxiliar) {
-        this.idAuxiliar = idAuxiliar;
-    }
-
     public Vacina getVacina() {
         return vacina;
     }

@@ -25,7 +25,12 @@
                             <p:inputMask id="txtCpf" value="#{vacinadorBean.vacinador.cpf}" 
                                          requiredMessage="O campo CPF é obrigatório"
                                          mask="999.999.999-99" required="true" validator="cpfValidator" converter="cpfConverter"/>
-
+                            
+                            <p:outputLabel value="Cartão SUS: " for="txtSUS"/>
+                            <p:inputMask id="txtSUS" value="#{vacinadorBean.vacinador.cartaoSUS}" 
+                                         requiredMessage="O campo Cartão SUS é obrigatório"
+                                         mask="999999999999999" required="true"/>
+                            
                             <p:outputLabel value="RG: " style="text-align: center"/>
 
                             <p:row>

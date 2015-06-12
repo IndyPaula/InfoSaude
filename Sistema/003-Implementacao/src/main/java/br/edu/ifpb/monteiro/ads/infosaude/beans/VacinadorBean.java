@@ -55,6 +55,7 @@ public class VacinadorBean implements Serializable {
             vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), null);
             vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), null);
             vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), null);
+            vacinadorService.verificaCampoUnique("cartao_sus", "" + vacinador.getCartaoSUS(), null);
             vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), null);
 
             vacinador.setSenha(CriptografiaUtil.convertStringToMd5(vacinador.getSenha()));
@@ -118,6 +119,7 @@ public class VacinadorBean implements Serializable {
                 vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), id);
                 vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), id);
                 vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), id);
+                vacinadorService.verificaCampoUnique("cartao_sus", "" + vacinador.getCartaoSUS(), id);
                 vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), id);
 
                 vacinadorService.atualizar(vacinador);
