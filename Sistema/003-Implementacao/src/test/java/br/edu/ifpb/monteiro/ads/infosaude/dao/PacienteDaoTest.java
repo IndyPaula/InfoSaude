@@ -6,11 +6,11 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
-import javax.validation.ConstraintViolationException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
@@ -90,8 +90,6 @@ public class PacienteDaoTest {
         paciente.setDataCadastro(new Date());
         paciente.setSexo(EnumGeneros.MASCULINO);
 
-        boolean validadation = true;
-
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
@@ -103,7 +101,6 @@ public class PacienteDaoTest {
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-        assertEquals(false, validadation);
     }
 
     @Test
@@ -141,4 +138,107 @@ public class PacienteDaoTest {
         assertEquals(result.getNome(), "Vanderlan Gomes da Silva");
     }
 
+    @Test
+    public void testBuscarTodosPorCampo() {
+
+        Paciente paciente = new Paciente();
+        paciente.setCartaoSUS("77753453490");
+        paciente.setNome("Paciente");
+        paciente.setCpf("90145473422");
+        paciente.setDataNascimento(new Date());
+        paciente.setNumeroProntuario(42314);
+        paciente.setDataCadastro(new Date());
+        paciente.setSexo(EnumGeneros.MASCULINO);
+
+        try {
+
+            daoPaciente.getEntityManager().getTransaction().begin();
+            daoPaciente.salvar(paciente);
+            daoPaciente.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int quantidade = 0;
+        List<Paciente> pacientes;
+        
+        try {
+            pacientes = daoPaciente.buscarTodosPorCampo("nome", "Paciendew");
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+
+            pacientes = daoPaciente.buscarTodosPorCampo("nome", "Paciente");
+
+            quantidade = pacientes.size();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        assertEquals(quantidade, 1);
+    }
+
+    @Test
+    public void testBuscarTodos() {
+
+        boolean validation = false;
+        try {
+
+            List<Paciente> pacientes = daoPaciente.buscarTudo();
+
+            if (pacientes.size() > 0) {
+                validation = true;
+            }
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        assertEquals(validation, true);
+    }
+
+    @Test
+    public void testRemocao() {
+
+        Paciente paciente = new Paciente();
+        paciente.setCartaoSUS("77743383490");
+        paciente.setNome("Paciente");
+        paciente.setCpf("87745473422");
+        paciente.setDataNascimento(new Date());
+        paciente.setNumeroProntuario(4999994);
+        paciente.setDataCadastro(new Date());
+        paciente.setSexo(EnumGeneros.MASCULINO);
+
+        try {
+
+            daoPaciente.getEntityManager().getTransaction().begin();
+            daoPaciente.salvar(paciente);
+            daoPaciente.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        Paciente pac = null;
+        Paciente result = null;
+        try {
+
+            pac = daoPaciente.buscarPorCampo("cpf", "87745473422");
+
+            daoPaciente.remover(pac);
+
+            result = daoPaciente.buscarPorCampo("cpf", "87745473422");
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        assertEquals(result, null);
+    }
 }

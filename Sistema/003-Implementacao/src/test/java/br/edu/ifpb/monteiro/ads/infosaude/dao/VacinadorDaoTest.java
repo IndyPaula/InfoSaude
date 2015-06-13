@@ -1,7 +1,11 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
+import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.util.Date;
 import java.util.logging.Level;
@@ -53,6 +57,18 @@ public class VacinadorDaoTest {
         v.setCartaoSUS("123435436546");
         v.setSenha("456");
         v.setCodigoEquipeINE("487");
+        v.setNomeMae("Maria");
+        v.setNomePai("José");
+        v.setEtnia(EnumEtnias.PARDO);
+        v.setAltura(1.9);
+        v.setPeso(95);
+        v.setPesoNascer(3.6);
+        v.setNumero(42);
+        v.setRg("89898");
+        v.setOrgaoEmissor("SDS");
+        v.setUfOrgaoEmissor(EnumEstados.PI);
+        
+        v.equals(v);
 
         Vacinador result = null;
         try {
@@ -150,5 +166,86 @@ public class VacinadorDaoTest {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    @Test
+    public void testVerificaCampoUniqueCadastro() {
+
+        Vacinador acs = new Vacinador();
+        acs.setCartaoSUS("11153822234");
+        acs.setNome("Vanderlan Gomes da Silva");
+        acs.setCpf("60111223422");
+        acs.setCoren(16439);
+        acs.setMatricula(35612217);
+        acs.setLogin("Vacinador3");
+        acs.setCodigoEquipeINE("5414552");
+        acs.setSenha(CriptografiaUtil.convertStringToMd5("10042991"));
+        acs.setDataNascimento(new Date());
+        acs.setSexo(EnumGeneros.MASCULINO);
+
+        try {
+
+            daoVacinador.getEntityManager().getTransaction().begin();
+            daoVacinador.salvar(acs);
+            daoVacinador.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        boolean result;
+        try {
+
+            result = daoVacinador.verificaCampoUnique("cpf", "60111223422", null);
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            result = false;
+        }
+        assertEquals(result, false);
+    }
+
+    @Test(expected = DaoExcecoes.class)
+    public void testVerificaCampoUniqueEdicao() throws DaoExcecoes {
+
+        Vacinador vac = new Vacinador();
+        vac.setCartaoSUS("11153822231");
+        vac.setNome("Vanderlan Gomes da Silva");
+        vac.setCpf("60111223421");
+        vac.setCoren(59793);
+        vac.setMatricula(356126111);
+        vac.setLogin("Vacinador4");
+        vac.setCodigoEquipeINE("5414559");
+        vac.setSenha(CriptografiaUtil.convertStringToMd5("10042991"));
+        vac.setDataNascimento(new Date());
+        vac.setSexo(EnumGeneros.MASCULINO);
+
+        try {
+
+            daoVacinador.getEntityManager().getTransaction().begin();
+            daoVacinador.salvar(vac);
+            daoVacinador.getEntityManager().getTransaction().commit();
+            
+            daoVacinador.setEntity(Vacinador.class);
+            daoVacinador.getEntity();
+            
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Vacinador result;
+        boolean resultado;
+        try {
+
+            result = daoVacinador.buscarPorCampo("cpf", "60111223421");
+            resultado = daoVacinador.verificaCampoUnique("cpf", "60111223421", result.getId());
+
+        } catch (DaoExcecoes ex) {
+            resultado = false;
+            Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        if(resultado){
+            throw new DaoExcecoes( "Já existe", new Throwable());
+        }
     }
 }

@@ -28,7 +28,5 @@ public class PacienteDao extends GenericoDao<Paciente> implements PacienteDaoIF 
 
         getEntityManager().getTransaction().commit();
 
-        getEntityManager().close();
-
     }
 }

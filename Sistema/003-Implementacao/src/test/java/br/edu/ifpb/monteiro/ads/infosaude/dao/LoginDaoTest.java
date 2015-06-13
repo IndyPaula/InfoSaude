@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.util.Date;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ public class LoginDaoTest {
     private static EntityManagerProducer emp;
     private static EntityManager em;
     private static VacinadorDao daoVacinador;
+    private static ACSDao daoAcs;
     private static LoginDao daoLogin;
 
     @BeforeClass
@@ -54,10 +56,42 @@ public class LoginDaoTest {
             daoVacinador.getEntityManager().getTransaction().begin();
             daoVacinador.salvar(v);
             daoVacinador.getEntityManager().getTransaction().commit();
+            inserirAcs();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(LoginDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public static void inserirAcs(){
+        
+        ACS acs = new ACS();
+
+        acs.setNome("InfoSaude");
+        acs.setCpf("98745328712");
+        acs.setDataNascimento(new Date());
+        acs.setMatricula(958734983);
+        acs.setNumeroArea(2);
+        acs.setLogin("acsLogin");
+        acs.setCartaoSUS("127593754739264");
+        acs.setSenha(CriptografiaUtil.convertStringToMd5("123"));
+        acs.setCodigoEquipeINE("42987123");
+        acs.setAdm("s");
+        
+        
+        daoAcs = new ACSDao();
+        emp = new EntityManagerProducer("InfoSaudePUTest");
+        em = emp.create();
+        daoAcs.setEntityManager(em);
+
+        try {
+            daoAcs.getEntityManager().getTransaction().begin();
+            daoAcs.salvar(acs);
+            daoAcs.getEntityManager().getTransaction().commit();
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(LoginDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Test
@@ -85,11 +119,19 @@ public class LoginDaoTest {
     }
 
     @Test
-    public void tesUsuarioValidoSenhaValida() {
+    public void tesUsuarioValidoSenhaValidaVacinador() {
 
         Vacinador result = (Vacinador) daoLogin.efetuarLogin("InfoSaude","12345");
 
         assertEquals("111.233.324-23", result.getCpf());
+    }
+    
+    @Test
+    public void tesUsuarioValidoSenhaValidaAcs() {
+
+        ACS result = (ACS) daoLogin.efetuarLogin("acsLogin","123");
+
+        assertEquals("98745328712", result.getCpf());
     }
 
     @Test

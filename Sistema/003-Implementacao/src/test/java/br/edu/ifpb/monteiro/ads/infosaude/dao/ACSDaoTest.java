@@ -179,4 +179,76 @@ public class ACSDaoTest {
 
     }
 
+    @Test
+    public void testVerificaCampoUniqueCadastro() {
+
+        ACS acs = new ACS();
+        acs.setCartaoSUS("11153843234");
+        acs.setNome("Vanderlan Gomes da Silva");
+        acs.setCpf("60111473422");
+        acs.setNumeroArea(19);
+        acs.setMatricula(35611117);
+        acs.setLogin("ACS3");
+        acs.setCodigoEquipeINE("5414552");
+        acs.setSenha(CriptografiaUtil.convertStringToMd5("10042991"));
+        acs.setDataNascimento(new Date());
+        acs.setSexo(EnumGeneros.MASCULINO);
+
+        try {
+
+            daoACS.getEntityManager().getTransaction().begin();
+            daoACS.salvar(acs);
+            daoACS.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(ACSDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        boolean result;
+        try {
+
+            result = daoACS.verificaCampoUnique("cpf", "60111473422", null);
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(ACSDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+            result = false;
+        }
+        assertEquals(result, false);
+    }
+
+    @Test
+    public void testVerificaCampoUniqueEdicao() {
+
+        ACS acs = new ACS();
+        acs.setCartaoSUS("11153843231");
+        acs.setNome("Vanderlan Gomes da Silva");
+        acs.setCpf("60111473421");
+        acs.setNumeroArea(19);
+        acs.setMatricula(35611111);
+        acs.setLogin("ACS4");
+        acs.setCodigoEquipeINE("5414559");
+        acs.setSenha(CriptografiaUtil.convertStringToMd5("10042991"));
+        acs.setDataNascimento(new Date());
+        acs.setSexo(EnumGeneros.MASCULINO);
+
+        try {
+
+            daoACS.getEntityManager().getTransaction().begin();
+            daoACS.salvar(acs);
+            daoACS.getEntityManager().getTransaction().commit();
+
+        } catch (DaoExcecoes ex) {
+            Logger.getLogger(ACSDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ACS result;
+        boolean resultado = false;
+        try {
+
+            result = daoACS.buscarPorCampo("cpf", "60111473421");
+            resultado = daoACS.verificaCampoUnique("cpf", "60111473421", result.getId());
+
+        } catch (DaoExcecoes ex) {
+            resultado = false;
+            Logger.getLogger(ACSDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

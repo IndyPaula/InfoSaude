@@ -40,10 +40,6 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
         this.entity = entity;
     }
 
-    public Class<T> getClassePersistente() {
-        return entity;
-    }
-
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -71,8 +67,9 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        T entityLoc = entityManager.find(this.entity, id);
-        return entityLoc;
+        
+        return entityManager.find(this.entity, id);
+        
     }
 
     @Override
@@ -90,15 +87,11 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
             createQuery.where(predicate);
 
-            T resultado = entityManager.createQuery(createQuery).getSingleResult();
-
-            return resultado;
+            return entityManager.createQuery(createQuery).getSingleResult();
 
         } catch (NoResultException ex) {
             Logger.getLogger(GenericoDao.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (Exception e) {
-            throw new DaoExcecoes("Informação não encontrada"+e, e);
+            throw new DaoExcecoes("Informação não encontrada ");
         }
     }
 
@@ -116,12 +109,11 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
             createQuery.where(predicate);
 
-            List<T> resultado = entityManager.createQuery(createQuery).getResultList();
+            return entityManager.createQuery(createQuery).getResultList();
 
-            return resultado;
-
-        } catch (Exception e) {
-            throw new DaoExcecoes("Informação não encontrada", e);
+        } catch (NoResultException e) {
+            Logger.getLogger(GenericoDao.class.getName()).log(Level.SEVERE, null, e);
+            throw new DaoExcecoes("Informação não encontrada");
         }
     }
 

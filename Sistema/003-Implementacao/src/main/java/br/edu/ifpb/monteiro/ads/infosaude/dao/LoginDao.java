@@ -33,13 +33,13 @@ public class LoginDao extends GenericoDao<Funcionario> implements LoginDaoIF {
                     + "login =  '" + login + "' AND f.senha = '"
                     + CriptografiaUtil.convertStringToMd5(senha) + "' AND f.adm = 's' ", Vacinador.class);
 
-            if (queryAcs.getResultList().size() > 0) {
+            if (!queryAcs.getResultList().isEmpty()) {
                 
                 return (ACS) queryAcs.getResultList().get(0);
 
             }
 
-            if (queryVacinador.getResultList().size() > 0) {
+            if (!queryVacinador.getResultList().isEmpty()) {
 
                 return (Vacinador) queryVacinador.getResultList().get(0);
             

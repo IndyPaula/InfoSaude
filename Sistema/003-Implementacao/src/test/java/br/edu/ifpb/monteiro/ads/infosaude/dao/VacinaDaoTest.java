@@ -51,21 +51,6 @@ public class VacinaDaoTest {
 
     }
 
-    @Test
-    public void cpfDuplicadoTest() {
-        ACS acs = new ACS();
-        
-        acs.setAdm("s");
-        acs.setNome("InfoSaude ACS");
-        acs.setDataNascimento(new Date());
-        acs.setCpf("10145493421");
-        acs.setLogin("info");
-        acs.setSenha(CriptografiaUtil.convertStringToMd5("123"));
-        acs.setNumeroArea(342);
-                
-        
-    }
-
     @AfterClass
     public static void removerTest() {
 
