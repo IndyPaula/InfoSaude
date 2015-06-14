@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.dao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 import org.junit.After;
+import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -162,13 +164,13 @@ public class PacienteDaoTest {
 
         int quantidade = 0;
         List<Paciente> pacientes;
-        
+
         try {
             pacientes = daoPaciente.buscarTodosPorCampo("nome", "Paciendew");
         } catch (DaoExcecoes ex) {
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
 
             pacientes = daoPaciente.buscarTodosPorCampo("nome", "Paciente");
@@ -240,5 +242,83 @@ public class PacienteDaoTest {
 
         }
         assertEquals(result, null);
+    }
+
+    @Test
+    public void testAtributos() {
+
+        Paciente p = new Paciente();
+        p.setCartaoSUS("534534534");
+        p.setNome("Vanderlan Gomes da Silva");
+        p.setCpf("10145473422");
+        p.setDataNascimento(new Date());
+        p.setNumeroProntuario(4234);
+        p.setDataCadastro(new Date());
+        p.setSexo(EnumGeneros.MASCULINO);
+        p.setRg("882134");
+        p.setId(Long.MAX_VALUE);
+        p.setNomeMae("Maria");
+        p.setNomePai("Jose");
+        p.setAltura(1.8);
+        p.setPesoNascer(3.4);
+        p.setNumero(23);
+        p.setCep("2134");
+        p.setCidade("Monteiro");
+        p.setBairro("Centro");
+        p.setEstado(EnumEstados.PB);
+        p.setOrgaoEmissor("SDS");
+        p.setUfOrgaoEmissor(EnumEstados.PB);
+        p.setEtnia(EnumEtnias.PARDO);
+        p.setLogradouro("Av. Principal");
+
+        Paciente p2 = new Paciente();
+        p2.setCartaoSUS("534534534");
+        p2.setNome("Vanderlan Gomes da Silva");
+        p2.setCpf("10145473422");
+        p2.setDataNascimento(new Date());
+        p2.setNumeroProntuario(4234);
+        p2.setDataCadastro(new Date());
+        p2.setSexo(EnumGeneros.MASCULINO);
+        p2.setRg("882134");
+        p2.setId(Long.MAX_VALUE);
+        p2.setNomeMae("Maria");
+        p2.setNomePai("Jose");
+        p2.setAltura(1.8);
+        p2.setPesoNascer(3.4);
+        p2.setNumero(23);
+        p2.setCep("2134");
+        p2.setCidade("Monteiro");
+        p2.setBairro("Centro");
+        p2.setEstado(EnumEstados.PB);
+        p2.setOrgaoEmissor("SDS");
+        p2.setUfOrgaoEmissor(EnumEstados.PB);
+        p2.setEtnia(EnumEtnias.PARDO);
+        p2.setLogradouro("Av. Principal");
+
+        double altura = p.getAltura() + p2.getAltura();
+        double pesoNascerSoma = p.getPesoNascer() + p2.getPesoNascer();
+
+        Assert.assertTrue(pesoNascerSoma == 6.8);
+        Assert.assertTrue(altura == 3.6);
+        Assert.assertTrue(altura == 3.6);
+        Assert.assertTrue(!p.equals(new Paciente()));
+
+        assertEquals(p2.getCartaoSUS(), "534534534");
+        assertEquals(p2.getSexo(), EnumGeneros.MASCULINO);
+        assertEquals(p2.getCartaoSUS(), "534534534");
+        assertEquals(p2.getNomeMae(), "Maria");
+        assertEquals(p2.getNomePai(), "Jose");
+        assertEquals(p2.getNumero(), p2.getNumero());
+        assertEquals(p2.getCep(), "2134");
+        assertEquals(p2.getCidade(), "Monteiro");
+        assertEquals(p2.getBairro(), "Centro");
+        assertEquals(p2.getLogradouro(), p.getLogradouro());
+        assertEquals(p2.getRg(), p.getRg());
+        assertEquals(p2.getEstado(), EnumEstados.PB);
+        assertEquals(p2.getOrgaoEmissor(), "SDS");
+        assertEquals(p2.getUfOrgaoEmissor(), EnumEstados.PB);
+        assertEquals(p2.getEtnia(), EnumEtnias.PARDO);
+
+        assertEquals(p, p2);
     }
 }
