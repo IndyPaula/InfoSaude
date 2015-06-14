@@ -30,7 +30,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 11)
     private String cpf;
 
-    @Column(name = "cartao_sus", nullable = false, length = 15, unique = true)
+    @Column(name = "cartaosus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
 
     @OneToOne(cascade = CascadeType.ALL)

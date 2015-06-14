@@ -42,12 +42,12 @@ public class ACSService extends GenericoService<ACS> implements ACSServiceIF, Se
             if (id == null) {
                 acs = dao.buscarPorCampo(campo, valor);
                 if (acs != null) {
-                    throw new DaoExcecoes("O "+campo+" informado pertence a outra pessoa, por favor informe outro.");
+                    throw new DaoExcecoes("O "+campo.toUpperCase()+" informado pertence a outra pessoa, por favor informe outro.");
                 }
             } else {
                 acs = dao.buscarPorCampo(campo, valor);
                 if (acs != null && id != acs.getId()) {
-                    throw new DaoExcecoes("O "+campo+" informado pertence a outra pessoa, por favor informe outro.");
+                    throw new DaoExcecoes("O "+campo.toUpperCase()+" informado pertence a outra pessoa, por favor informe outro.");
                 }
                 return true;
             }

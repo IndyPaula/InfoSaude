@@ -11,6 +11,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
  */
 public interface PacienteServiceIF extends ServiceIF<Paciente> {
 
-    public boolean cpfExiste(Long idAuxiliar, String cpf) throws ServiceExcecoes, DaoExcecoes;
+    public boolean verificaCampoUnique(String campo, Object valor, Long id) throws ServiceExcecoes, DaoExcecoes;
 
 }

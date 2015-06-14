@@ -20,7 +20,7 @@ public class Paciente extends Pessoa implements Serializable {
     @Column(name = "numero_prontuario", nullable = false, unique = true)
     private Integer numeroProntuario;
 
-    @Column(name = "pessoa_cartao_sus", nullable = false, length = 15, unique = true)
+    @Column(name = "cartaosus", nullable = false, length = 15, unique = true)
     private String cartaoSUS;
 
     @Temporal(TemporalType.DATE)

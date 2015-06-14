@@ -91,8 +91,8 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
         } catch (NoResultException ex) {
             Logger.getLogger(GenericoDao.class.getName()).log(Level.SEVERE, null, ex);
-            throw new DaoExcecoes("Informação não encontrada ");
         }
+        return null;
     }
 
     @Override
@@ -113,8 +113,8 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
         } catch (NoResultException e) {
             Logger.getLogger(GenericoDao.class.getName()).log(Level.SEVERE, null, e);
-            throw new DaoExcecoes("Informação não encontrada");
         }
+        return null;
     }
 
     @Override

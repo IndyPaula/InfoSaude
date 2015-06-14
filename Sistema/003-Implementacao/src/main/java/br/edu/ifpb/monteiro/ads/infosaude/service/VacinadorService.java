@@ -35,7 +35,7 @@ public class VacinadorService extends GenericoService<Vacinador> implements Vaci
     @Override
     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws ServiceExcecoes, DaoExcecoes {
 
-        if (campo == "coren") {
+        if ("coren".equals(campo)) {
             return verificaCorenUnique(valor, id);
         }else{
             

@@ -49,8 +49,8 @@ public class PacienteBean {
     public String salvar() {
         try {
 
-            pacienteService.cpfExiste(null, paciente.getCpf());
-
+            pacienteService.verificaCampoUnique("cpf", paciente.getCpf(),null);
+            pacienteService.verificaCampoUnique("cartaosus", paciente.getCartaoSUS(), null);
             pacienteService.salvar(paciente);
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 
@@ -93,10 +93,9 @@ public class PacienteBean {
     public String update() throws BeanExcecao {
 
         try {
-            Long id = pacienteService.buscarPorCampo("cpf", paciente.getCpf()).getId();
 
-            pacienteService.cpfExiste(id, paciente.getCpf());
-            paciente.setId(id);
+            pacienteService.verificaCampoUnique("cpf", paciente.getCpf(), paciente.getId());
+            pacienteService.verificaCampoUnique("cartaosus", paciente.getCpf(), paciente.getId());
             pacienteService.atualizar(paciente);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
             return "buscar_usuario_ubs.xhtml";
@@ -126,7 +125,7 @@ public class PacienteBean {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
             return null;
         } else {
-            return "editar_usuario_ubs.xhtml";
+            return "editar_usuario_ubs.xhtml?faces-redirect=true";
         }
 
     }

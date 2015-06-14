@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -32,37 +33,27 @@ public class PacienteService extends GenericoService<Paciente> implements Pacien
     }
 
     @Override
-    public boolean cpfExiste(Long id, String cpf) throws ServiceExcecoes, DaoExcecoes {
+    public boolean verificaCampoUnique(String campo, Object valor, Long id) throws ServiceExcecoes, DaoExcecoes {
 
-        Paciente paciente = null;
-        if (id == null) {
-            paciente = dao.buscarPorCampo("cpf", cpf);
+        try {
 
-            if (paciente != null) {
+            Paciente vacinador = null;
 
-                throw new DaoExcecoes("O CPF informado pertence a " + paciente.getNome() + ", por favor informe outro.");
+            if (id == null) {
+                vacinador = dao.buscarPorCampo(campo, valor);
+                if (vacinador != null) {
+                    throw new DaoExcecoes("O "+campo.toUpperCase()+" informado pertence a outra pessoa, por favor informe outro.");
+                }
+            } else {
+                vacinador = dao.buscarPorCampo(campo, valor);
+                if (vacinador != null && id != vacinador.getId()) {
+                    throw new DaoExcecoes("O "+campo.toUpperCase()+" informado pertence a outra pessoa, por favor informe outro.");
+                }
+                return true;
             }
-        } else {
-            
-            paciente = dao.buscarPorCampo("cpf", cpf);
-            
-            if (paciente != null && id != paciente.getId()) {
-
-                throw new DaoExcecoes("O CPF informado pertence a " + paciente.getNome() + ", por favor informe outro.");
-            }
-
-            return true;
+        } catch (NoResultException ex) {
+            Logger.getLogger(VacinadorService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
-    }
-    @Override
-    public void remover(Paciente p){
-        
-        try {
-            dao.remover(p);
-        } catch (DaoExcecoes ex) {
-            Logger.getLogger(PacienteService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
     }
 }

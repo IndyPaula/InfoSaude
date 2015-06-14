@@ -16,6 +16,7 @@
                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
                     <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde"
                                 style="width: 90%; text-align: center; margin-top: 80px; height: 600px;">
+                        <h:inputHidden value="#{pacienteBean.paciente.id}"  />
                         <h:panelGrid columns="2"  style="text-align: left">
 
                             <p:outputLabel value="Nome: " for="txtNome"/>
