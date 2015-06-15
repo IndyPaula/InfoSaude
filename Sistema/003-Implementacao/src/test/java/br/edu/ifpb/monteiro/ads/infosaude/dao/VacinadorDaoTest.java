@@ -54,7 +54,7 @@ public class VacinadorDaoTest {
         v.setMatricula(12432);
         v.setCoren(8748);
         v.setLogin("Joelton");
-        v.setCartaoSUS("123435436546");
+        v.setCartaosus("123435436546");
         v.setSenha("456");
         v.setCodigoEquipeINE("487");
         v.setNomeMae("Maria");
@@ -152,7 +152,7 @@ public class VacinadorDaoTest {
         v.setDataNascimento(new Date());
         v.setMatricula(7777);
         v.setCoren(102030);
-        v.setCartaoSUS("123456789987654");
+        v.setCartaosus("123456789987654");
         v.setLogin("Teste");
         v.setSenha("fjosijfew9urj3");
         v.setCodigoEquipeINE("41343234");
@@ -172,7 +172,7 @@ public class VacinadorDaoTest {
     public void testVerificaCampoUniqueCadastro() {
 
         Vacinador acs = new Vacinador();
-        acs.setCartaoSUS("11153822234");
+        acs.setCartaosus("11153822234");
         acs.setNome("Vanderlan Gomes da Silva");
         acs.setCpf("60111223422");
         acs.setCoren(16439);
@@ -208,7 +208,7 @@ public class VacinadorDaoTest {
     public void testVerificaCampoUniqueEdicao() throws DaoExcecoes {
 
         Vacinador vac = new Vacinador();
-        vac.setCartaoSUS("11153822231");
+        vac.setCartaosus("11153822231");
         vac.setNome("Vanderlan Gomes da Silva");
         vac.setCpf("60111223421");
         vac.setCoren(59793);

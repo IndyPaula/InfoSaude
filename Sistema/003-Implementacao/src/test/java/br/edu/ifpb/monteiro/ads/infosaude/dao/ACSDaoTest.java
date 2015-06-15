@@ -52,7 +52,7 @@ public class ACSDaoTest {
     public void testACSValido() {
 
         ACS acs = new ACS();
-        acs.setCartaoSUS("53453843234");
+        acs.setCartaosus("53453843234");
         acs.setNome("Vanderlan Gomes da Silva");
         acs.setCpf("60945473422");
         acs.setNumeroArea(329);
@@ -86,7 +86,7 @@ public class ACSDaoTest {
     @Test(expected = ConstraintViolationException.class)
     public void testCpfNull() {
         ACS acs = new ACS();
-        acs.setCartaoSUS("534534534");
+        acs.setCartaosus("534534534");
         acs.setNome("Fulano Alves");
         acs.setDataNascimento(new Date());
         acs.setSexo(EnumGeneros.MASCULINO);
@@ -111,7 +111,7 @@ public class ACSDaoTest {
     public void testEdicao() {
 
         ACS acs = new ACS();
-        acs.setCartaoSUS("99894325252");
+        acs.setCartaosus("99894325252");
         acs.setNome("Ze Agente");
         acs.setCpf("43254357631");
         acs.setDataNascimento(new Date());
@@ -149,7 +149,7 @@ public class ACSDaoTest {
     public void testRemocao() {
 
         ACS acs = new ACS();
-        acs.setCartaoSUS("756382915734027");
+        acs.setCartaosus("756382915734027");
         acs.setNome("Maria Agente");
         acs.setCpf("38563710983");
         acs.setDataNascimento(new Date());
@@ -183,7 +183,7 @@ public class ACSDaoTest {
     public void testVerificaCampoUniqueCadastro() {
 
         ACS acs = new ACS();
-        acs.setCartaoSUS("11153843234");
+        acs.setCartaosus("11153843234");
         acs.setNome("Vanderlan Gomes da Silva");
         acs.setCpf("60111473422");
         acs.setNumeroArea(19);
@@ -219,7 +219,7 @@ public class ACSDaoTest {
     public void testVerificaCampoUniqueEdicao() {
 
         ACS acs = new ACS();
-        acs.setCartaoSUS("11153843231");
+        acs.setCartaosus("11153843231");
         acs.setNome("Vanderlan Gomes da Silva");
         acs.setCpf("60111473421");
         acs.setNumeroArea(19);

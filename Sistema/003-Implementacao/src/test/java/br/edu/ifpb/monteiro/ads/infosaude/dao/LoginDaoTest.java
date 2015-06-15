@@ -47,7 +47,7 @@ public class LoginDaoTest {
         v.setMatricula(432432);
         v.setCoren(423423);
         v.setLogin("InfoSaude");
-        v.setCartaoSUS("987623433223443");
+        v.setCartaosus("987623433223443");
         v.setSenha(CriptografiaUtil.convertStringToMd5("12345"));
         v.setCodigoEquipeINE("4234");
         v.setAdm("s");
@@ -73,7 +73,7 @@ public class LoginDaoTest {
         acs.setMatricula(958734983);
         acs.setNumeroArea(2);
         acs.setLogin("acsLogin");
-        acs.setCartaoSUS("127593754739264");
+        acs.setCartaosus("127593754739264");
         acs.setSenha(CriptografiaUtil.convertStringToMd5("123"));
         acs.setCodigoEquipeINE("42987123");
         acs.setAdm("s");

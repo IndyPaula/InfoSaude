@@ -46,7 +46,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
         try {
             acsService.verificaCampoUnique("cpf", acs.getCpf(), null);
             acsService.verificaCampoUnique("matricula", + acs.getMatricula(), null);
-            acsService.verificaCampoUnique("cartaosus",  acs.getCartaoSUS(), null);
+            acsService.verificaCampoUnique("cartaosus",  acs.getCartaosus(), null);
             acsService.verificaCampoUnique("login", "" + acs.getLogin(), null);
 
             acs.setSenha(CriptografiaUtil.convertStringToMd5(acs.getSenha()));
@@ -107,7 +107,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
 
                 acsService.verificaCampoUnique("cpf", acs.getCpf(), acs.getId());
                 acsService.verificaCampoUnique("matricula",  + acs.getMatricula(), acs.getId());
-                acsService.verificaCampoUnique("cartaosus", acs.getCartaoSUS(), acs.getId());
+                acsService.verificaCampoUnique("cartaosus", acs.getCartaosus(), acs.getId());
                 acsService.verificaCampoUnique("login",  acs.getLogin(), acs.getId());
 
                 acsService.atualizar(acs);

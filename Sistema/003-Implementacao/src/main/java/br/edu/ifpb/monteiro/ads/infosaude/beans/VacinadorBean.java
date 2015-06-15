@@ -47,7 +47,7 @@ public class VacinadorBean extends FuncionarioBeanGenerico implements Serializab
             vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), null);
             vacinadorService.verificaCampoUnique("coren", + vacinador.getCoren(), null);
             vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), null);
-            vacinadorService.verificaCampoUnique("cartaosus", "" + vacinador.getCartaoSUS(), null);
+            vacinadorService.verificaCampoUnique("cartaosus", "" + vacinador.getCartaosus(), null);
             vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), null);
 
             vacinador.setSenha(CriptografiaUtil.convertStringToMd5(vacinador.getSenha()));
@@ -111,7 +111,7 @@ public class VacinadorBean extends FuncionarioBeanGenerico implements Serializab
                 vacinadorService.verificaCampoUnique("cpf", vacinador.getCpf(), id);
                 vacinadorService.verificaCampoUnique("coren", "" + vacinador.getCoren(), id);
                 vacinadorService.verificaCampoUnique("matricula", "" + vacinador.getMatricula(), id);
-                vacinadorService.verificaCampoUnique("cartaosus", "" + vacinador.getCartaoSUS(), id);
+                vacinadorService.verificaCampoUnique("cartaosus", "" + vacinador.getCartaosus(), id);
                 vacinadorService.verificaCampoUnique("login", "" + vacinador.getLogin(), id);
 
                 vacinadorService.atualizar(vacinador);
