@@ -251,9 +251,9 @@ public abstract class Pessoa implements Identificavel<Pessoa>, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        return hash;
+        int pessoaHash = 3;
+        pessoaHash = 53 * pessoaHash + Objects.hashCode(this.id);
+        return pessoaHash;
     }
 
     @Override

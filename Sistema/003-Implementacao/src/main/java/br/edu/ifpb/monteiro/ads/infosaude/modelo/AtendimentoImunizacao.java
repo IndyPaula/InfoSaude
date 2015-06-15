@@ -127,9 +127,9 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        return hash;
+        int codigoHash = 31;
+        codigoHash = 41 * codigoHash + Objects.hashCode(this.id);
+        return codigoHash;
     }
 
     @Override
