@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.infosaude.dao.util;
+package br.edu.ifpb.monteiro.ads.infosaude.beans.util;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,6 +11,10 @@ import javax.faces.context.FacesContext;
  * @author Vanderlan Gomes
  */
 public class JsfUtil {
+    
+    private JsfUtil(){
+        
+    }
 
     public static void addSuccessMessage(String message) {
         FacesContext.getCurrentInstance().addMessage(null,

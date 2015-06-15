@@ -26,6 +26,9 @@ public class LoginFilter implements Filter {
 
     @Override
     public void destroy() {
+        
+        // Método não implementado por falta de necessidade
+        
     }
 
     @Override
@@ -45,5 +48,7 @@ public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
+         // Método não implementado por falta de necessidade
+        
     }
 }
