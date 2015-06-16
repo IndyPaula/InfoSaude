@@ -165,7 +165,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
             return null;
         } else {
-           return "editar_usuario_ubs.xhtml";
+           return "editar_acs.xhtml";
         }
         
     }
