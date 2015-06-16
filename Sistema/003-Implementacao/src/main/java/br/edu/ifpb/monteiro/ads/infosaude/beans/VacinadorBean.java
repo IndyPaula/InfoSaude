@@ -2,7 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinadorServiceIF;

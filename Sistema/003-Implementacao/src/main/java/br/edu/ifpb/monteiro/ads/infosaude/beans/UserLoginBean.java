@@ -1,6 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.LoginServiceIF;
 import java.io.Serializable;

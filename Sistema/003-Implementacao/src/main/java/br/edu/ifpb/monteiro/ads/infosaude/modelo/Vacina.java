@@ -61,7 +61,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     @Column(name = "data_vencimento", nullable = false)
     private Date dataVencimento;
 
-    @Column(name = "lote", nullable = false, length = 20, unique = true)
+    @Column(name = "lote", nullable = false, length = 20)
     private String lote;
 
     @Column(name = "loboratorio", nullable = false, length = 45)
@@ -167,9 +167,9 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.id);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        return prime * result + ((id == null) ? 0 : id.hashCode());
     }
 
     @Override

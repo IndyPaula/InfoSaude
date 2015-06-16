@@ -4,6 +4,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,9 +68,9 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public T consultarPorId(Long id) throws DaoExcecoes {
-        
+
         return entityManager.find(this.entity, id);
-        
+
     }
 
     @Override
@@ -97,24 +98,19 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public List<T> buscarTodosPorCampo(String campo, Object valor) throws DaoExcecoes {
-        try {
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
-            CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(entity);
+        CriteriaQuery<T> createQuery = criteriaBuilder.createQuery(entity);
 
-            Root<T> root = createQuery.from(entity);
+        Root<T> root = createQuery.from(entity);
 
-            Predicate predicate = criteriaBuilder.conjunction();
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.<T>get(campo), valor));
+        Predicate predicate = criteriaBuilder.conjunction();
+        predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.<T>get(campo), valor));
 
-            createQuery.where(predicate);
+        createQuery.where(predicate);
 
-            return entityManager.createQuery(createQuery).getResultList();
+        return entityManager.createQuery(createQuery).getResultList();
 
-        } catch (NoResultException e) {
-            Logger.getLogger(GenericoDao.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return null;
     }
 
     @Override
@@ -122,7 +118,5 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
         CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entity));
         return entityManager.createQuery(cq).getResultList();
-
     }
-
 }

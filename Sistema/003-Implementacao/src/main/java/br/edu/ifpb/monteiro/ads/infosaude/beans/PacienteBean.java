@@ -2,7 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEtnias;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumGeneros;
@@ -10,6 +10,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Paciente;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.PacienteServiceIF;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,6 +36,7 @@ public class PacienteBean {
 
     private List<Paciente> pacientesFilter;
 
+    private static final String PAGINA_LISTAR_PACIENTES = "buscar_usuario_ubs.xhtml";
     public PacienteBean() {
 
     }
@@ -61,7 +63,7 @@ public class PacienteBean {
             return null;
 
         }
-        return "buscar_usuario_ubs.xhtml";
+        return PAGINA_LISTAR_PACIENTES;
     }
 
     public List<Paciente> getPacientes() {
@@ -74,20 +76,21 @@ public class PacienteBean {
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return Collections.emptyList();
     }
 
-    public void remover() {
+    public String remover() {
 
         try {
             pacienteService.remover(pacienteSelected);
             JsfUtil.addSuccessMessage("Usuário da UBS removido com sucesso");
+            return PAGINA_LISTAR_PACIENTES;
 
         } catch (ServiceExcecoes ex) {
             JsfUtil.addErrorMessage("Erro ao tentar remover Usuário da UBS");
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return null;
     }
 
     public String update() throws BeanExcecao {
@@ -98,7 +101,7 @@ public class PacienteBean {
             pacienteService.verificaCampoUnique("cartaosus", paciente.getCpf(), paciente.getId());
             pacienteService.atualizar(paciente);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
-            return "buscar_usuario_ubs.xhtml";
+            return PAGINA_LISTAR_PACIENTES;
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
 
@@ -116,7 +119,7 @@ public class PacienteBean {
         } else {
             remover();
         }
-        return "buscar_usuario_ubs.xhtml";
+        return PAGINA_LISTAR_PACIENTES;
     }
 
     public String selecinaEditar() {

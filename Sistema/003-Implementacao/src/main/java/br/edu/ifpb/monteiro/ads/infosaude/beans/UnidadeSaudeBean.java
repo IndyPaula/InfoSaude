@@ -1,6 +1,6 @@
 package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumEstados;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;

@@ -7,6 +7,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,6 +99,6 @@ public abstract class GenericoService<T extends Identificavel> implements Serial
         } catch (DaoExcecoes ex) {
             Logger.getLogger(GenericoService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return Collections.emptyList();
     }
 }

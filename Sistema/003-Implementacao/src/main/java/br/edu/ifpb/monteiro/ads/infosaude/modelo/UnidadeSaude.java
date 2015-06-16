@@ -140,9 +140,10 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.id);
-        return hash;
+        final int hash = 31;
+        int result = 1;
+        result = hash * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
@@ -150,11 +151,18 @@ public class UnidadeSaude implements Identificavel<UnidadeSaude>, Serializable {
         if (obj == null) {
             return false;
         }
+        if (this == obj) {
+            return true;
+        }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final UnidadeSaude other = (UnidadeSaude) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        UnidadeSaude other = (UnidadeSaude) obj;
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
             return false;
         }
         return true;

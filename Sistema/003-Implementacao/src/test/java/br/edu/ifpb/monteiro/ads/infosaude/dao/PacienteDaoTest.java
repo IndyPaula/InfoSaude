@@ -53,19 +53,19 @@ public class PacienteDaoTest {
     @Test
     public void testPacienteValido() {
 
-        Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("534534534");
-        paciente.setNome("Vanderlan Gomes da Silva");
-        paciente.setCpf("10145473422");
-        paciente.setDataNascimento(new Date());
-        paciente.setNumeroProntuario(4234);
-        paciente.setDataCadastro(new Date());
-        paciente.setSexo(EnumGeneros.MASCULINO);
+        Paciente pac2 = new Paciente();
+        pac2.setCartaoSUS("534534534");
+        pac2.setNome("Vanderlan Gomes da Silva");
+        pac2.setCpf("10145473422");
+        pac2.setDataNascimento(new Date());
+        pac2.setNumeroProntuario(4234);
+        pac2.setDataCadastro(new Date());
+        pac2.setSexo(EnumGeneros.MASCULINO);
 
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
-            daoPaciente.salvar(paciente);
+            daoPaciente.salvar(pac2);
             daoPaciente.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -79,23 +79,23 @@ public class PacienteDaoTest {
         } catch (DaoExcecoes ex) {
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        assertEquals(paciente.getId(), result.getId());
+        assertEquals(pac2.getId(), result.getId());
     }
 
     @Test(expected = RollbackException.class)
     public void testCpfNull() {
-        Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("534534534");
-        paciente.setNome("Fulano Alves");
-        paciente.setDataNascimento(new Date());
-        paciente.setNumeroProntuario(4234);
-        paciente.setDataCadastro(new Date());
-        paciente.setSexo(EnumGeneros.MASCULINO);
+        Paciente pacienteUbs = new Paciente();
+        pacienteUbs.setCartaoSUS("534534534");
+        pacienteUbs.setNome("Fulano Alves");
+        pacienteUbs.setDataNascimento(new Date());
+        pacienteUbs.setNumeroProntuario(4234);
+        pacienteUbs.setDataCadastro(new Date());
+        pacienteUbs.setSexo(EnumGeneros.MASCULINO);
 
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
-            daoPaciente.salvar(paciente);
+            daoPaciente.salvar(pacienteUbs);
             daoPaciente.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -108,21 +108,21 @@ public class PacienteDaoTest {
     @Test
     public void testEdicao() {
 
-        Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("99994325252");
-        paciente.setNome("Vanderlan Gomes");
-        paciente.setCpf("432.543.576-31");
-        paciente.setDataNascimento(new Date());
-        paciente.setNumeroProntuario(55655555);
-        paciente.setDataCadastro(new Date());
-        paciente.setSexo(EnumGeneros.MASCULINO);
-        paciente.setEstado(EnumEstados.PE);
+        Paciente pac = new Paciente();
+        pac.setCartaoSUS("99994325252");
+        pac.setNome("Vanderlan Gomes");
+        pac.setCpf("432.543.576-31");
+        pac.setDataNascimento(new Date());
+        pac.setNumeroProntuario(55655555);
+        pac.setDataCadastro(new Date());
+        pac.setSexo(EnumGeneros.MASCULINO);
+        pac.setEstado(EnumEstados.PE);
 
         Paciente result = null;
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
-            daoPaciente.salvar(paciente);
+            daoPaciente.salvar(pac);
 
             Paciente paciente2 = daoPaciente.buscarPorCampo("cpf", "432.543.576-31");
             paciente2.setNome("Vanderlan Gomes da Silva");
@@ -143,19 +143,19 @@ public class PacienteDaoTest {
     @Test
     public void testBuscarTodosPorCampo() {
 
-        Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("77753453490");
-        paciente.setNome("Paciente");
-        paciente.setCpf("90145473422");
-        paciente.setDataNascimento(new Date());
-        paciente.setNumeroProntuario(42314);
-        paciente.setDataCadastro(new Date());
-        paciente.setSexo(EnumGeneros.MASCULINO);
+        Paciente paci = new Paciente();
+        paci.setCartaoSUS("77753453490");
+        paci.setNome("Paciente");
+        paci.setCpf("90145473422");
+        paci.setDataNascimento(new Date());
+        paci.setNumeroProntuario(42314);
+        paci.setDataCadastro(new Date());
+        paci.setSexo(EnumGeneros.MASCULINO);
 
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
-            daoPaciente.salvar(paciente);
+            daoPaciente.salvar(paci);
             daoPaciente.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -192,7 +192,7 @@ public class PacienteDaoTest {
 
             List<Paciente> pacientes = daoPaciente.buscarTudo();
 
-            if (pacientes.size() > 0) {
+            if (!pacientes.isEmpty()) {
                 validation = true;
             }
 
@@ -206,19 +206,19 @@ public class PacienteDaoTest {
     @Test
     public void testRemocao() {
 
-        Paciente paciente = new Paciente();
-        paciente.setCartaoSUS("77743383490");
-        paciente.setNome("Paciente");
-        paciente.setCpf("87745473422");
-        paciente.setDataNascimento(new Date());
-        paciente.setNumeroProntuario(4999994);
-        paciente.setDataCadastro(new Date());
-        paciente.setSexo(EnumGeneros.MASCULINO);
+        Paciente pacienteTestRemocao = new Paciente();
+        pacienteTestRemocao.setCartaoSUS("77743383490");
+        pacienteTestRemocao.setNome("Paciente");
+        pacienteTestRemocao.setCpf("87745473422");
+        pacienteTestRemocao.setDataNascimento(new Date());
+        pacienteTestRemocao.setNumeroProntuario(4999994);
+        pacienteTestRemocao.setDataCadastro(new Date());
+        pacienteTestRemocao.setSexo(EnumGeneros.MASCULINO);
 
         try {
 
             daoPaciente.getEntityManager().getTransaction().begin();
-            daoPaciente.salvar(paciente);
+            daoPaciente.salvar(pacienteTestRemocao);
             daoPaciente.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -295,12 +295,6 @@ public class PacienteDaoTest {
         p2.setEtnia(EnumEtnias.PARDO);
         p2.setLogradouro("Av. Principal");
 
-        double altura = p.getAltura() + p2.getAltura();
-        double pesoNascerSoma = p.getPesoNascer() + p2.getPesoNascer();
-
-        Assert.assertTrue(pesoNascerSoma == 6.8);
-        Assert.assertTrue(altura == 3.6);
-        Assert.assertTrue(altura == 3.6);
         Assert.assertTrue(!p.equals(new Paciente()));
 
         assertEquals(p2.getCartaoSUS(), "534534534");

@@ -1,10 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import java.util.Date;
 import java.util.logging.Level;
@@ -66,23 +64,23 @@ public class VacinaDaoTest {
     @Test
     public void salvarTest() {
 
-        Vacina vacina = new Vacina();
-        vacina.setContraIndicacoes("123");
-        vacina.setDataFabricacao(new Date());
-        vacina.setDataVencimento(new Date());
-        vacina.setId(Long.MIN_VALUE);
-        vacina.setInstrucaoAdministracao("123");
-        vacina.setInstrucaoArmazenamento("123");
-        vacina.setLaboratorio("123");
-        vacina.setLote("123");
-        vacina.setNome("123");
-        vacina.setQuantidadeDoses(3);
-        vacina.setReacoesAdversas("123");
-        vacina.setViaAdministracao(EnumViaAdministracao.ORAL);
+        Vacina vacina1 = new Vacina();
+        vacina1.setContraIndicacoes("123");
+        vacina1.setDataFabricacao(new Date());
+        vacina1.setDataVencimento(new Date());
+        vacina1.setId(Long.MIN_VALUE);
+        vacina1.setInstrucaoAdministracao("123");
+        vacina1.setInstrucaoArmazenamento("123");
+        vacina1.setLaboratorio("123");
+        vacina1.setLote("123");
+        vacina1.setNome("123");
+        vacina1.setQuantidadeDoses(3);
+        vacina1.setReacoesAdversas("123");
+        vacina1.setViaAdministracao(EnumViaAdministracao.ORAL);
 
         try {
             vacinaDao.getEntityManager().getTransaction().begin();
-            vacinaDao.salvar(vacina);
+            vacinaDao.salvar(vacina1);
             vacinaDao.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinaDaoTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +95,7 @@ public class VacinaDaoTest {
             Logger.getLogger(VacinaDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        assertEquals(vacina.getId(), result.getId());
+        assertEquals(vacina1.getId(), result.getId());
 
     }
 
@@ -154,30 +152,30 @@ public class VacinaDaoTest {
 
     @Test
     public void atualizarTest() {
-        Vacina vacina = new Vacina();
-        vacina.setContraIndicacoes("1235");
-        vacina.setDataFabricacao(new Date());
-        vacina.setDataVencimento(new Date());
-        vacina.setId(4567895L);
-        vacina.setInstrucaoAdministracao("1235");
-        vacina.setInstrucaoArmazenamento("1235");
-        vacina.setLaboratorio("1235");
-        vacina.setLote("1235");
-        vacina.setNome("1235");
-        vacina.setQuantidadeDoses(35);
-        vacina.setReacoesAdversas("1235");
-        vacina.setViaAdministracao(EnumViaAdministracao.ORAL);
+        Vacina vacina3 = new Vacina();
+        vacina3.setContraIndicacoes("1235");
+        vacina3.setDataFabricacao(new Date());
+        vacina3.setDataVencimento(new Date());
+        vacina3.setId(4567895L);
+        vacina3.setInstrucaoAdministracao("1235");
+        vacina3.setInstrucaoArmazenamento("1235");
+        vacina3.setLaboratorio("1235");
+        vacina3.setLote("1235");
+        vacina3.setNome("1235");
+        vacina3.setQuantidadeDoses(35);
+        vacina3.setReacoesAdversas("1235");
+        vacina3.setViaAdministracao(EnumViaAdministracao.ORAL);
 
         Vacina test = null;
 
         try {
             vacinaDao.getEntityManager().getTransaction().begin();
-            vacinaDao.salvar(vacina);
+            vacinaDao.salvar(vacina3);
 
-            Vacina vacina2 = vacinaDao.consultarPorId(4567895L);
-            vacina2.setNome("1234");
+            Vacina vacina4 = vacinaDao.consultarPorId(4567895L);
+            vacina4.setNome("1234");
 
-            vacinaDao.atualizar(vacina2);
+            vacinaDao.atualizar(vacina4);
             vacinaDao.getEntityManager().getTransaction().commit();
 
             test = vacinaDao.consultarPorId(4567895L);

@@ -2,7 +2,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.CriptografiaUtil;
-import br.edu.ifpb.monteiro.ads.infosaude.dao.util.JsfUtil;
+import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ACSServiceIF;
@@ -35,6 +35,8 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
 
     private transient List<ACS> agentesFilter;
 
+    private static final String PAGINA_LISTA_ACS = "buscar_acs.xhtml";
+    
     @PostConstruct
     public void init() {
 
@@ -53,7 +55,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
             acsService.salvar(acs);
             JsfUtil.addSuccessMessage("Agente comunitário de Saúde cadastrado com sucesso");
 
-            return "buscar_acs.xhtml";
+            return PAGINA_LISTA_ACS;
 
         } catch (ServiceExcecoes | DaoExcecoes ex) {
             Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,7 +92,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
 
             JsfUtil.addSuccessMessage("Agente comunitário de Saúde removido com sucesso");
 
-            return "buscar_acs.xhtml";
+            return PAGINA_LISTA_ACS;
 
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(AcsBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,7 +114,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
 
                 acsService.atualizar(acs);
                 JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
-                return "buscar_acs.xhtml";
+                return PAGINA_LISTA_ACS;
             } else {
                 JsfUtil.addErrorMessage("A senha informada não corresponde a senha atual");
             }
@@ -154,7 +156,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
         } else {
             remover();
         }
-        return "buscar_acs.xhtml";
+        return PAGINA_LISTA_ACS;
     }
 
     public String selecinaEditar() {
