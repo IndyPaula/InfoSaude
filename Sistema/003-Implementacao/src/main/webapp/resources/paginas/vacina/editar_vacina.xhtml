@@ -29,14 +29,14 @@
                                         <p:calendar  id="data_fabricacao" locale="pt_BR" navigator="true" 
                                                      maxdate="#{vacinaBean.dataAtual}"
                                                      value="#{vacinaBean.vacina.dataFabricacao}"
-                                                     style="margin-right: 50px;" required="true" />
+                                                     style="margin-right: 50px;" required="true" readonly="true"/>
                                                      
 
                                         <p:outputLabel value="Data de Venc.: " for="data_vencimento" />
                                         <p:calendar locale="pt_BR" navigator="true"  
                                                     mindate="#{vacinaBean.dataAtual}"
                                                     value="#{vacinaBean.vacina.dataVencimento}"
-                                                    required="true" id="data_vencimento" />
+                                                    required="true" id="data_vencimento" readonly="true"/>
                                                     
 
                                     </h:panelGrid>
