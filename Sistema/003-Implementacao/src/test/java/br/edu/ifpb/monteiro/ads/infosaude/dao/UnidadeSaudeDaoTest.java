@@ -139,7 +139,7 @@ public class UnidadeSaudeDaoTest {
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
 
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, "Erro ao Salvar UBS" + ex);
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, "Erro ao Salvar UBS {0}",  ex);
             salvo = false;
         }
         assertEquals(false, salvo);
