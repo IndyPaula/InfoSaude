@@ -32,16 +32,16 @@
                                         <p:calendar  id="data_fabricacao" locale="pt_BR" navigator="true" 
                                                     maxdate="#{vacinaBean.dataAtual}"
                                                     value="#{vacinaBean.vacina.dataFabricacao}"
-                                                    style="margin-right: 50px;" required="true"
-                                                    mask="99/99/9999"/>
+                                                    style="margin-right: 50px;" required="true" />
+                                                   
                                         
                                         
                                         <p:outputLabel value="Data de Venc.: " for="data_vencimento" />
                                         <p:calendar locale="pt_BR" navigator="true"  
                                                     mindate="#{vacinaBean.dataAtual}"
                                                     value="#{vacinaBean.vacina.dataVencimento}"
-                                                    required="true" id="data_vencimento"
-                                                    mask="99/99/9999"/>
+                                                    required="true" id="data_vencimento" />
+                                                    
 
                                     </h:panelGrid>
                                 </p:column>
