@@ -32,7 +32,8 @@
                                         <p:calendar  id="data_fabricacao" locale="pt_BR" navigator="true" 
                                                     maxdate="#{vacinaBean.dataAtual}"
                                                     value="#{vacinaBean.vacina.dataFabricacao}"
-                                                    style="margin-right: 50px;" required="true" readonly="true"/>
+                                                    style="margin-right: 50px;" required="true"
+                                                    readonlyInput="true"/>
                                                    
                                         
                                         
@@ -40,7 +41,8 @@
                                         <p:calendar locale="pt_BR" navigator="true"  
                                                     mindate="#{vacinaBean.dataAtual}"
                                                     value="#{vacinaBean.vacina.dataVencimento}"
-                                                    required="true" id="data_vencimento" readonly="true"/>
+                                                    required="true" id="data_vencimento"
+                                                    readonlyInput="true"/>
                                                     
 
                                     </h:panelGrid>
