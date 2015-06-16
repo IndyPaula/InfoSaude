@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolationException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -48,8 +49,15 @@ public class ACSDaoTest {
         daoACS.getEntityManager().clear();
     }
 
-     @Test(expected = DaoExcecoes.class)
-    public void testVerificaCampoUnique() throws DaoExcecoes{
+    @Test(expected = NoResultException.class)
+    public void testVerificaCamposUnique() throws DaoExcecoes {
+
+        daoACS.verificaCampoUnique("matricula", 7589327, null);
+
+    }
+
+    @Test(expected = DaoExcecoes.class)
+    public void testVerificaCampoUnique() throws DaoExcecoes {
 
         ACS testCampoUniqueAcs = new ACS();
 
@@ -76,7 +84,7 @@ public class ACSDaoTest {
         testCpfDuplicadoAcs.setCodigoEquipeINE("13234");
 
         ACS a = null;
-        
+
         daoACS.getEntityManager().getTransaction().begin();
         daoACS.salvar(testCampoUniqueAcs);
         daoACS.salvar(testCpfDuplicadoAcs);

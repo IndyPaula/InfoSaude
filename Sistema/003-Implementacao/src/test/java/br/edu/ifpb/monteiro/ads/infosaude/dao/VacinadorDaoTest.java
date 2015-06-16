@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolationException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -43,8 +44,15 @@ public class VacinadorDaoTest {
 
     }
 
+    @Test(expected = NoResultException.class)
+    public void testVerificaCamposUnique() throws DaoExcecoes {
+
+        daoVacinador.verificaCampoUnique("cpf", "17469865382", null);
+
+    }
+
     @Test(expected = DaoExcecoes.class)
-    public void testVerificaCampoUnique() throws DaoExcecoes{
+    public void testVerificaCampoUnique() throws DaoExcecoes {
 
         Vacinador testCampoUnique = new Vacinador();
 
@@ -71,7 +79,7 @@ public class VacinadorDaoTest {
         testCpfDuplicado.setCodigoEquipeINE("13234");
 
         Vacinador va = null;
-        
+
         daoVacinador.getEntityManager().getTransaction().begin();
         daoVacinador.salvar(testCampoUnique);
         daoVacinador.salvar(testCpfDuplicado);

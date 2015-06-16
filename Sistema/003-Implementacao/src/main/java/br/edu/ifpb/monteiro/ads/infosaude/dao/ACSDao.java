@@ -4,10 +4,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.ACSDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
-import br.edu.ifpb.monteiro.ads.infosaude.service.VacinadorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -44,26 +40,15 @@ public class ACSDao extends GenericoDao<ACS> implements ACSDaoIF {
 
         Query queryAcs = getEntityManager().createNativeQuery(
                 "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
-        
-        if (id == null) {
 
-            func = (Funcionario) queryAcs.getSingleResult();
+        func = (Funcionario) queryAcs.getSingleResult();
 
-            if (func != null) {
-
-                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-            }
-        } else {
-
-            func = (Funcionario) queryAcs.getSingleResult();
-
-            if (func != null && id != func.getId()) {
-
-                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-            }
-
+        if (id != null  && id == func.getId()) {
+            return true;
         }
-        return true;
+
+        throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
+
     }
 
 }

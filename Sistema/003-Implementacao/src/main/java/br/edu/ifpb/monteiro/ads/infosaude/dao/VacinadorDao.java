@@ -35,31 +35,17 @@ public class VacinadorDao extends GenericoDao<Vacinador> implements VacinadorDao
 
     @Override
     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws DaoExcecoes {
-
         Funcionario funcionario = null;
 
         Query queryVacinador = getEntityManager().createNativeQuery(
                 "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
-        
-        if (id == null) {
 
+        funcionario = (Funcionario) queryVacinador.getSingleResult();
 
-            funcionario = (Funcionario) queryVacinador.getSingleResult();
-
-            if (funcionario != null) {
-
-                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-            }
-        } else {
-            funcionario = (Funcionario) queryVacinador.getSingleResult();
-
-            if (funcionario != null && id != funcionario.getId()) {
-
-                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-            }
-
+        if (id != null && id == funcionario.getId()) {
+            return true;
         }
-        return true;
-    }
 
+        throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
+    }
 }
