@@ -4,10 +4,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinadorDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
-import br.edu.ifpb.monteiro.ads.infosaude.service.VacinadorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -40,42 +36,30 @@ public class VacinadorDao extends GenericoDao<Vacinador> implements VacinadorDao
     @Override
     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws DaoExcecoes {
 
-        try {
+        Funcionario funcionario = null;
 
-            Funcionario funcionario = null;
+        Query queryVacinador = getEntityManager().createNativeQuery(
+                "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
+        
+        if (id == null) {
 
-            if (id == null) {
 
-                Query queryVacinador = getEntityManager().createNativeQuery(
-                        "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
-                
-                funcionario = (Funcionario) queryVacinador.getSingleResult();
+            funcionario = (Funcionario) queryVacinador.getSingleResult();
 
-                if (funcionario != null) {
+            if (funcionario != null) {
 
-                    throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-                }
-            } else {
-                
-                Query queryVacinador = getEntityManager().createNativeQuery(
-                        "SELECT * FROM funcionario f,  pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
-                
-                funcionario = (Funcionario) queryVacinador.getSingleResult();
-                
-                if (funcionario != null && id != funcionario.getId()) {
-
-                    throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-                }
-
-                return true;
+                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
             }
-        } catch (NoResultException ex) {
+        } else {
+            funcionario = (Funcionario) queryVacinador.getSingleResult();
 
-            Logger.getLogger(VacinadorService.class.getName()).log(Level.SEVERE, null, ex);
+            if (funcionario != null && id != funcionario.getId()) {
+
+                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
+            }
 
         }
         return true;
-
     }
 
 }

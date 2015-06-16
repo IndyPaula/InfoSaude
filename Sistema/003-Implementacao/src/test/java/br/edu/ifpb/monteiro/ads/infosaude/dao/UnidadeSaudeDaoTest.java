@@ -52,12 +52,12 @@ public class UnidadeSaudeDaoTest {
     public static void removerDados() {
 
         try {
-            UnidadeSaude ubs = daoUbs.buscarPorCampo("cnes", 312);
+            UnidadeSaude ubs3 = daoUbs.buscarPorCampo("cnes", 312);
 
             if (!daoUbs.getEntityManager().getTransaction().isActive()) {
                 daoUbs.getEntityManager().getTransaction().begin();
             }
-            daoUbs.remover(ubs);
+            daoUbs.remover(ubs3);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,20 +68,20 @@ public class UnidadeSaudeDaoTest {
     @Test
     public void ubsValida() {
 
-        UnidadeSaude ubs = new UnidadeSaude();
-        ubs.setBairro("efjoewif");
-        ubs.setCep("5487598");
-        ubs.setCidade("Monteiro");
-        ubs.setCnes(312);
-        ubs.setEnderecoNumero(100);
-        ubs.setEstado(EnumEstados.PE);
-        ubs.setLogradouro("mfioejfie");
-        ubs.setNome("UBS 08");
-        ubs.setNumero(12);
+        UnidadeSaude inidadeSaude = new UnidadeSaude();
+        inidadeSaude.setBairro("efjoewif");
+        inidadeSaude.setCep("5487598");
+        inidadeSaude.setCidade("Monteiro");
+        inidadeSaude.setCnes(312);
+        inidadeSaude.setEnderecoNumero(100);
+        inidadeSaude.setEstado(EnumEstados.PE);
+        inidadeSaude.setLogradouro("mfioejfie");
+        inidadeSaude.setNome("UBS 08");
+        inidadeSaude.setNumero(12);
 
         try {
             daoUbs.getEntityManager().getTransaction().begin();
-            daoUbs.salvar(ubs);
+            daoUbs.salvar(inidadeSaude);
             daoUbs.getEntityManager().getTransaction().commit();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +118,7 @@ public class UnidadeSaudeDaoTest {
             daoUbs.getEntityManager().getTransaction().begin();
             daoUbs.salvar(ubs);
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(UnidadeSaudeDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         UnidadeSaude ubs2 = new UnidadeSaude();

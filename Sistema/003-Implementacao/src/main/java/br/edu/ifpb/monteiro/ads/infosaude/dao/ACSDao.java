@@ -21,12 +21,12 @@ public class ACSDao extends GenericoDao<ACS> implements ACSDaoIF {
         super(ACS.class);
     }
 
-   @Override
+    @Override
     public void remover(ACS entity) {
 
         Query queryAcs = getEntityManager().createNativeQuery("DELETE FROM acs WHERE id = " + entity.getId());
         queryAcs.executeUpdate();
-        
+
         Query queryFunc = getEntityManager().createNativeQuery("DELETE FROM funcionario WHERE id = " + entity.getId());
         queryFunc.executeUpdate();
 
@@ -36,45 +36,34 @@ public class ACSDao extends GenericoDao<ACS> implements ACSDaoIF {
         getEntityManager().getTransaction().commit();
 
     }
+
     @Override
     public boolean verificaCampoUnique(String campo, Object valor, Long id) throws DaoExcecoes {
 
-        try {
+        Funcionario func = null;
 
-            Funcionario func = null;
+        Query queryAcs = getEntityManager().createNativeQuery(
+                "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
+        
+        if (id == null) {
 
-            if (id == null) {
+            func = (Funcionario) queryAcs.getSingleResult();
 
-                Query queryAcs = getEntityManager().createNativeQuery(
-                        "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
-                
-                func = (Funcionario) queryAcs.getSingleResult();
+            if (func != null) {
 
-                if (func != null) {
-
-                    throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-                }
-            } else {
-                
-                Query queryAcs = getEntityManager().createNativeQuery(
-                        "SELECT * FROM funcionario f,  pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
-                
-                func = (Funcionario) queryAcs.getSingleResult();
-                
-                if (func != null && id != func.getId()) {
-
-                    throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
-                }
-
-                return true;
+                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
             }
-        } catch (NoResultException ex) {
+        } else {
 
-            Logger.getLogger(VacinadorService.class.getName()).log(Level.SEVERE, null, ex);
+            func = (Funcionario) queryAcs.getSingleResult();
+
+            if (func != null && id != func.getId()) {
+
+                throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");
+            }
 
         }
         return true;
-
     }
 
 }

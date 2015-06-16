@@ -61,7 +61,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     @Column(name = "data_vencimento", nullable = false)
     private Date dataVencimento;
 
-    @Column(name = "lote", nullable = false, length = 20, unique = true)
+    @Column(name = "lote", nullable = false, length = 20)
     private String lote;
 
     @Column(name = "loboratorio", nullable = false, length = 45)

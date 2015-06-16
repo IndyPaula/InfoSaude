@@ -43,40 +43,79 @@ public class VacinadorDaoTest {
 
     }
 
+    @Test(expected = DaoExcecoes.class)
+    public void testVerificaCampoUnique() throws DaoExcecoes{
+
+        Vacinador testCampoUnique = new Vacinador();
+
+        testCampoUnique.setCpf("10125346611");
+        testCampoUnique.setNome("Ze");
+        testCampoUnique.setDataNascimento(new Date());
+        testCampoUnique.setMatricula(8884324);
+        testCampoUnique.setCoren(9857349);
+        testCampoUnique.setCartaosus("123451111987654");
+        testCampoUnique.setLogin("AAA");
+        testCampoUnique.setSenha("fjosijfew9urj3");
+        testCampoUnique.setCodigoEquipeINE("13234");
+
+        Vacinador testCpfDuplicado = new Vacinador();
+
+        testCpfDuplicado.setCpf("10199946611");
+        testCpfDuplicado.setNome("Ze Segundo");
+        testCpfDuplicado.setDataNascimento(new Date());
+        testCpfDuplicado.setMatricula(888999);
+        testCpfDuplicado.setCoren(985734921);
+        testCpfDuplicado.setCartaosus("123459999987654");
+        testCpfDuplicado.setLogin("BBB");
+        testCpfDuplicado.setSenha("fjosijfew9urj3");
+        testCpfDuplicado.setCodigoEquipeINE("13234");
+
+        Vacinador va = null;
+        
+        daoVacinador.getEntityManager().getTransaction().begin();
+        daoVacinador.salvar(testCampoUnique);
+        daoVacinador.salvar(testCpfDuplicado);
+        daoVacinador.getEntityManager().getTransaction().commit();
+
+        va = daoVacinador.buscarPorCampo("cpf", testCpfDuplicado.getCpf());
+        va.setCpf("10125346611");
+        daoVacinador.verificaCampoUnique("cpf", testCampoUnique.getCpf(), va.getId());
+    }
+
     @Test
     public void testDadosValidos() {
 
-        Vacinador v = new Vacinador();
+        Vacinador vac = new Vacinador();
 
-        v.setNome("InfoSaude");
-        v.setCpf("111.293.324-23");
-        v.setDataNascimento(new Date());
-        v.setMatricula(12432);
-        v.setCoren(8748);
-        v.setLogin("Joelton");
-        v.setCartaosus("123435436546");
-        v.setSenha("456");
-        v.setCodigoEquipeINE("487");
-        v.setNomeMae("Maria");
-        v.setNomePai("José");
-        v.setEtnia(EnumEtnias.PARDO);
-        v.setAltura(1.9);
-        v.setPeso(95);
-        v.setPesoNascer(3.6);
-        v.setNumero(42);
-        v.setRg("89898");
-        v.setOrgaoEmissor("SDS");
-        v.setUfOrgaoEmissor(EnumEstados.PI);
-        
-        v.equals(v);
+        vac.setNome("InfoSaude");
+        vac.setCpf("111.293.324-23");
+        vac.setDataNascimento(new Date());
+        vac.setMatricula(12432);
+        vac.setCoren(8748);
+        vac.setLogin("Joelton");
+        vac.setCartaosus("123435436546");
+        vac.setSenha("456");
+        vac.setCodigoEquipeINE("487");
+        vac.setNomeMae("Maria");
+        vac.setNomePai("José");
+        vac.setEtnia(EnumEtnias.PARDO);
+        vac.setAltura(1.9);
+        vac.setPeso(95);
+        vac.setPesoNascer(3.6);
+        vac.setNumero(42);
+        vac.setRg("89898");
+        vac.setOrgaoEmissor("SDS");
+        vac.setUfOrgaoEmissor(EnumEstados.PI);
+
+        vac.equals(vac);
 
         Vacinador result = null;
         try {
             daoVacinador.getEntityManager().getTransaction().begin();
-            daoVacinador.salvar(v);
+            daoVacinador.salvar(vac);
             daoVacinador.getEntityManager().getTransaction().commit();
 
-            result = daoVacinador.buscarPorCampo("cpf", v.getCpf());
+            result = daoVacinador.buscarPorCampo("cpf", vac.getCpf());
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,19 +133,19 @@ public class VacinadorDaoTest {
     @Test(expected = ConstraintViolationException.class)
     public void testCpfInvalido() {
 
-        Vacinador v = new Vacinador();
+        Vacinador vacinadorTestCpf = new Vacinador();
 
-        v.setNome("InfoSaude");
-        v.setDataNascimento(new Date());
-        v.setMatricula(432432);
-        v.setCoren(423423);
-        v.setLogin("InfoSaude");
-        v.setSenha("fjosijfew9urj3");
-        v.setCodigoEquipeINE("4234");
+        vacinadorTestCpf.setNome("InfoSaude");
+        vacinadorTestCpf.setDataNascimento(new Date());
+        vacinadorTestCpf.setMatricula(432432);
+        vacinadorTestCpf.setCoren(423423);
+        vacinadorTestCpf.setLogin("InfoSaude");
+        vacinadorTestCpf.setSenha("fjosijfew9urj3");
+        vacinadorTestCpf.setCodigoEquipeINE("4234");
 
         try {
             daoVacinador.getEntityManager().getTransaction().begin();
-            daoVacinador.salvar(v);
+            daoVacinador.salvar(vacinadorTestCpf);
             daoVacinador.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -117,49 +156,49 @@ public class VacinadorDaoTest {
 
     @Test
     public void testRemocao() {
-        
+
         inserirRegistro();
         Vacinador v = null;
         try {
-            
+
             v = daoVacinador.buscarPorCampo("cpf", "101.523.466-99");
-            
+
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         daoVacinador.getEntityManager().getTransaction().begin();
         daoVacinador.remover(v);
-        
+
         Vacinador v2 = null;
         try {
-            
+
             v2 = daoVacinador.buscarPorCampo("cpf", "101.523.466-99");
-            
+
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         assertEquals(v2, null);
 
     }
 
     public void inserirRegistro() {
 
-        Vacinador v = new Vacinador();
+        Vacinador vInsert = new Vacinador();
 
-        v.setCpf("101.523.466-99");
-        v.setNome("InfoSaude");
-        v.setDataNascimento(new Date());
-        v.setMatricula(7777);
-        v.setCoren(102030);
-        v.setCartaosus("123456789987654");
-        v.setLogin("Teste");
-        v.setSenha("fjosijfew9urj3");
-        v.setCodigoEquipeINE("41343234");
+        vInsert.setCpf("101.523.466-99");
+        vInsert.setNome("InfoSaude");
+        vInsert.setDataNascimento(new Date());
+        vInsert.setMatricula(7777);
+        vInsert.setCoren(102030);
+        vInsert.setCartaosus("123456789987654");
+        vInsert.setLogin("Teste");
+        vInsert.setSenha("fjosijfew9urj3");
+        vInsert.setCodigoEquipeINE("41343234");
 
         try {
             daoVacinador.getEntityManager().getTransaction().begin();
-            daoVacinador.salvar(v);
+            daoVacinador.salvar(vInsert);
             daoVacinador.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -167,26 +206,26 @@ public class VacinadorDaoTest {
         }
 
     }
-    
+
     @Test
     public void testVerificaCampoUniqueCadastro() {
 
-        Vacinador acs = new Vacinador();
-        acs.setCartaosus("11153822234");
-        acs.setNome("Vanderlan Gomes da Silva");
-        acs.setCpf("60111223422");
-        acs.setCoren(16439);
-        acs.setMatricula(35612217);
-        acs.setLogin("Vacinador3");
-        acs.setCodigoEquipeINE("5414552");
-        acs.setSenha(CriptografiaUtil.convertStringToMd5("10042991"));
-        acs.setDataNascimento(new Date());
-        acs.setSexo(EnumGeneros.MASCULINO);
+        Vacinador testCampoUnique = new Vacinador();
+        testCampoUnique.setCartaosus("11153822234");
+        testCampoUnique.setNome("Vanderlan Gomes da Silva");
+        testCampoUnique.setCpf("60111223422");
+        testCampoUnique.setCoren(16439);
+        testCampoUnique.setMatricula(35612217);
+        testCampoUnique.setLogin("Vacinador3");
+        testCampoUnique.setCodigoEquipeINE("5414552");
+        testCampoUnique.setSenha(CriptografiaUtil.convertStringToMd5("10042991"));
+        testCampoUnique.setDataNascimento(new Date());
+        testCampoUnique.setSexo(EnumGeneros.MASCULINO);
 
         try {
 
             daoVacinador.getEntityManager().getTransaction().begin();
-            daoVacinador.salvar(acs);
+            daoVacinador.salvar(testCampoUnique);
             daoVacinador.getEntityManager().getTransaction().commit();
 
         } catch (DaoExcecoes ex) {
@@ -224,10 +263,9 @@ public class VacinadorDaoTest {
             daoVacinador.getEntityManager().getTransaction().begin();
             daoVacinador.salvar(vac);
             daoVacinador.getEntityManager().getTransaction().commit();
-            
+
             daoVacinador.setEntity(Vacinador.class);
             daoVacinador.getEntity();
-            
 
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,10 +280,10 @@ public class VacinadorDaoTest {
         } catch (DaoExcecoes ex) {
             resultado = false;
             Logger.getLogger(VacinadorDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
-        if(resultado){
-            throw new DaoExcecoes( "Já existe", new Throwable());
+        if (resultado) {
+            throw new DaoExcecoes("Já existe", new Throwable());
         }
     }
 }

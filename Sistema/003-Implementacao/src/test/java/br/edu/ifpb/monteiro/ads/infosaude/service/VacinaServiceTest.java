@@ -23,7 +23,7 @@ public class VacinaServiceTest {
 
     private static VacinaServie servie;
 
-    private Vacina vacina;
+    private Vacina vacinaDaUbs;
 
     @Mock
     private VacinaDaoIF dao;
@@ -37,22 +37,22 @@ public class VacinaServiceTest {
 
         MockitoAnnotations.initMocks(this);
 
-        vacina = new Vacina();
-        vacina.setContraIndicacoes("123");
-        vacina.setDataFabricacao(new Date());
-        vacina.setDataVencimento(new Date());
-        vacina.setId(1235L);
-        vacina.setInstrucaoAdministracao("123");
-        vacina.setInstrucaoArmazenamento("123");
-        vacina.setLaboratorio("123");
-        vacina.setLote("123");
-        vacina.setNome("123");
-        vacina.setQuantidadeDoses(3);
-        vacina.setReacoesAdversas("123");
-        vacina.setViaAdministracao(EnumViaAdministracao.ORAL);
+        vacinaDaUbs = new Vacina();
+        vacinaDaUbs.setContraIndicacoes("123");
+        vacinaDaUbs.setDataFabricacao(new Date());
+        vacinaDaUbs.setDataVencimento(new Date());
+        vacinaDaUbs.setId(1235L);
+        vacinaDaUbs.setInstrucaoAdministracao("123");
+        vacinaDaUbs.setInstrucaoArmazenamento("123");
+        vacinaDaUbs.setLaboratorio("123");
+        vacinaDaUbs.setLote("123");
+        vacinaDaUbs.setNome("123");
+        vacinaDaUbs.setQuantidadeDoses(3);
+        vacinaDaUbs.setReacoesAdversas("123");
+        vacinaDaUbs.setViaAdministracao(EnumViaAdministracao.ORAL);
 
         try {
-            when(dao.salvar(vacina)).thenReturn(vacina);
+            when(dao.salvar(vacinaDaUbs)).thenReturn(vacinaDaUbs);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinaServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,12 +64,12 @@ public class VacinaServiceTest {
 
         Vacina result = null;
         try {
-            result = dao.salvar(vacina);
+            result = dao.salvar(vacinaDaUbs);
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinaServiceTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        assertEquals(result.getNome(), vacina.getNome());
+        assertEquals(result.getNome(), vacinaDaUbs.getNome());
 
     }
 
