@@ -38,8 +38,8 @@
                                     <p:inputText id="globalFilter" onkeyup="PF('tabela_ACS').filter()" 
                                                  size="50" placeholder="Pesquise por Matricula, Nome, Login ou Área" />
                                     <p:spacer width="50" height="1"/>
-                                    
-                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="editar_acs.xhtml" 
+                                  
+                                    <p:commandButton value="Atualizar"  icon="ui-icon-refresh" action="#{acsBean.selecinaEditar()}" 
                                                      id="btAtualizar" update="mensagem">
                                 
                                         <f:setPropertyActionListener value="#{acsBean.ACSSelected}" target="#{acsBean.ACS}"/>
