@@ -12,7 +12,7 @@
 
             <ui:define name="centro">
                 <h:form id="cadastrarPaciente" >
-                    <p:growl id="mensages" showDetail="false" life="6000"/>
+                    <p:growl id="mensages" showDetail="false" life="7000"/>
                     <span id="titulo_pagina">Cadastro de usuários da UBS</span>
                     <p:fieldset legend="Cadastrar usuário da Unidade Básica de Saúde"
                                 style="width: 90%; text-align: center; margin-top: 80px; height: 600px;">
@@ -69,14 +69,14 @@
                                         maxdate="#{pacienteBean.dataAtual}"
                                         value="#{pacienteBean.paciente.dataNascimento}"
                                         required="true" requiredMessage="A Data de Nascimento é obrigatória"
-                                        />
+                                        mask="99/99/9999"/>
 
                             <p:outputLabel value="Data de cadastro: " for="txtDataCadastro"/>
                             <p:calendar id="txtDataCadastro" locale="pt_BR" navigator="true" 
                                         maxdate="#{pacienteBean.dataAtual}"
                                         value="#{pacienteBean.paciente.dataCadastro}"
                                         required="true" requiredMessage="A Data de Cadastro é obrigatória"
-                                        />
+                                        mask="99/99/9999"/>
 
                             <p:outputLabel value="Sexo: " for="txtSexo"/>
                             <p:selectOneMenu id="txtSexo"  value="#{pacienteBean.paciente.sexo}" required="true"  requiredMessage="O campo Sexo é obrigatório">
