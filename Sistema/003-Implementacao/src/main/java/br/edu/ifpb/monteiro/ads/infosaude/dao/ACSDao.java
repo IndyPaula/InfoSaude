@@ -4,6 +4,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.ACSDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -41,10 +44,12 @@ public class ACSDao extends GenericoDao<ACS> implements ACSDaoIF {
         Query queryAcs = getEntityManager().createNativeQuery(
                 "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
 
-        func = (Funcionario) queryAcs.getSingleResult();
+        try {
 
-        if (id != null  && id == func.getId()) {
-            return true;
+            func = (Funcionario) queryAcs.getSingleResult();
+        } catch (NoResultException e) {
+             Logger.getLogger(VacinaDao.class.getName()).log(Level.SEVERE, null, e);
+             return true;
         }
 
         throw new DaoExcecoes("O " + campo.toUpperCase() + " informado pertence a outra pessoa, por favor informe outro.");

@@ -4,6 +4,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinadorDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Funcionario;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -39,8 +42,13 @@ public class VacinadorDao extends GenericoDao<Vacinador> implements VacinadorDao
 
         Query queryVacinador = getEntityManager().createNativeQuery(
                 "SELECT * FROM funcionario f, pessoa p WHERE p.id = f.id AND " + campo + " = '" + valor + "' ", Funcionario.class);
+        try {
 
-        funcionario = (Funcionario) queryVacinador.getSingleResult();
+            funcionario = (Funcionario) queryVacinador.getSingleResult();
+        } catch (NoResultException e) {
+             Logger.getLogger(VacinaDao.class.getName()).log(Level.SEVERE, null, e);
+             return true;
+        }
 
         if (id != null && id == funcionario.getId()) {
             return true;

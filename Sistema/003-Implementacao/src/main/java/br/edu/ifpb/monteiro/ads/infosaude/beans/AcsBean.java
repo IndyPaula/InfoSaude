@@ -130,7 +130,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
 
     public boolean verificaSenhaAtual() throws ServiceExcecoes {
 
-        acs.setSenha(acsService.buscarPorCampo("cpf", acs.getCpf()).getSenha());
+        acs.setSenha(acsService.consultarPorId(acs.getId()).getSenha());
 
         if (getSenhaTemp().equals("")) {
 

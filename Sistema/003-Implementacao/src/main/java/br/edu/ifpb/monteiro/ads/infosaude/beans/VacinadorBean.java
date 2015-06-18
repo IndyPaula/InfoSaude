@@ -132,7 +132,7 @@ public class VacinadorBean extends FuncionarioBeanGenerico implements Serializab
 
     public boolean verificaSenhaAtual() throws ServiceExcecoes {
 
-        vacinador.setSenha(vacinadorService.buscarPorCampo("coren", vacinador.getCoren()).getSenha());
+        vacinador.setSenha(vacinadorService.consultarPorId(vacinador.getId()).getSenha());
 
         if(getSenhaTemp().equals("")){
             
