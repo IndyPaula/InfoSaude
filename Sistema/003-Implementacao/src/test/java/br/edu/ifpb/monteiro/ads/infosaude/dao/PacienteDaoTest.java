@@ -198,7 +198,7 @@ public class PacienteDaoTest {
 
         } catch (DaoExcecoes ex) {
             Logger.getLogger(PacienteDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
         assertEquals(validation, true);
     }
