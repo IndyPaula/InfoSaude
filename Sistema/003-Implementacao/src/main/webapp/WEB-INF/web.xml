@@ -10,10 +10,19 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>delta</param-value>
     </context-param>
+    <!-- FASES DO PROJETO JSF   
+    Descreve como a aplicação JSF está em seu ciclo de vida
+    no desenvolvimento de software, podendo conter
+    os seguintes valores:  
+    Development, UnitTest, SystemTest ou Production. 
+    Esta informação poderá ser usada por uma implementação
+    JSF cachear recursos de modo que haja uma melhora
+    no desempenho em produção, por exemplo.-->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>UnitTest</param-value>
     </context-param>
+    <!-- Temas do primefaces para a aplicação-->
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>

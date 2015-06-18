@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolationException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -49,7 +48,6 @@ public class ACSDaoTest {
         daoACS.getEntityManager().clear();
     }
 
-    @Test(expected = NoResultException.class)
     public void testVerificaCamposUnique() throws DaoExcecoes {
 
         daoACS.verificaCampoUnique("matricula", 7589327, null);
