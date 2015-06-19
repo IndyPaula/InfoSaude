@@ -65,10 +65,11 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                 /*Tratando as exceções capturadas*/
                 //Condição tratando o ViewExpiredException
                 if (excecao instanceof ViewExpiredException) {
+                    handled = true;
                     redirecionar("/resources/index.xhtml");//Redirecionando para a home
                 } else {
                     handled = true;
-                    redirecionar("/resources/index.xhtml");
+                    redirecionar("/resources/paginas/erro/erro.xhtml");
                 }
             } finally {
                 if (handled) {

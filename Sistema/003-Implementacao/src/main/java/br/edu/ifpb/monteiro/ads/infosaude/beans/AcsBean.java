@@ -36,19 +36,18 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
     private transient List<ACS> agentesFilter;
 
     private static final String PAGINA_LISTA_ACS = "buscar_acs.xhtml";
-    
+
     @PostConstruct
     public void init() {
 
         agentesFilter = new ArrayList<ACS>();
 
     }
-
     public String salvar() {
         try {
             acsService.verificaCampoUnique("cpf", acs.getCpf(), null);
-            acsService.verificaCampoUnique("matricula", + acs.getMatricula(), null);
-            acsService.verificaCampoUnique("cartaosus",  acs.getCartaosus(), null);
+            acsService.verificaCampoUnique("matricula", +acs.getMatricula(), null);
+            acsService.verificaCampoUnique("cartaosus", acs.getCartaosus(), null);
             acsService.verificaCampoUnique("login", "" + acs.getLogin(), null);
 
             acs.setSenha(CriptografiaUtil.convertStringToMd5(acs.getSenha()));
@@ -108,9 +107,9 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
             if (verificaSenhaAtual()) {
 
                 acsService.verificaCampoUnique("cpf", acs.getCpf(), acs.getId());
-                acsService.verificaCampoUnique("matricula",  + acs.getMatricula(), acs.getId());
+                acsService.verificaCampoUnique("matricula", +acs.getMatricula(), acs.getId());
                 acsService.verificaCampoUnique("cartaosus", acs.getCartaosus(), acs.getId());
-                acsService.verificaCampoUnique("login",  acs.getLogin(), acs.getId());
+                acsService.verificaCampoUnique("login", acs.getLogin(), acs.getId());
 
                 acsService.atualizar(acs);
                 JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
@@ -165,9 +164,9 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
             return null;
         } else {
-           return "editar_acs.xhtml";
+            return "editar_acs.xhtml";
         }
-        
+
     }
 
     public List<ACS> getAgentesFilter() {

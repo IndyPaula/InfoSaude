@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"    
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>InfoSaúde WEB</title>
+        <link href="${facesContext.externalContext.requestContextPath}/resources/css/styleTemplate.css" rel="stylesheet" type="text/css" />  
+        <link rel="icon" type="image/png" href="${facesContext.externalContext.requestContextPath}/res/imagens/favicon.png"/>
+        <style type="text/css">
+        </style>
+    </h:head>
+
+    <h:body >
+        <div style="height: 45px;background-color: skyblue;width: 100%; " >
+            <div style="display: table; width: 100%;">
+                <div style="width: 50%;  float: left;margin-left: 5%;"> 
+
+                    <img src="${facesContext.externalContext.requestContextPath}/res/imagens/info_saude_web.png"
+                         alt="InfoSaúde WEB" height="40" align="middle"/>
+
+                </div>
+            </div>
+        </div>
+
+        <p:layout style="width: 90%;margin-left: 5%;margin-top: 3px; padding: 0px;height: 750px !important;"  >
+            <p:layoutUnit position="center" style="height: 90% !important">
+                <div align="center" style="width: 100%; margin-top: 40px;">
+                    <ui:insert name="centro">
+
+                    </ui:insert>
+                </div>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+
+</html>

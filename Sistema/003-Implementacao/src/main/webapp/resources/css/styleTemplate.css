@@ -18,3 +18,13 @@ a:link
     color: #5a999d;
     text-shadow: skyblue 1px 1px 1px;
 }
+.titulo_mensagem_erro{
+    font-size: 35px;
+    color: royalblue;
+    text-shadow: skyblue 1px 1px 1px;
+}
+.mensagem_erro{
+    font-size: 15px;
+    color: currentColor;
+    text-shadow: currentColor 0.2px 0.2px 0.4px;
+}

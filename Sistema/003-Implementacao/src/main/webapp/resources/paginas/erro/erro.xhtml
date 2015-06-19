@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./../../template/template_erro.xhtml">
+
+            <ui:define name="centro">
+
+                <div style="width: 95%; background-color: activeborder;border-radius: 10px;padding: 30px;" >
+                    <img src="../../../res/imagens/erro.png" width="100" alt="Erro" />
+                    <span class="titulo_mensagem_erro">Erro interno do sistema!</span>
+                    <span style="font-size: 20px; margin-left: 10px;">
+                        <a href="../../index.xhtml"> Voltar ao início</a></span>
+                    <br></br>
+                    <span class="mensagem_erro">Infelizmente, o InfoSaúde WEB apresentou um 
+                        comportamento inesperado, por favor tente novamente.</span><br></br>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
