@@ -28,5 +28,12 @@ public class UnidadeSaudeDao extends GenericoDao<UnidadeSaude> implements Unidad
         }
         return entidade;
     }
+    
+    public UnidadeSaude obterInstancia() throws DaoExcecoes {
+
+        Query query = getEntityManager().createNativeQuery("SELECT * FROM unidade_saude", UnidadeSaude.class);
+
+        return ( UnidadeSaude) query.getSingleResult();
+    }
 
 }

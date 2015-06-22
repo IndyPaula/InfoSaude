@@ -18,20 +18,20 @@ import javax.persistence.EntityManager;
 @WebService(serviceName = "InfomacoesUbsWS")
 public class InfomacoesUbsWS {
 
-
-    private final EntityManagerProducer emp;
-    private final EntityManager em;
-    private final UnidadeSaudeDao daoUbs;
+    private EntityManagerProducer emp;
+    private EntityManager em;
+    private UnidadeSaudeDao daoUbs;
 
     public InfomacoesUbsWS() {
 
+    }
+
+    private void preparaDao() {
         daoUbs = new UnidadeSaudeDao();
-        
+
         emp = new EntityManagerProducer();
         em = emp.create();
         daoUbs.setEntityManager(em);
-
-
     }
 
     @WebMethod(operationName = "hello")
@@ -48,7 +48,8 @@ public class InfomacoesUbsWS {
     @WebMethod(operationName = "dadosUBS")
     public UnidadeSaude dadosUBS() {
         try {
-            return daoUbs.buscarTudo().get(0);
+            preparaDao();
+            return daoUbs.obterInstancia();
         } catch (DaoExcecoes ex) {
             Logger.getLogger(InfomacoesUbsWS.class.getName()).log(Level.SEVERE, null, ex);
         }
