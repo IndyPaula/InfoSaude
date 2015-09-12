@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_vacina_data_validade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce4fcbc9-7154-4094-9f93-088e23370685">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="data_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_fim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     vacina."id" AS vacina_id,
+     vacina."data_fabricacao" AS vacina_data_fabricacao,
+     vacina."data_vencimento" AS vacina_data_vencimento,
+     vacina."laboratorio" AS vacina_laboratorio,
+     vacina."nome" AS vacina_nome,
+     vacina."lote" AS vacina_lote,
+     vacina."quantidade_doses" AS vacina_quantidade_doses
+FROM
+     "public"."vacina" vacina
+WHERE
+     vacina."data_vencimento" BETWEEN $P{data_inicio} and $P{data_fim}]]>
+	</queryString>
+	<field name="vacina_id" class="java.lang.Long"/>
+	<field name="vacina_data_fabricacao" class="java.sql.Date"/>
+	<field name="vacina_data_vencimento" class="java.sql.Date"/>
+	<field name="vacina_laboratorio" class="java.lang.String"/>
+	<field name="vacina_nome" class="java.lang.String"/>
+	<field name="vacina_lote" class="java.lang.String"/>
+	<field name="vacina_quantidade_doses" class="java.lang.Integer"/>
+	<group name="vacina_nome">
+		<groupExpression><![CDATA[$F{vacina_nome}]]></groupExpression>
+	</group>
+	<group name="vacina_data_vencimento">
+		<groupExpression><![CDATA[$F{vacina_data_vencimento}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="2" width="51" height="20" uuid="cee177a4-341c-4227-a863-435ae854997d"/>
+				<text><![CDATA[vacina_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="2" width="100" height="20" uuid="230817de-8289-4580-a0c3-2b331ba5a31d"/>
+				<text><![CDATA[vacina_nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="2" width="89" height="20" uuid="aa06c569-0b1b-4fec-b7c3-e83357cc2594"/>
+				<text><![CDATA[vacina_lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="2" width="100" height="20" uuid="0060e92c-0126-460d-85c8-6ff503fb863c"/>
+				<text><![CDATA[vacina_laboratorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="0" width="100" height="20" uuid="3ff4cfab-9678-4f61-990a-d8bfa588de19"/>
+				<text><![CDATA[vacina_data_fabricacao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="2" width="100" height="20" uuid="c4559773-833f-4c8a-a04c-645623cd2f75"/>
+				<text><![CDATA[vacina_data_vencimento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="6" y="6" width="51" height="20" uuid="d7c3575f-b60f-4f5c-8d62-40eb52330796"/>
+				<textFieldExpression><![CDATA[$F{vacina_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="6" width="100" height="20" uuid="7330b7d8-b111-4c2c-bd9e-9aee403cae7d"/>
+				<textFieldExpression><![CDATA[$F{vacina_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="6" width="89" height="20" uuid="a4a54415-acdc-4c1a-9a97-ea81ad0bcfe7"/>
+				<textFieldExpression><![CDATA[$F{vacina_lote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="6" width="100" height="20" uuid="2fcc56ee-a3d1-4793-9ed9-b9090baed5c6"/>
+				<textFieldExpression><![CDATA[$F{vacina_laboratorio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="6" width="100" height="20" uuid="02cf4cff-eee5-4dce-9a76-1e6ad01e0c11"/>
+				<textFieldExpression><![CDATA[$F{vacina_data_fabricacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="6" width="100" height="20" uuid="d8db2af1-f63f-428d-8523-141cb3ec70c8"/>
+				<textFieldExpression><![CDATA[$F{vacina_data_vencimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

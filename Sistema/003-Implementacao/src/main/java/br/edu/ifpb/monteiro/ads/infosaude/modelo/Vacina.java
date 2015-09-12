@@ -64,7 +64,7 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     @Column(name = "lote", nullable = false, length = 20)
     private String lote;
 
-    @Column(name = "loboratorio", nullable = false, length = 45)
+    @Column(name = "laboratorio", nullable = false, length = 45)
     private String laboratorio;
 
     @Override
