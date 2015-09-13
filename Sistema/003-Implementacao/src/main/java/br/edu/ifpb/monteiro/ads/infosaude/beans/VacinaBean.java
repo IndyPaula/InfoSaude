@@ -7,28 +7,15 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.relatorios.RelatorioVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
-import java.io.FileOutputStream;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import org.eclipse.persistence.internal.jpa.EntityManagerImpl;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -53,8 +40,6 @@ public class VacinaBean {
     private Date dataInicio;
 
     private Date dataFim;
-    
-    private StreamedContent arquivo;
 
     @Inject
     RelatorioVacina relatorioVacina;
@@ -145,7 +130,6 @@ public class VacinaBean {
     public void relatorioVacinaDataValidade() {
 
         relatorioVacina.relatorioVacinaPorDataDeValidade(this.dataInicio, this.dataFim);
-        arquivo = relatorioVacina.baixarRelatorio(this.dataInicio, this.dataFim);
 
     }
 
@@ -160,8 +144,10 @@ public class VacinaBean {
     public List<Vacina> getVacinas() {
         try {
             return vacinaService.buscarTudo();
+
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VacinaBean.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return Collections.emptyList();
     }
@@ -210,8 +196,4 @@ public class VacinaBean {
         this.dataFim = dataFim;
     }
 
-    public StreamedContent getArquivo() {
-        return arquivo;
-    }
-    
 }

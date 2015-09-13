@@ -37,15 +37,11 @@
 
 
                         <p:commandButton value="Gerar Relatório" action="#{vacinaBean.relatorioVacinaDataValidade()}" 
-                                         id="btRelatorio" update="mensagem"
-                                         ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                            <p:fileDownload value="#{vacinaBean.arquivo}" />
-
+                                         id="btRelatorio" update="mensagem"  onclick="this.form.target = '_blank'"
+                                         ajax="false" icon="ui-icon-arrowthick-1-s">
                         </p:commandButton>
 
-
                     </p:fieldset>
-
 
                 </h:form>
 
