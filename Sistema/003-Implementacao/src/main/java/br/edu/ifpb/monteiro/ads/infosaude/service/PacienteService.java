@@ -37,16 +37,16 @@ public class PacienteService extends GenericoService<Paciente> implements Pacien
 
         try {
 
-            Paciente vacinador = null;
+            Paciente paciente = null;
 
             if (id == null) {
-                vacinador = dao.buscarPorCampo(campo, valor);
-                if (vacinador != null) {
+                paciente = dao.buscarPorCampo(campo, valor);
+                if (paciente != null) {
                     throw new DaoExcecoes("O "+campo.toUpperCase()+" informado pertence a outra pessoa, por favor informe outro.");
                 }
             } else {
-                vacinador = dao.buscarPorCampo(campo, valor);
-                if (vacinador != null && id != vacinador.getId()) {
+                paciente = dao.buscarPorCampo(campo, valor);
+                if (paciente != null && id != paciente.getId()) {
                     throw new DaoExcecoes("O "+campo.toUpperCase()+" informado pertence a outra pessoa, por favor informe outro.");
                 }
                 return true;

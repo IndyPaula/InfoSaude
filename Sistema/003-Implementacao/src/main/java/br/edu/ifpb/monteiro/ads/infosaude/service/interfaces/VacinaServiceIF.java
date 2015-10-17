@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.infosaude.service.interfaces;
 
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
+import java.util.Date;
 
 /**
  *
@@ -9,4 +10,8 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
  */
 public interface VacinaServiceIF extends ServiceIF<Vacina> {
 
+    public void relatorioVacinaPorDataDeValidade(Date dataInicio, Date dataFim);
+
+    public void relatorioVacinaImunobiologico(Date dataInicio, Date dataFim);
+    
 }

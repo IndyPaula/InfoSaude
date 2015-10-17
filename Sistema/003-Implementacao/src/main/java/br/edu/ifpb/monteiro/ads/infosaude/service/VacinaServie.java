@@ -4,8 +4,10 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
+import br.edu.ifpb.monteiro.ads.infosaude.relatorios.RelatorioVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -18,6 +20,9 @@ import javax.inject.Inject;
 public class VacinaServie extends GenericoService<Vacina> implements VacinaServiceIF, Serializable {
 
     private static final Long serialVersionUID = 1L;
+
+    @Inject
+    RelatorioVacina relatorioVacina;
 
     @Inject
     private transient VacinaDaoIF dao;
@@ -38,6 +43,15 @@ public class VacinaServie extends GenericoService<Vacina> implements VacinaServi
         } catch (DaoExcecoes ex) {
             Logger.getLogger(VacinaServie.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    @Override
+    public void relatorioVacinaPorDataDeValidade(Date dataInicio, Date dataFim) {
+        relatorioVacina.relatorioVacinaPorDataDeValidade(dataInicio, dataFim);
+    }
+
+    @Override
+    public void relatorioVacinaImunobiologico(Date dataInicio, Date dataFim) {
+        relatorioVacina.relatorioVacinaImunobiologico(dataInicio, dataFim);
     }
 }

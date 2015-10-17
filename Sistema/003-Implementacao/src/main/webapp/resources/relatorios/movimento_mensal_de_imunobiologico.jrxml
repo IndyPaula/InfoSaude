@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="movimento_mensal_de_imunobiológico" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="93123e78-391d-47f0-85d7-1e6794293746">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="data_inicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_fim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     unidade_saude."numero" AS unidade_saude_numero,
+     unidade_saude."endereco_cidade" AS unidade_saude_endereco_cidade,
+     vacina."id" AS vacina_id,
+     vacina."nome" AS vacina_nome,
+     vacina."data_vencimento" AS vacina_data_vencimento,
+     vacina."quantidade_doses_recebidas" AS vacina_quantidade_doses_recebidas,
+     vacina."quantidade_doses_remanejadas" AS vacina_quantidade_doses_remanejadas,
+     vacina."quantidade_doses_solicitadas" AS vacina_quantidade_doses_solicitadas,
+ vacina_estoque_anterior($P{data_inicial}, vacina."nome") AS vacina_estoque_anterior,
+vacina_doses_distribuidas_utilizadas($P{data_inicial}, $P{data_fim}, vacina."nome") AS vacina_doses_distribuidas_utilizadas,
+vacina_doses_inutilizadas($P{data_inicial}, $P{data_fim}, vacina."nome") AS vacina_doses_inutilizadas
+FROM
+     "public"."vacina" vacina,
+     "public"."unidade_saude" unidade_saude]]>
+	</queryString>
+	<field name="unidade_saude_numero" class="java.lang.Integer"/>
+	<field name="unidade_saude_endereco_cidade" class="java.lang.String"/>
+	<field name="vacina_id" class="java.lang.Long"/>
+	<field name="vacina_nome" class="java.lang.String"/>
+	<field name="vacina_data_vencimento" class="java.sql.Date"/>
+	<field name="vacina_quantidade_doses_recebidas" class="java.lang.Integer"/>
+	<field name="vacina_quantidade_doses_remanejadas" class="java.lang.Integer"/>
+	<field name="vacina_quantidade_doses_solicitadas" class="java.lang.Integer"/>
+	<field name="vacina_estoque_anterior" class="java.lang.Long"/>
+	<field name="vacina_doses_distribuidas_utilizadas" class="java.lang.Long"/>
+	<field name="vacina_doses_inutilizadas" class="java.lang.Long"/>
+	<variable name="vacina_quantidade_doses_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<filterExpression><![CDATA[new Boolean(true)]]></filterExpression>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="47" width="117" height="32" uuid="2a65f5e0-a9f8-45b7-87d0-49606b08b20e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ministério da Saúde CENEPI / COPNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="31" width="322" height="32" uuid="eae684cf-f577-4d7a-9a89-17a17beee2a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5ª GERÊNCIA REGIONAL DE SAÚDE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="157" height="44" uuid="721591c6-bafc-4950-a836-78a18fc88568"/>
+				<imageExpression><![CDATA["/home/jefferson/NetBeansProjects/InfoSaude/Sistema/003-Implementacao/src/main/webapp/resources/imagens/info_saude relatório.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="483" y="6" width="103" height="67" uuid="4fdbf1ee-97f0-4c18-9861-d0dab2fe4e53"/>
+				<imageExpression><![CDATA["/home/jefferson/Área de Trabalho/85px-Brasao_monteiro.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="843f3dcc-5fee-45a9-a51c-d6151268f3c8"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVIMENTO MENSAL DE IMUNOBIOLÓGICO]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="0" y="63" width="157" height="15" uuid="ceb89967-d17d-47f1-a26a-2f5d81606e33"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="46" width="157" height="17" uuid="3519ed89-e93a-4c86-ab32-8f06adf0b02d"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="46" width="265" height="17" uuid="e0a4d0b9-2ce8-490d-91c4-38351b286c00"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Municipio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="46" width="133" height="17" uuid="b9dfe9b2-504e-4624-9ffc-af9860eda68f"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade de Saúde]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="422" y="62" width="133" height="16" uuid="52323683-3035-430c-ba2e-f639e7ab7549"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidade_saude_numero} != null ? $F{unidade_saude_numero} : "-"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="63" width="265" height="15" uuid="243cd603-378d-4c2f-a946-1c72a2f5db7f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidade_saude_endereco_cidade} != null ?
+$F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="89" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="10" width="555" height="79" forecolor="#C5C5C5" backcolor="#E2E2E2" uuid="182838c1-8b32-4638-b815-e1517032c37b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="10" width="88" height="79" uuid="88acd7ae-1150-4594-9ec0-d8089cc5e6c8"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imunobiológico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="10" width="58" height="79" uuid="50048f08-e08d-4c7c-bee6-7d1c733e21d5"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estoque Anterior (Saldo)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="10" width="296" height="20" uuid="3df4999f-c162-4ab8-9059-35eccb785736"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movimento de Estoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="10" width="62" height="79" uuid="323c498a-9aec-4470-86bd-f9a212138e7f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doses Solicitadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="10" width="51" height="79" uuid="ef8bab5f-b0e5-40c1-a0bf-8c0b8600073f"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estoque Atual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="30" width="63" height="20" uuid="668ca01e-245e-4032-9232-e41a1ff9dad7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="30" width="233" height="20" uuid="836e9870-6dec-4f08-b4f2-8ea5701e7274"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="50" width="63" height="39" uuid="344b9223-fa1e-4b85-9400-ca2dadf78dfd"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doses Recebidas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="50" width="73" height="39" uuid="0e7dc0c6-2a44-464d-a256-5b42e6ccf373"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doses Distribuídas  Utilizadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="50" width="77" height="39" uuid="bc982fbe-d7de-48dd-b66c-b7fa7e698d17"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doses Inutilizadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="50" width="83" height="39" uuid="39ecf247-bb0a-4bdb-ac4e-17ef21121135"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doses Remanejadas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#FEFEFE" backcolor="#DDF8FF" uuid="4ac4fe4b-44fd-493c-87fc-63dba8d556e4">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="88" height="20" uuid="881f7374-dd7a-44f9-8ec1-d55438542bdf"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="0" width="51" height="20" uuid="5e44f36a-f032-4ac0-800d-36011cecfc8d"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{vacina_estoque_anterior} != null ? $F{vacina_estoque_anterior}: 0)
++ ($F{vacina_quantidade_doses_recebidas} != null ? $F{vacina_quantidade_doses_recebidas}: 0)
+- ($F{vacina_doses_distribuidas_utilizadas} != null ? $F{vacina_doses_distribuidas_utilizadas}: 0)
+- ($F{vacina_doses_inutilizadas} != null ? $F{vacina_doses_inutilizadas}: 0)
+- ($F{vacina_quantidade_doses_remanejadas} != null ? $F{vacina_quantidade_doses_remanejadas}: 0)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="83" height="20" uuid="b688ae28-2b89-4795-8348-650f9b0ba6bf"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_doses_remanejadas} != null ? $F{vacina_quantidade_doses_remanejadas}: 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="493" y="0" width="62" height="20" uuid="91e81aaa-7794-40d8-8844-5b5064602b4c"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_doses_solicitadas} != null ? $F{vacina_quantidade_doses_solicitadas}: 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="0" width="63" height="20" uuid="21928884-4a02-4e01-a7c1-818b63d940bc"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_doses_recebidas} != null ? $F{vacina_quantidade_doses_recebidas}: 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="0" width="58" height="20" uuid="b11613b9-18f9-4e77-b48c-f32a17c94dd4"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_estoque_anterior} != null ? $F{vacina_estoque_anterior}: 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="0" width="73" height="20" uuid="7de84c06-93e0-4561-abeb-0c1dcad14ece"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_doses_distribuidas_utilizadas} != null ? $F{vacina_doses_distribuidas_utilizadas}: 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="77" height="20" uuid="d4b421e6-6098-4637-b80c-8f6655d32ac6"/>
+				<box leftPadding="4">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_doses_inutilizadas} != null ? $F{vacina_doses_inutilizadas}: 0]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="34" width="100" height="20" uuid="d5df6397-2789-47ca-abbd-7720fc81f0ed"/>
+				<textFieldExpression><![CDATA["Página: "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

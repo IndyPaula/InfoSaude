@@ -138,4 +138,43 @@ public class RelatorioVacina {
         }
     }
 
+    public void relatorioVacinaImunobiologico(Date dataInicio, Date dataFim) {
+
+      try {
+
+            String arquivoJASPER = pegarCaminhoRelatorio() + "movimento_mensal_de_imunobiologico.jasper";
+
+            Map<String, Object> parametros = new HashMap<String, Object>();
+
+            parametros.put("data_inicio", dataInicio);
+
+            parametros.put("data_fim", dataFim);
+
+            em.getTransaction().begin();
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(arquivoJASPER, parametros, getConexao());
+
+            byte[] b = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            
+            res.setContentType("application/pdf");
+            
+            res.setHeader("Content-disposition", "inline;filename=Relatório Imunobiológico no período de " 
+                    + dataInicio + " a " + dataFim + ".pdf");
+            
+            res.getOutputStream().write(b);
+            
+            res.getCharacterEncoding();
+            
+            FacesContext.getCurrentInstance().responseComplete();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    
+    
+    
+    
 }

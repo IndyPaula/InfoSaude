@@ -4,7 +4,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
-import br.edu.ifpb.monteiro.ads.infosaude.relatorios.RelatorioVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.util.ArrayList;
@@ -40,9 +39,6 @@ public class VacinaBean {
     private Date dataInicio;
 
     private Date dataFim;
-
-    @Inject
-    RelatorioVacina relatorioVacina;
 
     public VacinaBean() {
     }
@@ -99,6 +95,7 @@ public class VacinaBean {
 
     public String salvar() {
         try {
+            vacina.setDataCadastro(getDataAtual());
             vacinaService.salvar(vacina);
             JsfUtil.addSuccessMessage("Vacina cadastrada com sucesso");
 
@@ -127,12 +124,20 @@ public class VacinaBean {
         return null;
     }
 
-    public void relatorioVacinaDataValidade() {
+    public void relatorioVacinaPorDataDeValidade() {
 
-        if (this.dataInicio.before(this.dataFim)){
-            relatorioVacina.relatorioVacinaPorDataDeValidade(this.dataInicio, this.dataFim);
+        if (this.dataInicio.before(this.dataFim)) {
+            vacinaService.relatorioVacinaPorDataDeValidade(this.dataInicio, this.dataFim);
         } else {
-           JsfUtil.addErrorMessage("Data inicial deve ser anterior a data final");   
+            JsfUtil.addErrorMessage("Data inicial deve ser anterior a data final");
+        }
+    }
+
+    public void relatorioVacinaImunobiologico() {
+        if (this.dataInicio.before(this.dataFim)) {
+            vacinaService.relatorioVacinaImunobiologico(this.dataInicio, this.dataFim);
+        } else {
+            JsfUtil.addErrorMessage("Data inicial deve ser anterior a data final");
         }
     }
 

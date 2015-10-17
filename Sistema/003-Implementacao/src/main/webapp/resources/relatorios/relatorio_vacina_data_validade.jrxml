@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_vacina_data_validade" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce4fcbc9-7154-4094-9f93-088e23370685">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="data_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_fim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     vacina."data_fabricacao" AS vacina_data_fabricacao,
+     vacina."data_vencimento" AS vacina_data_vencimento,
+     vacina."laboratorio" AS vacina_laboratorio,
+     vacina."nome" AS vacina_nome,
+     vacina."lote" AS vacina_lote,
+     vacina."quantidade_doses_recebidas" AS doses,
+     vacina."id" AS vacina_id
+FROM
+     "public"."vacina" vacina
+WHERE
+     vacina."data_vencimento" BETWEEN $P{data_inicio} and $P{data_fim}]]>
+	</queryString>
+	<field name="vacina_data_fabricacao" class="java.sql.Date"/>
+	<field name="vacina_data_vencimento" class="java.sql.Date"/>
+	<field name="vacina_laboratorio" class="java.lang.String"/>
+	<field name="vacina_nome" class="java.lang.String"/>
+	<field name="vacina_lote" class="java.lang.String"/>
+	<field name="doses" class="java.lang.Integer"/>
+	<field name="vacina_id" class="java.lang.Long"/>
+	<group name="vacina_nome">
+		<groupExpression><![CDATA[$F{vacina_nome}]]></groupExpression>
+	</group>
+	<group name="vacina_data_vencimento">
+		<groupExpression><![CDATA[$F{vacina_data_vencimento}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<image>
+				<reportElement x="143" y="0" width="268" height="93" uuid="2e2b9b44-a90b-46a6-b335-3465604b6e0b"/>
+				<imageExpression><![CDATA["/home/jefferson/NetBeansProjects/InfoSaude/Sistema/003-Implementacao/src/main/webapp/resources/imagens/info_saude relatório.jpg"]]></imageExpression>
+			</image>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="434" y="73" width="121" height="20" uuid="1a677077-ce7f-449c-877f-4ba56b5d4d0b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="73" width="100" height="20" uuid="19bfb352-23f1-4a01-a1c9-aa1f255988f4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Monteiro-PB, ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="11" width="555" height="27" uuid="c0c7a61b-fab3-4fda-adb1-6934c4cea0d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vacinas por data de validade"]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<textField>
+					<reportElement x="50" y="42" width="255" height="27" uuid="2262607d-89b1-4ed2-9cb6-4051096b6ff0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vacinas com data de vencimento entre: "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="405" y="42" width="24" height="27" uuid="57b2df6c-36b0-4552-a5fd-d0dd29d14036"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["e"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd MMMMM yyyy">
+					<reportElement x="305" y="42" width="100" height="27" uuid="3141c06d-18d1-4be3-b240-fc7555c1d079"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{data_inicio}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd MMMMM yyyy">
+					<reportElement x="420" y="42" width="97" height="27" uuid="17f64fa9-f4fe-4fda-9e20-91d9a47559e6"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{data_fim}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#FDFBFB" backcolor="#DEDEDE" uuid="70259c2c-54e6-4d81-be0c-658ff50657e0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="115" height="20" uuid="230817de-8289-4580-a0c3-2b331ba5a31d"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="88" height="20" uuid="aa06c569-0b1b-4fec-b7c3-e83357cc2594"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="0" width="95" height="20" uuid="0060e92c-0126-460d-85c8-6ff503fb863c"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laboratório]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="113" height="20" uuid="3ff4cfab-9678-4f61-990a-d8bfa588de19"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de fabricação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="0" width="121" height="20" uuid="c4559773-833f-4c8a-a04c-645623cd2f75"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de vencimento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="ba0a3725-a454-468a-8bb7-8f1acc126a6c"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#FEFEFE" backcolor="#ADE6FE" uuid="c3eb74f5-860d-478c-baae-b29d165de7dc">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="120" y="0" width="88" height="20" uuid="a4a54415-acdc-4c1a-9a97-ea81ad0bcfe7"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_lote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="0" width="95" height="20" uuid="2fcc56ee-a3d1-4793-9ed9-b9090baed5c6"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_laboratorio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="315" y="0" width="113" height="20" uuid="02cf4cff-eee5-4dce-9a76-1e6ad01e0c11"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_data_fabricacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="434" y="0" width="121" height="20" uuid="d8db2af1-f63f-428d-8523-141cb3ec70c8"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_data_vencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="115" height="20" uuid="7330b7d8-b111-4c2c-bd9e-9aee403cae7d"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["  " + $F{vacina_nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="3c4a87b3-88e0-499c-9a9e-aa26a7741193"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="455" y="10" width="100" height="20" uuid="cb49a31b-9d31-4ab7-acb5-a816657b3c4a"/>
+				<textFieldExpression><![CDATA["Página:" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

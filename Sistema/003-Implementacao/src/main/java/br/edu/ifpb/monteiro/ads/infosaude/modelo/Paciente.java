@@ -2,8 +2,12 @@ package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,7 +24,7 @@ public class Paciente extends Pessoa implements Serializable {
     @Column(name = "numero_prontuario", nullable = false, unique = true)
     private Integer numeroProntuario;
 
-    @Column(name = "cartaosus", nullable = false, length = 15, unique = true)
+    @Column(name = "cartao_sus", nullable = true, length = 15, unique = true)
     private String cartaoSUS;
 
     @Temporal(TemporalType.DATE)
@@ -29,6 +33,10 @@ public class Paciente extends Pessoa implements Serializable {
 
     @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 14)
     private String cpf;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
+    @JoinColumn(name = "atendimento_imunizacao_id")
+    private List<AtendimentoImunizacao> imunizacaos;
 
     public Integer getNumeroProntuario() {
         return numeroProntuario;
@@ -61,5 +69,13 @@ public class Paciente extends Pessoa implements Serializable {
     public void setCartaoSUS(String cartaoSUS) {
         this.cartaoSUS = cartaoSUS;
     }
-    
+
+    public List<AtendimentoImunizacao> getImunizacaos() {
+        return imunizacaos;
+    }
+
+    public void setImunizacaos(List<AtendimentoImunizacao> imunizacaos) {
+        this.imunizacaos = imunizacaos;
+    }
+
 }

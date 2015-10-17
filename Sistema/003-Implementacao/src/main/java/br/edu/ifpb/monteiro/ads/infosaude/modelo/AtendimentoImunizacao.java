@@ -14,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -49,15 +51,15 @@ public class AtendimentoImunizacao implements Identificavel<AtendimentoImunizaca
     @Column(name = "dose", nullable = false, length = 20)
     private EnumDoseVacina dose;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private transient Vacina vacina;
+    @ManyToOne
+    private Vacina vacina;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estrategia_imunizacao", length = 25, nullable = false)
     private EnumEstrategiaImunizacao estrategiaImunizacao;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private transient Paciente paciente;
+    @ManyToOne
+    private Paciente paciente;
 
     @Override
     public Long getId() {

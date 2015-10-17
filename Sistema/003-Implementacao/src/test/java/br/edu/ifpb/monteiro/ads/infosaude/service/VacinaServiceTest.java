@@ -47,7 +47,7 @@ public class VacinaServiceTest {
         vacinaDaUbs.setLaboratorio("123");
         vacinaDaUbs.setLote("123");
         vacinaDaUbs.setNome("123");
-        vacinaDaUbs.setQuantidadeDoses(3);
+        vacinaDaUbs.setQuantidadeDosesRecebidas(3);
         vacinaDaUbs.setReacoesAdversas("123");
         vacinaDaUbs.setViaAdministracao(EnumViaAdministracao.ORAL);
 

@@ -1,14 +1,78 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../../template/template_base.xhtml">
 
             <ui:define name="centro">
-                centro
+
+                <span id="titulo_pagina">Relatorio de Vacinas</span>
+                <p:accordionPanel style="margin-top: 30px">
+                    <p:tab title="Data de validade">
+
+                        <h:form id="vacina_relatorio_validade">
+                            <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
+
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:outputLabel for="data_inicio_validade" value="Data início:"/>
+                                <p:calendar  id="data_inicio_validade" locale="pt_BR" navigator="true" 
+                                             value="#{vacinaBean.dataInicio}"
+                                             required="true"
+                                             readonlyInput="true"/>
+
+                                <p:outputLabel value="Data Fim: " for="data_fim_validade" />
+                                <p:calendar locale="pt_BR" navigator="true"  
+                                            value="#{vacinaBean.dataFim}"
+                                            required="true" id="data_fim_validade"
+                                            readonlyInput="true"/>
+
+                            </h:panelGrid>
+                            
+                             <p:commandButton value="Visualizar Relatório" action="#{vacinaBean.relatorioVacinaPorDataDeValidade()}" 
+                                                 id="btRelatorio" update="mensagem"  onclick="this.form.target = '_blank'"
+                                                 ajax="false" icon="ui-icon-zoomout" style="">
+                                </p:commandButton>
+                            
+                        </h:form>
+                    </p:tab>
+
+
+                    <p:tab title="Controle Imunobiológico">
+                        <h:form id="vacina_relatorio_imunobiologico">
+                            <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:outputLabel for="data_inicio_imunobiologico" value="Data início:"/>
+                                <p:calendar  id="data_inicio_imunobiologico" locale="pt_BR" navigator="true" 
+                                             value="#{vacinaBean.dataInicio}"
+                                             required="true"
+                                             readonlyInput="true"/>
+
+                                <p:outputLabel value="Data Fim: " for="data_fim_imunobiologico" />
+                                <p:calendar locale="pt_BR" navigator="true"  
+                                            value="#{vacinaBean.dataFim}"
+                                            required="true" id="data_fim_imunobiologico"
+                                            readonlyInput="true"/>
+
+                            </h:panelGrid>
+
+                            <p:commandButton value="Visualizar Relatório" action="#{vacinaBean.relatorioVacinaImunobiologico()}" 
+                                             id="btRelatorio" update="mensagem"  onclick="this.form.target = '_blank'"
+                                             ajax="false" icon="ui-icon-zoomout" >
+                            </p:commandButton>
+                            
+                        </h:form>
+                    </p:tab>
+
+
+                </p:accordionPanel>
+
+
+
             </ui:define>
 
         </ui:composition>

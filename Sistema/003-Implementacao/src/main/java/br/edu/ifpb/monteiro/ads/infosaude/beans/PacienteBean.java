@@ -52,7 +52,7 @@ public class PacienteBean {
         try {
 
             pacienteService.verificaCampoUnique("cpf", paciente.getCpf(),null);
-            pacienteService.verificaCampoUnique("cartaosus", paciente.getCartaoSUS(), null);
+            pacienteService.verificaCampoUnique("cartao_sus", paciente.getCartaoSUS(), null);
             pacienteService.salvar(paciente);
             JsfUtil.addSuccessMessage("Usuário da UBS cadastrado com sucesso");
 

@@ -4,7 +4,9 @@ import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -50,8 +54,8 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     @Column(name = "reacoes_adversas", length = 255)
     private String reacoesAdversas;
 
-    @Column(name = "quantidade_doses", nullable = false)
-    private Integer quantidadeDoses;
+    @Column(name = "quantidade_doses_recebidas", nullable = false)
+    private Integer quantidadeDosesRecebidas;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_fabricacao", nullable = false)
@@ -66,6 +70,23 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
 
     @Column(name = "laboratorio", nullable = false, length = 45)
     private String laboratorio;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_cadastro", nullable = false)
+    private Date dataCadastro;
+
+    @Column(name = "quantidade_doses_inutilizadas")
+    private Integer quantidadeDosesInutilizadas;
+
+    @Column(name = "quantidade_doses_remanejadas")
+    private Integer quantidadeDosesRemanejadas;
+
+    @Column(name = "quantidade_doses_solicitadas")
+    private Integer quantidadeDosesSolicitadas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacina")
+    @JoinColumn(name = "atendimento_imunizacao_id")
+    private List<AtendimentoImunizacao> imunizacoes;
 
     @Override
     public Long getId() {
@@ -149,12 +170,12 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
         this.lote = lote;
     }
 
-    public Integer getQuantidadeDoses() {
-        return quantidadeDoses;
+    public Integer getQuantidadeDosesRecebidas() {
+        return quantidadeDosesRecebidas;
     }
 
-    public void setQuantidadeDoses(Integer quantidadeDoses) {
-        this.quantidadeDoses = quantidadeDoses;
+    public void setQuantidadeDosesRecebidas(Integer quantidadeDosesRecebidas) {
+        this.quantidadeDosesRecebidas = quantidadeDosesRecebidas;
     }
 
     public String getLaboratorio() {
@@ -163,6 +184,46 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
 
     public void setLaboratorio(String laboratorio) {
         this.laboratorio = laboratorio;
+    }
+
+    public List<AtendimentoImunizacao> getImunizacoes() {
+        return imunizacoes;
+    }
+
+    public void setImunizacoes(List<AtendimentoImunizacao> imunizacoes) {
+        this.imunizacoes = imunizacoes;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Integer getQuantidadeDosesInutilizadas() {
+        return quantidadeDosesInutilizadas;
+    }
+
+    public void setQuantidadeDosesInutilizadas(Integer quantidadeDosesInutilizadas) {
+        this.quantidadeDosesInutilizadas = quantidadeDosesInutilizadas;
+    }
+
+    public Integer getQuantidadeDosesRemanejadas() {
+        return quantidadeDosesRemanejadas;
+    }
+
+    public void setQuantidadeDosesRemanejadas(Integer quantidadeDosesRemanejadas) {
+        this.quantidadeDosesRemanejadas = quantidadeDosesRemanejadas;
+    }
+
+    public Integer getQuantidadeDosesSolicitadas() {
+        return quantidadeDosesSolicitadas;
+    }
+
+    public void setQuantidadeDosesSolicitadas(Integer quantidadeDosesSolicitadas) {
+        this.quantidadeDosesSolicitadas = quantidadeDosesSolicitadas;
     }
 
     @Override
