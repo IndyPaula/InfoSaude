@@ -4,6 +4,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
+import br.edu.ifpb.monteiro.ads.infosaude.relatorios.RelatorioVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.util.ArrayList;
@@ -36,6 +37,13 @@ public class VacinaBean {
 
     private Vacina vacinaSelecionada;
 
+    private Date dataInicio;
+
+    private Date dataFim;
+
+    @Inject
+    RelatorioVacina relatorioVacina;
+
     public VacinaBean() {
     }
 
@@ -57,10 +65,11 @@ public class VacinaBean {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
             return null;
         } else {
-           return "editar_vacina.xhtml";
+            return "editar_vacina.xhtml";
         }
-        
+
     }
+
     public void selecinaExcluir() {
 
         if (vacinaSelecionada == null) {
@@ -68,7 +77,7 @@ public class VacinaBean {
 
         } else {
             remover();
-            
+
         }
     }
 
@@ -117,6 +126,16 @@ public class VacinaBean {
         }
         return null;
     }
+
+    public void relatorioVacinaDataValidade() {
+
+        if (this.dataInicio.before(this.dataFim)){
+            relatorioVacina.relatorioVacinaPorDataDeValidade(this.dataInicio, this.dataFim);
+        } else {
+           JsfUtil.addErrorMessage("Data inicial deve ser anterior a data final");   
+        }
+    }
+
     public Vacina getVacina() {
         return vacina;
     }
@@ -128,8 +147,10 @@ public class VacinaBean {
     public List<Vacina> getVacinas() {
         try {
             return vacinaService.buscarTudo();
+
         } catch (ServiceExcecoes ex) {
-            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VacinaBean.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return Collections.emptyList();
     }
@@ -160,6 +181,22 @@ public class VacinaBean {
 
     public void setVacinaSelecionada(Vacina vacinaSelecionada) {
         this.vacinaSelecionada = vacinaSelecionada;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 
 }
