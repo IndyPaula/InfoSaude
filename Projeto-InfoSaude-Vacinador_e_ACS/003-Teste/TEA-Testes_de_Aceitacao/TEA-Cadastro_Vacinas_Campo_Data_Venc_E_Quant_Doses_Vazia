@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8084/InfoSaude/resources/paginas/acs/adicionar_acs.xhtml" />
+<title>Cadastro_Vacinas_Campo_Data_Venc_E_Quant_Doses_Vazia</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Cadastro_Vacinas_Campo_Data_Venc_E_Quant_Doses_Vazia</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/InfoSaude/resources/paginas/vacina/adicionar_vacina.xhtml</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:lote</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:data_fabricacao_input</td>
+	<td>12/06/14</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cadastrarVacina:data_vencimento_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:laboratorio</td>
+	<td>lab</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:nome_vacina</td>
+	<td>nome</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:j_idt57</td>
+	<td>inst</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:j_idt59</td>
+	<td>inst</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:j_idt61</td>
+	<td>inst</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cadastrarVacina:j_idt66</td>
+	<td>inst</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=cadastrarVacina:j_idt67</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//div[@id='cadastrarVacina:mensages_container']/div/div/div[2]/span</td>
+	<td>erro_data_venc_vazia</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
