@@ -14,9 +14,9 @@
                 <h:form id="cadastrarVacina" >
                     <p:growl id="mensages" showDetail="false" life="7000"/>
                     <span id="titulo_pagina">Atualizar informações da Vacina </span>
-                    <p:fieldset legend="Altualizar informações da Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 510px;">
-                          <h:inputHidden value="#{vacinaBean.vacina.id}"  />
-                        <h:panelGrid columns="2"  style="text-align: left;">
+                    <p:fieldset legend="Altualizar informações da Vacina" style="width: 90%; text-align: center; margin-top: 80px; height: 650px;">
+                        <h:inputHidden value="#{vacinaBean.vacina.id}"  />
+                        <h:panelGrid columns="2"  style="text-align: left;" cellpadding="10px">
 
                             <p:outputLabel for="lote" value="Lote: "/>
 
@@ -31,15 +31,15 @@
                                                      value="#{vacinaBean.vacina.dataFabricacao}"
                                                      style="margin-right: 50px;" required="true"
                                                      readonlyInput="true"/>
-                                                     
+
 
                                         <p:outputLabel value="Data de Venc.: " for="data_vencimento" />
                                         <p:calendar locale="pt_BR" navigator="true"  
                                                     mindate="#{vacinaBean.dataAtual}"
                                                     value="#{vacinaBean.vacina.dataVencimento}"
                                                     required="true" id="data_vencimento"
-                                                   readonlyInput="true" />
-                                                    
+                                                    readonlyInput="true" />
+
 
                                     </h:panelGrid>
                                 </p:column>
@@ -57,10 +57,16 @@
                                                itemLabel="#{via}" itemValue="#{via}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="Quant. doses " for="quant_dose"/>
-                            <pe:inputNumber id="quant_dose" value="#{vacinaBean.vacina.quantidadeDoses}" 
-                                            maxValue="99" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses é obrigatória"
+                             <p:outputLabel value="Quant. doses recebida:" for="quant_dose_recebida"/>
+                             <pe:inputNumber id="quant_dose_recebida" value="#{vacinaBean.vacina.quantidadeDosesRecebidas}" 
+                                            maxValue="999" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses é obrigatória"
                                             minValue="1"/>
+
+                            <p:outputLabel value="Quant. doses solicitada:" for="quant_dose_solicitada"/>
+                            <pe:inputNumber id="quant_dose_solicitada" value="#{vacinaBean.vacina.quantidadeDosesSolicitadas}" 
+                                            maxValue="999" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses solicitada é obrigatória"
+                                            minValue="1"/>
+
                             <p:outputLabel value="Instruções de Administração: "/>
                             <p:inputTextarea maxlength="670"  style="width: 670px;" 
                                              value="#{vacinaBean.vacina.instrucaoAdministracao}"
