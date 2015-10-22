@@ -51,11 +51,11 @@
                             <p:inputText value="#{vacinaBean.vacina.nome}" size="60" required="true" id="nome_vacina"/>
 
                             <p:outputLabel value="Via de Administração:"/>
-                            <p:selectOneMenu editable="true" id="viaAdmin" value="#{vacinaBean.vacina.viaAdministracao}">
+                            <h:selectOneMenu id="viaAdmin" value="#{vacinaBean.vacina.viaAdministracao}">
                                 <f:selectItem itemLabel="Selecione"/>
                                 <f:selectItems var="via" value="#{vacinaBean.viaAdministracao}"
                                                itemLabel="#{via}" itemValue="#{via}"/>
-                            </p:selectOneMenu>
+                            </h:selectOneMenu>
 
                              <p:outputLabel value="Quant. doses recebida:" for="quant_dose_recebida"/>
                              <pe:inputNumber id="quant_dose_recebida" value="#{vacinaBean.vacina.quantidadeDosesRecebidas}" 
