@@ -65,8 +65,8 @@ FROM
 				<imageExpression><![CDATA["/home/jefferson/NetBeansProjects/InfoSaude/Sistema/003-Implementacao/src/main/webapp/resources/imagens/info_saude relatório.jpg"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="483" y="6" width="103" height="67" uuid="4fdbf1ee-97f0-4c18-9861-d0dab2fe4e53"/>
-				<imageExpression><![CDATA["/home/jefferson/Área de Trabalho/85px-Brasao_monteiro.jpg"]]></imageExpression>
+				<reportElement x="479" y="0" width="62" height="79" uuid="d033a2de-bb34-483f-99d4-5b94f0516af0"/>
+				<imageExpression><![CDATA["/home/jefferson/NetBeansProjects/InfoSaude/Sistema/003-Implementacao/src/main/webapp/resources/imagens/Brasao_monteiro.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

@@ -75,18 +75,16 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
     @Column(name = "data_cadastro", nullable = false)
     private Date dataCadastro;
 
-    @Column(name = "quantidade_doses_inutilizadas")
-    private Integer quantidadeDosesInutilizadas;
-
-    @Column(name = "quantidade_doses_remanejadas")
-    private Integer quantidadeDosesRemanejadas;
-
     @Column(name = "quantidade_doses_solicitadas")
     private Integer quantidadeDosesSolicitadas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacina")
     @JoinColumn(name = "atendimento_imunizacao_id")
     private List<AtendimentoImunizacao> imunizacoes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacina")
+    @JoinColumn(name = "controle_estoque_vacina_id")
+    private List<ControleEstoqueVacina> controleEstoqueVacina;
 
     @Override
     public Long getId() {
@@ -202,28 +200,20 @@ public class Vacina implements Identificavel<Vacina>, Serializable {
         this.dataCadastro = dataCadastro;
     }
 
-    public Integer getQuantidadeDosesInutilizadas() {
-        return quantidadeDosesInutilizadas;
-    }
-
-    public void setQuantidadeDosesInutilizadas(Integer quantidadeDosesInutilizadas) {
-        this.quantidadeDosesInutilizadas = quantidadeDosesInutilizadas;
-    }
-
-    public Integer getQuantidadeDosesRemanejadas() {
-        return quantidadeDosesRemanejadas;
-    }
-
-    public void setQuantidadeDosesRemanejadas(Integer quantidadeDosesRemanejadas) {
-        this.quantidadeDosesRemanejadas = quantidadeDosesRemanejadas;
-    }
-
     public Integer getQuantidadeDosesSolicitadas() {
         return quantidadeDosesSolicitadas;
     }
 
     public void setQuantidadeDosesSolicitadas(Integer quantidadeDosesSolicitadas) {
         this.quantidadeDosesSolicitadas = quantidadeDosesSolicitadas;
+    }
+
+    public List<ControleEstoqueVacina> getControleEstoqueVacina() {
+        return controleEstoqueVacina;
+    }
+
+    public void setControleEstoqueVacina(List<ControleEstoqueVacina> controleEstoqueVacina) {
+        this.controleEstoqueVacina = controleEstoqueVacina;
     }
 
     @Override
