@@ -13,7 +13,7 @@
 		<![CDATA[SELECT
      vacina_estoque_anterior($P{data_inicial},vacina."nome") AS vacina_estoque_anterior,
      vacina_doses_distribuidas_utilizadas($P{data_inicial},$P{data_fim},vacina."nome") AS vacina_doses_distribuidas_utilizadas,
-     vacina_quantidade_estoque(vacina."id",$P{data_inicial},$P{data_fim}) AS vacina_quantidade_estoque,
+     vacina_quantidade_estoque(vacina."id") AS vacina_quantidade_estoque,
  vacina_quantidade_remanejada(vacina."id",$P{data_inicial},$P{data_fim}) AS  vacina_quantidade_remanejada,
 vacina_quantidade_inutilizada(vacina."id",$P{data_inicial},$P{data_fim}) AS vacina_quantidade_inutilizada,
      unidade_saude."numero" AS unidade_saude_numero,
