@@ -11,32 +11,34 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
+     vacina_estoque_anterior($P{data_inicial},vacina."nome") AS vacina_estoque_anterior,
+     vacina_doses_distribuidas_utilizadas($P{data_inicial},$P{data_fim},vacina."nome") AS vacina_doses_distribuidas_utilizadas,
+     vacina_quantidade_estoque(vacina."id",$P{data_inicial},$P{data_fim}) AS vacina_quantidade_estoque,
+ vacina_quantidade_remanejada(vacina."id",$P{data_inicial},$P{data_fim}) AS  vacina_quantidade_remanejada,
+vacina_quantidade_inutilizada(vacina."id",$P{data_inicial},$P{data_fim}) AS vacina_quantidade_inutilizada,
      unidade_saude."numero" AS unidade_saude_numero,
      unidade_saude."endereco_cidade" AS unidade_saude_endereco_cidade,
      vacina."id" AS vacina_id,
      vacina."nome" AS vacina_nome,
      vacina."data_vencimento" AS vacina_data_vencimento,
      vacina."quantidade_doses_recebidas" AS vacina_quantidade_doses_recebidas,
-     vacina."quantidade_doses_remanejadas" AS vacina_quantidade_doses_remanejadas,
-     vacina."quantidade_doses_solicitadas" AS vacina_quantidade_doses_solicitadas,
- vacina_estoque_anterior($P{data_inicial}, vacina."nome") AS vacina_estoque_anterior,
-vacina_doses_distribuidas_utilizadas($P{data_inicial}, $P{data_fim}, vacina."nome") AS vacina_doses_distribuidas_utilizadas,
-vacina_doses_inutilizadas($P{data_inicial}, $P{data_fim}, vacina."nome") AS vacina_doses_inutilizadas
+     vacina."quantidade_doses_solicitadas" AS vacina_quantidade_doses_solicitadas
 FROM
      "public"."vacina" vacina,
      "public"."unidade_saude" unidade_saude]]>
 	</queryString>
+	<field name="vacina_estoque_anterior" class="java.lang.Long"/>
+	<field name="vacina_doses_distribuidas_utilizadas" class="java.lang.Long"/>
+	<field name="vacina_quantidade_estoque" class="java.lang.Long"/>
+	<field name="vacina_quantidade_remanejada" class="java.lang.Long"/>
+	<field name="vacina_quantidade_inutilizada" class="java.lang.Long"/>
 	<field name="unidade_saude_numero" class="java.lang.Integer"/>
 	<field name="unidade_saude_endereco_cidade" class="java.lang.String"/>
 	<field name="vacina_id" class="java.lang.Long"/>
 	<field name="vacina_nome" class="java.lang.String"/>
 	<field name="vacina_data_vencimento" class="java.sql.Date"/>
 	<field name="vacina_quantidade_doses_recebidas" class="java.lang.Integer"/>
-	<field name="vacina_quantidade_doses_remanejadas" class="java.lang.Integer"/>
 	<field name="vacina_quantidade_doses_solicitadas" class="java.lang.Integer"/>
-	<field name="vacina_estoque_anterior" class="java.lang.Long"/>
-	<field name="vacina_doses_distribuidas_utilizadas" class="java.lang.Long"/>
-	<field name="vacina_doses_inutilizadas" class="java.lang.Long"/>
 	<variable name="vacina_quantidade_doses_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
@@ -363,11 +365,7 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[($F{vacina_estoque_anterior} != null ? $F{vacina_estoque_anterior}: 0)
-+ ($F{vacina_quantidade_doses_recebidas} != null ? $F{vacina_quantidade_doses_recebidas}: 0)
-- ($F{vacina_doses_distribuidas_utilizadas} != null ? $F{vacina_doses_distribuidas_utilizadas}: 0)
-- ($F{vacina_doses_inutilizadas} != null ? $F{vacina_doses_inutilizadas}: 0)
-- ($F{vacina_quantidade_doses_remanejadas} != null ? $F{vacina_quantidade_doses_remanejadas}: 0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_estoque} != null ? $F{vacina_quantidade_estoque}: 0]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="359" y="0" width="83" height="20" uuid="b688ae28-2b89-4795-8348-650f9b0ba6bf"/>
@@ -379,7 +377,7 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{vacina_quantidade_doses_remanejadas} != null ? $F{vacina_quantidade_doses_remanejadas}: 0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_remanejada} != null ? $F{vacina_quantidade_remanejada}: 0]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="493" y="0" width="62" height="20" uuid="91e81aaa-7794-40d8-8844-5b5064602b4c"/>
@@ -439,7 +437,7 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{vacina_doses_inutilizadas} != null ? $F{vacina_doses_inutilizadas}: 0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_inutilizada} != null ? $F{vacina_quantidade_inutilizada}: 0]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

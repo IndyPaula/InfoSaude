@@ -1,6 +1,8 @@
 package br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces;
 
+import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ControleEstoqueVacina;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 
 /**
  *
@@ -8,5 +10,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.modelo.ControleEstoqueVacina;
  * @date 23/10/2015
  */
 public interface ControleEstoqueVacinaDaoIF extends DaoIF<ControleEstoqueVacina> {
+    
+    int quantidadeDeVacina(Vacina vacina) throws DaoExcecoes;
     
 }

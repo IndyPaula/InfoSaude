@@ -57,10 +57,26 @@
                                                itemLabel="#{via}" itemValue="#{via}"/>
                             </h:selectOneMenu>
 
-                             <p:outputLabel value="Quant. doses recebida:" for="quant_dose_recebida"/>
-                             <pe:inputNumber id="quant_dose_recebida" value="#{vacinaBean.vacina.quantidadeDosesRecebidas}" 
-                                            maxValue="999" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses é obrigatória"
-                                            minValue="1"/>
+
+
+                            <p:outputLabel value="Quant. doses recebida:" for="quant_dose_recebida"/>
+
+                            <p:row>
+                                <p:column colspan="2">
+                                    <h:panelGrid columns="3" >
+
+                                        <pe:inputNumber id="quant_dose_recebida" value="#{vacinaBean.vacina.quantidadeDosesRecebidas}" 
+                                                        maxValue="999" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses é obrigatória"
+                                                        minValue="1"/>
+
+
+                                        <p:commandButton value="Retirar " style="margin-top: 1%; margin-left: 60%" 
+                                                          update="mensages"  action="#{vacinaBean.selecionarVacina()}"
+                                                         />
+
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:row>
 
                             <p:outputLabel value="Quant. doses solicitada:" for="quant_dose_solicitada"/>
                             <pe:inputNumber id="quant_dose_solicitada" value="#{vacinaBean.vacina.quantidadeDosesSolicitadas}" 
@@ -102,8 +118,42 @@
                     <p:commandButton value="Salvar Alterações" style="margin-top: 1%;" action="#{vacinaBean.update()}"
                                      update="mensages" ajax="false" />
 
+
+
+
                 </h:form>
+
+
+                <p:dialog  id="editarQuantidadeDoseDlgId" widgetVar="editarQuantidadeDose" 
+                           header="Motivo da retirada" resizable="false" height="140" width="380"
+                           appendTo="@(body)"  modal="true">
+                    <h:form id="quantVacinaFlqId">
+                        <h:panelGrid columns="2" cellpadding="10px" >
+
+
+                            <p:outputLabel value="Quantidade: " for="quantidade_retirda"/>
+                            <p:spinner value="#{vacinaBean.controleEstoqueVacina.quantidadeDoses}" min="1" max="#{vacinaBean.quantidadeVacina}"
+                                       required="true" id="quantidade_retirda" />
+
+                            <p:outputLabel value="Motivo:"/>
+                            <h:selectOneMenu value="#{vacinaBean.controleEstoqueVacina.motivoRetirada}">
+                                <f:selectItem itemLabel="Selecione:"/>
+                                <f:selectItems var="motivo" value="#{vacinaBean.motivoRetirada}"
+                                               itemLabel="#{motivo}" itemValue="#{motivo}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <p:commandButton value="Retirar" style="margin-top: 1%;" action="#{vacinaBean.editarQuantidadeDose()}"
+                                         update="mensages" ajax="false" />
+
+                    </h:form>
+                </p:dialog>
+
+
+
+
             </ui:define>
+
+
         </ui:composition>
     </body>
 </html>

@@ -3,8 +3,11 @@ package br.edu.ifpb.monteiro.ads.infosaude.beans;
 import br.edu.ifpb.monteiro.ads.infosaude.beans.excecaoes.BeanExcecao;
 import br.edu.ifpb.monteiro.ads.infosaude.beans.util.JsfUtil;
 import br.edu.ifpb.monteiro.ads.infosaude.enumerations.EnumViaAdministracao;
+import br.edu.ifpb.monteiro.ads.infosaude.enumerations.MotivoRetirada;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.ControleEstoqueVacina;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
+import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ControleEstoqueVacinaServiceIF;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -28,7 +33,13 @@ public class VacinaBean {
     private Vacina vacina;
 
     @Inject
+    private ControleEstoqueVacina controleEstoqueVacina;
+
+    @Inject
     private VacinaServiceIF vacinaService;
+
+    @Inject
+    private ControleEstoqueVacinaServiceIF controleEstoqueVacinaServiceIF;
 
     private String mensangem;
 
@@ -39,6 +50,10 @@ public class VacinaBean {
     private Date dataInicio;
 
     private Date dataFim;
+
+    private Vacina v;
+
+    private FacesContext context = FacesContext.getCurrentInstance();
 
     public VacinaBean() {
     }
@@ -124,7 +139,7 @@ public class VacinaBean {
         return null;
     }
 
-    public void relatorioVacinaPorDataDeValidade() {
+    public void relatorioVacinaPorDataDeValidade() throws ServiceExcecoes {
 
         if (this.dataInicio.before(this.dataFim)) {
             vacinaService.relatorioVacinaPorDataDeValidade(this.dataInicio, this.dataFim);
@@ -133,11 +148,40 @@ public class VacinaBean {
         }
     }
 
-    public void relatorioVacinaImunobiologico() {
+    public void relatorioVacinaImunobiologico() throws ServiceExcecoes {
         if (this.dataInicio.before(this.dataFim)) {
             vacinaService.relatorioVacinaImunobiologico(this.dataInicio, this.dataFim);
         } else {
             JsfUtil.addErrorMessage("Data inicial deve ser anterior a data final");
+        }
+    }
+
+    public String editarQuantidadeDose() {
+
+        try {
+            int valor = controleEstoqueVacinaServiceIF.quantidadeDeVacina(vacinaSelecionada);
+            if ((valor <= controleEstoqueVacina.getQuantidadeDoses())
+                    && (valor > 0)) {
+
+                v = (Vacina) context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
+                controleEstoqueVacina.setDataRetirada(new Date());
+                controleEstoqueVacina.setVacina(v);
+                controleEstoqueVacinaServiceIF.salvar(controleEstoqueVacina);
+            } else {
+                JsfUtil.addErrorMessage("Sistema indica que a vacina " + vacinaSelecionada.getNome() + " do lote " + vacinaSelecionada.getLote() + " já foi completamente utilizada!");
+            }
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "buscar_vacina.xhtml";
+    }
+
+    public void selecionarVacina() {
+        if (getQuantidadeVacina() > 0) {
+            RequestContext.getCurrentInstance().execute("PF('editarQuantidadeDose').show();");
+            context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
+        } else {
+            JsfUtil.addErrorMessage("Sistema indica que a vacina " + vacinaSelecionada.getNome() + " do lote " + vacinaSelecionada.getLote() + " já foi completamente utilizada!");
         }
     }
 
@@ -162,6 +206,10 @@ public class VacinaBean {
 
     public EnumViaAdministracao[] getViaAdministracao() {
         return EnumViaAdministracao.values();
+    }
+
+    public MotivoRetirada[] getMotivoRetirada() {
+        return MotivoRetirada.values();
     }
 
     public String getMensangem() {
@@ -202,6 +250,30 @@ public class VacinaBean {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public ControleEstoqueVacina getControleEstoqueVacina() {
+        return controleEstoqueVacina;
+    }
+
+    public void setControleEstoqueVacina(ControleEstoqueVacina controleEstoqueVacina) {
+        this.controleEstoqueVacina = controleEstoqueVacina;
+    }
+
+    public int getQuantidadeVacina() {
+        int quantidadeVacina = 0;
+        try {
+            v = (Vacina) context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
+            quantidadeVacina = controleEstoqueVacinaServiceIF.quantidadeDeVacina(v);
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (quantidadeVacina > 0) {
+            return quantidadeVacina;
+        } else {
+            return quantidadeVacina;
+        }
     }
 
 }

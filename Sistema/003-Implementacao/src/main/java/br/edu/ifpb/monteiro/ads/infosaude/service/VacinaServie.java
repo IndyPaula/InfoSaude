@@ -5,6 +5,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.VacinaDaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.relatorios.RelatorioVacina;
+import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.VacinaServiceIF;
 import java.io.Serializable;
 import java.util.Date;
@@ -54,4 +55,5 @@ public class VacinaServie extends GenericoService<Vacina> implements VacinaServi
     public void relatorioVacinaImunobiologico(Date dataInicio, Date dataFim) {
         relatorioVacina.relatorioVacinaImunobiologico(dataInicio, dataFim);
     }
+
 }
