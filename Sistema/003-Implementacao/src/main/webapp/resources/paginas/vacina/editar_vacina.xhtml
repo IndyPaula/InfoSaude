@@ -71,7 +71,7 @@
 
 
                                         <p:commandButton value="Retirar " style="margin-top: 1%; margin-left: 60%" 
-                                                          update="mensages"  action="#{vacinaBean.selecionarVacina()}"
+                                                         update="mensages"  action="#{vacinaBean.selecionarVacina()}"
                                                          />
 
                                     </h:panelGrid>
@@ -132,8 +132,9 @@
 
 
                             <p:outputLabel value="Quantidade: " for="quantidade_retirda"/>
-                            <p:spinner value="#{vacinaBean.controleEstoqueVacina.quantidadeDoses}" min="1" max="#{vacinaBean.quantidadeVacina}"
-                                       required="true" id="quantidade_retirda" />
+                            <pe:inputNumber id="quantidade_retirda" value="#{vacinaBean.controleEstoqueVacina.quantidadeDoses}" 
+                                            maxValue="999" decimalPlaces="0" required="true" validatorMessage="Quantidade de doses é obrigatória"
+                                            minValue="1"/>
 
                             <p:outputLabel value="Motivo:"/>
                             <h:selectOneMenu value="#{vacinaBean.controleEstoqueVacina.motivoRetirada}">

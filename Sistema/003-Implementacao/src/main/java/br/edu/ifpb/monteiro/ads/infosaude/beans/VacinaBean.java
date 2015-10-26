@@ -51,9 +51,11 @@ public class VacinaBean {
 
     private Date dataFim;
 
-    private Vacina v;
+    Vacina vacinaEstoque;
 
     private FacesContext context = FacesContext.getCurrentInstance();
+
+    private int quantidadeVacina = 0;
 
     public VacinaBean() {
     }
@@ -71,7 +73,7 @@ public class VacinaBean {
     }
 
     public String selecinaEditar() {
-
+        context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
         if (vacinaSelecionada == null) {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
             return null;
@@ -125,7 +127,6 @@ public class VacinaBean {
     }
 
     public String update() throws BeanExcecao {
-
         try {
             vacinaService.atualizar(vacina);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
@@ -159,30 +160,44 @@ public class VacinaBean {
     public String editarQuantidadeDose() {
 
         try {
-            int valor = controleEstoqueVacinaServiceIF.quantidadeDeVacina(vacinaSelecionada);
-            if ((valor <= controleEstoqueVacina.getQuantidadeDoses())
-                    && (valor > 0)) {
+            vacinaEstoque = (Vacina) context.getExternalContext().getSessionMap().get("vacina");
+            quantidadeVacina = controleEstoqueVacinaServiceIF.quantidadeDeVacina(vacinaEstoque);
 
-                v = (Vacina) context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
+            if (quantidadeVacina >= controleEstoqueVacina.getQuantidadeDoses()
+                    && quantidadeVacina > 0) {
                 controleEstoqueVacina.setDataRetirada(new Date());
-                controleEstoqueVacina.setVacina(v);
+                controleEstoqueVacina.setVacina(vacinaEstoque);
                 controleEstoqueVacinaServiceIF.salvar(controleEstoqueVacina);
+                return "buscar_vacina.xhtml";
             } else {
-                JsfUtil.addErrorMessage("Sistema indica que a vacina " + vacinaSelecionada.getNome() + " do lote " + vacinaSelecionada.getLote() + " já foi completamente utilizada!");
+                JsfUtil.addErrorMessage("Só existem " + quantidadeVacina + " doses da vacina "
+                        + vacinaEstoque.getNome() + " do lote " + vacinaEstoque.getLote());
+                return "buscar_vacina.xhtml";
             }
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+            return "buscar_vacina.xhtml";
         }
-        return "buscar_vacina.xhtml";
+
     }
 
     public void selecionarVacina() {
-        if (getQuantidadeVacina() > 0) {
-            RequestContext.getCurrentInstance().execute("PF('editarQuantidadeDose').show();");
-            context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
-        } else {
-            JsfUtil.addErrorMessage("Sistema indica que a vacina " + vacinaSelecionada.getNome() + " do lote " + vacinaSelecionada.getLote() + " já foi completamente utilizada!");
+
+        try {
+            vacinaEstoque = (Vacina) context.getExternalContext().getSessionMap().get("vacina");
+            quantidadeVacina = controleEstoqueVacinaServiceIF.quantidadeDeVacina(vacinaEstoque);
+
+            if (quantidadeVacina > 0) {
+                RequestContext.getCurrentInstance().execute("PF('editarQuantidadeDose').show();");
+            } else {
+                JsfUtil.addErrorMessage("A vacina " + vacinaEstoque.getNome() + " do lote " + vacinaEstoque.getLote() + ""
+                        + " não tem doses armazenadas");
+            }
+
+        } catch (ServiceExcecoes ex) {
+            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public Vacina getVacina() {
@@ -258,22 +273,6 @@ public class VacinaBean {
 
     public void setControleEstoqueVacina(ControleEstoqueVacina controleEstoqueVacina) {
         this.controleEstoqueVacina = controleEstoqueVacina;
-    }
-
-    public int getQuantidadeVacina() {
-        int quantidadeVacina = 0;
-        try {
-            v = (Vacina) context.getExternalContext().getSessionMap().put("vacina", vacinaSelecionada);
-            quantidadeVacina = controleEstoqueVacinaServiceIF.quantidadeDeVacina(v);
-        } catch (ServiceExcecoes ex) {
-            Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (quantidadeVacina > 0) {
-            return quantidadeVacina;
-        } else {
-            return quantidadeVacina;
-        }
     }
 
 }

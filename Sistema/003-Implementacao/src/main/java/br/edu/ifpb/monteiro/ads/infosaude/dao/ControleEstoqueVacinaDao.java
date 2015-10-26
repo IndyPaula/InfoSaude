@@ -24,13 +24,16 @@ public class ControleEstoqueVacinaDao extends GenericoDao<ControleEstoqueVacina>
         Long valor = vacina.getId();
         String consulta = "select vacina_quantidade_estoque(" + valor + ")";
         Query singleResult = getEntityManager().createNativeQuery(consulta);
-        resultadoDoRetorno = Integer.parseInt(singleResult.getSingleResult().toString());
-        if (resultadoDoRetorno > 0) {
-            return resultadoDoRetorno;
+        if (singleResult.getResultList().isEmpty()) {
+            resultadoDoRetorno = Integer.parseInt(singleResult.getSingleResult().toString());
+            if (resultadoDoRetorno > 0) {
+                return resultadoDoRetorno;
+            } else {
+                return 0;
+            }
         } else {
-            return 0;
+            return vacina.getQuantidadeDosesRecebidas();
         }
-
     }
 
 }
