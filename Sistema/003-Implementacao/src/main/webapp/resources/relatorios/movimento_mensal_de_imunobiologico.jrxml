@@ -447,6 +447,13 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 				<reportElement x="455" y="34" width="100" height="20" uuid="d5df6397-2789-47ca-abbd-7720fc81f0ed"/>
 				<textFieldExpression><![CDATA["Página: "+$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="34" width="422" height="20" uuid="574c27fb-4e17-4da8-9c43-27935d4340a7"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Dados correspondem ao periodo de "
++ $P{data_inicial}.toLocaleString().replace("00","").replace(":","") +
+" a " + $P{data_fim}.toLocaleString().replace("00","").replace(":","")]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

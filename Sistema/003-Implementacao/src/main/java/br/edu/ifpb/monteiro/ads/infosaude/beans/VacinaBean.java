@@ -109,7 +109,7 @@ public class VacinaBean {
         return null;
 
     }
-
+    
     public String salvar() {
         try {
             vacina.setDataCadastro(getDataAtual());
