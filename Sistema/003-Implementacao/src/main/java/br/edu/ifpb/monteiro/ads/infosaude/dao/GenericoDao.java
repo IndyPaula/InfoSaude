@@ -56,9 +56,8 @@ public abstract class GenericoDao<T extends Identificavel> implements Serializab
 
     @Override
     public T atualizar(T entity) throws DaoExcecoes {
-        T ent = consultarPorId(entity.getId());
-        entityManager.merge(ent);
-        return ent;
+        entityManager.merge(entity);
+        return entity;
     }
 
     @Override

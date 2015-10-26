@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.infosaude.service;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.interfaces.DaoIF;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.Transactional;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacina;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.interfaces.Identificavel;
 import br.edu.ifpb.monteiro.ads.infosaude.service.excecoes.ServiceExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.service.interfaces.ServiceIF;

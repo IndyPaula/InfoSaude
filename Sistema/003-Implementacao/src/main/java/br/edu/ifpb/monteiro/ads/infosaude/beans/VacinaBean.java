@@ -127,7 +127,11 @@ public class VacinaBean {
     }
 
     public String update() throws BeanExcecao {
+
         try {
+            Vacina pegarData = vacinaService.consultarPorId(vacina.getId());
+            Date dataDeCadastro = pegarData.getDataCadastro();
+            vacina.setDataCadastro(dataDeCadastro);
             vacinaService.atualizar(vacina);
             JsfUtil.addSuccessMessage("Informações atualizadas com sucesso");
             return "buscar_vacina.xhtml";
@@ -136,8 +140,9 @@ public class VacinaBean {
 
             JsfUtil.addErrorMessage(ex.getMessage());
             Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
+
     }
 
     public void relatorioVacinaPorDataDeValidade() throws ServiceExcecoes {
