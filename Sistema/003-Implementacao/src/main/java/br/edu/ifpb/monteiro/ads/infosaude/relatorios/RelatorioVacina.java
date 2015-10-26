@@ -146,7 +146,7 @@ public class RelatorioVacina {
 
             Map<String, Object> parametros = new HashMap<String, Object>();
 
-            parametros.put("data_inicio", dataInicio);
+            parametros.put("data_inicial", dataInicio);
 
             parametros.put("data_fim", dataFim);
 
