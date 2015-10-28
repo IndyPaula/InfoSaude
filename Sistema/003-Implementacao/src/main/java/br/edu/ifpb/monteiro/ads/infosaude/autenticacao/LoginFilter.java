@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Vanderlan Gomes<vanderlan.gs@gmail.com>
  * @date 14/04/2015
  */
-//@WebFilter(urlPatterns = {"/resources/*"})
+@WebFilter(urlPatterns = {"/resources/*"})
 public class LoginFilter implements Filter {
 
     @Inject

@@ -13,4 +13,6 @@ public interface ControleEstoqueVacinaServiceIF extends ServiceIF<ControleEstoqu
 
     int quantidadeDeVacina(Vacina vacina) throws ServiceExcecoes;
 
+    int verificarVacinaRemover(Vacina vacina) throws ServiceExcecoes;
+
 }

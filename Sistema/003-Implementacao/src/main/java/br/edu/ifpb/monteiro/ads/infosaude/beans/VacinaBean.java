@@ -83,12 +83,15 @@ public class VacinaBean {
 
     }
 
-    public void selecinaExcluir() {
+    public void selecinaExcluir() throws ServiceExcecoes {
 
         if (vacinaSelecionada == null) {
             JsfUtil.addErrorMessage("Selecione um item da tabela");
 
-        } else {
+        } else if (controleEstoqueVacinaServiceIF.verificarVacinaRemover(vacinaSelecionada) >0 ){
+            
+            
+        }else {
             remover();
 
         }
@@ -97,11 +100,15 @@ public class VacinaBean {
     public String remover() {
 
         try {
-            vacinaService.remover(vacinaSelecionada);
+            int testeIF = controleEstoqueVacinaServiceIF.verificarVacinaRemover(vacinaSelecionada);
+            if (testeIF == 0) {
+                vacinaService.remover(vacinaSelecionada);
+                JsfUtil.addSuccessMessage("Vacina removida com sucesso");
 
-            JsfUtil.addSuccessMessage("Vacina removida com sucesso");
-
-            return "buscar_vacina.xhtml";
+                return "buscar_vacina.xhtml";
+            } else {
+                JsfUtil.addErrorMessage("Vacina não pode ser removida pois consta nos registros com doses ja utilizadas");
+            }
 
         } catch (ServiceExcecoes ex) {
             Logger.getLogger(VacinaBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,7 +116,7 @@ public class VacinaBean {
         return null;
 
     }
-    
+
     public String salvar() {
         try {
             vacina.setDataCadastro(getDataAtual());
@@ -168,11 +175,12 @@ public class VacinaBean {
             vacinaEstoque = (Vacina) context.getExternalContext().getSessionMap().get("vacina");
             quantidadeVacina = controleEstoqueVacinaServiceIF.quantidadeDeVacina(vacinaEstoque);
 
-            if (quantidadeVacina >= controleEstoqueVacina.getQuantidadeDoses()
-                    && quantidadeVacina > 0) {
+            if ((quantidadeVacina >= controleEstoqueVacina.getQuantidadeDoses())
+                    && (quantidadeVacina > 0)) {
                 controleEstoqueVacina.setDataRetirada(new Date());
                 controleEstoqueVacina.setVacina(vacinaEstoque);
                 controleEstoqueVacinaServiceIF.salvar(controleEstoqueVacina);
+                JsfUtil.addSuccessMessage("Foram removidas " + controleEstoqueVacina.getQuantidadeDoses() + " doses");
                 return "buscar_vacina.xhtml";
             } else {
                 JsfUtil.addErrorMessage("Só existem " + quantidadeVacina + " doses da vacina "

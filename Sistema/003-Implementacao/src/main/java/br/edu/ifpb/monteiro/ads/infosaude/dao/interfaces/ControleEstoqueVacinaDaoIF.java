@@ -13,4 +13,6 @@ public interface ControleEstoqueVacinaDaoIF extends DaoIF<ControleEstoqueVacina>
     
     int quantidadeDeVacina(Vacina vacina) throws DaoExcecoes;
     
+    int verificarVacinaRemover(Vacina vacina) throws DaoExcecoes;
+    
 }

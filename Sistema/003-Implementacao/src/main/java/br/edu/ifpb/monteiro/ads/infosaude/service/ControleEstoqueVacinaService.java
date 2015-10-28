@@ -42,4 +42,14 @@ public class ControleEstoqueVacinaService extends GenericoService<ControleEstoqu
         return 0;
     }
 
+    @Override
+    public int verificarVacinaRemover(Vacina vacina) throws ServiceExcecoes {
+        try {
+            return dao.verificarVacinaRemover(vacina);
+        } catch (DaoExcecoes e) {
+            Logger.getLogger(ControleEstoqueVacinaService.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return -1;
+    }
+
 }
