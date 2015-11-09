@@ -36,7 +36,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>InfomacoesUbsWS</servlet-name>
+        <servlet-name>InfoSaudeWS</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -46,10 +46,9 @@
     </servlet-mapping>
     <!-- DECLARAÇÃO DE WEB SERVICES-->
     <servlet-mapping>
-        <servlet-name>InfomacoesUbsWS</servlet-name>
-        <url-pattern>/InfomacoesUbsWS</url-pattern>
+        <servlet-name>InfoSaudeWS</servlet-name>
+        <url-pattern>/InfoSaudeWS</url-pattern>
     </servlet-mapping>
-    <!-- DECLARAÇÃO DE WEB SERVICES-->
     <session-config>
         <session-timeout>
             240

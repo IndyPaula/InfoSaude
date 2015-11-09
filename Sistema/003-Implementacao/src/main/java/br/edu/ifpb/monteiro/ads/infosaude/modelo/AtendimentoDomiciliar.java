@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -38,6 +40,77 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
     @Column(name = "motivo_visita", length = 45)
     private String motivoVisita;
 
+    @ManyToOne
+    @JoinColumn(name = "acs_id")
+    private transient ACS acsResponsavel;
+
+    @Column(name = "cartao_sus", length = 15)
+    private String cartaoSus;
+
+    //acompanhamento 
+    @Column(name = "gestante", length = 1)
+    private String gestante;
+
+    @Column(name = "puerpera", length = 1)
+    private String puerpera;
+
+    @Column(name = "recem_nascido", length = 1)
+    private String recemNascido;
+
+    @Column(name = "crianca", length = 1)
+    private String crianca;
+
+    @Column(name = "desnutricao", length = 1)
+    private String desnutricao;
+
+    @Column(name = "reabilitacao_deficiencia", length = 1)
+    private String reabilitacaoDeficiencia;
+
+    @Column(name = "hipertensao", length = 1)
+    private String hipertensao;
+
+    @Column(name = "diabetes", length = 1)
+    private String diabetes;
+
+    @Column(name = "asma", length = 1)
+    private String asma;
+
+    @Column(name = "dpoc_enfisema", length = 1)
+    private String dpocEnfisema;
+
+    @Column(name = "cancer", length = 1)
+    private String cancer;
+
+    @Column(name = "outras_doencas_cronicas", length = 1)
+    private String outrasDoencasCronicas;
+
+    @Column(name = "hanseniase", length = 1)
+    private String hanseniase;
+
+    @Column(name = "tuberculose", length = 1)
+    private String tuberculose;
+
+    @Column(name = "domiciliados_acamados", length = 1)
+    private String domiciliadosAcamados;
+
+    @Column(name = "vulnerabilidade_social", length = 1)
+    private String vulnerabilidadeSocial;
+
+    @Column(name = "bolsa_familia", length = 1)
+    private String bolsaFamilia;
+
+    @Column(name = "saude_mental", length = 1)
+    private String saudeMental;
+
+    @Column(name = "usuario_alcool", length = 1)
+    private String usuarioAlcool;
+
+    @Column(name = "usuario_drogas", length = 1)
+    private String usuarioDrogas;
+
+    @Column(name = "status", length = 1)
+    private String status;
+
     @Override
     public Long getId() {
         return id;
@@ -46,6 +119,14 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getDataAtendimento() {
@@ -71,5 +152,181 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
     public void setMotivoVisita(String motivoVisita) {
         this.motivoVisita = motivoVisita;
     }
-    
+
+    public ACS getAcsResponsavel() {
+        return acsResponsavel;
+    }
+
+    public void setAcsResponsavel(ACS acsResponsavel) {
+        this.acsResponsavel = acsResponsavel;
+    }
+
+    public String getCartaoSus() {
+        return cartaoSus;
+    }
+
+    public void setCartaoSus(String cartaoSus) {
+        this.cartaoSus = cartaoSus;
+    }
+
+    public String getGestante() {
+        return gestante;
+    }
+
+    public void setGestante(String gestante) {
+        this.gestante = gestante;
+    }
+
+    public String getPuerpera() {
+        return puerpera;
+    }
+
+    public void setPuerpera(String puerpera) {
+        this.puerpera = puerpera;
+    }
+
+    public String getRecemNascido() {
+        return recemNascido;
+    }
+
+    public void setRecemNascido(String recemNascido) {
+        this.recemNascido = recemNascido;
+    }
+
+    public String getCrianca() {
+        return crianca;
+    }
+
+    public void setCrianca(String crianca) {
+        this.crianca = crianca;
+    }
+
+    public String getDesnutricao() {
+        return desnutricao;
+    }
+
+    public void setDesnutricao(String desnutricao) {
+        this.desnutricao = desnutricao;
+    }
+
+    public String getReabilitacaoDeficiencia() {
+        return reabilitacaoDeficiencia;
+    }
+
+    public void setReabilitacaoDeficiencia(String reabilitacaoDeficiencia) {
+        this.reabilitacaoDeficiencia = reabilitacaoDeficiencia;
+    }
+
+    public String getHipertensao() {
+        return hipertensao;
+    }
+
+    public void setHipertensao(String hipertensao) {
+        this.hipertensao = hipertensao;
+    }
+
+    public String getDiabetes() {
+        return diabetes;
+    }
+
+    public void setDiabetes(String diabetes) {
+        this.diabetes = diabetes;
+    }
+
+    public String getAsma() {
+        return asma;
+    }
+
+    public void setAsma(String asma) {
+        this.asma = asma;
+    }
+
+    public String getDpocEnfisema() {
+        return dpocEnfisema;
+    }
+
+    public void setDpocEnfisema(String dpocEnfisema) {
+        this.dpocEnfisema = dpocEnfisema;
+    }
+
+    public String getCancer() {
+        return cancer;
+    }
+
+    public void setCancer(String cancer) {
+        this.cancer = cancer;
+    }
+
+    public String getOutrasDoencasCronicas() {
+        return outrasDoencasCronicas;
+    }
+
+    public void setOutrasDoencasCronicas(String outrasDoencasCronicas) {
+        this.outrasDoencasCronicas = outrasDoencasCronicas;
+    }
+
+    public String getHanseniase() {
+        return hanseniase;
+    }
+
+    public void setHanseniase(String hanseniase) {
+        this.hanseniase = hanseniase;
+    }
+
+    public String getTuberculose() {
+        return tuberculose;
+    }
+
+    public void setTuberculose(String tuberculose) {
+        this.tuberculose = tuberculose;
+    }
+
+    public String getDomiciliadosAcamados() {
+        return domiciliadosAcamados;
+    }
+
+    public void setDomiciliadosAcamados(String domiciliadosAcamados) {
+        this.domiciliadosAcamados = domiciliadosAcamados;
+    }
+
+    public String getVunerabilidadeSocial() {
+        return vulnerabilidadeSocial;
+    }
+
+    public void setVunerabilidadeSocial(String vulnerabilidadeSocial) {
+        this.vulnerabilidadeSocial = vulnerabilidadeSocial;
+    }
+
+    public String getBolsaFamilia() {
+        return bolsaFamilia;
+    }
+
+    public void setBolsaFamilia(String bolsaFamilia) {
+        this.bolsaFamilia = bolsaFamilia;
+    }
+
+    public String getSaudeMental() {
+        return saudeMental;
+    }
+
+    public void setSaudeMental(String saudeMental) {
+        this.saudeMental = saudeMental;
+    }
+
+    public String getUsuarioAlcool() {
+        return usuarioAlcool;
+    }
+
+    public void setUsuarioAlcool(String usuarioAlcool) {
+        this.usuarioAlcool = usuarioAlcool;
+    }
+
+    public String getUsuarioDrogas() {
+        return usuarioDrogas;
+    }
+
+    public void setUsuarioDrogas(String usuarioDrogas) {
+        this.usuarioDrogas = usuarioDrogas;
+    }
+
 }

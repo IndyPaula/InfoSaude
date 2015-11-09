@@ -6,6 +6,7 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.VacinadorDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
+import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoDomiciliar;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.util.List;
@@ -20,8 +21,8 @@ import javax.persistence.EntityManager;
  * @date 11/06/2015
  * @author Vanderlan Gomes
  */
-@WebService(serviceName = "InfomacoesUbsWS")
-public class InfomacoesUbsWS {
+@WebService(serviceName = "InfoSaudeWS")
+public class InfoSaudeWS {
 
     private EntityManagerProducer emp;
     private EntityManager em;
@@ -29,7 +30,7 @@ public class InfomacoesUbsWS {
     private VacinadorDao daoVacinador;
     private ACSDao daoAcs;
 
-    public InfomacoesUbsWS() {
+    public InfoSaudeWS() {
 
     }
 
@@ -47,7 +48,8 @@ public class InfomacoesUbsWS {
 
     @WebMethod(operationName = "hello")
     public String hello(@WebParam(name = "name") String txt) {
-
+        
+        System.err.println("TESTANDO WEB SERVICES SOAP, BEM VINDO " + txt);
         return "TESTANDO WEB SERVICES SOAP, BEM VINDO " + txt;
     }
 
@@ -62,7 +64,7 @@ public class InfomacoesUbsWS {
             preparaDao();
             return daoUbs.obterInstancia();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(InfomacoesUbsWS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoSaudeWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -77,7 +79,7 @@ public class InfomacoesUbsWS {
             preparaDao();
             return daoVacinador.buscarTudo();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(InfomacoesUbsWS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoSaudeWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -92,8 +94,22 @@ public class InfomacoesUbsWS {
             preparaDao();
             return daoAcs.buscarTudo();
         } catch (DaoExcecoes ex) {
-            Logger.getLogger(InfomacoesUbsWS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoSaudeWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    /**
+     * Retorna os agentes comunitários de Saúde da UBS
+     *
+     * @param atendimento
+     * @return
+     */
+    @WebMethod(operationName = "insertAtendimentoDomiciliar")
+    public String insertVisitaDomiciliar(@WebParam(name = "atendimento") AtendimentoDomiciliar atendimento) {
+
+        System.err.println("YES,  ID IS:  "+atendimento.getGestante());
+        
+        return "Vamos lá";
+
     }
 }
