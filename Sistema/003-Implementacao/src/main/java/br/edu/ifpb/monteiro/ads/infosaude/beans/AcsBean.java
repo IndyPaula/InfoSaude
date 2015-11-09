@@ -43,6 +43,7 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
         agentesFilter = new ArrayList<ACS>();
 
     }
+
     public String salvar() {
         try {
             acsService.verificaCampoUnique("cpf", acs.getCpf(), null);
@@ -103,9 +104,9 @@ public class AcsBean extends FuncionarioBeanGenerico implements Serializable {
     public String update() {
 
         try {
-
+            Long id = acsService.buscarPorCampo("matricula", acs.getMatricula()).getId();
             if (verificaSenhaAtual()) {
-
+                acs.setId(id);
                 acsService.verificaCampoUnique("cpf", acs.getCpf(), acs.getId());
                 acsService.verificaCampoUnique("matricula", +acs.getMatricula(), acs.getId());
                 acsService.verificaCampoUnique("cartaosus", acs.getCartaosus(), acs.getId());
