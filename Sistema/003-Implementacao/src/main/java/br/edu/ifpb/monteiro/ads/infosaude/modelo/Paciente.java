@@ -37,9 +37,21 @@ public class Paciente extends Pessoa implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     @JoinColumn(name = "atendimento_imunizacao_id")
     private List<AtendimentoImunizacao> imunizacaos;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
+    @JoinColumn(name = "atendimento_domiciliar_id")
+    private List<AtendimentoDomiciliar> atendimentos;
 
     public Integer getNumeroProntuario() {
         return numeroProntuario;
+    }
+
+    public List<AtendimentoDomiciliar> getAtendimentos() {
+        return atendimentos;
+    }
+
+    public void setAtendimentos(List<AtendimentoDomiciliar> atendimentos) {
+        this.atendimentos = atendimentos;
     }
 
     public void setNumeroProntuario(Integer numeroProntuario) {

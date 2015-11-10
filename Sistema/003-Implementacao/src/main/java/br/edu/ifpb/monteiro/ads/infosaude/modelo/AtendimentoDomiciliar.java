@@ -21,28 +21,28 @@ import javax.persistence.TemporalType;
  * @date 15/04/2015
  */
 @Entity(name = "atendimento_domiciliar")
-@SequenceGenerator(name = "atendimento_domiciliar_seq", sequenceName = "atendimento_domiciliar_seq", initialValue = 1, allocationSize = 1)
 public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomiciliar>, Serializable {
 
     private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "atendimento_domiciliar_seq")
     private Long id;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_atendimento", nullable = false)
     private Date dataAtendimento;
 
-    @OneToOne
-    private transient Paciente paciente;
+     @ManyToOne
+    private Paciente paciente;
 
     @Column(name = "motivo_visita", length = 45)
     private String motivoVisita;
 
     @ManyToOne
-    @JoinColumn(name = "acs_id")
-    private transient ACS acsResponsavel;
+    private ACS acs;
+
+    @ManyToOne
+    private Funcionario funcionarioResponsavel;
 
     @Column(name = "cartao_sus", length = 15)
     private String cartaoSus;
@@ -129,6 +129,30 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
         this.status = status;
     }
 
+    public ACS getAcs() {
+        return acs;
+    }
+
+    public void setAcs(ACS acs) {
+        this.acs = acs;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionarioResponsavel;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionarioResponsavel = funcionario;
+    }
+
+    public String getVulnerabilidadeSocial() {
+        return vulnerabilidadeSocial;
+    }
+
+    public void setVulnerabilidadeSocial(String vulnerabilidadeSocial) {
+        this.vulnerabilidadeSocial = vulnerabilidadeSocial;
+    }
+
     public Date getDataAtendimento() {
         return dataAtendimento;
     }
@@ -154,11 +178,11 @@ public class AtendimentoDomiciliar implements Identificavel<AtendimentoDomicilia
     }
 
     public ACS getAcsResponsavel() {
-        return acsResponsavel;
+        return acs;
     }
 
     public void setAcsResponsavel(ACS acsResponsavel) {
-        this.acsResponsavel = acsResponsavel;
+        this.acs = acsResponsavel;
     }
 
     public String getCartaoSus() {

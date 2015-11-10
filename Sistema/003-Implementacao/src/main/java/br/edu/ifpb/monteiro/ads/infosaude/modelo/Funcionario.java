@@ -1,9 +1,12 @@
 package br.edu.ifpb.monteiro.ads.infosaude.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +28,10 @@ public class Funcionario extends Pessoa implements Serializable {
 
     @Column(name = "codigo_euipe_ine", length = 15, nullable = false)
     private String codigoEquipeINE;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioResponsavel")
+    @JoinColumn(name = "atendimento_domiciliar_id")
+    private List<AtendimentoDomiciliar> atendimentos;
 
     @NotNull
     @Column(name = "cpf", nullable = false, length = 14, unique = true, precision = 11)
@@ -59,6 +66,14 @@ public class Funcionario extends Pessoa implements Serializable {
 
     public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public List<AtendimentoDomiciliar> getAtendimentos() {
+        return atendimentos;
+    }
+
+    public void setAtendimentos(List<AtendimentoDomiciliar> atendimentos) {
+        this.atendimentos = atendimentos;
     }
 
     public String getCodigoEquipeINE() {
