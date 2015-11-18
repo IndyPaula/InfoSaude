@@ -18,20 +18,6 @@
                         <h:form id="vacina_relatorio_validade">
                             <p:growl id="mensagem" showDetail="false" autoUpdate="true"/>
 
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <p:outputLabel for="data_inicio_validade" value="Data início:"/>
-                                <p:calendar  id="data_inicio_validade" locale="pt_BR" navigator="true" 
-                                             value="#{vacinaBean.dataInicio}"
-                                             required="true"
-                                             readonlyInput="true"/>
-
-                                <p:outputLabel value="Data Fim: " for="data_fim_validade" />
-                                <p:calendar locale="pt_BR" navigator="true"  
-                                            value="#{vacinaBean.dataFim}"
-                                            required="true" id="data_fim_validade"
-                                            readonlyInput="true"/>
-
-                            </h:panelGrid>
                             
                              <p:commandButton value="Visualizar Relatório" action="#{vacinaBean.relatorioVacinaPorDataDeValidade()}" 
                                                  id="btRelatorio" update="mensagem"  onclick="this.form.target = '_blank'"

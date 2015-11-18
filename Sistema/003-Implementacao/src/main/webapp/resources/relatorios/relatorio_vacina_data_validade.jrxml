@@ -22,8 +22,11 @@
 FROM
      "public"."unidade_saude" unidade_saude,
      "public"."vacina" vacina
-WHERE
-     vacina."data_vencimento" BETWEEN $P{data_inicial} and $P{data_fim}]]>
+
+where
+	vacina_quantidade_estoque(vacina."id") > 0
+
+order by  vacina."data_vencimento"]]>
 	</queryString>
 	<field name="vacina_quantidade_estoque" class="java.lang.Long"/>
 	<field name="unidade_saude_numero" class="java.lang.Integer"/>
