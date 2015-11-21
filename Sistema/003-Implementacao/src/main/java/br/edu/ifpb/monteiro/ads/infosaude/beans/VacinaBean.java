@@ -154,11 +154,7 @@ public class VacinaBean {
 
     public void relatorioVacinaPorDataDeValidade() throws ServiceExcecoes {
 
-        if (this.dataInicio.before(this.dataFim)) {
             vacinaService.relatorioVacinaPorDataDeValidade(this.dataInicio, this.dataFim);
-        } else {
-            JsfUtil.addErrorMessage("Data inicial deve ser anterior a data final");
-        }
     }
 
     public void relatorioVacinaImunobiologico() throws ServiceExcecoes {

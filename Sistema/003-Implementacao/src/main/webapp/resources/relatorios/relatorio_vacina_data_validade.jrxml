@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_vacina_data_validade" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="93123e78-391d-47f0-85d7-1e6794293746">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="68"/>
 	<parameter name="data_inicial" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -11,38 +11,31 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     vacina_estoque_anterior($P{data_inicial},vacina."nome") AS vacina_estoque_anterior,
-     vacina_doses_distribuidas_utilizadas($P{data_inicial},$P{data_fim},vacina."nome") AS vacina_doses_distribuidas_utilizadas,
      vacina_quantidade_estoque(vacina."id") AS vacina_quantidade_estoque,
-     vacina_quantidade_remanejada(vacina."id",$P{data_inicial},$P{data_fim}) AS vacina_quantidade_remanejada,
-     vacina_quantidade_inutilizada(vacina."id",$P{data_inicial},$P{data_fim}) AS vacina_quantidade_inutilizada,
      unidade_saude."numero" AS unidade_saude_numero,
      unidade_saude."endereco_cidade" AS unidade_saude_endereco_cidade,
      vacina."nome" AS vacina_nome,
-     vacina."data_vencimento" AS vacina_data_vencimento,
-     vacina."data_cadastro" AS vacina_data_cadastro,
-     vacina."data_fabricacao" AS vacina_data_fabricacao,
+     vacina."lote" AS vacina_lote,
      vacina."laboratorio" AS vacina_laboratorio,
-     vacina."lote" AS vacina_lote
+     vacina."data_vencimento" AS vacina_data_vencimento,
+     vacina."id" AS vacina_id
 FROM
-     "public"."vacina" vacina,
-     "public"."unidade_saude" unidade_saude
-WHERE
-     vacina."data_vencimento" BETWEEN $P{data_inicial} and $P{data_fim}]]>
+     "public"."unidade_saude" unidade_saude,
+     "public"."vacina" vacina
+
+where
+	vacina_quantidade_estoque(vacina."id") > 0
+
+order by  vacina."data_vencimento"]]>
 	</queryString>
-	<field name="vacina_estoque_anterior" class="java.lang.Long"/>
-	<field name="vacina_doses_distribuidas_utilizadas" class="java.lang.Long"/>
 	<field name="vacina_quantidade_estoque" class="java.lang.Long"/>
-	<field name="vacina_quantidade_remanejada" class="java.lang.Long"/>
-	<field name="vacina_quantidade_inutilizada" class="java.lang.Long"/>
 	<field name="unidade_saude_numero" class="java.lang.Integer"/>
 	<field name="unidade_saude_endereco_cidade" class="java.lang.String"/>
 	<field name="vacina_nome" class="java.lang.String"/>
-	<field name="vacina_data_vencimento" class="java.sql.Date"/>
-	<field name="vacina_data_cadastro" class="java.sql.Date"/>
-	<field name="vacina_data_fabricacao" class="java.sql.Date"/>
-	<field name="vacina_laboratorio" class="java.lang.String"/>
 	<field name="vacina_lote" class="java.lang.String"/>
+	<field name="vacina_laboratorio" class="java.lang.String"/>
+	<field name="vacina_data_vencimento" class="java.sql.Date"/>
+	<field name="vacina_id" class="java.lang.Long"/>
 	<variable name="vacina_quantidade_doses_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
@@ -149,33 +142,30 @@ WHERE
 				<text><![CDATA[Unidade de Saúde]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="422" y="62" width="133" height="16" uuid="52323683-3035-430c-ba2e-f639e7ab7549"/>
-				<box>
+				<reportElement x="157" y="62" width="265" height="16" uuid="28671d21-abbd-43a3-8c3d-74a1fac4e182"/>
+				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{unidade_saude_numero} != null ? $F{unidade_saude_numero} : "-"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{unidade_saude_endereco_cidade} != null ? $F{unidade_saude_endereco_cidade}: "-"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="157" y="63" width="265" height="15" uuid="243cd603-378d-4c2f-a946-1c72a2f5db7f"/>
-				<box>
+				<reportElement x="422" y="62" width="133" height="16" uuid="4ee6e3f1-b748-4aa8-b432-d22cd5fb23cd"/>
+				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{unidade_saude_endereco_cidade} != null ?
-$F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{unidade_saude_numero} != null ? $F{unidade_saude_numero} : "-"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -260,11 +250,11 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 		<band height="20" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="20" forecolor="#FEFEFE" backcolor="#B6EDFD" uuid="1bfc7386-613f-48da-a300-7ddf35da60f1">
-					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0) ]]></printWhenExpression>
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<textField>
-				<reportElement x="0" y="0" width="155" height="20" uuid="881f7374-dd7a-44f9-8ec1-d55438542bdf"/>
+				<reportElement x="0" y="0" width="155" height="20" uuid="d6980cfe-97ae-4b21-8a69-577fd9b87b13"/>
 				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -272,13 +262,11 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vacina_nome} != null ? $F{vacina_nome}: "-"]]></textFieldExpression>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_nome} != null ? $F{vacina_nome} : "-"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="155" y="0" width="100" height="20" uuid="706710ed-a5a6-4ea0-9354-de42f6fca894"/>
+				<reportElement x="155" y="0" width="100" height="20" uuid="0b12a78a-b4ff-4760-bded-d0a1067a1a78"/>
 				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -286,13 +274,11 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vacina_laboratorio}  != null ? $F{vacina_laboratorio}: "-"]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_laboratorio} != null ? $F{vacina_laboratorio} : "-"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="255" y="0" width="100" height="20" uuid="bc4b7f85-713c-4956-9b0b-fe36bed8f7a2"/>
+				<reportElement x="255" y="0" width="100" height="20" uuid="80ea6523-3b26-4c21-92f0-d16a1e703036"/>
 				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -300,13 +286,11 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vacina_lote}  != null ? $F{vacina_lote}: "-"]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_lote} != null ? $F{vacina_lote} : "-"]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="355" y="0" width="100" height="20" uuid="67f8c82f-7c4c-4cdc-a0a6-810fca78aa2c"/>
+				<reportElement x="355" y="0" width="100" height="20" uuid="e09cee03-40be-4328-add1-860a42b1c00e"/>
 				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -314,13 +298,11 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vacina_data_vencimento}  != null ? $F{vacina_data_vencimento}: "-"]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_data_vencimento} != null ? $F{vacina_data_vencimento} : "-"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="0" width="100" height="20" uuid="9169f760-0aab-4537-beb0-04e89e14031f"/>
+				<reportElement x="455" y="0" width="100" height="20" uuid="761ed0ba-b00b-404d-b1de-900eee9c0ee0"/>
 				<box leftPadding="4">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -328,10 +310,8 @@ $F{unidade_saude_endereco_cidade} : "-"]]></textFieldExpression>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vacina_quantidade_estoque}  != null ? $F{vacina_quantidade_estoque}: "-"]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vacina_quantidade_estoque} != null ? $F{vacina_quantidade_estoque} : "-"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
