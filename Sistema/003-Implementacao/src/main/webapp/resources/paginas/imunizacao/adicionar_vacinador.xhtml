@@ -16,10 +16,10 @@
                     <span id="titulo_pagina">Cadastro de Vacinador da UBS</span>
                     <p:fieldset legend="Cadastrar Vacinador da Unidade Básica de Saúde"
                                 style="width: 90%; text-align: center; margin-top: 80px;  max-height: 650px;" >
-                        <h:panelGrid columns="2"  style="text-align: left" cellpadding="10px">
+                        <h:panelGrid columns="2"  style="text-align: left" cellpadding="2px">
 
                             <p:outputLabel for="nome" value="Nome: "/>
-                            <p:inputText id="nome" required="true" value="#{vacinadorBean.vacinador.nome}" size="60"
+                            <p:inputText id="nome" required="true" value="#{vacinadorBean.vacinador.nome}" size="61"
                                          />
 
                             <p:outputLabel value="CPF: " for="txtCpf"/>
@@ -41,7 +41,7 @@
                                                      style="margin-right: 40px; margin-left: -3px"   />
 
                                         <p:outputLabel value="Orgão Emissor: "/>
-                                        <p:inputText value="#{vacinadorBean.vacinador.orgaoEmissor}" style="margin-right: 40px"/>
+                                        <p:inputText value="#{vacinadorBean.vacinador.orgaoEmissor}" style="margin-left: 10px"/>
 
                                         <p:outputLabel value="UF: " style="margin-left: 36px; margin-right: 2px"/>
                                         <p:selectOneMenu id="ufRG" value="#{vacinadorBean.vacinador.ufOrgaoEmissor}">
@@ -54,7 +54,7 @@
                             </p:row> 
 
 
-                            <p:outputLabel for="registroCoren" value="Registro Coren: " style="text-align: center"/>
+                            <p:outputLabel for="registroCoren" value="Coren: " style="text-align: center"/>
 
                             <p:row>
                                 <p:column colspan="2">
@@ -80,7 +80,7 @@
 
 
 
-                                        <p:outputLabel value="Data de nascimento: " for="txtDataNascimento"/>
+                                        <p:outputLabel value="Data de Nasc.: " for="txtDataNascimento"/>
                                         <p:calendar id="txtDataNascimento" locale="pt_BR" navigator="true" 
                                                     maxdate="#{vacinadorBean.dataAtual}"
                                                     value="#{vacinadorBean.vacinador.dataNascimento}"
@@ -100,7 +100,7 @@
                                     <h:panelGrid columns="6" >
 
                                         <p:inputText value="#{vacinadorBean.vacinador.logradouro}" 
-                                                     size="70" style="margin-right: 25px"/>
+                                                     size="61" style="margin-right: 25px"/>
 
 
                                         <p:outputLabel value="Nº.: "/>
@@ -118,7 +118,7 @@
                                     <h:panelGrid columns="6" >
 
                                         <p:inputText value="#{vacinadorBean.vacinador.bairro}" 
-                                                     size="70" style="margin-right: 25px"/>
+                                                     size="61" style="margin-right: 25px"/>
 
                                         <p:outputLabel value="CEP: "/>
                                         <p:inputMask mask="99.999-999" value="#{vacinadorBean.vacinador.cep}" 
