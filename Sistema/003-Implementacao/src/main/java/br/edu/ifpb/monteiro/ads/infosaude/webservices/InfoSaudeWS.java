@@ -6,7 +6,6 @@ import br.edu.ifpb.monteiro.ads.infosaude.dao.VacinadorDao;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.excecoes.DaoExcecoes;
 import br.edu.ifpb.monteiro.ads.infosaude.dao.util.EntityManagerProducer;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.ACS;
-import br.edu.ifpb.monteiro.ads.infosaude.modelo.AtendimentoDomiciliar;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.UnidadeSaude;
 import br.edu.ifpb.monteiro.ads.infosaude.modelo.Vacinador;
 import java.util.List;
@@ -98,16 +97,36 @@ public class InfoSaudeWS {
         }
         return null;
     }
-    /**
-     * Retorna os agentes comunitários de Saúde da UBS
-     *
-     * @param atendimento
-     * @return
-     */
-    @WebMethod(operationName = "insertAtendimentoDomiciliar")
-    public String insertVisitaDomiciliar(@WebParam(name = "atendimento") AtendimentoDomiciliar atendimento) {
+   @WebMethod(operationName = "insertAtendimento")
+    public String insertCliente(@WebParam(name = "id")  Long id,
+                                                @WebParam(name = "dataAtendimento") String dataAtendimento,
+                                                @WebParam(name = "paciente") String paciente,
+                                                @WebParam(name = "motivoVisita") String motivoVisita,
+                                                @WebParam(name = "acsResponsavel") String acsResponsavel, 
+                                                @WebParam(name = "cartaoSus")   String cartaoSus,
+                                                @WebParam(name = "gestante")  String gestante, 
+                                                @WebParam(name = "puerpera") String puerpera,
+                                                @WebParam(name = "recemNascido") String recemNascido,
+                                                @WebParam(name = "crianca") String crianca,
+                                                @WebParam(name = "desnutricao") String desnutricao,
+                                                @WebParam(name = "reabilitacaoDeficiencia") String reabilitacaoDeficiencia,
+                                                @WebParam(name = "hipertensao") String hipertensao,
+                                                @WebParam(name = "diabetes") String diabetes,
+                                                @WebParam(name = "asma") String asma,
+                                                @WebParam(name = "dpocEnfisema") String dpocEnfisema,
+                                                @WebParam(name = "cancer") String cancer,
+                                                @WebParam(name = "outrasDoencasCronicas") String outrasDoencasCronicas,
+                                                @WebParam(name = "hanseniase") String hanseniase,
+                                                @WebParam(name = "tuberculose") String tuberculose,
+                                                @WebParam(name = "domiciliadosAcamados") String domiciliadosAcamados,
+                                                @WebParam(name = "vunerabilidadeSocial") String vunerabilidadeSocial,
+                                                @WebParam(name = "bolsaFamilia") String bolsaFamilia,
+                                                @WebParam(name = "saudeMental") String saudeMental,
+                                                @WebParam(name = "usuarioAlcool") String usuarioAlcool,
+                                                @WebParam(name = "usuarioDrogas") String usuarioDrogas) {
 
-        System.err.println("YES,  ID IS:  "+atendimento.getGestante());
+        System.err.println("ASMA:  "+asma);
+        System.err.println("DIABETES:  "+diabetes);
         
         return "Vamos lá";
 
